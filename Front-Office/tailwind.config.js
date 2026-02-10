@@ -5,7 +5,15 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'sans': ['Roboto', 'sans-serif'],
+        'roboto': ['Roboto', 'sans-serif'],
+        'anton': ['Anton', 'sans-serif'],
+        'bangers': ['Bangers', 'cursive'],
+        'cookie': ['Cookie', 'cursive'],
+      },
+    },
   },
   plugins: [],
 }

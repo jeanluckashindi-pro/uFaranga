@@ -24,7 +24,7 @@ function AppContent() {
       <div className="p-8">
         {/* Header avec toggle de thème */}
         <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-indigo-600">uFaranga - Back Office</h1>
+          <h1 className="text-3xl font-bold text-indigo-600 font-roboto">uFaranga - Back Office</h1>
           <ThemeToggle />
         </div>
         
@@ -91,6 +91,38 @@ function AppContent() {
             <p>• Basculement vers thème light disponible</p>
             <p>• Couleurs Facebook : #1877f2</p>
             <p>• Spinner radial amélioré</p>
+            <p>• Police par défaut : Roboto</p>
+          </div>
+        </div>
+
+        {/* Démonstration des Polices - Admin */}
+        <div className="bg-card border border-default p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold mb-4 font-roboto">Polices Disponibles - Administration</h2>
+          
+          <div className="space-y-4">
+            <div className="p-4 border border-default rounded">
+              <h3 className="text-lg font-roboto font-medium mb-2">Roboto (Par défaut)</h3>
+              <p className="font-roboto text-base">Interface d'administration avec police moderne et professionnelle.</p>
+              <p className="font-roboto font-bold text-sm mt-1">Classes : font-roboto, font-sans</p>
+            </div>
+            
+            <div className="p-4 border border-default rounded">
+              <h3 className="text-2xl font-anton mb-2">ANTON - ADMIN</h3>
+              <p className="font-roboto text-sm text-muted">Pour les titres importants du back-office.</p>
+              <p className="font-roboto font-bold text-sm mt-1">Classe : font-anton</p>
+            </div>
+            
+            <div className="p-4 border border-default rounded">
+              <h3 className="text-2xl font-bangers mb-2">BANGERS ADMIN</h3>
+              <p className="font-roboto text-sm text-muted">Style décontracté pour certains éléments.</p>
+              <p className="font-roboto font-bold text-sm mt-1">Classe : font-bangers</p>
+            </div>
+            
+            <div className="p-4 border border-default rounded">
+              <h3 className="text-2xl font-cookie mb-2">Cookie Admin</h3>
+              <p className="font-roboto text-sm text-muted">Pour les éléments décoratifs du back-office.</p>
+              <p className="font-roboto font-bold text-sm mt-1">Classe : font-cookie</p>
+            </div>
           </div>
         </div>
       </div>

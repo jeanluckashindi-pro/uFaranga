@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bangers&family=Cookie&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,8 +12,9 @@
     --facebook-active: #1464cc;
   }
   
-  /* Thème par défaut - Dark */
+  /* Police par défaut - Roboto */
   body {
+    font-family: 'Roboto', sans-serif;
     background-color: #000000;
     color: #ffffff;
   }
@@ -99,5 +102,22 @@
   
   .theme-light .border-default {
     border-color: #e5e5e5;
+  }
+  
+  /* Classes de polices */
+  .font-roboto {
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .font-anton {
+    font-family: 'Anton', sans-serif;
+  }
+  
+  .font-bangers {
+    font-family: 'Bangers', cursive;
+  }
+  
+  .font-cookie {
+    font-family: 'Cookie', cursive;
   }
 }
