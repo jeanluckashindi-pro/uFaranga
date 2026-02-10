@@ -1,14 +1,25 @@
 import React from 'react';
-import { Button } from 'primereact/button';
+import ComponentExamples from './components/common/ComponentExamples';
+import TailwindTest from './components/TailwindTest';
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-blue-600 mb-4">Front Office - uFaranga</h1>
-        <p className="text-gray-600 mb-4">Bienvenue sur l'application Front Office</p>
-        <Button label="Commencer" icon="pi pi-check" className="p-button-success" />
-      </div>
+    <div className="min-h-screen bg-gray-100">
+      <header className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <h1 className="text-2xl font-bold text-blue-600">uFaranga - Front Office</h1>
+            <p className="text-gray-600">Application Client</p>
+          </div>
+        </div>
+      </header>
+      
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8">
+          <TailwindTest />
+        </div>
+        <ComponentExamples />
+      </main>
     </div>
   );
 }

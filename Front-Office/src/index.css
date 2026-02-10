@@ -5,3 +5,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom styles to ensure Tailwind is working */
+@layer base {
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+  }
+}
