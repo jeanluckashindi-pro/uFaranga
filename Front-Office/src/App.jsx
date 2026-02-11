@@ -27,6 +27,12 @@ import Contact from './pages/Contact';
 import Actualites from './pages/Actualites';
 import Team from './pages/Team';
 import Sandbox from './pages/Sandbox';
+import DeveloperSignup from './pages/DeveloperSignup';
+import DeveloperDashboard from './pages/DeveloperDashboard';
+import Webinaires from './pages/Webinaires';
+import Tutoriels from './pages/Tutoriels';
+import Changelog from './pages/Changelog';
+import Conformite from './pages/Conformite';
 import NotFound from './pages/NotFound';
 
 // Produits - Compte & Carte
@@ -121,8 +127,14 @@ function App() {
             {/* Support & Ressources */}
             <Route path="/support" element={<Support />} />
             <Route path="/developpeurs" element={<Developers />} />
+            <Route path="/developpeurs/inscription" element={<DeveloperSignup />} />
+            <Route path="/developpeurs/dashboard" element={<DeveloperDashboard />} />
             <Route path="/sandbox" element={<Sandbox />} />
             <Route path="/sdks" element={<SDKs />} />
+            <Route path="/webinaires" element={<Webinaires />} />
+            <Route path="/tutoriels" element={<Tutoriels />} />
+            <Route path="/changelog" element={<Changelog />} />
+            <Route path="/conformite" element={<Conformite />} />
             
             {/* Entreprise */}
             <Route path="/a-propos" element={<About />} />
