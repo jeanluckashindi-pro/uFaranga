@@ -314,4 +314,19 @@ const Comptabilite = () => {
                 </div>
                 <div className="space-y-2">
                   {feature.benefits.map((benefit, idx) => (
-                    <div key={idx} className="flex items-center gap-2 text-sm text-gr
+                    <div key={idx} className="flex items-center gap-2 text-sm text-gray-300">
+                      <CheckCircle className="w-4 h-4 text-secondary shrink-0" />
+                      {benefit}
+                    </div>
+                  ))}
+                </div>
+              </GlassCard>
+            ))}
+          </div>
+        </div>
+      </Section>
+    </div>
+  );
+};
+
+export default Comptabilite;
