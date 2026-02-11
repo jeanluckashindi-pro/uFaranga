@@ -7,10 +7,29 @@ import {
   User, Phone, Mail, ArrowRight, Smartphone, X
 } from 'lucide-react';
 
+// Add animation styles
+const styles = `
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+`;
+
 const VirtualCard = () => {
   const [showCardDetails, setShowCardDetails] = useState(false);
   const [copiedField, setCopiedField] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
   const [cards, setCards] = useState([]);
   const [formData, setFormData] = useState({
     cardName: '',
@@ -18,6 +37,8 @@ const VirtualCard = () => {
     currency: 'BIF',
     monthlyLimit: '500000'
   });
+
+  const totalSteps = 4;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -70,7 +91,35 @@ const VirtualCard = () => {
       currency: 'BIF',
       monthlyLimit: '500000'
     });
+    setCurrentStep(0);
     setShowCreateModal(false);
+  };
+
+  const nextStep = () => {
+    if (currentStep < totalSteps - 1) {
+      setCurrentStep(currentStep + 1);
+    }
+  };
+
+  const prevStep = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
+    }
+  };
+
+  const canProceed = () => {
+    switch(currentStep) {
+      case 0:
+        return formData.cardName.trim().length > 0;
+      case 1:
+        return formData.cardType !== '';
+      case 2:
+        return formData.currency !== '';
+      case 3:
+        return formData.monthlyLimit !== '';
+      default:
+        return true;
+    }
   };
 
   const toggleCardStatus = (cardId) => {
@@ -133,6 +182,7 @@ const VirtualCard = () => {
 
   return (
     <div className="min-h-screen bg-black">
+      <style>{styles}</style>
       {/* Hero */}
       <section className="py-20 bg-gradient-to-b from-primary/10 to-black">
         <div className="container mx-auto px-4">
@@ -471,3 +521,288 @@ const VirtualCard = () => {
           </div>
         </div>
       </section>
+
+      {/* Create Card Modal */}
+      {showCreateModal && (
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900 rounded-2xl max-w-2xl w-full max-h-[90vh] flex flex-col">
+            <div className="p-8 flex-shrink-0">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-6">
+                <div>
+                  <h2 className="text-3xl font-anton uppercase mb-2">CRÉER UNE CARTE VIRTUELLE</h2>
+                  <p className="text-gray-400">Étape {currentStep + 1} sur {totalSteps}</p>
+                </div>
+                <button
+                  onClick={() => {
+                    setShowCreateModal(false);
+                    setCurrentStep(0);
+                  }}
+                  className="w-10 h-10 rounded-full border border-gray-700 flex items-center justify-center hover:border-gray-600 transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="mb-6">
+                <div className="flex gap-2">
+                  {[...Array(totalSteps)].map((_, idx) => (
+                    <div
+                      key={idx}
+                      className={`h-2 flex-1 rounded-full transition-all ${
+                        idx <= currentStep ? 'bg-primary' : 'bg-gray-800'
+                      }`}
+                    ></div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Scrollable Content */}
+            <div className="flex-1 overflow-y-auto px-8">
+              <div className="pb-6">
+                {/* Step 1: Card Name */}
+                {currentStep === 0 && (
+                  <div className="space-y-6 animate-fadeIn">
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                        <CreditCard className="w-10 h-10 text-primary" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-2">Nommez votre carte</h3>
+                      <p className="text-gray-400">Choisissez un nom pour identifier facilement votre carte</p>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold mb-3">
+                        Nom de la carte *
+                      </label>
+                      <input
+                        type="text"
+                        name="cardName"
+                        value={formData.cardName}
+                        onChange={handleInputChange}
+                        placeholder="Ex: Carte Shopping, Carte Netflix..."
+                        className="w-full bg-black border border-gray-700 rounded-lg px-6 py-4 text-lg focus:border-primary focus:outline-none"
+                        autoFocus
+                      />
+                    </div>
+
+                    <div className="bg-primary/10 border border-primary/30 rounded-xl p-4">
+                      <div className="flex gap-3">
+                        <AlertCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                        <div className="text-sm text-gray-300">
+                          <p className="font-semibold text-primary mb-1">Exemples de noms :</p>
+                          <p>• Ma carte principale</p>
+                          <p>• Carte abonnements</p>
+                          <p>• Shopping en ligne</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 2: Card Type */}
+                {currentStep === 1 && (
+                  <div className="space-y-6 animate-fadeIn">
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                        <Globe className="w-10 h-10 text-primary" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-2">Type de carte</h3>
+                      <p className="text-gray-400">Choisissez le réseau de paiement</p>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-6">
+                      <button
+                        type="button"
+                        onClick={() => setFormData(prev => ({ ...prev, cardType: 'visa' }))}
+                        className={`p-8 rounded-xl border-2 transition-all ${
+                          formData.cardType === 'visa'
+                            ? 'border-primary bg-primary/10 scale-105'
+                            : 'border-gray-800 hover:border-gray-700'
+                        }`}
+                      >
+                        <div className="text-3xl font-bold mb-3">VISA</div>
+                        <div className="text-sm text-gray-400">Acceptée dans 200+ pays</div>
+                        {formData.cardType === 'visa' && (
+                          <Check className="w-6 h-6 text-primary mx-auto mt-4" />
+                        )}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setFormData(prev => ({ ...prev, cardType: 'mastercard' }))}
+                        className={`p-8 rounded-xl border-2 transition-all ${
+                          formData.cardType === 'mastercard'
+                            ? 'border-primary bg-primary/10 scale-105'
+                            : 'border-gray-800 hover:border-gray-700'
+                        }`}
+                      >
+                        <div className="text-3xl font-bold mb-3">MASTERCARD</div>
+                        <div className="text-sm text-gray-400">Réseau international</div>
+                        {formData.cardType === 'mastercard' && (
+                          <Check className="w-6 h-6 text-primary mx-auto mt-4" />
+                        )}
+                      </button>
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 3: Currency */}
+                {currentStep === 2 && (
+                  <div className="space-y-6 animate-fadeIn">
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
+                        <DollarSign className="w-10 h-10 text-primary" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-2">Devise de la carte</h3>
+                      <p className="text-gray-400">Sélectionnez la devise principale</p>
+                    </div>
+
+                    <div className="space-y-3">
+                      {[
+                        { code: 'BIF', name: 'Franc Burundais', flag: '🇧🇮' },
+                        { code: 'USD', name: 'Dollar Américain', flag: '🇺🇸' },
+                        { code: 'EUR', name: 'Euro', flag: '🇪🇺' },
+                        { code: 'RWF', name: 'Franc Rwandais', flag: '🇷🇼' }
+                      ].map((curr) => (
+                        <button
+                          key={curr.code}
+                          type="button"
+                          onClick={() => setFormData(prev => ({ ...prev, currency: curr.code }))}
+                          className={`w-full p-4 rounded-xl border-2 transition-all flex items-center justify-between ${
+                            formData.currency === curr.code
+                              ? 'border-primary bg-primary/10'
+                              : 'border-gray-800 hover:border-gray-700'
+                          }`}
+                        >
+                          <div className="flex items-center gap-4">
+                            <span className="text-3xl">{curr.flag}</span>
+                            <div className="text-left">
+                              <div className="font-bold">{curr.code}</div>
+                              <div className="text-sm text-gray-400">{curr.name}</div>
+                            </div>
+                          </div>
+                          {formData.currency === curr.code && (
+                            <Check className="w-6 h-6 text-primary" />
+                          )}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Step 4: Monthly Limit */}
+                {currentStep === 3 && (
+                  <div className="space-y-6 animate-fadeIn">
+                    <div className="text-center mb-6">
+                      <div className="w-20 h-20 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-4">
+                        <Shield className="w-10 h-10 text-secondary" />
+                      </div>
+                      <h3 className="text-2xl font-bold mb-2">Limite mensuelle</h3>
+                      <p className="text-gray-400">Définissez votre plafond de dépenses</p>
+                    </div>
+
+                    <div className="space-y-3">
+                      {[
+                        { value: '100000', label: '100,000 BIF', desc: 'Pour petites dépenses' },
+                        { value: '500000', label: '500,000 BIF', desc: 'Usage modéré', recommended: true },
+                        { value: '1000000', label: '1,000,000 BIF', desc: 'Usage régulier' },
+                        { value: '5000000', label: '5,000,000 BIF', desc: 'Gros achats' },
+                        { value: '10000000', label: '10,000,000 BIF', desc: 'Usage professionnel' }
+                      ].map((limit) => (
+                        <button
+                          key={limit.value}
+                          type="button"
+                          onClick={() => setFormData(prev => ({ ...prev, monthlyLimit: limit.value }))}
+                          className={`w-full p-4 rounded-xl border-2 transition-all flex items-center justify-between ${
+                            formData.monthlyLimit === limit.value
+                              ? 'border-secondary bg-secondary/10'
+                              : 'border-gray-800 hover:border-gray-700'
+                          }`}
+                        >
+                          <div className="text-left">
+                            <div className="font-bold flex items-center gap-2">
+                              {limit.label}
+                              {limit.recommended && (
+                                <span className="px-2 py-0.5 bg-secondary/20 text-secondary text-xs rounded-full">
+                                  Recommandé
+                                </span>
+                              )}
+                            </div>
+                            <div className="text-sm text-gray-400">{limit.desc}</div>
+                          </div>
+                          {formData.monthlyLimit === limit.value && (
+                            <Check className="w-6 h-6 text-secondary" />
+                          )}
+                        </button>
+                      ))}
+                    </div>
+
+                    <div className="bg-secondary/10 border border-secondary/30 rounded-xl p-4">
+                      <div className="flex gap-3">
+                        <AlertCircle className="w-5 h-5 text-secondary shrink-0 mt-0.5" />
+                        <div className="text-sm text-gray-300">
+                          Vous pourrez modifier cette limite à tout moment depuis les paramètres de la carte
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Fixed Navigation at Bottom */}
+            <div className="p-8 pt-4 border-t border-gray-800 flex-shrink-0">
+              <div className="flex gap-4">
+                <button
+                  onClick={prevStep}
+                  disabled={currentStep === 0}
+                  className={`flex-1 border border-gray-700 px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center gap-2 ${
+                    currentStep === 0
+                      ? 'opacity-50 cursor-not-allowed'
+                      : 'hover:border-gray-600'
+                  }`}
+                >
+                  <ArrowRight className="w-5 h-5 rotate-180" />
+                  Précédent
+                </button>
+
+                {currentStep < totalSteps - 1 ? (
+                  <button
+                    onClick={nextStep}
+                    disabled={!canProceed()}
+                    className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center gap-2 ${
+                      canProceed()
+                        ? 'bg-white text-black hover:bg-gray-200'
+                        : 'bg-gray-800 text-gray-500 cursor-not-allowed'
+                    }`}
+                  >
+                    Suivant
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                ) : (
+                  <button
+                    onClick={handleCreateCard}
+                    disabled={!canProceed()}
+                    className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-colors inline-flex items-center justify-center gap-2 ${
+                      canProceed()
+                        ? 'bg-secondary text-black hover:bg-secondary/90'
+                        : 'bg-gray-800 text-gray-500 cursor-not-allowed'
+                    }`}
+                  >
+                    <Plus className="w-5 h-5" />
+                    Créer la carte
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default VirtualCard;
