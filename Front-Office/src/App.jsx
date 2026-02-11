@@ -52,9 +52,18 @@ import Savings from './pages/Savings';
 import Tontines from './pages/Tontines';
 import MicroCredit from './pages/MicroCredit';
 
+// Produits - Services additionnels
+import Cashback from './pages/Cashback';
+import Assurance from './pages/Assurance';
+import Recharge from './pages/Recharge';
+import Investissements from './pages/Investissements';
+
 // Business
 import POS from './pages/POS';
 import API from './pages/API';
+
+// Agents
+import DepotRetrait from './pages/agents/DepotRetrait';
 
 // Autres
 import Download from './pages/Download';
@@ -69,6 +78,20 @@ import Hospitality from './pages/solutions/Hospitality';
 import OnlinePayments from './pages/solutions/OnlinePayments';
 import RecurringPayments from './pages/solutions/RecurringPayments';
 import International from './pages/solutions/International';
+import Masse from './pages/solutions/Masse';
+
+// Développeurs
+import Webhooks from './pages/Webhooks';
+import Plugins from './pages/Plugins';
+import Docs from './pages/Docs';
+
+// Business - Gestion
+import MultiUsers from './pages/MultiUsers';
+import Paie from './pages/Paie';
+import Comptabilite from './pages/Comptabilite';
+import Tresorerie from './pages/Tresorerie';
+import Facturation from './pages/Facturation';
+import Ecommerce from './pages/Ecommerce';
 
 function App() {
   return (
@@ -99,6 +122,12 @@ function App() {
             <Route path="/tontines" element={<Tontines />} />
             <Route path="/credit" element={<MicroCredit />} />
             
+            {/* Produits - Services additionnels */}
+            <Route path="/cashback" element={<Cashback />} />
+            <Route path="/assurance" element={<Assurance />} />
+            <Route path="/recharge" element={<Recharge />} />
+            <Route path="/investissements" element={<Investissements />} />
+            
             {/* Business */}
             <Route path="/entreprises" element={<Business />} />
             <Route path="/pos" element={<POS />} />
@@ -106,6 +135,7 @@ function App() {
             
             {/* Agents */}
             <Route path="/agents" element={<Agents />} />
+            <Route path="/agents/depot-retrait" element={<DepotRetrait />} />
             
             {/* Solutions */}
             <Route path="/solutions/commerce" element={<Commerce />} />
@@ -117,6 +147,20 @@ function App() {
             <Route path="/solutions/paiements" element={<OnlinePayments />} />
             <Route path="/solutions/recurrents" element={<RecurringPayments />} />
             <Route path="/solutions/international" element={<International />} />
+            <Route path="/solutions/masse" element={<Masse />} />
+            
+            {/* Développeurs */}
+            <Route path="/webhooks" element={<Webhooks />} />
+            <Route path="/plugins" element={<Plugins />} />
+            <Route path="/docs" element={<Docs />} />
+            
+            {/* Business - Gestion */}
+            <Route path="/multi-users" element={<MultiUsers />} />
+            <Route path="/paie" element={<Paie />} />
+            <Route path="/comptabilite" element={<Comptabilite />} />
+            <Route path="/tresorerie" element={<Tresorerie />} />
+            <Route path="/facturation" element={<Facturation />} />
+            <Route path="/ecommerce" element={<Ecommerce />} />
             
             {/* Blog */}
             <Route path="/blog" element={<Blog />} />
