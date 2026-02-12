@@ -1,165 +1,121 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { 
+  Facebook, Twitter, Instagram, Linkedin, Youtube, 
+  Mail, Phone, MapPin, Send, ArrowRight 
+} from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
-  const footerLinks = {
-    produits: [
-      { name: 'Particuliers', href: '/' },
-      { name: 'Entreprises', href: '/entreprises' },
-      { name: 'Agents', href: '/agents' },
-      { name: 'API Développeurs', href: '/developpeurs' },
-      { name: 'Tarifs', href: '/tarifs' },
-    ],
-    entreprise: [
-      { name: 'À propos', href: '/a-propos' },
-      { name: 'Carrières', href: '/carrieres' },
-      { name: 'Blog', href: '/blog' },
-      { name: 'Presse', href: '/presse' },
-      { name: 'Devenir partenaire', href: '/partenaires' },
-    ],
-    support: [
-      { name: "Centre d'aide", href: '/support' },
-      { name: 'FAQ', href: '/support#faq' },
-      { name: 'Contactez-nous', href: '/support#contact' },
-      { name: 'Statut des services', href: '/support#status' },
-      { name: 'Signaler un problème', href: '/support#report' },
-    ],
-    legal: [
-      { name: "Conditions d'utilisation", href: '/legal#terms' },
-      { name: 'Politique de confidentialité', href: '/legal#privacy' },
-      { name: 'Politique de cookies', href: '/legal#cookies' },
-      { name: 'Mentions légales', href: '/legal#mentions' },
-      { name: 'Lutte anti-blanchiment', href: '/legal#aml' },
-    ],
-  };
+  const footerSections = [
+    {
+      title: 'Produits',
+      links: [
+        { name: 'Compte Mobile', href: '/compte' },
+        { name: 'Cartes', href: '/carte-virtuelle' },
+        { name: 'Transferts', href: '/transferts' },
+        { name: 'Épargne', href: '/epargne' },
+        { name: 'Crédit', href: '/credit' },
+      ]
+    },
+    {
+      title: 'Entreprise',
+      links: [
+        { name: 'Solutions Business', href: '/entreprises' },
+        { name: 'API Développeurs', href: '/developpeurs' },
+        { name: 'Devenir Agent', href: '/agents' },
+        { name: 'Partenaires', href: '/partenaires' },
+        { name: 'Tarifs', href: '/tarifs' },
+      ]
+    },
+    {
+      title: 'Ressources',
+      links: [
+        { name: 'Centre d\'aide', href: '/support' },
+        { name: 'Blog', href: '/blog' },
+        { name: 'Documentation', href: '/docs' },
+        { name: 'Tutoriels', href: '/tutoriels' },
+        { name: 'Statut', href: '/support#status' },
+      ]
+    },
+    {
+      title: 'Société',
+      links: [
+        { name: 'À propos', href: '/a-propos' },
+        { name: 'Carrières', href: '/carrieres' },
+        { name: 'Presse', href: '/presse' },
+        { name: 'Impact Social', href: '/impact' },
+        { name: 'Contact', href: '/contact' },
+      ]
+    }
+  ];
 
   const socialLinks = [
-    { name: 'Facebook', icon: 'pi pi-facebook', href: '#' },
-    { name: 'Twitter', icon: 'pi pi-twitter', href: '#' },
-    { name: 'Instagram', icon: 'pi pi-instagram', href: '#' },
-    { name: 'LinkedIn', icon: 'pi pi-linkedin', href: '#' },
-    { name: 'YouTube', icon: 'pi pi-youtube', href: '#' },
+    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/ufaranga', color: 'hover:text-blue-500' },
+    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/ufaranga', color: 'hover:text-sky-400' },
+    { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/ufaranga', color: 'hover:text-pink-500' },
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://linkedin.com/company/ufaranga', color: 'hover:text-blue-600' },
+    { name: 'YouTube', icon: Youtube, href: 'https://youtube.com/@ufaranga', color: 'hover:text-red-500' },
   ];
 
   return (
-    <footer className="dark: border-t border-gray-200 dark:border-gray-800">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {/* Colonne 1 : uFaranga */}
-          <div className="lg:col-span-1">
-            <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-xl">uF</span>
-              </div>
-              <span className="text-xl font-bold text-gray-900 dark:text-white">
-                uFaranga
-              </span>
+    <footer className="bg-black border-t border-white/10">
+      <div className="container mx-auto px-4 py-16">
+        {/* Top Section */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12">
+          {/* Brand Column */}
+          <div className="lg:col-span-4">
+            <Link to="/" className="inline-block mb-6">
+              <span className="text-4xl font-anton text-white tracking-tight kaushan-">uFaranga</span>
             </Link>
-            <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
-              L'argent simple et accessible
+            
+            <p className="text-gray-400 mb-6 leading-relaxed">
+              La solution de paiement mobile qui transforme la vie financière de millions d'Africains. Simple, rapide et sécurisé.
             </p>
-            <div className="flex space-x-3">
+
+
+            {/* Social Links */}
+            <div className="flex gap-3">
               {socialLinks.map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
-                  className="w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-800 flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-blue-600 hover:text-white transition-colors"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-10 h-10 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 ${social.color} transition-all hover:border-white/20`}
                   aria-label={social.name}
                 >
-                  <i className={social.icon}></i>
+                  <social.icon className="w-5 h-5" />
                 </a>
               ))}
             </div>
           </div>
 
-          {/* Colonne 2 : Produits */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
-              Produits
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.produits.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
+          {/* Links Columns */}
+          <div className="lg:col-span-8">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {footerSections.map((section) => (
+                <div key={section.title}>
+                  <h3 className="text-white font-bold mb-4 text-sm uppercase tracking-wider">
+                    {section.title}
+                  </h3>
+                  <ul className="space-y-3">
+                    {section.links.map((link) => (
+                      <li key={link.name}>
+                        <Link
+                          to={link.href}
+                          className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-2 group"
+                        >
+                          <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 -ml-5 group-hover:ml-0 transition-all" />
+                          {link.name}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
-          </div>
-
-          {/* Colonne 3 : Entreprise */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
-              Entreprise
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.entreprise.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Colonne 4 : Support */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
-              Support
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.support.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Colonne 5 : Légal */}
-          <div>
-            <h3 className="text-sm font-semibold text-gray-900 dark:text-white uppercase tracking-wider mb-4">
-              Légal
-            </h3>
-            <ul className="space-y-3">
-              {footerLinks.legal.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Bas du footer */}
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <p className="text-sm text-gray-600 dark:text-gray-400 text-center md:text-left">
-              © {currentYear} uFaranga. Tous droits réservés. | uFaranga est une marque déposée.
-            </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400 text-center md:text-right">
-              Régulé par la Banque de la République du Burundi (BRB)
-            </p>
+            </div>
           </div>
         </div>
       </div>

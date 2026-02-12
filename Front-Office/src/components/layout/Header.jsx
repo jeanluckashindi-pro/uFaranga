@@ -263,7 +263,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-20">
           {/* Brand */}
           <Link to="/" className="flex items-center">
-            <span className="text-3xl font-kaushan text-primary">
+            <span className="text-3xl font-kaushan text-white">
               uFaranga
             </span>
           </Link>

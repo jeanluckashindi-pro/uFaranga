@@ -61,7 +61,7 @@ const Home = () => {
       color: "bg-pink-500",
     },
     {
-      title: "Paiement Marchand 🛒",
+      title: "Paiement Marchand",
       desc: "Scannez et payez chez vos commerçants préférés sans toucher à du cash.",
       icon: CheckCircle,
       color: "bg-teal-500",

@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Layout from './components/layout/Layout';
+import AdminLayout from './components/layout/AdminLayout';
 
 // Pages principales
 import Home from './pages/Home';
@@ -77,6 +78,10 @@ import TrouverAgent from './pages/TrouverAgent';
 // Autres
 import Download from './pages/Download';
 
+// Admin
+import AdminDashboard from './pages/admin/Dashboard';
+import AdminTransactions from './pages/admin/Transactions';
+
 // Solutions
 import Commerce from './pages/solutions/Commerce';
 import Education from './pages/solutions/Education';
@@ -106,13 +111,22 @@ function App() {
   return (
     <ThemeProvider>
       <Router>
-        <Layout>
-          <Routes>
-            {/* Pages principales */}
-            <Route path="/" element={<Home />} />
-            <Route path="/fonctionnalites" element={<Features />} />
-            <Route path="/tarifs" element={<Pricing />} />
-            <Route path="/telecharger" element={<Download />} />
+        <Routes>
+          {/* Admin Routes */}
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="transactions" element={<AdminTransactions />} />
+          </Route>
+
+          {/* Public Routes */}
+          <Route path="/*" element={
+            <Layout>
+              <Routes>
+                {/* Pages principales */}
+                <Route path="/" element={<Home />} />
+                <Route path="/fonctionnalites" element={<Features />} />
+                <Route path="/tarifs" element={<Pricing />} />
+                <Route path="/telecharger" element={<Download />} />
             
             {/* Produits - Compte & Carte */}
             <Route path="/compte" element={<Account />} />
@@ -211,10 +225,13 @@ function App() {
             <Route path="/affiliation" element={<Affiliation />} />
             <Route path="/contact" element={<Contact />} />
             
+            
             {/* 404 */}
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+              </Routes>
+            </Layout>
+          } />
+        </Routes>
       </Router>
     </ThemeProvider>
   );
