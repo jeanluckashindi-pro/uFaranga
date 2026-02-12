@@ -25,11 +25,11 @@ function CartographieAgents() {
   const [selectedProvince, setSelectedProvince] = useState(null);
   const [filterStatus, setFilterStatus] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
-  const [showProvinces, setShowProvinces] = useState(false); // Désactivé par défaut
+  const [showProvinces, setShowProvinces] = useState(false);
   const [showAgents, setShowAgents] = useState(true);
-  const [isPanelOpen, setIsPanelOpen] = useState(true); // Contrôle ouverture panneau
+  const [isPanelOpen, setIsPanelOpen] = useState(true);
   const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/dark-v11');
-  const [viewMode, setViewMode] = useState('3d'); // '2d' ou '3d'
+  const [viewMode, setViewMode] = useState('3d');
   const markersRef = useRef([]);
 
   // Filtrer les agents
@@ -59,18 +59,17 @@ function CartographieAgents() {
       style: mapStyle,
       center: [BURUNDI_CENTER.longitude, BURUNDI_CENTER.latitude],
       zoom: BURUNDI_CENTER.zoom,
-      pitch: 45, // Vue oblique 3D
-      bearing: 0, // Rotation
-      antialias: true // Meilleure qualité 3D
+      pitch: 45,
+      bearing: 0,
+      antialias: true
     });
 
     map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
     map.current.addControl(new mapboxgl.FullscreenControl(), 'top-right');
 
-    // Ajuster la vue sur les limites du Burundi
     map.current.fitBounds([
-      [BURUNDI_BOUNDS.minLng, BURUNDI_BOUNDS.minLat], // Sud-Ouest
-      [BURUNDI_BOUNDS.maxLng, BURUNDI_BOUNDS.maxLat]  // Nord-Est
+      [BURUNDI_BOUNDS.minLng, BURUNDI_BOUNDS.minLat],
+      [BURUNDI_BOUNDS.maxLng, BURUNDI_BOUNDS.maxLat]
     ], {
       padding: 50,
       pitch: 45,
@@ -78,9 +77,7 @@ function CartographieAgents() {
       duration: 0
     });
 
-    // Ajouter la frontière du Burundi après le chargement
     map.current.on('load', () => {
-      // Ajouter une source vide pour les provinces sélectionnées
       map.current.addSource('selected-province', {
         type: 'geojson',
         data: {
@@ -89,7 +86,6 @@ function CartographieAgents() {
         }
       });
 
-      // Couche de remplissage pour la province sélectionnée
       map.current.addLayer({
         id: 'selected-province-fill',
         type: 'fill',
@@ -100,7 +96,6 @@ function CartographieAgents() {
         }
       });
 
-      // Bordure de la province sélectionnée
       map.current.addLayer({
         id: 'selected-province-line',
         type: 'line',
@@ -112,7 +107,6 @@ function CartographieAgents() {
         }
       });
 
-      // Marquer la carte comme chargée
       setMapLoaded(true);
     });
 
@@ -128,11 +122,9 @@ function CartographieAgents() {
   useEffect(() => {
     if (!map.current || !mapLoaded) return;
 
-    // Supprimer les anciens marqueurs
     markersRef.current.forEach(marker => marker.remove());
     markersRef.current = [];
 
-    // Ajouter seulement les marqueurs des agents (pas de cercles de provinces)
     if (showAgents) {
       filteredAgents.forEach(agent => {
         const el = document.createElement('div');
@@ -144,7 +136,6 @@ function CartographieAgents() {
         `;
         el.style.cursor = 'pointer';
 
-        // Hover effect
         el.addEventListener('mouseenter', () => {
           el.firstElementChild.style.transform = 'scale(1.3)';
         });
@@ -179,9 +170,6 @@ function CartographieAgents() {
                       <span style="font-weight: 600; color: #F58424;">${agent.transactions}</span>
                     </div>
                   </div>
-                  <button onclick="window.location.href='/admin/agents?id=${agent.id}'" style="width: 100%; margin-top: 10px; padding: 6px 12px; background: #007BFF; color: white; border-radius: 6px; border: none; cursor: pointer; font-size: 13px; font-weight: 600; transition: all 0.2s;">
-                    Voir Détails
-                  </button>
                 </div>
               `)
           )
@@ -190,59 +178,21 @@ function CartographieAgents() {
         markersRef.current.push(marker);
       });
     }
-  }, [mapLoaded, showAgents, filteredAgents, selectedProvince]);
+  }, [mapLoaded, showAgents, filteredAgents]);
 
-  // Voler vers un agent
   const flyToAgent = (agent) => {
     if (map.current) {
       map.current.flyTo({
         center: [agent.lng, agent.lat],
         zoom: 13,
-        pitch: 60, // Vue plus oblique
-        bearing: 30, // Légère rotation
+        pitch: 60,
+        bearing: 30,
         duration: 2000
       });
       setSelectedAgent(agent);
     }
   };
 
-  // Sélectionner une province
-  const selectProvince = (province) => {
-    if (map.current && mapLoaded) {
-      // Mettre à jour la source avec le polygone de la province
-      map.current.getSource('selected-province').setData({
-        type: 'Feature',
-        geometry: {
-          type: 'Polygon',
-          coordinates: [province.bounds]
-        }
-      });
-
-      // Voler vers la province
-      map.current.flyTo({
-        center: [province.lng, province.lat],
-        zoom: 10,
-        pitch: 45,
-        bearing: 0,
-        duration: 1500
-      });
-
-      setSelectedProvince(province);
-    }
-  };
-
-  // Désélectionner la province
-  const clearProvinceSelection = () => {
-    if (map.current && mapLoaded) {
-      map.current.getSource('selected-province').setData({
-        type: 'FeatureCollection',
-        features: []
-      });
-      setSelectedProvince(null);
-    }
-  };
-
-  // Changer le style de la carte
   const changeMapStyle = (style) => {
     if (map.current) {
       map.current.setStyle(style);
@@ -250,7 +200,6 @@ function CartographieAgents() {
     }
   };
 
-  // Basculer entre 2D et 3D
   const toggleViewMode = () => {
     if (map.current) {
       if (viewMode === '2d') {
@@ -263,7 +212,6 @@ function CartographieAgents() {
     }
   };
 
-  // Réinitialiser la vue
   const resetView = () => {
     if (map.current) {
       map.current.fitBounds([
@@ -276,19 +224,15 @@ function CartographieAgents() {
         duration: 1500
       });
       setSelectedAgent(null);
-      clearProvinceSelection();
     }
   };
 
   return (
     <div className="h-full flex flex-col bg-background">
-      {/* Carte - Plein écran */}
       <div className="flex-1 relative">
         <div ref={mapContainer} className="w-full h-full" />
 
-        {/* Contrôles de la carte - Flottants à gauche */}
         <div className="absolute top-4 left-4 flex flex-col gap-2">
-          {/* Bouton toggle panneau */}
           <button
             onClick={() => setIsPanelOpen(!isPanelOpen)}
             className="p-3 bg-card/95 backdrop-blur-sm border border-primary rounded-lg shadow-lg hover:bg-primary hover:text-white transition-all"
@@ -297,7 +241,6 @@ function CartographieAgents() {
             <Search className="w-5 h-5" />
           </button>
 
-          {/* Bouton réinitialiser vue */}
           <button
             onClick={resetView}
             className="p-3 bg-card/95 backdrop-blur-sm border border-darkGray rounded-lg shadow-lg hover:border-primary hover:text-primary transition-all"
@@ -306,7 +249,6 @@ function CartographieAgents() {
             <Home className="w-5 h-5" />
           </button>
 
-          {/* Bouton 2D/3D */}
           <button
             onClick={toggleViewMode}
             className={`p-3 backdrop-blur-sm border rounded-lg shadow-lg transition-all ${
@@ -319,7 +261,6 @@ function CartographieAgents() {
             <Layers className="w-5 h-5" />
           </button>
 
-          {/* Contrôles de couches */}
           <div className="flex flex-col gap-1 bg-card/95 backdrop-blur-sm border border-darkGray rounded-lg p-2 shadow-lg">
             <button
               onClick={() => setShowAgents(!showAgents)}
@@ -334,7 +275,6 @@ function CartographieAgents() {
             </button>
           </div>
 
-          {/* Styles de carte */}
           <div className="flex flex-col gap-1 bg-card/95 backdrop-blur-sm border border-darkGray rounded-lg p-2 shadow-lg">
             <button
               onClick={() => changeMapStyle('mapbox://styles/mapbox/dark-v11')}
@@ -343,7 +283,6 @@ function CartographieAgents() {
                   ? 'bg-primary text-white'
                   : 'hover:bg-darkGray text-gray-400'
               }`}
-              title="Mode Sombre"
             >
               Sombre
             </button>
@@ -354,7 +293,6 @@ function CartographieAgents() {
                   ? 'bg-primary text-white'
                   : 'hover:bg-darkGray text-gray-400'
               }`}
-              title="Mode Rues"
             >
               Rues
             </button>
@@ -365,42 +303,21 @@ function CartographieAgents() {
                   ? 'bg-primary text-white'
                   : 'hover:bg-darkGray text-gray-400'
               }`}
-              title="Mode Satellite"
             >
               Satellite
             </button>
           </div>
         </div>
 
-        {/* Badge province sélectionnée - En haut au centre */}
-        {selectedProvince && (
-          <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-            <div className="flex items-center gap-2 px-4 py-2 bg-card/95 backdrop-blur-sm border border-secondary rounded-lg shadow-lg">
-              <MapIcon className="w-4 h-4 text-secondary" />
-              <span className="text-secondary font-semibold text-sm">{selectedProvince.name}</span>
-              <span className="text-xs text-gray-400">•</span>
-              <span className="text-xs text-gray-400">{selectedProvince.agents} agents</span>
-              <button
-                onClick={clearProvinceSelection}
-                className="ml-1 hover:bg-secondary/30 rounded-full p-0.5 transition-colors"
-              >
-                <X className="w-3 h-3 text-secondary" />
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Panneau de recherche flottant - Déplaçable et refermable */}
         {isPanelOpen && (
           <div 
             className="absolute top-4 right-4 w-80 bg-card/95 backdrop-blur-sm border border-primary rounded-lg shadow-2xl"
             style={{ maxHeight: 'calc(100vh - 200px)' }}
           >
-            {/* Header du panneau - Déplaçable */}
             <div className="p-3 border-b border-darkGray flex items-center justify-between cursor-move bg-primary/10">
               <div className="flex items-center gap-2">
                 <Move className="w-4 h-4 text-primary" />
-                <h3 className="text-sm font-semibold text-text">Recherche & Agents</h3>
+                <h3 className="text-sm font-semibold text-text">Agents Burundi</h3>
               </div>
               <button
                 onClick={() => setIsPanelOpen(false)}
@@ -411,7 +328,6 @@ function CartographieAgents() {
             </div>
 
             <div className="p-3 space-y-2">
-              {/* Recherche */}
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
@@ -423,7 +339,6 @@ function CartographieAgents() {
                 />
               </div>
 
-              {/* Filtres */}
               <div className="flex gap-2">
                 <button
                   onClick={() => setFilterStatus('all')}
@@ -458,7 +373,6 @@ function CartographieAgents() {
               </div>
             </div>
 
-            {/* Liste des agents - Scrollable */}
             <div className="max-h-96 overflow-y-auto border-t border-darkGray">
               <div className="p-2 space-y-1">
                 <p className="text-xs text-gray-400 px-2 py-1">
@@ -495,7 +409,6 @@ function CartographieAgents() {
           </div>
         )}
 
-        {/* Légende flottante - Minimaliste */}
         <div className="absolute bottom-4 right-4 bg-card/95 backdrop-blur-sm border border-darkGray rounded-lg p-3 shadow-2xl">
           <p className="text-xs font-semibold text-text mb-2">Légende</p>
           <div className="space-y-1.5">

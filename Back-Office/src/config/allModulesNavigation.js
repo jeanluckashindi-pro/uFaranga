@@ -11,7 +11,7 @@ import {
 export const allModulesNavigation = [
   // ==================== MODULE AGENT ====================
   {
-    section: '🧑‍💼 MODULE AGENT',
+    section: 'MODULE AGENT',
     module: 'agent',
     color: 'primary',
     items: [
@@ -61,7 +61,7 @@ export const allModulesNavigation = [
 
   // ==================== MODULE ADMIN SYSTÈME ====================
   {
-    section: '🛡 MODULE ADMIN SYSTÈME',
+    section: 'MODULE ADMIN SYSTÈME',
     module: 'admin',
     color: 'danger',
     items: [
@@ -74,8 +74,8 @@ export const allModulesNavigation = [
       { 
         path: '/admin/cartographie', 
         icon: Globe, 
-        label: 'Cartographie Agents',
-        description: 'Carte interactive du réseau'
+        label: 'Cartographie Réseau',
+        description: 'Carte réseau uFaranga global'
       },
       { 
         path: '/admin/agents', 
@@ -136,7 +136,7 @@ export const allModulesNavigation = [
 
   // ==================== MODULE CLIENT ====================
   {
-    section: '👤 MODULE CLIENT',
+    section: 'MODULE CLIENT',
     module: 'client',
     color: 'secondary',
     items: [
@@ -199,7 +199,7 @@ export const allModulesNavigation = [
 
   // ==================== MODULE ADMIN TECHNIQUE ====================
   {
-    section: '⚙️ MODULE ADMIN TECHNIQUE',
+    section: 'MODULE ADMIN TECHNIQUE',
     module: 'tech',
     color: 'primary',
     items: [
@@ -208,6 +208,12 @@ export const allModulesNavigation = [
         icon: Server, 
         label: 'Monitoring Système',
         description: 'État serveurs et API'
+      },
+      { 
+        path: '/tech/cartographie-agents', 
+        icon: Globe, 
+        label: 'Cartographie Agents',
+        description: 'Carte agents Burundi'
       },
       { 
         path: '/tech/performance', 

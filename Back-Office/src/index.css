@@ -27,6 +27,52 @@
   }
 }
 
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #00070F;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #007BFF 0%, #F58424 100%);
+  border-radius: 10px;
+  border: 2px solid #00070F;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #0066DD 0%, #E67310 100%);
+}
+
+::-webkit-scrollbar-corner {
+  background: #00070F;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #007BFF #00070F;
+}
+
+/* Select dropdown personnalisé */
+select {
+  background-image: none;
+}
+
+select option {
+  background-color: #181F27;
+  color: #F9F9F9;
+  padding: 8px;
+}
+
+select option:hover {
+  background-color: #007BFF;
+}
+
 /* Mapbox Popup Styles */
 .mapboxgl-popup-content {
   background-color: #F9F9F9 !important;

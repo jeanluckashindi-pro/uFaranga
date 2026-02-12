@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
-  ChevronLeft, ChevronRight, Menu, X, Bell, Globe, LogOut
+  ChevronLeft, ChevronRight, Menu, X, Bell, Globe, LogOut, Search, Filter
 } from 'lucide-react';
 import allModulesNavigation from '../config/allModulesNavigation';
 
@@ -10,6 +10,8 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [notifications, setNotifications] = useState(3);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedModule, setSelectedModule] = useState('all');
 
   const isActive = (path) => {
     return location.pathname === path || location.pathname.startsWith(path + '/');
@@ -19,6 +21,37 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
     if (badgeKey === 'notifications') return notifications;
     return 0;
   };
+
+  // Filtrer les modules et items
+  const filteredNavigation = allModulesNavigation
+    .filter(section => {
+      // Filtre par module sélectionné
+      if (selectedModule !== 'all' && section.module !== selectedModule) {
+        return false;
+      }
+      return true;
+    })
+    .map(section => ({
+      ...section,
+      items: section.items.filter(item => {
+        // Filtre par recherche
+        if (!searchTerm) return true;
+        const search = searchTerm.toLowerCase();
+        return (
+          item.label.toLowerCase().includes(search) ||
+          (item.description && item.description.toLowerCase().includes(search))
+        );
+      })
+    }))
+    .filter(section => section.items.length > 0); // Enlever les sections vides
+
+  const moduleOptions = [
+    { value: 'all', label: 'Tous les modules', color: 'primary' },
+    { value: 'agent', label: 'Agent', color: 'primary' },
+    { value: 'admin', label: 'Admin Système', color: 'danger' },
+    { value: 'client', label: 'Client', color: 'secondary' },
+    { value: 'tech', label: 'Admin Technique', color: 'primary' }
+  ];
 
   // Déterminer le module actif
   const getCurrentModule = () => {
@@ -66,95 +99,140 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
     <div className="flex h-screen w-screen overflow-hidden">
       {/* Sidebar Desktop */}
       <aside
-        className={`hidden md:block fixed left-0 h-full bg-background border-r border-text/10 transition-all duration-300 z-50 ${
+        className={`hidden md:block fixed left-0 h-screen bg-background border-r border-text/10 transition-all duration-300 z-50 flex flex-col ${
           isSidebarOpen ? 'w-80' : 'w-20'
         }`}
       >
-        {/* Logo */}
-        <div className="mt-6 px-4 flex items-center justify-between">
-          {isSidebarOpen ? (
-            <div>
-              <h1 className="text-xl font-anton uppercase text-text">uFaranga Platform</h1>
-              <p className="text-xs text-gray-400 mt-1">Tous les Modules</p>
+        {/* Top Nav - Hauteur fixe */}
+        <div className="h-[160px] flex-shrink-0">
+          {/* Logo */}
+          <div className="mt-6 px-4 flex items-center justify-between">
+            {isSidebarOpen ? (
+              <div>
+                <h1 className="text-2xl  text-text" style={{ fontFamily: 'Kaushan Script, cursive' }}>uFaranga</h1>
+                <p className="text-xs text-gray-400 mt-1">Back Office</p>
+              </div>
+            ) : (
+              <div className="w-full flex justify-center">
+                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary via-secondary to-danger flex items-center justify-center text-white font-bold">
+                  U
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Toggle Button et Filtre - Flex Layout */}
+          <div className="px-4 mt-4">
+            <div className="flex items-center gap-2">
+              {/* Toggle Button */}
+              <button
+                onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                className="p-2 bg-background border border-darkGray rounded-lg text-text hover:bg-card transition-colors flex items-center justify-center flex-shrink-0"
+              >
+                {isSidebarOpen ? <ChevronLeft className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
+              </button>
+
+              {/* Filtre par module - Dropdown */}
+              {isSidebarOpen && (
+                <div className="relative flex-1">
+                  <Filter className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none z-10" />
+                  <select
+                    value={selectedModule}
+                    onChange={(e) => setSelectedModule(e.target.value)}
+                    className="w-full pl-10 pr-8 py-2 bg-card border border-darkGray rounded-lg text-text text-sm focus:outline-none focus:border-darkGray transition-colors appearance-none cursor-pointer"
+                  >
+                    {moduleOptions.map(option => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                  <ChevronRight className="absolute right-3 top-1/2 transform -translate-y-1/2 rotate-90 w-4 h-4 text-gray-400 pointer-events-none" />
+                </div>
+              )}
             </div>
-          ) : (
-            <div className="w-full flex justify-center">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary via-secondary to-danger flex items-center justify-center text-white font-bold">
-                U
+          </div>
+
+          {/* Recherche */}
+          {isSidebarOpen && (
+            <div className="px-4 mt-2">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                <input
+                  type="text"
+                  placeholder="Rechercher..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 bg-card border border-darkGray rounded-lg text-text text-sm placeholder-gray-500 focus:outline-none focus:border-darkGray transition-colors"
+                />
               </div>
             </div>
           )}
         </div>
 
-        {/* Toggle Button */}
-        <div className="px-4 mt-4">
-          <button
-            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-            className="w-full p-2 bg-background border border-darkGray rounded-lg text-text hover:bg-card transition-colors flex items-center justify-center"
-          >
-            {isSidebarOpen ? <ChevronLeft className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
-          </button>
-        </div>
-
-        {/* Navigation - Tous les modules */}
-        <nav className="mt-6 px-4 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 200px)' }}>
-          {allModulesNavigation.map((section, idx) => (
-            <div key={idx} className="mb-6">
-              {isSidebarOpen && (
-                <div className="text-xs font-bold text-text uppercase mb-3 px-3 py-2 bg-card rounded-lg border border-darkGray">
-                  {section.section}
-                </div>
-              )}
-              <div className="space-y-1">
-                {section.items.map((item) => {
-                  const badgeCount = item.badge ? getBadgeCount(item.badge) : 0;
-                  const itemActive = isActive(item.path);
-                  return (
-                    <Link
-                      key={item.path}
-                      to={item.path}
-                      className={`flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'} gap-3 px-3 py-2.5 rounded-lg transition-all ${
-                        itemActive
-                          ? `bg-${section.color} text-white font-semibold shadow-lg`
-                          : 'hover:bg-card text-gray-300 hover:text-text'
-                      }`}
-                      title={!isSidebarOpen ? item.label : item.description}
-                    >
-                      <div className="flex items-center gap-3 min-w-0">
-                        <item.icon className="w-4 h-4 flex-shrink-0" />
-                        {isSidebarOpen && (
-                          <div className="flex flex-col min-w-0">
-                            <span className="text-sm truncate">{item.label}</span>
-                            {item.description && (
-                              <span className="text-xs opacity-70 truncate">{item.description}</span>
+        {/* Navigation - Prend le reste de l'espace */}
+        <div className="overflow-y-auto px-4 py-4" style={{ height: 'calc(100vh - 240px)' }}>
+          {filteredNavigation.length === 0 ? (
+            <div className="text-center py-8 text-gray-400 text-sm">
+              Aucun résultat trouvé
+            </div>
+          ) : (
+            <>
+              {filteredNavigation.map((section, idx) => (
+                <div key={idx} className="mb-4">
+                  {isSidebarOpen && (
+                    <div className="text-lg font-anton font-light uppercase mb-3 px-3 py-1 flex items-center gap-2">
+                      <span className={`w-2 h-2 rounded-full bg-${section.color} flex-shrink-0`}></span>
+                      <span className="text-text">{section.section}</span>
+                    </div>
+                  )}
+                  <div className="space-y-1">
+                    {section.items.map((item) => {
+                      const badgeCount = item.badge ? getBadgeCount(item.badge) : 0;
+                      const itemActive = isActive(item.path);
+                      return (
+                        <Link
+                          key={item.path}
+                          to={item.path}
+                          className={`flex items-center ${isSidebarOpen ? 'justify-between' : 'justify-center'} gap-3 px-3 py-2.5 rounded-lg transition-all ${
+                            itemActive
+                              ? `bg-${section.color} text-white font-semibold shadow-lg`
+                              : 'hover:bg-card text-gray-300 hover:text-text'
+                          }`}
+                          title={!isSidebarOpen ? item.label : item.description}
+                        >
+                          <div className="flex items-center gap-3 min-w-0">
+                            <item.icon className="w-4 h-4 flex-shrink-0" />
+                            {isSidebarOpen && (
+                              <span className="text-sm truncate">{item.label}</span>
                             )}
                           </div>
-                        )}
-                      </div>
-                      {isSidebarOpen && badgeCount > 0 && (
-                        <span className={`px-2 py-0.5 rounded-full text-xs font-bold flex-shrink-0 ${
-                          itemActive
-                            ? 'bg-white text-primary'
-                            : 'bg-danger text-white'
-                        }`}>
-                          {badgeCount}
-                        </span>
-                      )}
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          ))}
+                          {isSidebarOpen && badgeCount > 0 && (
+                            <span className={`px-2 py-0.5 rounded-full text-xs font-bold flex-shrink-0 ${
+                              itemActive
+                                ? 'bg-white text-primary'
+                                : 'bg-danger text-white'
+                            }`}>
+                              {badgeCount}
+                            </span>
+                          )}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </>
+          )}
+        </div>
 
-          {/* Logout */}
-          <div className={`mt-8 pt-6 border-t border-text/10 ${!isSidebarOpen && 'px-0'}`}>
-            <button className={`flex items-center ${isSidebarOpen ? 'gap-3 px-3' : 'justify-center'} py-3 rounded-lg w-full hover:bg-danger/10 text-danger transition-all`}>
-              <LogOut className="w-5 h-5" />
-              {isSidebarOpen && <span>Déconnexion</span>}
-            </button>
-          </div>
-        </nav>
+        {/* Bottom Nav - Hauteur fixe pour déconnexion */}
+        <div className="h-[80px] flex-shrink-0 px-4 flex items-center justify-center mb-6">
+          <button className={`flex items-center ${isSidebarOpen ? 'gap-3 px-3 justify-start' : 'justify-center'} rounded-lg w-full hover:bg-danger/10 text-danger transition-all h-12`}>
+            <LogOut className="w-5 h-5" />
+            {isSidebarOpen && <span>Déconnexion</span>}
+          </button>
+        </div>
       </aside>
 
       {/* Mobile Sidebar Overlay */}
