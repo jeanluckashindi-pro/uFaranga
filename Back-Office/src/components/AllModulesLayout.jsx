@@ -227,8 +227,8 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
         </div>
 
         {/* Bottom Nav - Hauteur fixe pour déconnexion */}
-        <div className="h-[80px] flex-shrink-0 px-4 flex items-center justify-center mb-6">
-          <button className={`flex items-center ${isSidebarOpen ? 'gap-3 px-3 justify-start' : 'justify-center'} rounded-lg w-full hover:bg-danger/10 text-danger transition-all h-12`}>
+        <div className="h-[80px] flex-shrink-0 px-4 flex items-center justify-center">
+          <button style={{marginBottom:"20px"}} className={`flex items-center ${isSidebarOpen ? 'gap-3 px-3 justify-start' : 'justify-center'} rounded-lg w-full hover:bg-danger/10 text-danger transition-all h-12`}>
             <LogOut className="w-5 h-5" />
             {isSidebarOpen && <span>Déconnexion</span>}
           </button>

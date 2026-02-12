@@ -21,7 +21,10 @@ const UFARANGA_COUNTRIES = [
     users: 456000,
     volume: 2300000000, // BIF
     status: 'actif',
-    color: '#007BFF'
+    color: '#007BFF',
+    population: 13000000,
+    ufarangaUsers: 456000,
+    penetration: 3.5 // % du territoire
   },
   { 
     name: 'Rwanda', 
@@ -32,7 +35,10 @@ const UFARANGA_COUNTRIES = [
     users: 890000,
     volume: 5600000000,
     status: 'actif',
-    color: '#007BFF'
+    color: '#007BFF',
+    population: 13500000,
+    ufarangaUsers: 890000,
+    penetration: 6.6
   },
   { 
     name: 'RD Congo', 
@@ -43,7 +49,10 @@ const UFARANGA_COUNTRIES = [
     users: 1200000,
     volume: 8900000000,
     status: 'actif',
-    color: '#007BFF'
+    color: '#007BFF',
+    population: 99000000,
+    ufarangaUsers: 1200000,
+    penetration: 1.2
   },
   { 
     name: 'Tanzanie', 
@@ -54,7 +63,10 @@ const UFARANGA_COUNTRIES = [
     users: 670000,
     volume: 4200000000,
     status: 'actif',
-    color: '#007BFF'
+    color: '#007BFF',
+    population: 65000000,
+    ufarangaUsers: 670000,
+    penetration: 1.0
   },
   { 
     name: 'Kenya', 
@@ -65,7 +77,10 @@ const UFARANGA_COUNTRIES = [
     users: 2100000,
     volume: 12000000000,
     status: 'actif',
-    color: '#007BFF'
+    color: '#007BFF',
+    population: 54000000,
+    ufarangaUsers: 2100000,
+    penetration: 3.9
   },
   { 
     name: 'Ouganda', 
@@ -76,7 +91,10 @@ const UFARANGA_COUNTRIES = [
     users: 980000,
     volume: 6700000000,
     status: 'actif',
-    color: '#007BFF'
+    color: '#007BFF',
+    population: 47000000,
+    ufarangaUsers: 980000,
+    penetration: 2.1
   },
   { 
     name: 'Sénégal', 
@@ -87,7 +105,10 @@ const UFARANGA_COUNTRIES = [
     users: 540000,
     volume: 3400000000,
     status: 'en_deploiement',
-    color: '#F58424'
+    color: '#F58424',
+    population: 17000000,
+    ufarangaUsers: 540000,
+    penetration: 3.2
   },
   { 
     name: 'Côte d\'Ivoire', 
@@ -98,8 +119,11 @@ const UFARANGA_COUNTRIES = [
     users: 780000,
     volume: 5100000000,
     status: 'en_deploiement',
-    color: '#F58424'
-  },
+    color: '#F58424',
+    population: 28000000,
+    ufarangaUsers: 780000,
+    penetration: 2.8
+  }
 ];
 
 const STATUS_COLORS = {
@@ -114,7 +138,7 @@ function CartographieReseau() {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
-  const [isPanelOpen, setIsPanelOpen] = useState(true);
+  const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [mapStyle, setMapStyle] = useState('mapbox://styles/mapbox/dark-v11');
   const [viewMode, setViewMode] = useState('2d'); // 2D par défaut
   const markersRef = useRef([]);
@@ -144,13 +168,83 @@ function CartographieReseau() {
       zoom: 4,
       pitch: 0, // Vue 2D
       bearing: 0,
-      antialias: true
+      antialias: true,
+      attributionControl: false // Enlever les attributions Mapbox
     });
 
-    map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
-    map.current.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+    // Pas de contrôles par défaut
 
     map.current.on('load', () => {
+      // Liste des codes ISO des pays couverts
+      const coveredCountries = ['BI', 'RW', 'CD', 'TZ', 'KE', 'UG', 'SN', 'CI'];
+      
+      // Ajouter une couche pour colorer les pays couverts
+      map.current.addLayer({
+        id: 'country-fills',
+        type: 'fill',
+        source: {
+          type: 'vector',
+          url: 'mapbox://mapbox.country-boundaries-v1'
+        },
+        'source-layer': 'country_boundaries',
+        filter: ['in', 'iso_3166_1', ...coveredCountries],
+        paint: {
+          'fill-color': '#007BFF',
+          'fill-opacity': 0.4
+        }
+      });
+
+      // Ajouter les bordures des pays couverts
+      map.current.addLayer({
+        id: 'country-borders',
+        type: 'line',
+        source: {
+          type: 'vector',
+          url: 'mapbox://mapbox.country-boundaries-v1'
+        },
+        'source-layer': 'country_boundaries',
+        filter: ['in', 'iso_3166_1', ...coveredCountries],
+        paint: {
+          'line-color': '#F58424',
+          'line-width': 3,
+          'line-opacity': 1
+        }
+      });
+
+      // Ajouter les labels au centre de chaque pays
+      UFARANGA_COUNTRIES.forEach(country => {
+        const labelEl = document.createElement('div');
+        labelEl.className = 'country-label';
+        labelEl.style.cssText = `
+          background: rgba(24, 31, 39, 0.95);
+          backdrop-filter: blur(10px);
+          border: 1px solid #343A40;
+          border-radius: 8px;
+          padding: 8px 12px;
+          text-align: center;
+          pointer-events: none;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        `;
+        labelEl.innerHTML = `
+          <div style="font-family: 'Anton', sans-serif; font-size: 16px; color: #F58424; text-transform: uppercase; margin-bottom: 4px;">
+            ${country.name}
+          </div>
+          <div style="font-size: 11px; color: #9ca3af; margin-bottom: 2px;">
+            ${(country.population / 1000000).toFixed(1)}M habitants
+          </div>
+          <div style="font-size: 11px; color: #007BFF; font-weight: 600;">
+            uFaranga: ${(country.ufarangaUsers / 1000).toFixed(0)}K
+          </div>
+          <div style="font-size: 10px; color: #6b7280;">
+            ${country.penetration}% du territoire
+          </div>
+        `;
+
+        new mapboxgl.Marker(labelEl, { anchor: 'center' })
+          .setLngLat([country.lng, country.lat])
+          .addTo(map.current);
+      });
+
       setMapLoaded(true);
     });
 
@@ -352,27 +446,27 @@ function CartographieReseau() {
         </div>
 
         {/* Stats globales - En haut au centre */}
-        <div className="absolute top-4 left-1/2 transform -translate-x-1/2">
-          <div className="bg-card/95 backdrop-blur-sm border border-primary rounded-lg shadow-lg px-6 py-3">
-            <div className="flex items-center gap-6">
+        <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10">
+          <div className="bg-card/95 backdrop-blur-sm border border-darkGray rounded-lg shadow-lg px-4 py-2">
+            <div className="flex items-center gap-4">
               <div className="text-center">
-                <div className="text-xs text-gray-400">Pays</div>
-                <div className="text-lg font-bold text-primary">{stats.countries}</div>
+                <div className="text-xs text-gray-400 mb-0.5">Pays</div>
+                <div className="text-xl font-bold text-primary">{stats.countries}</div>
               </div>
               <div className="h-8 w-px bg-darkGray"></div>
               <div className="text-center">
-                <div className="text-xs text-gray-400">Agents</div>
-                <div className="text-lg font-bold text-secondary">{(stats.agents / 1000).toFixed(1)}K</div>
+                <div className="text-xs text-gray-400 mb-0.5">Agents</div>
+                <div className="text-xl font-bold text-secondary">{(stats.agents / 1000).toFixed(1)}K</div>
               </div>
               <div className="h-8 w-px bg-darkGray"></div>
               <div className="text-center">
-                <div className="text-xs text-gray-400">Utilisateurs</div>
-                <div className="text-lg font-bold text-text">{(stats.users / 1000000).toFixed(1)}M</div>
+                <div className="text-xs text-gray-400 mb-0.5">Utilisateurs</div>
+                <div className="text-xl font-bold text-text">{(stats.users / 1000000).toFixed(1)}M</div>
               </div>
               <div className="h-8 w-px bg-darkGray"></div>
               <div className="text-center">
-                <div className="text-xs text-gray-400">Volume</div>
-                <div className="text-lg font-bold text-text">{(stats.volume / 1000000000).toFixed(1)}B</div>
+                <div className="text-xs text-gray-400 mb-0.5">Volume</div>
+                <div className="text-xl font-bold text-text">{(stats.volume / 1000000000).toFixed(1)}B BIF</div>
               </div>
             </div>
           </div>
@@ -380,8 +474,8 @@ function CartographieReseau() {
 
         {/* Badge pays sélectionné */}
         {selectedCountry && (
-          <div className="absolute top-20 left-1/2 transform -translate-x-1/2">
-            <div className="flex items-center gap-2 px-4 py-2 bg-card/95 backdrop-blur-sm border border-secondary rounded-lg shadow-lg">
+          <div className="absolute top-16 left-1/2 transform -translate-x-1/2 z-10">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-card/95 backdrop-blur-sm border border-darkGray rounded-lg shadow-lg">
               <GlobeIcon className="w-4 h-4 text-secondary" />
               <span className="text-secondary font-semibold text-sm">{selectedCountry.name}</span>
               <button
@@ -397,12 +491,17 @@ function CartographieReseau() {
         {/* Panneau de recherche */}
         {isPanelOpen && (
           <div 
-            className="absolute top-4 right-4 w-80 bg-card/95 backdrop-blur-sm border border-primary rounded-lg shadow-2xl"
-            style={{ maxHeight: 'calc(100vh - 200px)' }}
+            className="absolute top-4 right-4 w-80 bg-card/95 backdrop-blur-sm border border-darkGray rounded-lg shadow-2xl overflow-hidden"
+            style={{ maxHeight: 'calc(100vh - 100px)', cursor: 'move' }}
+            draggable="true"
+            onDragStart={(e) => {
+              e.dataTransfer.effectAllowed = 'move';
+            }}
           >
-            <div className="p-3 border-b border-darkGray flex items-center justify-between cursor-move bg-primary/10">
+            {/* Header */}
+            <div className="p-3 border-b border-darkGray flex items-center justify-between bg-darkGray/30 cursor-move">
               <div className="flex items-center gap-2">
-                <Move className="w-4 h-4 text-primary" />
+                <GlobeIcon className="w-4 h-4 text-primary" />
                 <h3 className="text-sm font-semibold text-text">Réseau uFaranga</h3>
               </div>
               <button
@@ -413,7 +512,8 @@ function CartographieReseau() {
               </button>
             </div>
 
-            <div className="p-3 space-y-2">
+            {/* Search */}
+            <div className="p-3 border-b border-darkGray">
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 <input
@@ -421,60 +521,58 @@ function CartographieReseau() {
                   placeholder="Rechercher un pays..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 bg-background border border-darkGray rounded-lg text-text text-sm placeholder-gray-500 focus:outline-none focus:border-primary transition-colors"
+                  className="w-full pl-10 pr-4 py-2 bg-background border border-darkGray rounded-lg text-text text-sm placeholder-gray-500 focus:outline-none focus:border-darkGray transition-colors"
                 />
               </div>
             </div>
 
-            <div className="max-h-96 overflow-y-auto border-t border-darkGray">
-              <div className="p-2 space-y-1">
-                <p className="text-xs text-gray-400 px-2 py-1">
-                  {filteredCountries.length} pays
+            {/* Countries List */}
+            <div className="overflow-y-auto" style={{ maxHeight: 'calc(100vh - 250px)' }}>
+              <div className="p-2">
+                <p className="text-xs text-gray-400 px-2 py-1 mb-1">
+                  {filteredCountries.length} pays trouvés
                 </p>
-                {filteredCountries.map((country) => (
+                <div className="space-y-1">
+                  {filteredCountries.map((country) => (
                   <div
                     key={country.code}
                     onClick={() => flyToCountry(country)}
-                    className={`p-2 rounded-lg cursor-pointer transition-all ${
+                    className={`p-3 rounded-lg cursor-pointer transition-all border ${
                       selectedCountry?.code === country.code
-                        ? 'bg-primary text-white'
-                        : 'bg-background/50 hover:bg-background text-gray-300'
+                        ? 'bg-primary/20 border-primary text-white'
+                        : 'bg-background/50 hover:bg-darkGray border-darkGray text-gray-300'
                     }`}
                   >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2">
+                      <div className="flex items-start gap-2 flex-1 min-w-0">
                         <span
-                          className={`h-2 w-2 rounded-full flex-shrink-0`}
+                          className={`h-2.5 w-2.5 rounded-full flex-shrink-0 mt-1`}
                           style={{ backgroundColor: STATUS_COLORS[country.status] }}
                         />
                         <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-xs truncate">{country.name}</p>
-                          <p className="text-xs opacity-70">{country.agents.toLocaleString()} agents</p>
+                          <p className="font-semibold text-sm truncate mb-1">{country.name}</p>
+                          <div className="grid grid-cols-2 gap-x-3 gap-y-0.5 text-xs">
+                            <div className="text-gray-400">
+                              <span className="opacity-60">Agents:</span> <span className="text-secondary font-semibold">{country.agents.toLocaleString()}</span>
+                            </div>
+                            <div className="text-gray-400">
+                              <span className="opacity-60">Users:</span> <span className="text-text font-semibold">{(country.users / 1000).toFixed(0)}K</span>
+                            </div>
+                            <div className="text-gray-400 col-span-2">
+                              <span className="opacity-60">Volume:</span> <span className="text-primary font-semibold">{(country.volume / 1000000000).toFixed(1)}B BIF</span>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <MapPin className="w-3 h-3 flex-shrink-0" />
+                      <MapPin className="w-4 h-4 flex-shrink-0 mt-0.5 opacity-50" />
                     </div>
                   </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         )}
-
-        {/* Légende */}
-        <div className="absolute bottom-4 right-4 bg-card/95 backdrop-blur-sm border border-darkGray rounded-lg p-3 shadow-2xl">
-          <p className="text-xs font-semibold text-text mb-2">Statut</p>
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: STATUS_COLORS.actif }}></div>
-              <span className="text-xs text-gray-400">Actif</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full" style={{ backgroundColor: STATUS_COLORS.en_deploiement }}></div>
-              <span className="text-xs text-gray-400">En déploiement</span>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   );

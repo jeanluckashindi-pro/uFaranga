@@ -72,10 +72,10 @@ function AdminDashboard() {
 
   const getSeverityColor = (severity) => {
     const colors = {
-      high: 'bg-danger/10 border-danger text-danger',
-      medium: 'bg-secondary/10 border-secondary text-secondary',
-      low: 'bg-primary/10 border-primary text-primary',
-      info: 'bg-gray-500/10 border-gray-500 text-gray-400'
+      high: 'bg-danger/10 border-darkGray text-danger',
+      medium: 'bg-secondary/10 border-darkGray text-secondary',
+      low: 'bg-primary/10 border-darkGray text-primary',
+      info: 'bg-gray-500/10 border-darkGray text-gray-400'
     };
     return colors[severity] || colors.info;
   };
@@ -139,7 +139,7 @@ function AdminDashboard() {
 
       {/* Alertes Importantes */}
       {alertes.filter(a => a.severity === 'high').length > 0 && (
-        <div className="border border-danger bg-danger/5 rounded-lg p-4">
+        <div className="border border-darkGray bg-danger/5 rounded-lg p-4">
           <div className="flex items-center gap-3">
             <AlertTriangle className="w-5 h-5 text-danger" />
             <div className="flex-1">

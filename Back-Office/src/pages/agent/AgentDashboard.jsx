@@ -84,7 +84,7 @@ function AgentDashboard() {
     <div className="p-6 space-y-6">
       {/* Alert Float Faible */}
       {isFloatLow && (
-        <div className="bg-red-500/10 border border-red-500 rounded-lg p-4 flex items-center gap-3">
+        <div className="bg-red-500/10 border border-darkGray rounded-lg p-4 flex items-center gap-3">
           <AlertCircle className="w-5 h-5 text-red-500" />
           <div className="flex-1">
             <p className="text-text font-semibold">Float proche du minimum</p>
@@ -99,7 +99,7 @@ function AgentDashboard() {
       {/* KPIs Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Float Balance */}
-        <div className={`border rounded-lg p-6 bg-card ${isFloatLow ? 'border-red-500' : 'border-secondary'}`}>
+        <div className={`border rounded-lg p-6 bg-card ${isFloatLow ? 'border-darkGray' : 'border-darkGray'}`}>
           <div className="flex items-center justify-between mb-2">
             <p className="text-gray-400 text-sm">Float Balance</p>
             <DollarSign className={`w-5 h-5 ${isFloatLow ? 'text-red-500' : 'text-secondary'}`} />
@@ -115,7 +115,7 @@ function AgentDashboard() {
         </div>
 
         {/* Cash Balance */}
-        <div className="border border-primary bg-card rounded-lg p-6">
+        <div className="border border-darkGray bg-card rounded-lg p-6">
           <div className="flex items-center justify-between mb-2">
             <p className="text-gray-400 text-sm">Cash Physique</p>
             <DollarSign className="w-5 h-5 text-primary" />
@@ -128,7 +128,7 @@ function AgentDashboard() {
         </div>
 
         {/* Commissions Today */}
-        <div className="border border-darkGray hover:border-secondary/50 bg-card rounded-lg p-6 transition-colors">
+        <div className="border border-darkGray hover:border-darkGray bg-card rounded-lg p-6 transition-colors">
           <div className="flex items-center justify-between mb-2">
             <p className="text-gray-400 text-sm">Commissions Jour</p>
             <TrendingUp className="w-5 h-5 text-secondary" />
@@ -141,7 +141,7 @@ function AgentDashboard() {
         </div>
 
         {/* Transactions Today */}
-        <div className="border border-darkGray hover:border-primary/50 bg-card rounded-lg p-6 transition-colors">
+        <div className="border border-darkGray hover:border-darkGray bg-card rounded-lg p-6 transition-colors">
           <div className="flex items-center justify-between mb-2">
             <p className="text-gray-400 text-sm">Transactions</p>
             <Activity className="w-5 h-5 text-primary" />
@@ -269,15 +269,15 @@ function AgentDashboard() {
             <ArrowDownToLine className="w-8 h-8" />
             <span className="font-semibold">Dépôt</span>
           </button>
-          <button className="p-6 border border-darkGray hover:border-primary/50 bg-card rounded-lg transition-colors flex flex-col items-center gap-2">
+          <button className="p-6 border border-darkGray hover:border-darkGray bg-card rounded-lg transition-colors flex flex-col items-center gap-2">
             <ArrowUpFromLine className="w-8 h-8 text-text" />
             <span className="font-semibold text-text">Retrait</span>
           </button>
-          <button className="p-6 border border-darkGray hover:border-secondary/50 bg-card rounded-lg transition-colors flex flex-col items-center gap-2">
+          <button className="p-6 border border-darkGray hover:border-darkGray bg-card rounded-lg transition-colors flex flex-col items-center gap-2">
             <ArrowLeftRight className="w-8 h-8 text-text" />
             <span className="font-semibold text-text">Transfert</span>
           </button>
-          <button className="p-6 border border-darkGray hover:border-primary/50 bg-card rounded-lg transition-colors flex flex-col items-center gap-2">
+          <button className="p-6 border border-darkGray hover:border-darkGray bg-card rounded-lg transition-colors flex flex-col items-center gap-2">
             <CreditCard className="w-8 h-8 text-text" />
             <span className="font-semibold text-text">Paiement</span>
           </button>
