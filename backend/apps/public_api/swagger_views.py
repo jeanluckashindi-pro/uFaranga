@@ -24,32 +24,9 @@ class PublicAPISchemaView(APIView):
         schema = {
             'openapi': '3.0.3',
             'info': {
-                'title': 'uFaranga Public API',
+                'title': 'API Publique uFaranga',
                 'version': '1.0.0',
-                'description': '''
-# API Publique uFaranga
-
-Documentation interactive de l'API publique uFaranga.
-
-## 🔐 Authentification
-
-Toutes les requêtes nécessitent une clé API. Incluez-la dans le header:
-
-```
-Authorization: ApiKey your_api_key_here
-```
-
-## 📊 Rate Limiting
-
-- **SANDBOX**: 60/min, 1,000/jour, 30,000/mois
-- **PRODUCTION**: 120/min, 10,000/jour, 300,000/mois
-
-## 🌐 Environnements
-
-- **Local**: http://localhost:8000
-- **Sandbox**: https://sandbox-api.ufaranga.bi
-- **Production**: https://api.ufaranga.bi
-                ''',
+                'description': 'Documentation interactive de l\'API publique uFaranga.',
                 'contact': {
                     'name': 'uFaranga Support',
                     'email': 'developers@ufaranga.bi'
@@ -76,7 +53,7 @@ Authorization: ApiKey your_api_key_here
                         'type': 'apiKey',
                         'in': 'header',
                         'name': 'Authorization',
-                        'description': 'Format: ApiKey your_api_key_here'
+                        'description': 'Format : ApiKey votre_cle_api'
                     }
                 },
                 'schemas': self._get_schemas()
@@ -424,7 +401,7 @@ class PublicAPISwaggerView(APIView):
         """Affiche Swagger UI"""
         return render(request, 'public_api/swagger.html', {
             'schema_url': '/api/public/schema/',
-            'title': 'uFaranga Public API - Documentation'
+            'title': 'API Publique uFaranga - Documentation'
         })
 
 

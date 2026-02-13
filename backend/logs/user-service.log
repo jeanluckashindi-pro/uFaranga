@@ -376,3 +376,53 @@ INFO 2026-02-13 17:21:13,573 basehttp 5732 13496 "GET /api/public/docs/ HTTP/1.1
 INFO 2026-02-13 17:21:14,395 basehttp 5732 13496 "GET /api/public/schema/ HTTP/1.1" 200 7245
 INFO 2026-02-13 17:22:17,955 basehttp 5732 22012 "GET /api/public/docs/ HTTP/1.1" 200 1982
 INFO 2026-02-13 17:22:19,362 basehttp 5732 22012 "GET /api/public/schema/ HTTP/1.1" 200 7245
+INFO 2026-02-13 17:26:19,454 autoreload 5732 29360 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:26:19,695 autoreload 32256 13544 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:26:21,970 autoreload 29252 13016 Watching for file changes with StatReloader
+INFO 2026-02-13 17:26:22,072 autoreload 27740 20608 Watching for file changes with StatReloader
+INFO 2026-02-13 17:26:23,107 basehttp 29252 16892 "GET /api/public/docs/ HTTP/1.1" 200 1982
+INFO 2026-02-13 17:26:24,316 basehttp 29252 16892 "GET /api/public/schema/ HTTP/1.1" 200 6755
+INFO 2026-02-13 17:26:52,128 autoreload 29252 13016 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:26:52,848 autoreload 27740 20608 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:26:54,534 autoreload 34724 29680 Watching for file changes with StatReloader
+INFO 2026-02-13 17:26:55,226 autoreload 17688 20048 Watching for file changes with StatReloader
+INFO 2026-02-13 17:26:57,586 autoreload 34724 29680 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:26:58,733 autoreload 17688 20048 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:26:59,868 autoreload 34568 3804 Watching for file changes with StatReloader
+INFO 2026-02-13 17:27:01,038 autoreload 2648 3128 Watching for file changes with StatReloader
+INFO 2026-02-13 17:27:02,883 autoreload 34568 3804 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:27:04,417 autoreload 2648 3128 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:27:05,551 autoreload 10180 34572 Watching for file changes with StatReloader
+WARNING 2026-02-13 17:27:06,557 log 10180 32268 Unauthorized: /api/public/version/
+WARNING 2026-02-13 17:27:06,559 basehttp 10180 32268 "GET /api/public/version/ HTTP/1.1" 401 103
+INFO 2026-02-13 17:27:07,338 autoreload 15588 23212 Watching for file changes with StatReloader
+INFO 2026-02-13 17:27:12,594 autoreload 15588 23212 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:27:13,044 autoreload 10180 34572 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:27:14,816 autoreload 28420 17308 Watching for file changes with StatReloader
+INFO 2026-02-13 17:27:15,120 autoreload 5508 34028 Watching for file changes with StatReloader
+INFO 2026-02-13 17:27:21,775 basehttp 28420 32312 "GET /api/public/docs/ HTTP/1.1" 200 1982
+INFO 2026-02-13 17:27:22,648 basehttp 28420 32312 "GET /api/public/schema/ HTTP/1.1" 200 6806
+INFO 2026-02-13 17:27:36,824 basehttp 28420 16460 "GET /api/public/docs/ HTTP/1.1" 200 1982
+INFO 2026-02-13 17:27:37,677 basehttp 28420 16460 "GET /api/public/schema/ HTTP/1.1" 200 6806
+INFO 2026-02-13 17:27:58,938 basehttp 28420 16460 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 17:28:02,368 basehttp 28420 16460 "GET /api/schema/ HTTP/1.1" 200 93983
+INFO 2026-02-13 17:28:37,682 basehttp 28420 6728 "GET /api/public/docs/ HTTP/1.1" 200 1982
+INFO 2026-02-13 17:28:37,940 basehttp 28420 6728 "GET /api/public/schema/ HTTP/1.1" 200 6806
+INFO 2026-02-13 17:29:20,716 autoreload 5508 34028 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:29:21,140 autoreload 28420 17308 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:29:22,754 autoreload 23064 34164 Watching for file changes with StatReloader
+INFO 2026-02-13 17:29:23,282 autoreload 2648 33960 Watching for file changes with StatReloader
+INFO 2026-02-13 17:29:26,011 autoreload 23064 34164 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:29:26,766 autoreload 2648 33960 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:29:28,282 autoreload 17736 12128 Watching for file changes with StatReloader
+INFO 2026-02-13 17:29:28,978 autoreload 23180 9372 Watching for file changes with StatReloader
+INFO 2026-02-13 17:29:31,338 autoreload 17736 12128 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:29:32,002 autoreload 23180 9372 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:29:33,406 autoreload 6896 20244 Watching for file changes with StatReloader
+INFO 2026-02-13 17:29:34,420 autoreload 17064 32352 Watching for file changes with StatReloader
+INFO 2026-02-13 17:29:34,510 basehttp 6896 17824 "GET /api/public/docs/ HTTP/1.1" 200 1984
+INFO 2026-02-13 17:29:35,253 basehttp 6896 17824 "GET /api/public/schema/ HTTP/1.1" 200 6773
+INFO 2026-02-13 17:29:36,310 autoreload 6896 20244 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:29:38,106 autoreload 29504 26972 Watching for file changes with StatReloader
+INFO 2026-02-13 17:29:46,024 basehttp 17064 28000 "GET /api/public/docs/ HTTP/1.1" 200 1984
+INFO 2026-02-13 17:29:47,357 basehttp 17064 28000 "GET /api/public/schema/ HTTP/1.1" 200 6771
