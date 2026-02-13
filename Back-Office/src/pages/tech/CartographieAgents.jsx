@@ -230,7 +230,7 @@ function CartographieAgents() {
   };
 
   return (
-    <div className="h-full flex flex-col bg-background">
+    <div className="w-full h-screen flex flex-col bg-background" style={{ height: 'calc(100vh - 73px)' }}>
       <div className="flex-1 relative">
         <div ref={mapContainer} className="w-full h-full" />
 

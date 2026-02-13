@@ -11,8 +11,12 @@ export default {
         'body': ['Open Sans', 'sans-serif'],      // Police pour le corps de texte
         'heading': ['Josefin Sans', 'sans-serif'], // Police pour les titres
         'anton': ['Anton', 'sans-serif'],
+        'antonio': ['Antonio', 'sans-serif'],
         'bangers': ['Bangers', 'cursive'],
         'cookie': ['Cookie', 'cursive'],
+        'allan': ['Allan', 'cursive'],
+        'luckiest': ['Luckiest Guy', 'cursive'],
+        'ubuntu': ['Ubuntu', 'sans-serif'],
       },
       colors: {
         primary: '#007BFF',        // Bleu

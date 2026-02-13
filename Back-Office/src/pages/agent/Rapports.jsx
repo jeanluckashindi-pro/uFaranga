@@ -6,14 +6,15 @@ import { Button } from 'primereact/button';
 import { Tag } from 'primereact/tag';
 import { Menu } from 'primereact/menu';
 import { Dialog } from 'primereact/dialog';
+import { Toast } from 'primereact/toast';
 import {
-  LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
-  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
+  LineChart, Line, BarChart, Bar,
+  XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts';
 import {
   Calendar as CalendarIcon, Download, TrendingUp, Activity,
   DollarSign, ArrowDownToLine, ArrowUpFromLine, ArrowLeftRight,
-  CreditCard, Target, Shield, RefreshCw, BarChart3, Clock
+  CreditCard, Target, Shield, RefreshCw, BarChart3, Clock, FileText, CheckCircle
 } from 'lucide-react';
 
 function Rapports() {
@@ -22,6 +23,7 @@ function Rapports() {
   const [showOfficialReport, setShowOfficialReport] = useState(false);
   const dt = useRef(null);
   const menuRef = useRef(null);
+  const toast = useRef(null);
 
   const periods = [
     { label: "Aujourd'hui", value: 'today' },
@@ -87,7 +89,15 @@ function Rapports() {
     { heure: '14h', transactions: 5 }
   ];
 
-  const exportCSV = () => { dt.current.exportCSV(); };
+  const exportCSV = () => { 
+    dt.current.exportCSV(); 
+    toast.current.show({
+      severity: 'success',
+      summary: 'Export CSV',
+      detail: 'Le fichier CSV a été téléchargé avec succès',
+      life: 3000
+    });
+  };
 
   const exportPdf = () => {
     import('jspdf').then((jsPDF) => {
@@ -116,6 +126,13 @@ function Rapports() {
         });
 
         doc.save('rapport_agent.pdf');
+        
+        toast.current.show({
+          severity: 'success',
+          summary: 'Export PDF',
+          detail: 'Le rapport PDF a été généré avec succès',
+          life: 3000
+        });
       });
     });
   };

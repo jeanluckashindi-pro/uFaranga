@@ -49,7 +49,6 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
     { value: 'all', label: 'Tous les modules', color: 'primary' },
     { value: 'agent', label: 'Agent', color: 'primary' },
     { value: 'admin', label: 'Admin Système', color: 'danger' },
-    { value: 'client', label: 'Client', color: 'secondary' },
     { value: 'tech', label: 'Admin Technique', color: 'primary' }
   ];
 
@@ -57,7 +56,6 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
   const getCurrentModule = () => {
     if (location.pathname.startsWith('/agent')) return 'agent';
     if (location.pathname.startsWith('/admin')) return 'admin';
-    if (location.pathname.startsWith('/client')) return 'client';
     if (location.pathname.startsWith('/tech')) return 'tech';
     return 'agent';
   };
@@ -67,7 +65,6 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
   const moduleColors = {
     agent: 'primary',
     admin: 'danger',
-    client: 'secondary',
     tech: 'primary'
   };
 
@@ -81,9 +78,6 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
       { label: 'Agents', value: '1,234', color: 'text-secondary' },
       { label: 'Clients', value: '45.6K', color: 'text-primary' },
       { label: 'Volume', value: '2.3B BIF', color: 'text-text' }
-    ],
-    client: [
-      { label: 'Solde', value: '125K BIF', color: 'text-secondary' }
     ],
     tech: [
       { label: 'Uptime', value: '99.9%', color: 'text-secondary' },
@@ -110,7 +104,7 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
             {isSidebarOpen ? (
               <div>
                 <h1 className="text-3xl  text-text text-secondary" style={{ fontFamily: 'Kaushan Script, cursive' }}>uFaranga</h1>
-                <div className='flex items-center justify-start gap-2'><span className="text-x text-white ">Just </span> <span className="text-xs text-primary"> Money</span></div>
+                <div className='flex items-center justify-start gap-2 font-allan'><span className="text-x text-white ">Simply</span> <span className="text-x text-primary">Money</span></div>
               </div>
             ) : (
               <div className="w-full flex justify-center">
@@ -181,9 +175,9 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
               {filteredNavigation.map((section, idx) => (
                 <div key={idx} className="mb-4">
                   {isSidebarOpen && (
-                    <div className="font-anton font-light uppercase mb-3 px-3 py-1 flex items-center gap-2">
+                    <div className="font-antonio  mb-3 px-3 py-1 flex items-center gap-2">
                       <span className={`w-2 h-2 rounded-full bg-${section.color} flex-shrink-0`}></span>
-                      <span className="text-text text-2xl">{section.section}</span>
+                      <span className="text-text text-xl">{section.section}</span>
                     </div>
                   )}
                   <div className="space-y-1">
@@ -227,8 +221,8 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
         </div>
 
         {/* Bottom Nav - Hauteur fixe pour déconnexion */}
-        <div className="h-[80px] flex-shrink-0 px-4 flex items-center justify-center">
-          <button style={{marginBottom:"20px"}} className={`flex items-center ${isSidebarOpen ? 'gap-3 px-3 justify-start' : 'justify-center'} rounded-lg w-full hover:bg-danger/10 text-danger transition-all h-12`}>
+        <div className="h-[80px] flex-shrink-0  px-4 flex items-center justify-center border-t border-t border-text/10">
+          <button style={{marginBottom:"15px"}} className={`flex items-center ${isSidebarOpen ? 'gap-3 px-3 justify-start' : 'justify-center'} rounded-lg w-full border-darkGray bg-card text-gray-400 transition-all h-12`}>
             <LogOut className="w-5 h-5" />
             {isSidebarOpen && <span>Déconnexion</span>}
           </button>

@@ -238,49 +238,8 @@ function CartographieReseau() {
         }
       });
 
-      // Ajouter les labels au centre de chaque pays
-      UFARANGA_COUNTRIES.forEach(country => {
-        const labelEl = document.createElement('div');
-        labelEl.className = 'country-label';
-        labelEl.dataset.countryCode = country.code; // Stocker le code du pays
-        labelEl.style.cssText = `
-          text-align: center;
-          pointer-events: auto;
-          cursor: pointer;
-          transform: rotate(-15deg);
-          text-shadow: 
-            2px 2px 0px rgba(0,0,0,0.8),
-            4px 4px 0px rgba(0,0,0,0.6),
-            6px 6px 0px rgba(0,0,0,0.4),
-            8px 8px 10px rgba(0,0,0,0.3);
-          transition: transform 0.2s;
-        `;
-        labelEl.innerHTML = `
-          <div style="font-family: 'Anton', sans-serif; font-size: 20px; color: white; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px;">
-            ${country.name}
-          </div>
-          <div style="font-size: 12px; color: white; margin-bottom: 2px; font-weight: 600;">
-            ${(country.population / 1000000).toFixed(1)}M habitants
-          </div>
-          <div style="font-size: 12px; color: white; font-weight: 700;">
-            uFaranga: ${(country.ufarangaUsers / 1000).toFixed(0)}K
-          </div>
-          <div style="font-size: 11px; color: white; opacity: 0.9;">
-            ${country.penetration}% du territoire
-          </div>
-        `;
-
-        labelEl.addEventListener('mouseenter', () => {
-          labelEl.style.transform = 'rotate(-15deg) scale(1.1)';
-        });
-        labelEl.addEventListener('mouseleave', () => {
-          labelEl.style.transform = 'rotate(-15deg) scale(1)';
-        });
-
-        new mapboxgl.Marker(labelEl, { anchor: 'center' })
-          .setLngLat([country.lng, country.lat])
-          .addTo(map.current);
-      });
+      // Labels supprimés pour un style épuré
+      // Les pays sont cliquables via le panneau de recherche
 
       setMapLoaded(true);
     });
@@ -369,26 +328,14 @@ function CartographieReseau() {
   }, [mapLoaded, filteredCountries]);
   */
 
-  // Gérer les clics sur les labels de pays
-  useEffect(() => {
-    const handleLabelClick = (e) => {
-      const label = e.target.closest('.country-label');
-      if (label && label.dataset.countryCode) {
-        const country = UFARANGA_COUNTRIES.find(c => c.code === label.dataset.countryCode);
-        if (country) {
-          setHighlightedCountry(country);
-          setSelectedCountryDetail(country);
-        }
-      }
-    };
-
-    document.addEventListener('click', handleLabelClick);
-    return () => document.removeEventListener('click', handleLabelClick);
-  }, []);
+  // Labels supprimés - les pays sont sélectionnables via le panneau
 
   // Mettre à jour la couleur du pays sélectionné
   useEffect(() => {
     if (!map.current || !mapLoaded) return;
+    
+    // Vérifier que le style est chargé et que la couche existe
+    if (!map.current.isStyleLoaded() || !map.current.getLayer('country-highlight')) return;
     
     if (highlightedCountry) {
       map.current.setFilter('country-highlight', ['==', 'iso_3166_1', highlightedCountry.code]);
@@ -412,8 +359,72 @@ function CartographieReseau() {
 
   const changeMapStyle = (style) => {
     if (map.current) {
+      const currentCenter = map.current.getCenter();
+      const currentZoom = map.current.getZoom();
+      const currentPitch = map.current.getPitch();
+      const currentBearing = map.current.getBearing();
+      
       map.current.setStyle(style);
       setMapStyle(style);
+      
+      // Restaurer la vue après le changement de style
+      map.current.once('style.load', () => {
+        map.current.jumpTo({
+          center: currentCenter,
+          zoom: currentZoom,
+          pitch: currentPitch,
+          bearing: currentBearing
+        });
+        
+        // Réajouter les couches personnalisées
+        const coveredCountries = ['BI', 'RW', 'CD', 'TZ', 'KE', 'UG', 'SN', 'CI'];
+        
+        map.current.addLayer({
+          id: 'country-fills',
+          type: 'fill',
+          source: {
+            type: 'vector',
+            url: 'mapbox://mapbox.country-boundaries-v1'
+          },
+          'source-layer': 'country_boundaries',
+          filter: ['in', 'iso_3166_1', ...coveredCountries],
+          paint: {
+            'fill-color': '#007BFF',
+            'fill-opacity': 0.4
+          }
+        });
+
+        map.current.addLayer({
+          id: 'country-highlight',
+          type: 'fill',
+          source: {
+            type: 'vector',
+            url: 'mapbox://mapbox.country-boundaries-v1'
+          },
+          'source-layer': 'country_boundaries',
+          filter: ['==', 'iso_3166_1', highlightedCountry?.code || ''],
+          paint: {
+            'fill-color': '#8B1538',
+            'fill-opacity': 0.6
+          }
+        });
+
+        map.current.addLayer({
+          id: 'country-borders',
+          type: 'line',
+          source: {
+            type: 'vector',
+            url: 'mapbox://mapbox.country-boundaries-v1'
+          },
+          'source-layer': 'country_boundaries',
+          filter: ['in', 'iso_3166_1', ...coveredCountries],
+          paint: {
+            'line-color': '#F58424',
+            'line-width': 3,
+            'line-opacity': 1
+          }
+        });
+      });
     }
   };
 
@@ -443,7 +454,7 @@ function CartographieReseau() {
   };
 
   return (
-    <div className="h-full flex flex-col bg-background">
+    <div className="w-full h-screen flex flex-col bg-background" style={{ height: 'calc(100vh - 73px)' }}>
       {/* Carte - Plein écran */}
       <div className="flex-1 relative">
         <div ref={mapContainer} className="w-full h-full" />

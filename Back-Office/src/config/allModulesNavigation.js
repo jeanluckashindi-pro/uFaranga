@@ -134,69 +134,6 @@ export const allModulesNavigation = [
     ]
   },
 
-  // ==================== MODULE CLIENT ====================
-  {
-    section: 'MODULE CLIENT',
-    module: 'client',
-    color: 'secondary',
-    items: [
-      { 
-        path: '/client/dashboard', 
-        icon: LayoutDashboard, 
-        label: 'Dashboard Client',
-        description: 'Solde et activité'
-      },
-      { 
-        path: '/client/transfert', 
-        icon: ArrowLeftRight, 
-        label: 'Transfert Argent',
-        description: 'Envoyer de l\'argent'
-      },
-      { 
-        path: '/client/paiement', 
-        icon: CreditCard, 
-        label: 'Paiements',
-        description: 'Factures et services'
-      },
-      { 
-        path: '/client/depot', 
-        icon: ArrowDownToLine, 
-        label: 'Dépôt',
-        description: 'Déposer de l\'argent'
-      },
-      { 
-        path: '/client/retrait', 
-        icon: ArrowUpFromLine, 
-        label: 'Retrait',
-        description: 'Retirer de l\'argent'
-      },
-      { 
-        path: '/client/historique', 
-        icon: Clock, 
-        label: 'Historique',
-        description: 'Toutes transactions'
-      },
-      { 
-        path: '/client/releves', 
-        icon: Download, 
-        label: 'Relevés',
-        description: 'Télécharger relevés'
-      },
-      { 
-        path: '/client/profil', 
-        icon: UserCheck, 
-        label: 'Mon Profil',
-        description: 'Infos personnelles'
-      },
-      { 
-        path: '/client/securite', 
-        icon: Lock, 
-        label: 'Sécurité Client',
-        description: 'PIN, 2FA, appareils'
-      },
-    ]
-  },
-
   // ==================== MODULE ADMIN TECHNIQUE ====================
   {
     section: 'MODULE ADMIN TECHNIQUE',
