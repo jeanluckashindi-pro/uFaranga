@@ -1,0 +1,378 @@
+INFO 2026-02-13 13:34:42,491 autoreload 15424 29352 Watching for file changes with StatReloader
+INFO 2026-02-13 13:40:40,898 autoreload 5632 4600 Watching for file changes with StatReloader
+WARNING 2026-02-13 13:40:43,531 log 5632 31660 Not Found: /
+WARNING 2026-02-13 13:40:43,532 basehttp 5632 31660 "GET / HTTP/1.1" 404 2895
+WARNING 2026-02-13 13:40:43,762 log 5632 31660 Not Found: /favicon.ico
+WARNING 2026-02-13 13:40:43,763 basehttp 5632 31660 "GET /favicon.ico HTTP/1.1" 404 2946
+INFO 2026-02-13 13:41:12,932 autoreload 5632 4600 D:\Projets\Decima Techno\uFaranga\backend\django-services\user-service\config\urls.py changed, reloading.
+INFO 2026-02-13 13:41:13,728 autoreload 28104 23860 Watching for file changes with StatReloader
+INFO 2026-02-13 13:41:17,091 basehttp 28104 24496 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 13:41:19,029 basehttp 28104 24496 "GET /api/schema/ HTTP/1.1" 200 53234
+WARNING 2026-02-13 13:43:04,646 log 28104 29088 Unauthorized: /api/v1/users/
+WARNING 2026-02-13 13:43:04,648 basehttp 28104 29088 "GET /api/v1/users/ HTTP/1.1" 401 103
+INFO 2026-02-13 13:45:10,465 views 28104 17040 Nouvel utilisateur inscrit: testuser@ufaranga.com
+INFO 2026-02-13 13:45:10,476 basehttp 28104 17040 "POST /api/v1/auth/register/ HTTP/1.1" 201 1338
+INFO 2026-02-13 13:45:10,958 basehttp 28104 18136 "POST /api/v1/auth/login/ HTTP/1.1" 200 1074
+INFO 2026-02-13 13:45:11,016 basehttp 28104 17584 "GET /api/v1/auth/me/ HTTP/1.1" 200 734
+WARNING 2026-02-13 13:45:11,075 log 28104 25556 Forbidden: /api/v1/users/
+WARNING 2026-02-13 13:45:11,076 basehttp 28104 25556 "GET /api/v1/users/ HTTP/1.1" 403 113
+INFO 2026-02-13 14:32:34,944 autoreload 22392 1884 Watching for file changes with StatReloader
+INFO 2026-02-13 14:37:18,392 autoreload 30772 23272 Watching for file changes with StatReloader
+INFO 2026-02-13 14:47:01,985 autoreload 16472 10632 Watching for file changes with StatReloader
+INFO 2026-02-13 15:34:43,499 autoreload 14372 700 Watching for file changes with StatReloader
+INFO 2026-02-13 15:36:06,676 autoreload 10752 5936 Watching for file changes with StatReloader
+INFO 2026-02-13 15:36:10,262 log 10752 19160 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 15:36:10,495 log 10752 19160 "GET /api/schema/ HTTP/1.1" 200 90225
+INFO 2026-02-13 15:40:46,381 log 10752 29156 "HEAD /admin/login HTTP/1.1" 302 0
+INFO 2026-02-13 15:40:46,437 log 10752 29156 "HEAD /admin/login/?next=/admin/login HTTP/1.1" 200 0
+INFO 2026-02-13 15:40:46,439 log 10752 29156 "GET /admin/login HTTP/1.1" 302 0
+INFO 2026-02-13 15:40:46,445 log 10752 29156 "GET /admin/login/?next=/admin/login HTTP/1.1" 200 4154
+INFO 2026-02-13 15:41:23,756 log 10752 5692 "GET /admin/login/ HTTP/1.1" 200 4131
+WARNING 2026-02-13 15:41:23,885 log 10752 12840 Bad Request: /api/v1/auth/register/
+WARNING 2026-02-13 15:41:23,885 log 10752 12840 "POST /api/v1/auth/register/ HTTP/1.1" 400 136
+WARNING 2026-02-13 15:41:24,643 log 10752 18652 Unauthorized: /api/v1/auth/login/
+WARNING 2026-02-13 15:41:24,644 log 10752 18652 "POST /api/v1/auth/login/ HTTP/1.1" 401 124
+INFO 2026-02-13 16:24:35,973 autoreload 31272 25284 Watching for file changes with StatReloader
+INFO 2026-02-13 16:26:26,960 autoreload 28432 19184 Watching for file changes with StatReloader
+INFO 2026-02-13 16:28:16,473 autoreload 28432 19184 C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\requests\sessions.py changed, reloading.
+INFO 2026-02-13 16:28:17,009 autoreload 27376 22056 Watching for file changes with StatReloader
+INFO 2026-02-13 16:28:24,688 autoreload 27376 22056 C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\conf\urls\__init__.py changed, reloading.
+INFO 2026-02-13 16:28:45,009 autoreload 18956 17708 Watching for file changes with StatReloader
+INFO 2026-02-13 16:28:45,948 autoreload 17024 9608 Watching for file changes with StatReloader
+INFO 2026-02-13 16:30:24,459 autoreload 18956 17708 D:\Projets\Decima Techno\uFaranga\backend\apps\audit\models.py changed, reloading.
+INFO 2026-02-13 16:30:25,645 autoreload 21808 21232 Watching for file changes with StatReloader
+INFO 2026-02-13 16:30:27,539 autoreload 21808 21232 D:\Projets\Decima Techno\uFaranga\backend\apps\compliance\models.py changed, reloading.
+INFO 2026-02-13 16:30:28,706 autoreload 26964 21160 Watching for file changes with StatReloader
+INFO 2026-02-13 16:30:30,461 autoreload 26964 21160 D:\Projets\Decima Techno\uFaranga\backend\apps\bancaire\models.py changed, reloading.
+INFO 2026-02-13 16:30:31,377 autoreload 13968 2748 Watching for file changes with StatReloader
+INFO 2026-02-13 16:30:33,149 autoreload 13968 2748 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-02-13 16:30:34,473 autoreload 12864 4352 Watching for file changes with StatReloader
+INFO 2026-02-13 16:31:00,485 autoreload 12864 4352 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-13 16:31:01,424 autoreload 19996 20888 Watching for file changes with StatReloader
+INFO 2026-02-13 16:31:38,749 autoreload 2748 13968 Watching for file changes with StatReloader
+INFO 2026-02-13 16:31:44,638 basehttp 2748 21512 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 16:31:44,873 basehttp 2748 21512 "GET /api/schema/ HTTP/1.1" 200 93236
+WARNING 2026-02-13 16:32:25,421 log 2748 21512 Unauthorized: /api/v1/users/
+WARNING 2026-02-13 16:32:25,424 basehttp 2748 21512 "GET /api/v1/users/ HTTP/1.1" 401 103
+INFO 2026-02-13 16:32:44,327 basehttp 2748 21512 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 16:32:44,490 basehttp 2748 21512 "GET /api/schema/ HTTP/1.1" 200 93236
+INFO 2026-02-13 16:37:22,445 autoreload 2748 13968 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-13 16:37:23,623 autoreload 24508 460 Watching for file changes with StatReloader
+INFO 2026-02-13 16:37:50,712 autoreload 24508 460 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-13 16:37:51,755 autoreload 13252 14436 Watching for file changes with StatReloader
+INFO 2026-02-13 16:38:07,412 basehttp 13252 29268 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 16:38:07,612 basehttp 13252 29268 "GET /api/schema/ HTTP/1.1" 200 93236
+INFO 2026-02-13 16:42:26,927 autoreload 13252 14436 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-13 16:42:28,480 autoreload 9492 29680 Watching for file changes with StatReloader
+INFO 2026-02-13 16:42:34,452 autoreload 9492 29680 D:\Projets\Decima Techno\uFaranga\backend\config\urls.py changed, reloading.
+INFO 2026-02-13 16:42:35,520 autoreload 5248 22872 Watching for file changes with StatReloader
+INFO 2026-02-13 16:43:39,060 basehttp 5248 22480 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 16:43:39,322 basehttp 5248 22480 "GET /api/schema/ HTTP/1.1" 200 98712
+WARNING 2026-02-13 16:48:02,065 log 5248 22480 Unauthorized: /api/v1/users/
+WARNING 2026-02-13 16:48:02,066 basehttp 5248 22480 "GET /api/v1/users/ HTTP/1.1" 401 103
+WARNING 2026-02-13 16:48:30,210 log 5248 22480 Unauthorized: /api/public/health/
+WARNING 2026-02-13 16:48:30,210 basehttp 5248 22480 "GET /api/public/health/ HTTP/1.1" 401 103
+WARNING 2026-02-13 16:48:34,945 log 5248 22480 Not Found: /api/public/
+WARNING 2026-02-13 16:48:34,946 basehttp 5248 22480 "GET /api/public/ HTTP/1.1" 404 5096
+WARNING 2026-02-13 16:48:48,142 log 5248 22480 Unauthorized: /api/public/version/
+WARNING 2026-02-13 16:48:48,143 basehttp 5248 22480 "GET /api/public/version/ HTTP/1.1" 401 103
+INFO 2026-02-13 16:50:32,237 autoreload 5248 22872 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\views.py changed, reloading.
+INFO 2026-02-13 16:50:33,729 autoreload 30708 14528 Watching for file changes with StatReloader
+INFO 2026-02-13 16:50:46,370 autoreload 30708 14528 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\urls.py changed, reloading.
+INFO 2026-02-13 16:50:47,619 autoreload 21864 24464 Watching for file changes with StatReloader
+INFO 2026-02-13 16:51:10,761 autoreload 21864 24464 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\views.py changed, reloading.
+INFO 2026-02-13 16:51:11,953 autoreload 12260 23868 Watching for file changes with StatReloader
+INFO 2026-02-13 16:51:14,004 autoreload 12260 23868 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\views.py changed, reloading.
+INFO 2026-02-13 16:51:15,396 autoreload 12396 28172 Watching for file changes with StatReloader
+INFO 2026-02-13 16:51:50,223 autoreload 12396 28172 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\urls.py changed, reloading.
+INFO 2026-02-13 16:51:51,603 autoreload 22928 9996 Watching for file changes with StatReloader
+INFO 2026-02-13 16:52:13,618 autoreload 22928 9996 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\permissions.py changed, reloading.
+INFO 2026-02-13 16:52:14,543 autoreload 3196 24604 Watching for file changes with StatReloader
+WARNING 2026-02-13 16:52:48,479 log 3196 29756 Unauthorized: /api/public/version/
+WARNING 2026-02-13 16:52:48,480 basehttp 3196 29756 "GET /api/public/version/ HTTP/1.1" 401 103
+WARNING 2026-02-13 16:52:53,932 log 3196 29756 Unauthorized: /api/public/health/
+WARNING 2026-02-13 16:52:53,933 basehttp 3196 29756 "GET /api/public/health/ HTTP/1.1" 401 103
+INFO 2026-02-13 16:53:06,662 autoreload 5528 29908 Watching for file changes with StatReloader
+WARNING 2026-02-13 16:53:09,186 log 5528 26800 Not Found: /api/public/
+WARNING 2026-02-13 16:53:09,186 basehttp 5528 26800 "GET /api/public/ HTTP/1.1" 404 7183
+INFO 2026-02-13 16:53:37,248 basehttp 5528 26800 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 16:53:37,533 basehttp 5528 26800 "GET /api/schema/ HTTP/1.1" 200 104988
+WARNING 2026-02-13 16:54:03,358 log 5528 26800 Not Found: /api/public/
+WARNING 2026-02-13 16:54:03,358 basehttp 5528 26800 "GET /api/public/ HTTP/1.1" 404 7183
+ERROR 2026-02-13 16:54:44,819 log 5528 26800 Internal Server Error: /api/public/docs/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\drf_spectacular\views.py", line 141, in get
+    'schema_url': self._get_schema_url(request),
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\drf_spectacular\views.py", line 158, in _get_schema_url
+    schema_url = self.url or get_relative_url(reverse(self.url_name, request=request))
+                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\reverse.py", line 47, in reverse
+    url = _reverse(viewname, args, kwargs, request, format, **extra)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\reverse.py", line 60, in _reverse
+    url = django_reverse(viewname, args=args, kwargs=kwargs, **extra)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\urls\base.py", line 88, in reverse
+    return resolver._reverse_with_prefix(view, prefix, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\urls\resolvers.py", line 828, in _reverse_with_prefix
+    raise NoReverseMatch(msg)
+django.urls.exceptions.NoReverseMatch: Reverse for 'public-api-schema' not found. 'public-api-schema' is not a valid view function or pattern name.
+ERROR 2026-02-13 16:54:44,823 basehttp 5528 26800 "GET /api/public/docs/ HTTP/1.1" 500 130682
+INFO 2026-02-13 16:55:02,265 autoreload 5528 29908 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 16:55:03,755 autoreload 30064 2584 Watching for file changes with StatReloader
+INFO 2026-02-13 16:55:46,048 basehttp 30064 19988 "GET /api/public/docs/ HTTP/1.1" 200 4665
+INFO 2026-02-13 16:55:46,334 basehttp 30064 19988 "GET /api/public/schema/ HTTP/1.1" 200 104988
+WARNING 2026-02-13 16:56:04,852 log 30064 19988 Not Found: /api/public/
+WARNING 2026-02-13 16:56:04,853 basehttp 30064 19988 "GET /api/public/ HTTP/1.1" 404 7183
+WARNING 2026-02-13 16:56:05,564 log 30064 19988 Not Found: /api/public/
+WARNING 2026-02-13 16:56:05,564 basehttp 30064 19988 "GET /api/public/ HTTP/1.1" 404 7183
+INFO 2026-02-13 16:56:22,541 autoreload 12072 23640 Watching for file changes with StatReloader
+INFO 2026-02-13 16:56:27,374 basehttp 12072 28440 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 16:56:27,658 basehttp 12072 28440 "GET /api/schema/ HTTP/1.1" 200 104988
+INFO 2026-02-13 16:56:43,470 basehttp 12072 28440 "GET /api/public/docs/ HTTP/1.1" 200 4665
+INFO 2026-02-13 16:56:43,608 basehttp 12072 28440 "GET /api/public/schema/ HTTP/1.1" 200 104988
+INFO 2026-02-13 16:57:40,089 autoreload 12072 23640 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 16:57:41,156 autoreload 22284 20464 Watching for file changes with StatReloader
+INFO 2026-02-13 16:57:49,387 basehttp 22284 30820 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 16:57:49,642 basehttp 22284 30820 "GET /api/schema/ HTTP/1.1" 200 104988
+INFO 2026-02-13 16:57:52,411 basehttp 22284 30820 "GET /api/public/docs/ HTTP/1.1" 200 4665
+INFO 2026-02-13 16:57:52,593 basehttp 22284 30820 "GET /api/public/schema/ HTTP/1.1" 200 104988
+INFO 2026-02-13 16:57:55,246 basehttp 22284 30820 "GET /api/public/docs/ HTTP/1.1" 200 4665
+INFO 2026-02-13 16:57:55,394 basehttp 22284 30820 "GET /api/public/schema/ HTTP/1.1" 200 104988
+INFO 2026-02-13 16:58:07,218 autoreload 22284 20464 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 16:58:08,343 autoreload 22240 22836 Watching for file changes with StatReloader
+INFO 2026-02-13 16:58:24,329 autoreload 11384 28056 Watching for file changes with StatReloader
+INFO 2026-02-13 16:58:27,204 basehttp 22240 20956 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 16:58:27,432 basehttp 22240 20956 "GET /api/schema/ HTTP/1.1" 200 106025
+INFO 2026-02-13 16:58:49,578 basehttp 22240 20956 "GET /api/public/docs/ HTTP/1.1" 200 4665
+INFO 2026-02-13 16:58:49,757 basehttp 22240 20956 "GET /api/public/schema/ HTTP/1.1" 200 108455
+INFO 2026-02-13 16:58:49,973 basehttp 22240 20956 "GET /api/public/docs/ HTTP/1.1" 200 4665
+INFO 2026-02-13 16:58:50,153 basehttp 22240 20956 "GET /api/public/schema/ HTTP/1.1" 200 108455
+INFO 2026-02-13 17:00:28,832 autoreload 11384 28056 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:00:29,105 autoreload 22240 22836 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 17:00:30,062 autoreload 26300 10000 Watching for file changes with StatReloader
+INFO 2026-02-13 17:00:30,304 autoreload 2584 22640 Watching for file changes with StatReloader
+ERROR 2026-02-13 17:00:43,330 log 26300 10128 Internal Server Error: /api/public/docs/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py", line 425, in get
+    return render(request, 'public_api/swagger.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: public_api/swagger.html
+ERROR 2026-02-13 17:00:43,334 basehttp 26300 10128 "GET /api/public/docs/ HTTP/1.1" 500 122802
+ERROR 2026-02-13 17:01:10,060 log 26300 10128 Internal Server Error: /api/public/docs/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py", line 425, in get
+    return render(request, 'public_api/swagger.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: public_api/swagger.html
+ERROR 2026-02-13 17:01:10,063 basehttp 26300 10128 "GET /api/public/docs/ HTTP/1.1" 500 122802
+ERROR 2026-02-13 17:01:15,397 log 26300 10128 Internal Server Error: /api/public/docs/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py", line 425, in get
+    return render(request, 'public_api/swagger.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: public_api/swagger.html
+ERROR 2026-02-13 17:01:15,400 basehttp 26300 10128 "GET /api/public/docs/ HTTP/1.1" 500 122802
+INFO 2026-02-13 17:01:58,965 basehttp 26300 5268 "GET /api/public/schema/ HTTP/1.1" 200 7245
+ERROR 2026-02-13 17:02:31,677 log 26300 5268 Internal Server Error: /api/public/docs/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py", line 425, in get
+    return render(request, 'public_api/swagger.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: public_api/swagger.html
+ERROR 2026-02-13 17:02:31,680 basehttp 26300 5268 "GET /api/public/docs/ HTTP/1.1" 500 120118
+INFO 2026-02-13 17:03:09,015 autoreload 28004 28764 Watching for file changes with StatReloader
+ERROR 2026-02-13 17:06:13,316 log 2584 28708 Internal Server Error: /api/public/docs/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py", line 425, in get
+    return render(request, 'public_api/swagger.html', {
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\shortcuts.py", line 24, in render
+    content = loader.render_to_string(template_name, context, request, using=using)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\template\loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\template\loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: public_api/swagger.html
+ERROR 2026-02-13 17:06:13,328 basehttp 2584 28708 "GET /api/public/docs/ HTTP/1.1" 500 120253
+INFO 2026-02-13 17:18:42,123 autoreload 16160 22844 Watching for file changes with StatReloader
+INFO 2026-02-13 17:18:46,254 basehttp 28004 33080 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 17:18:50,299 basehttp 28004 34648 "GET /api/schema/ HTTP/1.1" 200 106725
+INFO 2026-02-13 17:20:28,776 autoreload 16160 22844 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-13 17:20:28,878 autoreload 28004 28764 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-13 17:20:31,396 autoreload 5732 29360 Watching for file changes with StatReloader
+INFO 2026-02-13 17:20:31,571 autoreload 32256 13544 Watching for file changes with StatReloader
+INFO 2026-02-13 17:20:47,311 basehttp 5732 24292 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 17:20:48,625 basehttp 5732 24292 "GET /api/schema/ HTTP/1.1" 200 93983
+INFO 2026-02-13 17:21:13,573 basehttp 5732 13496 "GET /api/public/docs/ HTTP/1.1" 200 1982
+INFO 2026-02-13 17:21:14,395 basehttp 5732 13496 "GET /api/public/schema/ HTTP/1.1" 200 7245
+INFO 2026-02-13 17:22:17,955 basehttp 5732 22012 "GET /api/public/docs/ HTTP/1.1" 200 1982
+INFO 2026-02-13 17:22:19,362 basehttp 5732 22012 "GET /api/public/schema/ HTTP/1.1" 200 7245
