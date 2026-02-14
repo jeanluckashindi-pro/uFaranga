@@ -1,12 +1,33 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
-  ChevronLeft, ChevronRight, Menu, X, Bell, Globe, LogOut, Search, Filter
+  ChevronLeft, ChevronRight, Menu, X, Bell, LogOut, Search, Filter
 } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
+import { useUser } from '../hooks/useUser';
+import MultipleSessionsAlert from './MultipleSessionsAlert';
+import UserMenu from './UserMenu';
 import allModulesNavigation from '../config/allModulesNavigation';
 
 function AllModulesLayout({ children, userName = 'Super Admin' }) {
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
+  const { 
+    user, 
+    getFullName, 
+    getUserType, 
+    getUserTypeLabel,
+    getAccessibleModules,
+    isSuperAdmin,
+    isSystem 
+  } = useUser();
+  
+  // Utiliser les vraies données de l'utilisateur si disponibles
+  const displayName = user ? getFullName() : userName;
+  const userType = getUserType();
+  const accessibleModules = getAccessibleModules();
+  
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [notifications, setNotifications] = useState(3);
@@ -22,9 +43,14 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
     return 0;
   };
 
-  // Filtrer les modules et items
+  // Filtrer les modules et items selon les droits d'accès
   const filteredNavigation = allModulesNavigation
     .filter(section => {
+      // Filtre par droits d'accès de l'utilisateur
+      if (!accessibleModules.includes(section.module)) {
+        return false;
+      }
+      
       // Filtre par module sélectionné
       if (selectedModule !== 'all' && section.module !== selectedModule) {
         return false;
@@ -45,12 +71,21 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
     }))
     .filter(section => section.items.length > 0); // Enlever les sections vides
 
-  const moduleOptions = [
-    { value: 'all', label: 'Tous les modules', color: 'primary' },
-    { value: 'agent', label: 'Agent', color: 'primary' },
-    { value: 'admin', label: 'Admin Système', color: 'danger' },
-    { value: 'tech', label: 'Admin Technique', color: 'primary' }
+  // Options de modules filtrées selon les droits d'accès
+  const allModuleOptions = [
+    { value: 'all', label: 'Tous les modules', color: 'primary', module: null },
+    { value: 'agent', label: 'Agent', color: 'primary', module: 'agent' },
+    { value: 'admin_system', label: 'Admin Système', color: 'danger', module: 'admin_system' },
+    { value: 'admin_tech', label: 'Admin Technique', color: 'primary', module: 'admin_tech' },
+    { value: 'client', label: 'Client', color: 'primary', module: 'client' }
   ];
+  
+  const moduleOptions = allModuleOptions.filter(option => {
+    // Toujours afficher "Tous les modules"
+    if (option.value === 'all') return true;
+    // Filtrer selon les modules accessibles
+    return accessibleModules.includes(option.module);
+  });
 
   // Déterminer le module actif
   const getCurrentModule = () => {
@@ -90,7 +125,11 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
   const currentStats = moduleStats[currentModule];
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden">
+    <>
+      {/* Alerte de sessions multiples */}
+      <MultipleSessionsAlert />
+      
+      <div className="flex h-screen w-screen overflow-hidden">
       {/* Sidebar Desktop */}
       <aside
         className={`hidden md:block fixed left-0 h-screen bg-background border-r border-text/10 transition-all duration-300 z-50 flex flex-col ${
@@ -165,7 +204,7 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
         </div>
 
         {/* Navigation - Prend le reste de l'espace */}
-        <div className="overflow-y-auto px-4 py-4" style={{ height: 'calc(100vh - 240px)' }}>
+        <div className="overflow-y-auto px-4 py-4" style={{ height: 'calc(100vh - 160px)' }}>
           {filteredNavigation.length === 0 ? (
             <div className="text-center py-8 text-gray-400 text-sm">
               Aucun résultat trouvé
@@ -218,14 +257,6 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
               ))}
             </>
           )}
-        </div>
-
-        {/* Bottom Nav - Hauteur fixe pour déconnexion */}
-        <div className="h-[80px] flex-shrink-0  px-4 flex items-center justify-center border-t border-t border-text/10">
-          <button style={{marginBottom:"15px"}} className={`flex items-center ${isSidebarOpen ? 'gap-3 px-3 justify-start' : 'justify-center'} rounded-lg w-full border-darkGray bg-card text-gray-400 transition-all h-12`}>
-            <LogOut className="w-5 h-5" />
-            {isSidebarOpen && <span>Déconnexion</span>}
-          </button>
         </div>
       </aside>
 
@@ -316,12 +347,25 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
                 <Menu className="w-5 h-5" />
               </button>
 
-              {/* Welcome Message */}
+              {/* Welcome Message & System Info */}
               <div className="hidden md:block">
-                <p className="text-sm text-gray-400">
-                  {new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-                </p>
-                <h2 className="text-lg font-heading font-semibold text-text">Bonjour, {userName}</h2>
+                <div className="flex items-center gap-3 mb-1">
+                  <div className="flex items-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
+                    <span className="text-xs font-medium text-green-400 font-sans">Système opérationnel</span>
+                  </div>
+                  <span className="text-xs text-gray-500">•</span>
+                  <span className="text-xs text-gray-400 font-sans">
+                    {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                  <span className="text-xs text-gray-500">•</span>
+                  <span className="text-xs text-gray-400 font-sans">
+                    {new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  </span>
+                </div>
+                <h2 className="text-lg font-heading font-semibold text-text">
+                  {displayName} <span className="text-sm font-normal text-gray-400">• {getUserTypeLabel()}</span>
+                </h2>
               </div>
             </div>
 
@@ -347,21 +391,8 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
                 )}
               </button>
 
-              {/* Language Selector */}
-              <button className="p-2 hover:bg-card rounded-lg transition-colors">
-                <Globe className="w-5 h-5 text-secondary" />
-              </button>
-
-              {/* User Avatar */}
-              <div className="flex items-center gap-3 pl-4 border-l border-text/10">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-purple-500 via-pink-500 to-red-500 border-2 border-text/25 flex items-center justify-center text-white font-bold">
-                  {userName.charAt(0)}
-                </div>
-                <div className="hidden md:block">
-                  <div className="text-sm font-semibold text-text">{userName}</div>
-                  <div className="text-xs text-gray-400 capitalize">Super Admin</div>
-                </div>
-              </div>
+              {/* User Menu */}
+              <UserMenu />
             </div>
           </div>
         </header>
@@ -374,6 +405,7 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
         </main>
       </div>
     </div>
+    </>
   );
 }
 

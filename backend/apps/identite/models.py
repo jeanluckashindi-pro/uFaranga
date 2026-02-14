@@ -69,25 +69,34 @@ class Utilisateur(AbstractBaseUser, PermissionsMixin):
         validators=[RegexValidator(r'^\+?[1-9]\d{1,14}$')],
         db_index=True
     )
-    hash_mot_de_passe = models.CharField(max_length=255)
-    
+    # Mot de passe : colonne en base = hash_mot_de_passe (AbstractBaseUser utilise "password")
+    password = models.CharField(max_length=255, db_column='hash_mot_de_passe')
+    # Dernière connexion : colonne en base = derniere_connexion (AbstractBaseUser utilise "last_login")
+    last_login = models.DateTimeField(blank=True, null=True, db_column='derniere_connexion')
+
     # Informations personnelles
-    prenom = models.CharField(max_length=100)
-    nom_famille = models.CharField(max_length=100)
+    prenom = models.CharField(max_length=100, default='')
+    nom_famille = models.CharField(max_length=100, default='')
     date_naissance = models.DateField()
-    lieu_naissance = models.CharField(max_length=100, blank=True)
+    lieu_naissance = models.CharField(max_length=100, blank=True, default='')
     nationalite = models.CharField(max_length=2, default='BI')
     
     # Adresse
     pays_residence = models.CharField(max_length=2, default='BI')
-    province = models.CharField(max_length=100, blank=True)
-    ville = models.CharField(max_length=100, blank=True)
-    commune = models.CharField(max_length=100, blank=True)
-    quartier = models.CharField(max_length=100, blank=True)
-    avenue = models.CharField(max_length=100, blank=True)
-    numero_maison = models.CharField(max_length=50, blank=True)
-    adresse_complete = models.TextField(blank=True)
-    code_postal = models.CharField(max_length=20, blank=True)
+    province = models.CharField(max_length=100, blank=True, default='')
+    ville = models.CharField(max_length=100, blank=True, default='')
+    commune = models.CharField(max_length=100, blank=True, default='')
+    quartier = models.CharField(max_length=100, blank=True, default='')
+    avenue = models.CharField(max_length=100, blank=True, default='')
+    numero_maison = models.CharField(max_length=50, blank=True, default='')
+    adresse_complete = models.TextField(blank=True, default='')
+    code_postal = models.CharField(max_length=20, blank=True, default='')
+    # Localisation (hiérarchie géo : Pays → Province → District → Quartier → Point de service)
+    pays = models.ForeignKey('localisation.Pays', on_delete=models.SET_NULL, null=True, blank=True, related_name='utilisateurs')
+    province = models.ForeignKey('localisation.Province', on_delete=models.SET_NULL, null=True, blank=True, related_name='utilisateurs')
+    district = models.ForeignKey('localisation.District', on_delete=models.SET_NULL, null=True, blank=True, related_name='utilisateurs')
+    quartier = models.ForeignKey('localisation.Quartier', on_delete=models.SET_NULL, null=True, blank=True, related_name='utilisateurs')
+    point_de_service = models.ForeignKey('localisation.PointDeService', on_delete=models.SET_NULL, null=True, blank=True, related_name='utilisateurs')
     
     # Vérifications
     telephone_verifie = models.BooleanField(default=False)
@@ -104,21 +113,20 @@ class Utilisateur(AbstractBaseUser, PermissionsMixin):
     validateur_kyc_id = models.UUIDField(null=True, blank=True)
     
     # Type et statut
-    type_utilisateur = models.CharField(max_length=20, choices=TYPE_UTILISATEUR_CHOICES)
+    type_utilisateur = models.CharField(max_length=20, choices=TYPE_UTILISATEUR_CHOICES, default='CLIENT')
     statut = models.CharField(max_length=20, choices=STATUT_CHOICES, default='ACTIF', db_index=True)
-    raison_statut = models.TextField(blank=True)
+    raison_statut = models.TextField(blank=True, default='')
     
     # Sécurité
     nombre_tentatives_connexion = models.IntegerField(default=0)
     bloque_jusqua = models.DateTimeField(null=True, blank=True)
     double_auth_activee = models.BooleanField(default=False)
-    secret_2fa = models.CharField(max_length=255, blank=True)
+    secret_2fa = models.CharField(max_length=255, blank=True, default='')
     
     # Métadonnées
     est_actif = models.BooleanField(default=True, db_index=True)
     date_creation = models.DateTimeField(default=timezone.now, db_index=True)
     date_modification = models.DateTimeField(auto_now=True)
-    derniere_connexion = models.DateTimeField(null=True, blank=True)
     derniere_modification_mdp = models.DateTimeField(null=True, blank=True)
     cree_par = models.UUIDField(null=True, blank=True)
     modifie_par = models.UUIDField(null=True, blank=True)

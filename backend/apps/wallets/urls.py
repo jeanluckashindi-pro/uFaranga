@@ -5,12 +5,12 @@ from . import views
 app_name = 'wallets'
 
 router = DefaultRouter()
-router.register(r'currencies', views.CurrencyViewSet, basename='currency')
+router.register(r'devises', views.CurrencyViewSet, basename='currency')
 router.register(r'', views.WalletViewSet, basename='wallet')
 
 urlpatterns = [
-    # Route spécifique pour l'update de solde (hors router pour plus de contrôle)
-    path('<uuid:pk>/balance/', views.BalanceUpdateView.as_view(), name='balance-update'),
+    # Mise à jour du solde (hors router pour plus de contrôle)
+    path('<uuid:pk>/solde/', views.BalanceUpdateView.as_view(), name='balance-update'),
     
     path('', include(router.urls)),
 ]

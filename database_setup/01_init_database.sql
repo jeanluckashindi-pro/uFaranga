@@ -53,3 +53,6 @@ COMMENT ON SCHEMA notification IS 'File de notifications et alertes';
 
 CREATE SCHEMA IF NOT EXISTS configuration;
 COMMENT ON SCHEMA configuration IS 'Configuration système et données de référence';
+
+CREATE SCHEMA IF NOT EXISTS localisation;
+COMMENT ON SCHEMA localisation IS 'Hiérarchie géographique : Pays → Province → District → Quartier → Point de service / Agent';

@@ -153,3 +153,14 @@ CREATE INDEX idx_notifications_en_attente ON notification.notifications(statut_e
     WHERE statut_envoi = 'EN_ATTENTE';
 
 COMMENT ON TABLE notification.notifications IS 'File de notifications';
+
+-- =====================================================
+-- Droits pour l'utilisateur Django (ufaranga)
+-- À exécuter en tant que postgres si les schémas ont été créés par postgres
+-- =====================================================
+GRANT USAGE ON SCHEMA notification TO ufaranga;
+GRANT SELECT, INSERT, UPDATE, DELETE ON notification.notifications TO ufaranga;
+
+GRANT USAGE ON SCHEMA commission TO ufaranga;
+GRANT SELECT, INSERT, UPDATE, DELETE ON commission.grilles_commissions TO ufaranga;
+GRANT SELECT, INSERT, UPDATE, DELETE ON commission.commissions TO ufaranga;

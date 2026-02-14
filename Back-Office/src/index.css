@@ -189,3 +189,85 @@ select option:hover {
 .overflow-x-auto::-webkit-scrollbar-thumb:hover {
   background: #495057;
 }
+
+/* Custom PrimeReact Checkbox for Login */
+.p-checkbox .p-checkbox-box {
+  background-color: transparent !important;
+  border: 1px solid #9CA3AF !important;
+  border-radius: 4px !important;
+}
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  background-color: #007BFF !important;
+  border-color: #007BFF !important;
+}
+
+.p-checkbox .p-checkbox-box:not(.p-disabled):hover {
+  border-color: #007BFF !important;
+}
+
+.p-checkbox .p-checkbox-box .p-checkbox-icon {
+  color: white !important;
+}
+
+/* Password Input Eye Icon */
+.password-input-icon {
+  color: #9CA3AF;
+  transition: color 0.2s;
+}
+
+.password-input-icon:hover {
+  color: #F9F9F9;
+}
+
+/* Animation pour l'alerte de sessions multiples */
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in {
+  animation: slide-in 0.3s ease-out;
+}
+
+/* Animation skeleton pour le chargement */
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.animate-pulse {
+  animation: skeleton-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Animation de shimmer pour skeleton */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    to right,
+    #343A40 0%,
+    #495057 20%,
+    #343A40 40%,
+    #343A40 100%
+  );
+  background-size: 1000px 100%;
+}

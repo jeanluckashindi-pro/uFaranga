@@ -112,3 +112,48 @@ CREATE TABLE identite.profils_utilisateurs (
 CREATE INDEX idx_profils_utilisateur ON identite.profils_utilisateurs(utilisateur_id);
 
 COMMENT ON TABLE identite.profils_utilisateurs IS 'Profils et préférences des utilisateurs';
+-- Ajoute les colonnes Django manquantes à identite.utilisateurs
+-- (la table existante a été créée sans is_superuser / is_staff)
+-- À exécuter une seule fois.
+
+ALTER TABLE identite.utilisateurs
+  ADD COLUMN IF NOT EXISTS is_superuser boolean NOT NULL DEFAULT false;
+
+ALTER TABLE identite.utilisateurs
+  ADD COLUMN IF NOT EXISTS is_staff boolean NOT NULL DEFAULT false;
+
+COMMENT ON COLUMN identite.utilisateurs.is_superuser IS 'Django: superuser status';
+COMMENT ON COLUMN identite.utilisateurs.is_staff IS 'Django: staff status';
+-- =============================================================================
+-- Droits sur le schéma IDENTITE pour l'utilisateur Django (ex: ufaranga)
+-- Tables concernées : identite.utilisateurs, identite.profils_utilisateurs
+-- À exécuter en tant que superutilisateur PostgreSQL (postgres) ou propriétaire du schéma.
+-- =============================================================================
+
+-- 1. Créer le schéma s'il n'existe pas (optionnel)
+CREATE SCHEMA IF NOT EXISTS identite;
+
+-- 2. Donner USAGE et CREATE sur le schéma à l'utilisateur de l'app
+-- Remplacer 'ufaranga' par le nom de l'utilisateur dans DATABASES['default']['USER']
+GRANT USAGE ON SCHEMA identite TO ufaranga;
+GRANT CREATE ON SCHEMA identite TO ufaranga;
+
+-- 3. Droits sur les tables (INSERT/SELECT/UPDATE/DELETE) si les tables existent déjà
+GRANT SELECT, INSERT, UPDATE, DELETE ON identite.utilisateurs TO ufaranga;
+GRANT SELECT, INSERT, UPDATE, DELETE ON identite.profils_utilisateurs TO ufaranga;
+-- =============================================================================
+-- Droits sur les tables identite.utilisateurs et identite.profils_utilisateurs
+-- Pour que l'utilisateur Django (ufaranga) puisse INSERT / SELECT / UPDATE / DELETE
+-- À exécuter en tant que postgres ou propriétaire des tables.
+-- =============================================================================
+
+-- Remplacer 'ufaranga' si votre DB_USER est différent
+GRANT SELECT, INSERT, UPDATE, DELETE ON identite.utilisateurs TO ufaranga;
+GRANT SELECT, INSERT, UPDATE, DELETE ON identite.profils_utilisateurs TO ufaranga;
+
+-- Si les tables ont des séquences (ex: bigserial)
+-- GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA identite TO ufaranga;
+
+-- Pour les tables ManyToMany (auth_group, auth_permission) utilisées par identite
+-- GRANT SELECT ON auth_group TO ufaranga;
+-- GRANT SELECT ON auth_permission TO ufaranga;

@@ -23,7 +23,7 @@ const Input = forwardRef(({
   const inputClasses = `
     border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
     ${sizeClasses[size]}
-    ${disabled ? 'bg-gray-100 cursor-not-allowed opacity-60' : 'bg-white'}
+    ${disabled ? 'bg-gray-100 cursor-not-allowed opacity-60' : 'bg-transparent'}
     ${error ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : 'border-gray-300'}
     ${fullWidth ? 'w-full' : ''}
     ${className}

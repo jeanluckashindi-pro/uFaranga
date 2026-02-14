@@ -63,7 +63,7 @@ const Modal = ({
         
         {/* Modal */}
         <div className={`
-          inline-block w-full text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle
+          inline-block w-full text-left align-bottom transition-all transform bg-card rounded-lg shadow-xl sm:my-8 sm:align-middle border border-darkGray
           ${sizeClasses[size]}
           ${className}
         `}>

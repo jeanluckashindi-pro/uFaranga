@@ -15,12 +15,24 @@ import {
 function AgentDashboard() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   const transactionsPerPage = 3;
 
   // Update time every minute
   useEffect(() => {
     const timer = setInterval(() => setCurrentTime(new Date()), 60000);
     return () => clearInterval(timer);
+  }, []);
+
+  // Simuler le chargement des données
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      // Simuler un délai de chargement
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      setLoading(false);
+    };
+    loadData();
   }, []);
 
   // KPIs - Données temps réel simulées
@@ -172,6 +184,10 @@ function AgentDashboard() {
 
   return (
     <div className="p-6 space-y-6">
+      {loading ? (
+        <DashboardSkeleton />
+      ) : (
+        <>
       {/* Header simple */}
       <div className="flex items-center justify-between">
         <div>
@@ -598,8 +614,126 @@ function AgentDashboard() {
           </div>
         </div>
       </div>
+        </>
+      )}
     </div>
   );
 }
 
 export default AgentDashboard;
+
+
+// Composant Skeleton pour le chargement
+const DashboardSkeleton = () => {
+  return (
+    <>
+      {/* Header Skeleton */}
+      <div className="flex items-center justify-between mb-6">
+        <div>
+          <div className="h-8 w-64 bg-darkGray rounded animate-pulse mb-2"></div>
+          <div className="h-4 w-96 bg-darkGray rounded animate-pulse"></div>
+        </div>
+        <div className="h-10 w-10 bg-darkGray rounded-lg animate-pulse"></div>
+      </div>
+
+      {/* KPIs Skeleton - 6 cartes */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+        {[1, 2, 3, 4, 5, 6].map((i) => (
+          <div key={i} className="border border-darkGray bg-card rounded-lg p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="h-4 w-32 bg-darkGray rounded animate-pulse"></div>
+              <div className="h-5 w-5 bg-darkGray rounded animate-pulse"></div>
+            </div>
+            <div className="h-10 w-40 bg-darkGray rounded animate-pulse mb-3"></div>
+            <div className="h-3 w-full bg-darkGray rounded animate-pulse"></div>
+          </div>
+        ))}
+      </div>
+
+      {/* Statistiques du Jour Skeleton */}
+      <div className="border border-darkGray bg-card rounded-lg p-6 mb-6">
+        <div className="h-6 w-48 bg-darkGray rounded animate-pulse mb-4"></div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div key={i} className="text-center p-4 bg-darkBlue rounded-lg">
+              <div className="h-6 w-6 bg-darkGray rounded mx-auto mb-2 animate-pulse"></div>
+              <div className="h-8 w-20 bg-darkGray rounded mx-auto mb-2 animate-pulse"></div>
+              <div className="h-3 w-16 bg-darkGray rounded mx-auto animate-pulse"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Graphiques Skeleton - 4 graphiques */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        {[1, 2, 3, 4].map((i) => (
+          <div key={i} className="border border-darkGray bg-card rounded-lg p-6">
+            <div className="h-6 w-48 bg-darkGray rounded animate-pulse mb-4"></div>
+            <div className="h-[300px] bg-darkGray rounded animate-pulse"></div>
+          </div>
+        ))}
+      </div>
+
+      {/* Répartition & Transactions Skeleton */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Camembert Skeleton */}
+        <div className="border border-darkGray bg-card rounded-lg p-6">
+          <div className="h-6 w-32 bg-darkGray rounded animate-pulse mb-4"></div>
+          <div className="h-[280px] bg-darkGray rounded-full mx-auto w-[280px] animate-pulse mb-4"></div>
+          <div className="space-y-2">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className="flex items-center justify-between">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-darkGray rounded-full animate-pulse"></div>
+                  <div className="h-3 w-20 bg-darkGray rounded animate-pulse"></div>
+                </div>
+                <div className="h-3 w-12 bg-darkGray rounded animate-pulse"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Transactions Skeleton */}
+        <div className="lg:col-span-2 border border-darkGray bg-card rounded-lg p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="h-6 w-48 bg-darkGray rounded animate-pulse"></div>
+            <div className="h-4 w-24 bg-darkGray rounded animate-pulse"></div>
+          </div>
+          
+          <div className="space-y-2 mb-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex items-center justify-between p-3 bg-darkBlue rounded-lg">
+                <div className="flex items-center gap-3 flex-1">
+                  <div className="h-12 w-12 bg-darkGray rounded-lg animate-pulse"></div>
+                  <div className="flex-1">
+                    <div className="h-4 w-32 bg-darkGray rounded animate-pulse mb-2"></div>
+                    <div className="h-3 w-48 bg-darkGray rounded animate-pulse"></div>
+                  </div>
+                </div>
+                <div className="text-right mx-4">
+                  <div className="h-4 w-24 bg-darkGray rounded animate-pulse mb-2"></div>
+                  <div className="h-3 w-16 bg-darkGray rounded animate-pulse"></div>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="h-3 w-12 bg-darkGray rounded animate-pulse"></div>
+                  <div className="h-6 w-20 bg-darkGray rounded-full animate-pulse"></div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Pagination Skeleton */}
+          <div className="flex items-center justify-between pt-4 border-t border-darkGray">
+            <div className="h-4 w-48 bg-darkGray rounded animate-pulse"></div>
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 bg-darkGray rounded-lg animate-pulse"></div>
+              <div className="h-8 w-8 bg-darkGray rounded-lg animate-pulse"></div>
+              <div className="h-8 w-8 bg-darkGray rounded-lg animate-pulse"></div>
+              <div className="h-8 w-8 bg-darkGray rounded-lg animate-pulse"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};

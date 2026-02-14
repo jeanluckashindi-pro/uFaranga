@@ -153,7 +153,26 @@ psql -U postgres -d ufaranga -f 09_schema_configuration.sql
 **Dépendances:**
 - ✅ `identite.utilisateurs`
 
-### 🔟 Vérification (OPTIONNEL mais recommandé)
+### 🔟 Schéma LOCALISATION (Pays → Province → District → Quartier → Point de service)
+
+```bash
+psql -U postgres -d ufaranga -f 11_schema_localisation.sql
+```
+
+**Tables créées:**
+- `localisation.pays`
+- `localisation.provinces`
+- `localisation.districts`
+- `localisation.quartiers`
+- `localisation.points_de_service`
+
+**Colonnes ajoutées à `identite.utilisateurs`:**
+- `pays_id`, `province_id`, `district_id`, `quartier_id`, `point_de_service_id` (liaison à la localisation)
+
+**Dépendances:**
+- ✅ `identite.utilisateurs`
+
+### 1️⃣1️⃣ Vérification (OPTIONNEL mais recommandé)
 
 ```bash
 psql -U postgres -d ufaranga -f 10_verify_installation.sql
@@ -167,7 +186,7 @@ psql -U postgres -d ufaranga -f 10_verify_installation.sql
 - ✅ Index
 - ✅ Triggers de protection
 
-### 1️⃣1️⃣ Tests (OPTIONNEL)
+### 1️⃣2️⃣ Tests (OPTIONNEL)
 
 ```bash
 psql -U postgres -d ufaranga -f test_database.sql

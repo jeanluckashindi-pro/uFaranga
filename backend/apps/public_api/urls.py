@@ -14,31 +14,31 @@ urlpatterns = [
     path('redoc/', PublicAPIRedocView.as_view(), name='redoc'),
     
     # Système
-    path('health/', views.health_check, name='health'),
-    path('status/', views.system_status, name='status'),
+    path('sante/', views.health_check, name='health'),
+    path('statut/', views.system_status, name='status'),
     path('version/', views.api_version, name='version'),
     
     # Tarification & Frais
-    path('fees/calculator/', views.FeesCalculatorView.as_view(), name='fees-calculator'),
-    path('fees/schedule/', views.fees_schedule, name='fees-schedule'),
-    path('exchange-rates/', views.exchange_rates, name='exchange-rates'),
+    path('frais/calculateur/', views.FeesCalculatorView.as_view(), name='fees-calculator'),
+    path('frais/grille/', views.fees_schedule, name='fees-schedule'),
+    path('taux-change/', views.exchange_rates, name='exchange-rates'),
     
     # Informations générales
-    path('countries/', views.supported_countries, name='countries'),
-    path('currencies/', views.supported_currencies, name='currencies'),
-    path('transaction-types/', views.transaction_types, name='transaction-types'),
+    path('pays/', views.supported_countries, name='countries'),
+    path('devises/', views.supported_currencies, name='currencies'),
+    path('types-transaction/', views.transaction_types, name='transaction-types'),
     
     # Validation
-    path('validate/phone/', views.validate_phone, name='validate-phone'),
-    path('validate/account/', views.validate_account, name='validate-account'),
+    path('valider/telephone/', views.validate_phone, name='validate-phone'),
+    path('valider/compte/', views.validate_account, name='validate-account'),
     
     # Agents
-    path('agents/search/', views.search_agents, name='agents-search'),
+    path('agents/recherche/', views.search_agents, name='agents-search'),
     path('agents/<uuid:agent_id>/', views.agent_detail, name='agent-detail'),
     
     # Inscription
-    path('register/initiate/', views.register_initiate, name='register-initiate'),
-    path('register/verify-otp/', views.verify_otp, name='verify-otp'),
+    path('inscription/initier/', views.register_initiate, name='register-initiate'),
+    path('inscription/verifier-otp/', views.verify_otp, name='verify-otp'),
     
     # Support
     path('contact/', views.contact_support, name='contact'),

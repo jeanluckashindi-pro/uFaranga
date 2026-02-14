@@ -66,7 +66,7 @@ class PublicAPISchemaView(APIView):
     def _get_public_paths(self):
         """Définit manuellement les paths de l'API publique"""
         return {
-            '/api/public/health/': {
+            '/api/public/sante/': {
                 'get': {
                     'tags': ['Système'],
                     'summary': 'Vérification de santé',
@@ -89,7 +89,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/status/': {
+            '/api/public/statut/': {
                 'get': {
                     'tags': ['Système'],
                     'summary': 'Statut des services',
@@ -110,7 +110,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/fees/calculator/': {
+            '/api/public/frais/calculateur/': {
                 'get': {
                     'tags': ['Tarification'],
                     'summary': 'Calculer les frais',
@@ -162,7 +162,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/fees/schedule/': {
+            '/api/public/frais/grille/': {
                 'get': {
                     'tags': ['Tarification'],
                     'summary': 'Grille tarifaire',
@@ -173,7 +173,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/exchange-rates/': {
+            '/api/public/taux-change/': {
                 'get': {
                     'tags': ['Tarification'],
                     'summary': 'Taux de change',
@@ -184,7 +184,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/countries/': {
+            '/api/public/pays/': {
                 'get': {
                     'tags': ['Informations'],
                     'summary': 'Pays supportés',
@@ -194,7 +194,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/currencies/': {
+            '/api/public/devises/': {
                 'get': {
                     'tags': ['Informations'],
                     'summary': 'Devises supportées',
@@ -204,7 +204,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/transaction-types/': {
+            '/api/public/types-transaction/': {
                 'get': {
                     'tags': ['Informations'],
                     'summary': 'Types de transactions',
@@ -214,7 +214,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/validate/phone/': {
+            '/api/public/valider/telephone/': {
                 'post': {
                     'tags': ['Validation'],
                     'summary': 'Valider un téléphone',
@@ -239,7 +239,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/validate/account/': {
+            '/api/public/valider/compte/': {
                 'post': {
                     'tags': ['Validation'],
                     'summary': 'Vérifier un compte',
@@ -264,7 +264,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/agents/search/': {
+            '/api/public/agents/recherche/': {
                 'get': {
                     'tags': ['Agents'],
                     'summary': 'Rechercher des agents',
@@ -295,7 +295,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/register/initiate/': {
+            '/api/public/inscription/initier/': {
                 'post': {
                     'tags': ['Inscription'],
                     'summary': 'Initier une inscription',
@@ -322,7 +322,7 @@ class PublicAPISchemaView(APIView):
                     }
                 }
             },
-            '/api/public/register/verify-otp/': {
+            '/api/public/inscription/verifier-otp/': {
                 'post': {
                     'tags': ['Inscription'],
                     'summary': 'Vérifier le code OTP',

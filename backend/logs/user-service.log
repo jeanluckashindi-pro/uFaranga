@@ -426,3 +426,1235 @@ INFO 2026-02-13 17:29:36,310 autoreload 6896 20244 D:\Projets\Decima Techno\uFar
 INFO 2026-02-13 17:29:38,106 autoreload 29504 26972 Watching for file changes with StatReloader
 INFO 2026-02-13 17:29:46,024 basehttp 17064 28000 "GET /api/public/docs/ HTTP/1.1" 200 1984
 INFO 2026-02-13 17:29:47,357 basehttp 17064 28000 "GET /api/public/schema/ HTTP/1.1" 200 6771
+INFO 2026-02-13 17:31:49,008 basehttp 17064 15000 "GET /api/public/docs/ HTTP/1.1" 200 1984
+INFO 2026-02-13 17:31:49,487 basehttp 17064 15000 "GET /api/public/schema/ HTTP/1.1" 200 6771
+INFO 2026-02-13 22:43:43,311 autoreload 3480 12768 Watching for file changes with StatReloader
+INFO 2026-02-13 22:53:17,520 basehttp 3480 6016 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 22:53:21,800 basehttp 3480 6016 "GET /api/schema/ HTTP/1.1" 200 93983
+INFO 2026-02-13 22:58:01,658 autoreload 3480 12768 D:\Projets\Decima Techno\uFaranga\backend\config\urls.py changed, reloading.
+INFO 2026-02-13 22:58:04,100 autoreload 11636 21020 Watching for file changes with StatReloader
+INFO 2026-02-13 22:58:16,444 autoreload 11636 21020 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\urls.py changed, reloading.
+INFO 2026-02-13 22:58:18,874 autoreload 19552 19400 Watching for file changes with StatReloader
+INFO 2026-02-13 22:58:31,237 autoreload 19552 19400 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 22:58:33,120 autoreload 25440 9228 Watching for file changes with StatReloader
+INFO 2026-02-13 22:58:35,673 autoreload 25440 9228 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 22:58:37,543 autoreload 8112 21240 Watching for file changes with StatReloader
+INFO 2026-02-13 22:58:39,892 autoreload 8112 21240 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 22:58:41,662 autoreload 34652 11064 Watching for file changes with StatReloader
+INFO 2026-02-13 22:58:44,255 autoreload 34652 11064 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 22:58:46,143 autoreload 14720 4236 Watching for file changes with StatReloader
+INFO 2026-02-13 22:58:48,342 autoreload 14720 4236 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 22:58:49,890 autoreload 17260 11932 Watching for file changes with StatReloader
+INFO 2026-02-13 22:58:53,139 autoreload 17260 11932 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 22:58:54,460 autoreload 32860 1812 Watching for file changes with StatReloader
+INFO 2026-02-13 22:58:56,642 autoreload 32860 1812 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 22:58:58,565 autoreload 34276 10872 Watching for file changes with StatReloader
+INFO 2026-02-13 22:59:01,222 autoreload 34276 10872 D:\Projets\Decima Techno\uFaranga\backend\apps\public_api\swagger_views.py changed, reloading.
+INFO 2026-02-13 22:59:03,259 autoreload 30760 10000 Watching for file changes with StatReloader
+INFO 2026-02-13 22:59:27,350 autoreload 30760 10000 D:\Projets\Decima Techno\uFaranga\backend\apps\users\views.py changed, reloading.
+INFO 2026-02-13 22:59:28,860 autoreload 34672 26100 Watching for file changes with StatReloader
+INFO 2026-02-13 22:59:56,117 basehttp 34672 2588 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 22:59:59,748 basehttp 34672 2588 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 23:00:03,645 basehttp 34672 2588 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-13 23:00:04,848 basehttp 34672 2588 "GET /api/schema/ HTTP/1.1" 200 94533
+INFO 2026-02-13 23:00:07,571 basehttp 34672 2588 "GET /api/schema/ HTTP/1.1" 200 94533
+INFO 2026-02-13 23:00:24,762 basehttp 34672 2588 "GET /api/public/docs/ HTTP/1.1" 200 1984
+INFO 2026-02-13 23:00:25,104 basehttp 34672 2588 "GET /api/public/schema/ HTTP/1.1" 200 6754
+INFO 2026-02-13 23:38:03,438 basehttp 34672 21576 "OPTIONS /api/v1/auth/login/ HTTP/1.1" 200 0
+WARNING 2026-02-13 23:38:03,563 log 34672 21576 Not Found: /api/v1/auth/login/
+WARNING 2026-02-13 23:38:03,563 basehttp 34672 21576 "POST /api/v1/auth/login/ HTTP/1.1" 404 3547
+WARNING 2026-02-13 23:38:06,506 log 34672 21576 Not Found: /api/v1/auth/login/
+WARNING 2026-02-13 23:38:06,506 basehttp 34672 21576 "POST /api/v1/auth/login/ HTTP/1.1" 404 3547
+WARNING 2026-02-13 23:38:07,435 log 34672 21576 Not Found: /api/v1/auth/login/
+WARNING 2026-02-13 23:38:07,437 basehttp 34672 21576 "POST /api/v1/auth/login/ HTTP/1.1" 404 3547
+INFO 2026-02-13 23:40:18,677 autoreload 34672 26100 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-13 23:40:20,201 autoreload 22944 13776 Watching for file changes with StatReloader
+INFO 2026-02-13 23:41:46,689 autoreload 22944 13776 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-13 23:41:48,607 autoreload 15284 24384 Watching for file changes with StatReloader
+INFO 2026-02-13 23:41:56,996 autoreload 15284 24384 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-13 23:41:58,862 autoreload 19340 6436 Watching for file changes with StatReloader
+INFO 2026-02-13 23:42:03,804 autoreload 19340 6436 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-13 23:42:05,380 autoreload 27788 3244 Watching for file changes with StatReloader
+WARNING 2026-02-13 23:42:24,146 log 27788 22924 Not Found: /api/v1/auth/login/
+WARNING 2026-02-13 23:42:24,152 basehttp 27788 22924 "POST /api/v1/auth/login/ HTTP/1.1" 404 3547
+INFO 2026-02-13 23:42:31,603 autoreload 27788 3244 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-13 23:42:33,368 autoreload 23084 5668 Watching for file changes with StatReloader
+INFO 2026-02-13 23:47:14,007 autoreload 23084 5668 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-02-13 23:47:16,181 autoreload 8808 21168 Watching for file changes with StatReloader
+INFO 2026-02-13 23:47:18,727 autoreload 8808 21168 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-02-13 23:47:20,269 autoreload 33776 27132 Watching for file changes with StatReloader
+INFO 2026-02-14 04:09:32,700 autoreload 2184 804 Watching for file changes with StatReloader
+WARNING 2026-02-14 04:09:37,825 log 2184 22124 Method Not Allowed: /api/v1/authentification/connexion/
+WARNING 2026-02-14 04:09:37,825 basehttp 2184 22124 "GET /api/v1/authentification/connexion/ HTTP/1.1" 405 94
+WARNING 2026-02-14 04:09:37,977 log 2184 22124 Not Found: /favicon.ico
+WARNING 2026-02-14 04:09:37,983 basehttp 2184 22124 "GET /favicon.ico HTTP/1.1" 404 3525
+INFO 2026-02-14 04:10:25,425 basehttp 2184 8348 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+WARNING 2026-02-14 04:10:25,429 log 2184 8348 Bad Request: /api/v1/authentification/connexion/
+WARNING 2026-02-14 04:10:25,431 basehttp 2184 8348 "POST /api/v1/authentification/connexion/ HTTP/1.1" 400 84
+INFO 2026-02-14 04:12:11,817 autoreload 2184 804 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:12:14,013 autoreload 24600 25540 Watching for file changes with StatReloader
+INFO 2026-02-14 04:12:29,641 autoreload 24600 25540 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:12:31,782 autoreload 23880 29472 Watching for file changes with StatReloader
+INFO 2026-02-14 04:12:35,440 autoreload 23880 29472 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:12:37,531 autoreload 33272 872 Watching for file changes with StatReloader
+INFO 2026-02-14 04:12:44,954 autoreload 33272 872 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:12:47,050 autoreload 15032 20848 Watching for file changes with StatReloader
+WARNING 2026-02-14 04:15:19,612 log 15032 24968 Unauthorized: /api/v1/authentification/connexion/
+WARNING 2026-02-14 04:15:19,615 basehttp 15032 24968 "POST /api/v1/authentification/connexion/ HTTP/1.1" 401 126
+WARNING 2026-02-14 04:16:33,904 log 15032 20472 Unauthorized: /api/v1/authentification/connexion/
+WARNING 2026-02-14 04:16:33,910 basehttp 15032 20472 "POST /api/v1/authentification/connexion/ HTTP/1.1" 401 126
+INFO 2026-02-14 04:19:32,639 autoreload 15032 20848 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:19:33,942 autoreload 28104 13616 Watching for file changes with StatReloader
+INFO 2026-02-14 04:19:44,379 autoreload 28104 13616 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:19:45,560 autoreload 3244 16328 Watching for file changes with StatReloader
+ERROR 2026-02-14 04:19:50,357 log 3244 27412 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 137, in validate
+    user = get_user_by_email_or_phone(credential)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'get_user_by_email_or_phone' is not defined
+ERROR 2026-02-14 04:19:50,360 basehttp 3244 27412 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 119664
+INFO 2026-02-14 04:19:54,079 autoreload 3244 16328 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:19:55,206 autoreload 21344 12996 Watching for file changes with StatReloader
+INFO 2026-02-14 04:20:11,832 autoreload 21344 12996 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:20:13,126 autoreload 26392 13728 Watching for file changes with StatReloader
+INFO 2026-02-14 04:23:49,661 autoreload 30468 16840 Watching for file changes with StatReloader
+WARNING 2026-02-14 04:23:54,848 log 30468 30004 Method Not Allowed: /api/v1/authentification/connexion/
+WARNING 2026-02-14 04:23:54,848 basehttp 30468 30004 "GET /api/v1/authentification/connexion/ HTTP/1.1" 405 94
+INFO 2026-02-14 04:24:18,662 basehttp 30468 24448 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1097
+INFO 2026-02-14 04:25:08,690 basehttp 30468 29724 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-14 04:25:11,067 basehttp 30468 29724 "GET /api/schema/ HTTP/1.1" 200 95024
+WARNING 2026-02-14 04:25:39,620 log 30468 29724 Unauthorized: /api/v1/authentification/moi/
+WARNING 2026-02-14 04:25:39,620 basehttp 30468 29724 "GET /api/v1/authentification/moi/ HTTP/1.1" 401 103
+INFO 2026-02-14 04:30:43,179 basehttp 30468 15380 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-14 04:30:43,337 basehttp 30468 15380 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 738
+INFO 2026-02-14 04:37:02,173 autoreload 30468 16840 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 04:37:03,537 autoreload 18564 9068 Watching for file changes with StatReloader
+INFO 2026-02-14 04:37:08,518 autoreload 18564 9068 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 04:37:09,761 autoreload 27476 16828 Watching for file changes with StatReloader
+INFO 2026-02-14 04:37:12,721 autoreload 27476 16828 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-14 04:37:13,712 autoreload 30956 18188 Watching for file changes with StatReloader
+ERROR 2026-02-14 04:41:07,042 log 30956 20608 Internal Server Error: /api/v1/authentification/moi/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py", line 208, in get
+    return Response(serializer.data)
+                    ^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `derniere_connexion` is not valid for model `Utilisateur` in `apps.identite.serializers.UtilisateurIdentiteSerializer`.
+ERROR 2026-02-14 04:41:07,049 basehttp 30956 20608 "GET /api/v1/authentification/moi/ HTTP/1.1" 500 162977
+INFO 2026-02-14 04:41:07,381 basehttp 30956 20608 "OPTIONS /api/v1/authentification/deconnexion/ HTTP/1.1" 200 0
+INFO 2026-02-14 04:41:07,449 views 30956 20608 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-14 04:41:07,449 basehttp 30956 20608 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+INFO 2026-02-14 04:42:21,354 autoreload 30956 18188 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 04:42:22,489 autoreload 10816 11920 Watching for file changes with StatReloader
+INFO 2026-02-14 04:42:28,573 autoreload 10816 11920 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 04:42:29,780 autoreload 22624 20996 Watching for file changes with StatReloader
+INFO 2026-02-14 04:42:41,108 autoreload 22624 20996 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\urls.py changed, reloading.
+INFO 2026-02-14 04:42:42,493 autoreload 30768 34572 Watching for file changes with StatReloader
+INFO 2026-02-14 04:44:14,971 basehttp 30768 19360 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1097
+WARNING 2026-02-14 04:44:15,517 log 30768 4088 Method Not Allowed: /api/v1/authentification/connexion/
+WARNING 2026-02-14 04:44:15,518 basehttp 30768 4088 "GET /api/v1/authentification/connexion/ HTTP/1.1" 405 94
+ERROR 2026-02-14 04:46:43,008 log 30768 19360 Internal Server Error: /api/v1/authentification/moi/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py", line 211, in get
+    data = dict(serializer.data)
+                ^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `derniere_connexion` is not valid for model `Utilisateur` in `apps.identite.serializers.UtilisateurIdentiteSerializer`.
+ERROR 2026-02-14 04:46:43,011 basehttp 30768 19360 "GET /api/v1/authentification/moi/ HTTP/1.1" 500 163564
+INFO 2026-02-14 04:46:43,478 views 30768 19360 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-14 04:46:43,478 basehttp 30768 19360 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+INFO 2026-02-14 04:50:30,157 autoreload 30768 34572 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:50:31,406 autoreload 23728 34272 Watching for file changes with StatReloader
+INFO 2026-02-14 04:50:41,817 autoreload 23728 34272 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:50:42,905 autoreload 28024 8620 Watching for file changes with StatReloader
+INFO 2026-02-14 04:54:36,246 autoreload 28024 8620 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:54:38,099 autoreload 9976 15600 Watching for file changes with StatReloader
+INFO 2026-02-14 04:54:49,122 autoreload 9976 15600 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:54:50,947 autoreload 30772 19788 Watching for file changes with StatReloader
+INFO 2026-02-14 04:55:03,582 autoreload 30772 19788 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 04:55:05,012 autoreload 26148 17184 Watching for file changes with StatReloader
+INFO 2026-02-14 04:58:02,126 basehttp 26148 31932 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1269
+INFO 2026-02-14 04:58:05,853 autoreload 26148 17184 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\auth_security.py changed, reloading.
+INFO 2026-02-14 04:58:07,716 autoreload 18196 21640 Watching for file changes with StatReloader
+INFO 2026-02-14 04:58:09,792 autoreload 18196 21640 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 04:58:11,016 autoreload 33424 4164 Watching for file changes with StatReloader
+INFO 2026-02-14 04:58:18,210 autoreload 33424 4164 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 04:58:19,535 autoreload 5888 31788 Watching for file changes with StatReloader
+INFO 2026-02-14 04:58:26,965 autoreload 5888 31788 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 04:58:28,241 autoreload 33496 20928 Watching for file changes with StatReloader
+INFO 2026-02-14 05:00:52,166 views 33496 18756 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-14 05:00:52,168 basehttp 33496 18756 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+INFO 2026-02-14 05:01:06,183 basehttp 33496 1872 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1269
+INFO 2026-02-14 05:03:43,526 basehttp 33496 32900 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1268
+INFO 2026-02-14 05:04:13,800 autoreload 33496 20928 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-14 05:04:15,572 autoreload 28576 13620 Watching for file changes with StatReloader
+INFO 2026-02-14 05:04:28,192 autoreload 28576 13620 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 05:04:29,531 autoreload 19840 13728 Watching for file changes with StatReloader
+INFO 2026-02-14 05:04:31,386 autoreload 19840 13728 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 05:04:32,663 autoreload 33820 14760 Watching for file changes with StatReloader
+INFO 2026-02-14 05:04:45,214 autoreload 33820 14760 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 05:04:46,817 autoreload 12864 9172 Watching for file changes with StatReloader
+INFO 2026-02-14 05:04:53,054 autoreload 12864 9172 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 05:04:54,204 autoreload 22504 19544 Watching for file changes with StatReloader
+INFO 2026-02-14 05:05:01,255 autoreload 22504 19544 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 05:05:02,328 autoreload 16500 3688 Watching for file changes with StatReloader
+ERROR 2026-02-14 05:07:33,858 log 16500 30208 Internal Server Error: /api/v1/authentification/moi/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py", line 217, in get
+    data = dict(serializer.data)
+                ^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `derniere_connexion` is not valid for model `Utilisateur` in `apps.identite.serializers.UtilisateurIdentiteSerializer`.
+ERROR 2026-02-14 05:07:33,864 basehttp 16500 30208 "GET /api/v1/authentification/moi/ HTTP/1.1" 500 163815
+ERROR 2026-02-14 05:07:34,005 log 16500 31540 Internal Server Error: /api/v1/authentification/moi/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py", line 217, in get
+    data = dict(serializer.data)
+                ^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `derniere_connexion` is not valid for model `Utilisateur` in `apps.identite.serializers.UtilisateurIdentiteSerializer`.
+ERROR 2026-02-14 05:07:34,009 basehttp 16500 31540 "GET /api/v1/authentification/moi/ HTTP/1.1" 500 163815
+ERROR 2026-02-14 05:08:07,465 log 16500 31540 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.InsufficientPrivilege: permission denied for schema notification
+LINE 1: INSERT INTO "notification"."notifications" ("id", "utilisate...
+                    ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 201, in validate
+    Notification.objects.create(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: permission denied for schema notification
+LINE 1: INSERT INTO "notification"."notifications" ("id", "utilisate...
+                    ^
+ERROR 2026-02-14 05:08:07,465 basehttp 16500 31540 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 231899
+INFO 2026-02-14 05:08:33,975 autoreload 19792 23164 Watching for file changes with StatReloader
+ERROR 2026-02-14 05:14:41,642 log 19792 6596 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.InsufficientPrivilege: permission denied for schema notification
+LINE 1: INSERT INTO "notification"."notifications" ("id", "utilisate...
+                    ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 201, in validate
+    Notification.objects.create(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: permission denied for schema notification
+LINE 1: INSERT INTO "notification"."notifications" ("id", "utilisate...
+                    ^
+ERROR 2026-02-14 05:14:41,660 basehttp 19792 6596 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 232085
+INFO 2026-02-14 05:15:08,965 autoreload 19792 23164 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\auth_security.py changed, reloading.
+INFO 2026-02-14 05:15:10,445 autoreload 21908 1656 Watching for file changes with StatReloader
+INFO 2026-02-14 05:15:19,719 autoreload 21908 1656 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 05:15:20,810 autoreload 33880 17668 Watching for file changes with StatReloader
+INFO 2026-02-14 05:15:31,063 autoreload 33880 17668 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-14 05:15:32,138 autoreload 25540 15696 Watching for file changes with StatReloader
+INFO 2026-02-14 05:16:08,618 autoreload 25540 15696 D:\Projets\Decima Techno\uFaranga\backend\config\constants.py changed, reloading.
+INFO 2026-02-14 05:16:09,595 autoreload 8636 19216 Watching for file changes with StatReloader
+ERROR 2026-02-14 05:16:20,081 log 8636 4656 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.InsufficientPrivilege: permission denied for schema notification
+LINE 1: INSERT INTO "notification"."notifications" ("id", "utilisate...
+                    ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 196, in validate
+    Notification.objects.create(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: permission denied for schema notification
+LINE 1: INSERT INTO "notification"."notifications" ("id", "utilisate...
+                    ^
+ERROR 2026-02-14 05:16:20,081 basehttp 8636 4656 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 232374
+INFO 2026-02-14 05:16:35,729 autoreload 14272 22632 Watching for file changes with StatReloader
+ERROR 2026-02-14 05:16:50,084 log 14272 23952 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.InsufficientPrivilege: permission denied for schema notification
+LINE 1: INSERT INTO "notification"."notifications" ("id", "utilisate...
+                    ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 196, in validate
+    Notification.objects.create(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: permission denied for schema notification
+LINE 1: INSERT INTO "notification"."notifications" ("id", "utilisate...
+                    ^
+ERROR 2026-02-14 05:16:50,084 basehttp 14272 23952 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 232374
+ERROR 2026-02-14 05:16:58,229 log 14272 23952 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.InsufficientPrivilege: permission denied for schema notification
+LINE 1: INSERT INTO "notification"."notifications" ("id", "utilisate...
+                    ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 196, in validate
+    Notification.objects.create(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: permission denied for schema notification
+LINE 1: INSERT INTO "notification"."notifications" ("id", "utilisate...
+                    ^
+ERROR 2026-02-14 05:16:58,232 basehttp 14272 23952 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 232383
+INFO 2026-02-14 05:18:52,775 basehttp 14272 23952 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1288
+ERROR 2026-02-14 05:18:52,918 log 14272 23952 Internal Server Error: /api/v1/authentification/moi/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py", line 217, in get
+    data = dict(serializer.data)
+                ^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 57, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `derniere_connexion` is not valid for model `Utilisateur` in `apps.identite.serializers.UtilisateurIdentiteSerializer`.
+ERROR 2026-02-14 05:18:52,922 basehttp 14272 23952 "GET /api/v1/authentification/moi/ HTTP/1.1" 500 164119
+INFO 2026-02-14 05:19:37,491 autoreload 14272 22632 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-14 05:19:38,510 autoreload 29664 31364 Watching for file changes with StatReloader
+INFO 2026-02-14 05:20:01,871 basehttp 29664 27416 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-14 05:20:04,239 basehttp 29664 27416 "GET /api/schema/ HTTP/1.1" 200 97448
+INFO 2026-02-14 05:20:18,307 basehttp 29664 1932 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1288
+INFO 2026-02-14 05:20:18,396 basehttp 29664 1932 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 05:20:18,536 basehttp 29664 1932 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 05:20:18,619 basehttp 29664 1932 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 05:20:39,826 basehttp 29664 1932 "OPTIONS /api/v1/authentification/deconnexion-toutes/ HTTP/1.1" 200 0
+INFO 2026-02-14 05:20:39,929 views 29664 1932 Toutes les sessions invalidées pour: systeme@ufaranga.bi
+INFO 2026-02-14 05:20:39,929 basehttp 29664 1932 "POST /api/v1/authentification/deconnexion-toutes/ HTTP/1.1" 200 53
+INFO 2026-02-14 05:22:42,699 basehttp 29664 1932 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1675
+INFO 2026-02-14 05:22:56,715 basehttp 29664 1932 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1675
+INFO 2026-02-14 05:23:56,211 autoreload 29664 31364 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 05:23:58,016 autoreload 13380 19916 Watching for file changes with StatReloader
+INFO 2026-02-14 05:24:45,477 autoreload 13380 19916 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 05:24:47,050 autoreload 30308 25068 Watching for file changes with StatReloader
+INFO 2026-02-14 05:24:55,520 autoreload 30308 25068 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\urls.py changed, reloading.
+INFO 2026-02-14 05:24:57,085 autoreload 32128 21108 Watching for file changes with StatReloader
+INFO 2026-02-14 05:25:04,904 basehttp 32128 19484 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1675
+INFO 2026-02-14 05:25:19,775 basehttp 32128 19484 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1675
+INFO 2026-02-14 05:27:22,952 basehttp 32128 19484 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1289
+INFO 2026-02-14 05:27:23,021 basehttp 32128 19484 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 05:27:23,134 basehttp 32128 19484 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 05:27:23,203 basehttp 32128 19484 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:10:25,534 autoreload 19020 12812 Watching for file changes with StatReloader
+WARNING 2026-02-14 07:10:27,430 log 19020 9492 Not Found: /favicon.ico
+WARNING 2026-02-14 07:10:27,431 basehttp 19020 9492 "GET /favicon.ico HTTP/1.1" 404 3525
+INFO 2026-02-14 07:11:35,051 basehttp 19020 11300 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+INFO 2026-02-14 07:11:36,289 basehttp 19020 11300 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1287
+INFO 2026-02-14 07:11:36,301 basehttp 19020 11300 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-14 07:11:36,469 basehttp 19020 11300 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:11:48,569 basehttp 19020 9272 "OPTIONS /api/v1/authentification/deconnexion-toutes/ HTTP/1.1" 200 0
+INFO 2026-02-14 07:11:48,699 views 19020 9272 Toutes les sessions invalidées pour: systeme@ufaranga.bi
+INFO 2026-02-14 07:11:48,700 basehttp 19020 9272 "POST /api/v1/authentification/deconnexion-toutes/ HTTP/1.1" 200 53
+INFO 2026-02-14 07:12:00,317 basehttp 19020 9272 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1675
+INFO 2026-02-14 07:12:00,479 basehttp 19020 9272 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1675
+INFO 2026-02-14 07:12:57,344 basehttp 19020 13744 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1289
+INFO 2026-02-14 07:12:57,425 basehttp 19020 13744 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:12:57,578 basehttp 19020 13744 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:12:57,665 basehttp 19020 13744 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:13:21,403 basehttp 19020 33332 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:13:30,367 basehttp 19020 4128 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:13:45,349 basehttp 19020 25988 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:14:09,334 basehttp 19020 25988 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:14:32,385 basehttp 19020 372 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:15:28,895 basehttp 19020 372 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:20:00,831 basehttp 19020 3844 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1288
+INFO 2026-02-14 07:20:00,919 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:20:08,999 views 19020 3844 Toutes les sessions invalidées pour: systeme@ufaranga.bi
+INFO 2026-02-14 07:20:09,000 basehttp 19020 3844 "POST /api/v1/authentification/deconnexion-toutes/ HTTP/1.1" 200 53
+INFO 2026-02-14 07:20:22,756 basehttp 19020 3844 "OPTIONS /api/v1/authentification/deconnexion/ HTTP/1.1" 200 0
+WARNING 2026-02-14 07:20:22,833 views 19020 3844 Erreur lors de la déconnexion: Le jeton a été banni
+WARNING 2026-02-14 07:20:22,833 log 19020 3844 Bad Request: /api/v1/authentification/deconnexion/
+WARNING 2026-02-14 07:20:22,834 basehttp 19020 3844 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 400 27
+INFO 2026-02-14 07:20:25,681 basehttp 19020 3844 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1289
+INFO 2026-02-14 07:20:25,793 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:20:32,665 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:20:32,751 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:24:44,325 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:25:06,370 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:25:39,356 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:26:25,775 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:26:56,355 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:27:10,345 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:27:28,366 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:27:36,487 basehttp 19020 3844 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1288
+INFO 2026-02-14 07:27:36,561 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:27:36,690 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:27:36,763 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:27:41,786 views 19020 3844 Toutes les sessions invalidées pour: systeme@ufaranga.bi
+INFO 2026-02-14 07:27:41,787 basehttp 19020 3844 "POST /api/v1/authentification/deconnexion-toutes/ HTTP/1.1" 200 53
+INFO 2026-02-14 07:27:46,206 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1675
+INFO 2026-02-14 07:27:54,077 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1675
+INFO 2026-02-14 07:27:54,180 basehttp 19020 3844 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1675
+INFO 2026-02-14 07:28:35,428 autoreload 19020 12812 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-14 07:28:37,512 autoreload 15304 11000 Watching for file changes with StatReloader
+INFO 2026-02-14 07:28:59,268 autoreload 15304 11000 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 07:29:00,361 autoreload 6984 3036 Watching for file changes with StatReloader
+INFO 2026-02-14 07:29:10,967 basehttp 6984 28416 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1289
+INFO 2026-02-14 07:29:11,078 basehttp 6984 28416 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:29:11,239 basehttp 6984 28416 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:29:11,322 basehttp 6984 28416 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:29:17,211 autoreload 6984 3036 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-14 07:29:18,684 autoreload 14196 16216 Watching for file changes with StatReloader
+INFO 2026-02-14 07:30:05,682 autoreload 14196 16216 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-14 07:30:07,371 autoreload 24180 16836 Watching for file changes with StatReloader
+INFO 2026-02-14 07:30:14,284 autoreload 24180 16836 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 07:30:15,795 autoreload 29136 14124 Watching for file changes with StatReloader
+INFO 2026-02-14 07:30:43,065 autoreload 29136 14124 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 07:30:44,714 autoreload 27120 20848 Watching for file changes with StatReloader
+INFO 2026-02-14 07:30:52,181 autoreload 27120 20848 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-14 07:30:53,367 autoreload 29948 16556 Watching for file changes with StatReloader
+INFO 2026-02-14 07:31:06,366 autoreload 29948 16556 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-14 07:31:07,811 autoreload 704 13516 Watching for file changes with StatReloader
+INFO 2026-02-14 07:31:23,804 basehttp 704 13444 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1288
+INFO 2026-02-14 07:31:23,895 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:31:24,018 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:31:24,095 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:32:07,501 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:32:07,621 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:32:07,717 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:32:07,799 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:35:36,503 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:35:36,639 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:35:36,772 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:35:36,888 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:35:36,989 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:35:37,082 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1735
+INFO 2026-02-14 07:36:13,470 basehttp 704 13444 "OPTIONS /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 0
+INFO 2026-02-14 07:36:13,557 views 704 13444 Déconnexion de 1 autre(s) session(s) pour systeme@ufaranga.bi, session actuelle conservée.
+INFO 2026-02-14 07:36:13,558 basehttp 704 13444 "POST /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 152
+INFO 2026-02-14 07:36:31,596 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:36:31,670 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:36:36,329 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:36:36,404 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:37:00,015 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:37:00,094 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:37:05,093 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:37:05,168 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:01,223 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:01,460 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:01,572 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:15,994 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:16,077 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:16,180 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:16,263 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:18,622 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:18,705 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:18,779 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:18,847 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:19,896 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:19,967 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:20,030 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:20,090 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:23,692 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:40,368 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:38:40,466 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:39:00,371 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:39:22,380 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:40:55,817 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1736
+INFO 2026-02-14 07:43:17,448 basehttp 704 13444 "PATCH /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:43:19,016 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:43:48,739 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:45:08,307 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:45:08,406 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:45:17,226 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:45:17,311 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:45:32,224 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:45:36,312 basehttp 704 13444 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:45:57,239 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:45:57,344 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:46:10,373 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:46:10,438 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:46:10,507 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:46:10,572 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:46:10,634 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:46:10,699 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:47:44,377 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:47:44,445 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:47:44,515 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:47:44,582 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:47:44,649 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:47:44,725 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:48:27,383 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:48:27,469 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:52:55,431 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:52:55,541 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:52:55,663 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:52:55,832 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:52:55,974 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:52:56,099 basehttp 704 13492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-14 07:53:20,406 autoreload 704 13516 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-14 07:53:21,710 autoreload 10420 16920 Watching for file changes with StatReloader
+INFO 2026-02-14 07:54:19,054 autoreload 10420 16920 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-14 07:54:20,285 autoreload 9876 4448 Watching for file changes with StatReloader
+INFO 2026-02-14 07:54:32,974 autoreload 9876 4448 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-02-14 07:54:34,234 autoreload 14488 30972 Watching for file changes with StatReloader
+INFO 2026-02-14 07:54:46,912 autoreload 14488 30972 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-02-14 07:54:48,226 autoreload 29744 22296 Watching for file changes with StatReloader
+INFO 2026-02-14 08:00:27,029 basehttp 29744 18172 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:00:27,110 basehttp 29744 18172 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:00:27,191 basehttp 29744 18172 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:00:27,289 basehttp 29744 18172 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:00:35,022 basehttp 29744 18172 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:00:35,112 basehttp 29744 18172 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:00:35,189 basehttp 29744 18172 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:00:35,307 basehttp 29744 18172 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:02:10,335 autoreload 29744 22296 D:\Projets\Decima Techno\uFaranga\backend\config\urls.py changed, reloading.
+INFO 2026-02-14 08:02:12,214 autoreload 18316 27060 Watching for file changes with StatReloader
+INFO 2026-02-14 08:02:39,359 basehttp 18316 16788 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:03:03,265 basehttp 18316 16788 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:04:56,365 basehttp 18316 16788 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:05:53,637 basehttp 18316 16788 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:05:53,716 basehttp 18316 16788 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:05:53,790 basehttp 18316 16788 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:05:53,858 basehttp 18316 16788 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+WARNING 2026-02-14 08:06:46,127 log 18316 16788 Bad Request: /api/v1/authentification/moi/
+WARNING 2026-02-14 08:06:46,128 basehttp 18316 16788 "PATCH /api/v1/authentification/moi/ HTTP/1.1" 400 186
+INFO 2026-02-14 08:07:03,431 autoreload 31176 2572 Watching for file changes with StatReloader
+WARNING 2026-02-14 08:07:07,142 log 31176 25768 Bad Request: /api/v1/authentification/moi/
+WARNING 2026-02-14 08:07:07,142 basehttp 31176 25768 "PATCH /api/v1/authentification/moi/ HTTP/1.1" 400 186
+WARNING 2026-02-14 08:07:20,557 log 31176 25768 Bad Request: /api/v1/authentification/moi/
+WARNING 2026-02-14 08:07:20,558 basehttp 31176 25768 "PATCH /api/v1/authentification/moi/ HTTP/1.1" 400 186
+INFO 2026-02-14 08:08:30,202 autoreload 31176 2572 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-14 08:08:31,471 autoreload 13076 24856 Watching for file changes with StatReloader
+INFO 2026-02-14 08:08:37,578 autoreload 13076 24856 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-14 08:08:38,708 autoreload 10060 24184 Watching for file changes with StatReloader
+INFO 2026-02-14 08:08:47,908 autoreload 10060 24184 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-14 08:08:48,945 autoreload 31364 24096 Watching for file changes with StatReloader
+INFO 2026-02-14 08:08:58,276 autoreload 31364 24096 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-14 08:08:59,495 autoreload 8756 11936 Watching for file changes with StatReloader
+INFO 2026-02-14 08:09:06,739 autoreload 8756 11936 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-14 08:09:08,044 autoreload 29640 26428 Watching for file changes with StatReloader
+INFO 2026-02-14 08:09:37,287 basehttp 29640 4040 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:10:00,369 basehttp 29640 4040 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:10:01,364 basehttp 29640 4040 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:10:04,376 basehttp 29640 4040 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:18:42,785 basehttp 29640 22464 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:18:42,858 basehttp 29640 22464 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:18:42,933 basehttp 29640 22464 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:18:43,001 basehttp 29640 22464 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:19:58,595 basehttp 29640 22464 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:22:16,366 basehttp 29640 22464 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:24:17,358 basehttp 29640 22464 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:24:49,338 basehttp 29640 22464 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 08:26:36,110 basehttp 29640 22464 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 09:20:43,191 basehttp 29640 9644 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-14 09:20:44,146 basehttp 29640 9644 "GET /api/schema/ HTTP/1.1" 200 186848
+INFO 2026-02-14 09:24:44,258 basehttp 29640 30244 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-14 09:24:44,555 basehttp 29640 30244 "GET /api/schema/ HTTP/1.1" 200 186848
+INFO 2026-02-14 10:06:11,232 autoreload 2592 33108 Watching for file changes with StatReloader
+INFO 2026-02-14 10:09:41,910 autoreload 19392 20808 Watching for file changes with StatReloader
+INFO 2026-02-14 10:09:45,723 basehttp 19392 2776 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+INFO 2026-02-14 10:09:46,675 basehttp 19392 2776 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-14 10:09:46,723 basehttp 19392 2776 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-14 10:09:46,831 basehttp 19392 2776 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-14 10:09:55,679 basehttp 19392 2776 "OPTIONS /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 0
+INFO 2026-02-14 10:09:55,748 views 19392 2776 Déconnexion de 1 autre(s) session(s) pour systeme@ufaranga.bi, session actuelle conservée.
+INFO 2026-02-14 10:09:55,748 basehttp 19392 2776 "POST /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 152
+INFO 2026-02-14 10:10:06,727 basehttp 19392 2776 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:10:06,811 basehttp 19392 2776 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:11:26,740 basehttp 19392 2776 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:11:26,897 basehttp 19392 2776 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:11:27,007 basehttp 19392 2776 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:11:43,944 basehttp 19392 2776 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:11:44,120 basehttp 19392 2776 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:11:44,223 basehttp 19392 2776 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:19:14,398 basehttp 19392 33996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:20:19,682 basehttp 19392 9588 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-14 10:20:22,247 basehttp 19392 9588 "GET /api/schema/ HTTP/1.1" 200 186848
+WARNING 2026-02-14 10:20:37,528 log 19392 9588 Unauthorized: /api/v1/authentification/moi/
+WARNING 2026-02-14 10:20:37,529 basehttp 19392 9588 "GET /api/v1/authentification/moi/ HTTP/1.1" 401 103
+INFO 2026-02-14 10:22:55,411 basehttp 19392 30512 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:23:00,401 basehttp 19392 30512 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:23:01,350 basehttp 19392 30512 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:23:03,380 basehttp 19392 30512 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:31:16,069 autoreload 21928 21932 Watching for file changes with StatReloader
+INFO 2026-02-14 10:40:57,877 basehttp 21928 13212 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+INFO 2026-02-14 10:40:58,910 basehttp 21928 13212 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-14 10:40:58,915 basehttp 21928 13212 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-14 10:40:59,038 basehttp 21928 13212 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-14 10:41:02,523 basehttp 21928 1768 "OPTIONS /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 0
+INFO 2026-02-14 10:41:02,593 views 21928 1768 Déconnexion de 1 autre(s) session(s) pour systeme@ufaranga.bi, session actuelle conservée.
+INFO 2026-02-14 10:41:02,594 basehttp 21928 1768 "POST /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 152
+INFO 2026-02-14 10:41:08,598 basehttp 21928 1768 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 10:41:08,675 basehttp 21928 1768 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-14 11:47:01,814 basehttp 21928 29952 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-14 11:47:01,923 basehttp 21928 29952 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-14 11:57:24,469 basehttp 21928 25096 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-14 11:57:24,536 basehttp 21928 25096 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-14 11:57:30,344 views 21928 25096 Déconnexion de 1 autre(s) session(s) pour systeme@ufaranga.bi, session actuelle conservée.
+INFO 2026-02-14 11:57:30,344 basehttp 21928 25096 "POST /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 152
+INFO 2026-02-14 12:08:02,399 basehttp 21928 24280 "OPTIONS /api/v1/authentification/deconnexion/ HTTP/1.1" 200 0
+INFO 2026-02-14 12:08:02,494 views 21928 24280 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-14 12:08:02,494 basehttp 21928 24280 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+INFO 2026-02-14 12:08:08,130 basehttp 21928 24280 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1260
+INFO 2026-02-14 12:08:08,255 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:08:23,243 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:08:23,344 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:10:20,243 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:10:20,371 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:10:33,738 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:10:33,816 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:11:04,156 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:11:04,284 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:11:27,903 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:11:27,972 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:13:13,043 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:13:13,133 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1773
+INFO 2026-02-14 12:14:18,190 views 21928 24280 Utilisateur déconnecté: agent1@ufaranga.bi
+INFO 2026-02-14 12:14:18,190 basehttp 21928 24280 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+INFO 2026-02-14 12:14:22,692 basehttp 21928 24280 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1286
+INFO 2026-02-14 12:14:22,795 basehttp 21928 24280 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1758

@@ -15,21 +15,24 @@ urlpatterns = [
     # Admin Django
     path('admin/', admin.site.urls),
 
-    # Health Check
-    path('health/', include('apps.users.health')),
+    # Santé
+    path('sante/', include('apps.users.health')),
 
-    # OAuth 2.0 Authentication
+    # OAuth 2.0
     path('api/v1/oauth2/', include('apps.oauth2.urls')),
     path('o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 
-    # Authentication (login, register, token refresh, logout)
-    path('api/v1/auth/', include('apps.authentication.urls')),
+    # Authentification (connexion, inscription, jeton, déconnexion)
+    path('api/v1/authentification/', include('apps.authentication.urls')),
 
-    # Users (CRUD, profiles, sessions)
-    path('api/v1/users/', include('apps.users.urls')),
+    # Utilisateurs (CRUD, profils, sessions)
+    path('api/v1/utilisateurs/', include('apps.users.urls')),
 
-    # Wallets (Currencies, Wallets, Transactions)
-    path('api/v1/wallets/', include('apps.wallets.urls')),
+    # Portefeuilles (Devises, Portefeuilles, Transactions)
+    path('api/v1/portefeuilles/', include('apps.wallets.urls')),
+
+    # Localisation (Pays, Province, District, Quartier, Point de service) — SYSTEME / SUPER_ADMIN
+    path('api/v1/localisation/', include('apps.localisation.urls')),
 
     # API Publique (nécessite clé API)
     path('api/public/', include('apps.public_api.urls')),

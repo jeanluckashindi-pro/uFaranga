@@ -62,7 +62,7 @@ export const allModulesNavigation = [
   // ==================== MODULE ADMIN SYSTÈME ====================
   {
     section: 'MODULE ADMIN SYSTÈME',
-    module: 'admin',
+    module: 'admin_system',
     color: 'danger',
     items: [
       { 
@@ -137,7 +137,7 @@ export const allModulesNavigation = [
   // ==================== MODULE ADMIN TECHNIQUE ====================
   {
     section: 'MODULE ADMIN TECHNIQUE',
-    module: 'tech',
+    module: 'admin_tech',
     color: 'primary',
     items: [
       { 

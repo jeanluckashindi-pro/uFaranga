@@ -1,6 +1,5 @@
 import os
 from pathlib import Path
-from datetime import timedelta
 
 # Compatibility patch for PostgreSQL 10 (Django 4.2 requires 12+)
 import config.pg_compat  # noqa: F401
@@ -53,6 +52,7 @@ LOCAL_APPS = [
     'apps.commission',
     'apps.notification',
     'apps.configuration',
+    'apps.localisation',  # Hiérarchie géo : Pays → Province → District → Quartier → Point de service
     'apps.developpeurs',  # Comptes développeurs et API keys
     'apps.public_api',  # API publique
 ]
@@ -110,7 +110,7 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT', '5432'),
         'OPTIONS': {
             'connect_timeout': 10,
-            'options': '-c search_path=public,identite,bancaire,portefeuille,transaction,audit,compliance,commission,notification,configuration',
+            'options': '-c search_path=public,identite,bancaire,portefeuille,transaction,audit,compliance,commission,notification,configuration,localisation',
         },
     }
 }
@@ -182,11 +182,18 @@ REST_FRAMEWORK = {
 }
 
 # =============================================================================
-# SIMPLE JWT
+# SIMPLE JWT (durées définies dans config.constants)
 # =============================================================================
+from config.constants import (
+    ACCESS_TOKEN_LIFETIME,
+    REFRESH_TOKEN_LIFETIME,
+    REFRESH_TOKEN_LIFETIME_REMEMBER_ME,
+)
+
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ACCESS_TOKEN_LIFETIME': ACCESS_TOKEN_LIFETIME,
+    'REFRESH_TOKEN_LIFETIME': REFRESH_TOKEN_LIFETIME,
+    'REFRESH_TOKEN_LIFETIME_REMEMBER_ME': REFRESH_TOKEN_LIFETIME_REMEMBER_ME,
     'ROTATE_REFRESH_TOKENS': True,
     'BLACKLIST_AFTER_ROTATION': True,
     'UPDATE_LAST_LOGIN': True,

@@ -34,17 +34,17 @@ class PublicAPISchema(AutoSchema):
         """Définit les tags basés sur le chemin"""
         path = self.path
         
-        if '/health' in path or '/status' in path or '/version' in path:
+        if '/sante' in path or '/statut' in path or '/version' in path:
             return ['Système']
-        elif '/fees' in path or '/exchange-rates' in path:
+        elif '/frais' in path or '/taux-change' in path:
             return ['Tarification']
-        elif '/countries' in path or '/currencies' in path or '/transaction-types' in path:
+        elif '/pays' in path or '/devises' in path or '/types-transaction' in path:
             return ['Informations']
-        elif '/validate' in path:
+        elif '/valider' in path:
             return ['Validation']
         elif '/agents' in path:
             return ['Agents']
-        elif '/register' in path:
+        elif '/inscription' in path:
             return ['Inscription']
         elif '/contact' in path or '/faq' in path:
             return ['Support']

@@ -23,9 +23,9 @@ const Button = ({
     success: 'bg-green-600 hover:bg-green-700 text-white focus:ring-green-500',
     warning: 'bg-yellow-600 hover:bg-yellow-700 text-white focus:ring-yellow-500',
     danger: 'bg-red-600 hover:bg-red-700 text-white focus:ring-red-500',
-    outline: 'border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white focus:ring-blue-500 bg-white',
-    ghost: 'text-blue-600 hover:bg-blue-50 focus:ring-blue-500 bg-transparent',
-    link: 'text-blue-600 hover:text-blue-800 underline-offset-4 hover:underline focus:ring-blue-500 bg-transparent',
+    outline: 'border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary bg-transparent',
+    ghost: 'text-primary hover:bg-primary/10 focus:ring-primary bg-transparent',
+    link: 'text-primary hover:text-secondary underline-offset-4 hover:underline focus:ring-primary bg-transparent',
     facebook: 'bg-facebook hover:bg-facebook-hover active:bg-facebook-active text-white focus:ring-facebook shadow-facebook border-0 font-semibold'
   };
 

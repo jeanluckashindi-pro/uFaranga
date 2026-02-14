@@ -36,9 +36,9 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     ViewSet pour la gestion des utilisateurs.
     
-    - Liste (GET /users/) — Admin uniquement
-    - Détail (GET /users/{id}/) — Propriétaire ou Admin
-    - Mise à jour (PUT/PATCH /users/{id}/) — Propriétaire ou Admin
+    - Liste (GET /api/v1/utilisateurs/) — Admin uniquement
+    - Détail (GET /api/v1/utilisateurs/{id}/) — Propriétaire ou Admin
+    - Mise à jour (PUT/PATCH /api/v1/utilisateurs/{id}/) — Propriétaire ou Admin
     """
     queryset = User.objects.select_related('profile').all()
     permission_classes = [IsAuthenticated]
