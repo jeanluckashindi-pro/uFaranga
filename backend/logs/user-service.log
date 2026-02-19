@@ -1874,3 +1874,53 @@ INFO 2026-02-15 00:21:40,479 basehttp 13440 11736 "GET /api/v1/localisation/pays
 INFO 2026-02-19 03:00:36,343 autoreload 14492 17104 Watching for file changes with StatReloader
 INFO 2026-02-19 03:01:00,765 basehttp 14492 26104 "GET / HTTP/1.1" 200 4658
 INFO 2026-02-19 03:01:02,893 basehttp 14492 26104 "GET /api/schema/ HTTP/1.1" 200 201875
+INFO 2026-02-19 03:04:23,084 basehttp 14492 2588 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+INFO 2026-02-19 03:04:24,007 basehttp 14492 2588 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-19 03:04:24,014 basehttp 14492 2588 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-19 03:04:24,099 basehttp 14492 2588 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-19 03:11:40,662 basehttp 14492 13092 "OPTIONS /api/v1/authentification/deconnexion/ HTTP/1.1" 200 0
+INFO 2026-02-19 03:11:40,740 views 14492 13092 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-19 03:11:40,740 basehttp 14492 13092 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+INFO 2026-02-19 03:17:50,404 autoreload 14492 17104 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-19 03:17:51,565 autoreload 4580 28864 Watching for file changes with StatReloader
+INFO 2026-02-19 03:17:55,476 autoreload 4580 28864 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-19 03:17:56,542 autoreload 29692 12924 Watching for file changes with StatReloader
+INFO 2026-02-19 03:18:00,416 autoreload 29692 12924 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-19 03:18:01,610 autoreload 18788 17568 Watching for file changes with StatReloader
+INFO 2026-02-19 03:18:06,524 autoreload 18788 17568 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-19 03:18:07,610 autoreload 21448 18780 Watching for file changes with StatReloader
+INFO 2026-02-19 03:18:23,115 autoreload 21448 18780 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-19 03:18:24,230 autoreload 27124 4228 Watching for file changes with StatReloader
+INFO 2026-02-19 03:18:34,433 autoreload 27124 4228 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\urls.py changed, reloading.
+INFO 2026-02-19 03:18:35,824 autoreload 17484 17288 Watching for file changes with StatReloader
+INFO 2026-02-19 03:18:59,945 autoreload 17484 17288 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-19 03:19:01,360 autoreload 1816 17488 Watching for file changes with StatReloader
+INFO 2026-02-19 03:19:11,222 basehttp 1816 1864 "OPTIONS /api/v1/authentification/mot-de-passe-oublie/ HTTP/1.1" 200 0
+WARNING 2026-02-19 03:19:11,253 log 1816 1864 Not Found: /api/v1/authentification/mot-de-passe-oublie/
+WARNING 2026-02-19 03:19:11,254 basehttp 1816 1864 "POST /api/v1/authentification/mot-de-passe-oublie/ HTTP/1.1" 404 5933
+INFO 2026-02-19 03:26:52,353 autoreload 1816 17488 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\services_sms.py changed, reloading.
+INFO 2026-02-19 03:26:53,508 autoreload 10080 29260 Watching for file changes with StatReloader
+INFO 2026-02-19 03:27:05,793 autoreload 10080 29260 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\services_sms.py changed, reloading.
+INFO 2026-02-19 03:27:06,905 autoreload 13648 1644 Watching for file changes with StatReloader
+INFO 2026-02-19 03:27:17,047 autoreload 13648 1644 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\services_sms.py changed, reloading.
+INFO 2026-02-19 03:27:18,156 autoreload 10660 17188 Watching for file changes with StatReloader
+INFO 2026-02-19 03:27:32,511 autoreload 10660 17188 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\services_sms.py changed, reloading.
+INFO 2026-02-19 03:27:33,473 autoreload 19400 26460 Watching for file changes with StatReloader
+INFO 2026-02-19 03:27:50,005 autoreload 19400 26460 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\services_sms.py changed, reloading.
+INFO 2026-02-19 03:27:51,020 autoreload 19872 10504 Watching for file changes with StatReloader
+INFO 2026-02-19 03:27:58,012 autoreload 19872 10504 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-19 03:27:59,122 autoreload 20080 27888 Watching for file changes with StatReloader
+INFO 2026-02-19 03:28:17,652 autoreload 20080 27888 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-19 03:28:18,824 autoreload 9064 8308 Watching for file changes with StatReloader
+INFO 2026-02-19 03:28:27,914 autoreload 9064 8308 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-19 03:28:28,836 autoreload 27096 20852 Watching for file changes with StatReloader
+INFO 2026-02-19 03:28:44,214 autoreload 27096 20852 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-19 03:28:45,172 autoreload 29164 25532 Watching for file changes with StatReloader
+INFO 2026-02-19 03:28:51,112 autoreload 29164 25532 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-19 03:28:52,076 autoreload 5616 22968 Watching for file changes with StatReloader
+INFO 2026-02-19 03:29:21,074 autoreload 5616 22968 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-19 03:29:22,145 autoreload 19188 20684 Watching for file changes with StatReloader
+INFO 2026-02-19 03:29:43,457 autoreload 19188 20684 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-19 03:29:44,367 autoreload 21516 27524 Watching for file changes with StatReloader
+INFO 2026-02-19 03:31:04,307 autoreload 21516 27524 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-02-19 03:31:05,218 autoreload 24412 25812 Watching for file changes with StatReloader

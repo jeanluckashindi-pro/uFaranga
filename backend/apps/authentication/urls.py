@@ -30,4 +30,16 @@ urlpatterns = [
 
     # Sessions actives (connexion multiple) — GET /api/v1/authentification/sessions-actives/
     path('sessions-actives/', views.SessionsActivesView.as_view(), name='sessions-actives'),
+
+    # Envoyer code de confirmation — POST /api/v1/authentification/envoyer-code-confirmation/
+    path('envoyer-code-confirmation/', views.EnvoyerCodeConfirmationView.as_view(), name='envoyer-code-confirmation'),
+
+    # Vérifier code de confirmation — POST /api/v1/authentification/verifier-code-confirmation/
+    path('verifier-code-confirmation/', views.VerifierCodeConfirmationView.as_view(), name='verifier-code-confirmation'),
+
+    # Réinitialiser mot de passe avec SMS — POST /api/v1/authentification/reinitialiser-mot-de-passe-sms/
+    path('reinitialiser-mot-de-passe-sms/', views.ReinitialiserMotDePasseSMSView.as_view(), name='reinitialiser-mot-de-passe-sms'),
+
+    # Historique des changements de mot de passe — GET /api/v1/authentification/historique-mot-de-passe/
+    path('historique-mot-de-passe/', views.HistoriqueMotDePasseView.as_view(), name='historique-mot-de-passe'),
 ]

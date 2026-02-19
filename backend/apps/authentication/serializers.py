@@ -354,3 +354,132 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
                 'new_password_confirm': 'Les mots de passe ne correspondent pas.'
             })
         return attrs
+
+
+class EnvoyerCodeConfirmationSerializer(serializers.Serializer):
+    """Envoi d'un code de confirmation par SMS."""
+    telephone = serializers.CharField(
+        required=True,
+        max_length=15,
+        help_text='Numéro de téléphone (ex: 62046725 ou +25762046725)'
+    )
+    prenom = serializers.CharField(
+        required=False,
+        max_length=100,
+        help_text='Prénom de l\'utilisateur (optionnel)'
+    )
+
+    def validate_telephone(self, value):
+        """Valide et normalise le numéro de téléphone."""
+        if not value or not value.strip():
+            raise serializers.ValidationError('Le numéro de téléphone est requis.')
+        
+        # Nettoyer le numéro (supprimer espaces et tirets)
+        cleaned = re.sub(r'[\s\-]', '', value.strip())
+        
+        # Vérifier le format
+        if not re.match(r'^\+?\d{8,15}$', cleaned):
+            raise serializers.ValidationError(
+                'Format de numéro invalide. Utilisez 8 à 15 chiffres, avec ou sans le préfixe +'
+            )
+        
+        return cleaned
+
+
+class VerifierCodeConfirmationSerializer(serializers.Serializer):
+    """Vérification d'un code de confirmation."""
+    telephone = serializers.CharField(
+        required=True,
+        max_length=15,
+        help_text='Numéro de téléphone'
+    )
+    code = serializers.CharField(
+        required=True,
+        min_length=5,
+        max_length=5,
+        help_text='Code à 5 chiffres'
+    )
+
+    def validate_telephone(self, value):
+        """Valide et normalise le numéro de téléphone."""
+        if not value or not value.strip():
+            raise serializers.ValidationError('Le numéro de téléphone est requis.')
+        
+        cleaned = re.sub(r'[\s\-]', '', value.strip())
+        
+        if not re.match(r'^\+?\d{8,15}$', cleaned):
+            raise serializers.ValidationError('Format de numéro invalide.')
+        
+        return cleaned
+
+    def validate_code(self, value):
+        """Valide le format du code."""
+        if not value or not value.strip():
+            raise serializers.ValidationError('Le code est requis.')
+        
+        cleaned = value.strip()
+        
+        if not re.match(r'^\d{5}$', cleaned):
+            raise serializers.ValidationError('Le code doit contenir exactement 5 chiffres.')
+        
+        return cleaned
+
+
+class ReinitialiserMotDePasseSMSSerializer(serializers.Serializer):
+    """Réinitialisation de mot de passe avec code SMS."""
+    telephone = serializers.CharField(
+        required=True,
+        max_length=15,
+        help_text='Numéro de téléphone'
+    )
+    code = serializers.CharField(
+        required=True,
+        min_length=5,
+        max_length=5,
+        help_text='Code de confirmation à 5 chiffres'
+    )
+    nouveau_mot_de_passe = serializers.CharField(
+        required=True,
+        write_only=True,
+        validators=[validate_password],
+        style={'input_type': 'password'},
+        help_text='Nouveau mot de passe'
+    )
+    nouveau_mot_de_passe_confirmation = serializers.CharField(
+        required=True,
+        write_only=True,
+        style={'input_type': 'password'},
+        help_text='Confirmation du nouveau mot de passe'
+    )
+
+    def validate_telephone(self, value):
+        """Valide et normalise le numéro de téléphone."""
+        if not value or not value.strip():
+            raise serializers.ValidationError('Le numéro de téléphone est requis.')
+        
+        cleaned = re.sub(r'[\s\-]', '', value.strip())
+        
+        if not re.match(r'^\+?\d{8,15}$', cleaned):
+            raise serializers.ValidationError('Format de numéro invalide.')
+        
+        return cleaned
+
+    def validate_code(self, value):
+        """Valide le format du code."""
+        if not value or not value.strip():
+            raise serializers.ValidationError('Le code est requis.')
+        
+        cleaned = value.strip()
+        
+        if not re.match(r'^\d{5}$', cleaned):
+            raise serializers.ValidationError('Le code doit contenir exactement 5 chiffres.')
+        
+        return cleaned
+
+    def validate(self, attrs):
+        """Valide que les deux mots de passe correspondent."""
+        if attrs['nouveau_mot_de_passe'] != attrs['nouveau_mot_de_passe_confirmation']:
+            raise serializers.ValidationError({
+                'nouveau_mot_de_passe_confirmation': 'Les deux mots de passe ne correspondent pas.'
+            })
+        return attrs

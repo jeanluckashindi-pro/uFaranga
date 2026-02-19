@@ -4,6 +4,7 @@ import {
   X, ChevronDown, ChevronRight, Eye, EyeOff, Globe, Shield
 } from 'lucide-react';
 import { Card } from '../../components/common';
+import GestionProfils from './GestionProfils';
 
 const ParametresSysteme = () => {
   const [activeTab, setActiveTab] = useState('general');
@@ -60,6 +61,7 @@ const ParametresSysteme = () => {
             { id: 'apparence', label: 'Apparence', icon: Palette },
             { id: 'modules', label: 'Modules', icon: Layout },
             { id: 'navigation', label: 'Navigation', icon: Menu },
+            { id: 'profils', label: 'Gestion des Profils', icon: Shield },
           ].map(tab => (
             <button
               key={tab.id}
@@ -299,6 +301,8 @@ const ParametresSysteme = () => {
           </Card>
         </div>
       )}
+
+      {activeTab === 'profils' && <GestionProfils />}
 
       {/* Modal Nouveau/Éditer Module */}
       {showModuleModal && (
