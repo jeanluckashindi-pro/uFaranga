@@ -124,28 +124,37 @@ const UserMenu = () => {
           isOpen={showLogoutModal}
           onClose={() => !isLoggingOut && setShowLogoutModal(false)}
           title="Confirmer la déconnexion"
+          size="small"
         >
-          <div className="space-y-4">
-            <p className="text-sm text-gray-400">
-              Êtes-vous sûr de vouloir vous déconnecter ? Vous devrez vous reconnecter pour accéder à votre compte.
-            </p>
+          <div className="space-y-6">
+            {/* Icône et message */}
+            <div className="flex flex-col items-center text-center">
+              <div className="w-16 h-16 rounded-full bg-red-500/10 flex items-center justify-center mb-4">
+                <LogOut className="w-8 h-8 text-red-400" />
+              </div>
+              <p className="text-sm text-gray-400 font-sans leading-relaxed">
+                Êtes-vous sûr de vouloir vous déconnecter ?<br />
+                Vous devrez vous reconnecter pour accéder à votre compte.
+              </p>
+            </div>
 
-            <div className="flex gap-3 justify-end">
+            {/* Boutons d'action */}
+            <div className="flex gap-3">
               <button
                 onClick={() => setShowLogoutModal(false)}
                 disabled={isLoggingOut}
-                className="px-4 py-2 text-sm text-gray-400 hover:text-text transition-colors disabled:opacity-50"
+                className="flex-1 px-4 py-2.5 text-sm font-medium font-sans text-text bg-darkGray hover:bg-gray-700 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Annuler
               </button>
               <button
                 onClick={handleLogout}
                 disabled={isLoggingOut}
-                className="px-4 py-2 text-sm bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors disabled:opacity-50 flex items-center gap-2"
+                className="flex-1 px-4 py-2.5 text-sm font-medium font-sans bg-red-600 hover:bg-red-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isLoggingOut ? (
                   <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    <div className="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent"></div>
                     Déconnexion...
                   </>
                 ) : (

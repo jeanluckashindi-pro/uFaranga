@@ -33,7 +33,6 @@ function AgentLayout({ children }) {
       section: 'Compte',
       items: [
         { path: '/agent/notifications', icon: Bell, label: 'Notifications', badge: notifications },
-        { path: '/agent/parametres', icon: Settings, label: 'Paramètres', badge: null },
       ]
     }
   ];

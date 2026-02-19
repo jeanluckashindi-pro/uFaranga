@@ -57,11 +57,6 @@ export const agentNavigation = [
         label: 'Notifications', 
         badge: 'notifications'
       },
-      { 
-        path: '/agent/parametres', 
-        icon: Settings, 
-        label: 'Paramètres'
-      },
     ]
   }
 ];

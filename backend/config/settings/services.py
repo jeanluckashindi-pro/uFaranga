@@ -49,6 +49,7 @@ SERVICE_URLS = {
     'NOTIFICATION_SERVICE': get_service_url('backend.node-services', 'notification-service', 'http://localhost:3001'),
     'FRAUD_DETECTION_SERVICE': get_service_url('backend.spring-services', 'fraud-detection-service', 'http://localhost:9001'),
     'WEBSOCKET_SERVICE': get_service_url('backend.node-services', 'websocket-service', 'http://localhost:3002'),
+    'SMS_SERVICE': os.getenv('SMS_SERVICE_URL', 'https://prodev.mediabox.bi:22629/sms'),
 }
 
 # Configuration des ports
@@ -171,4 +172,15 @@ DEFAULT_LIMITS = {
     'MAX_REQUESTS_PER_MINUTE': 100,
     'MAX_DAILY_TRANSACTIONS': 50,
     'MAX_TRANSACTION_AMOUNT': 10000,
+}
+
+# Configuration SMS
+SMS_CONFIG = {
+    'SERVICE_URL': SERVICE_URLS.get('SMS_SERVICE', 'https://prodev.mediabox.bi:22629/sms'),
+    'MESSAGE_FORMAT': {
+        'phone': '',  # Numéro de téléphone (ex: "62046725")
+        'txt_message': '',  # Message texte (ex: "Bonjour Jean-luc Kashindi")
+    },
+    'TIMEOUT': 10,  # Timeout en secondes
+    'VERIFY_SSL': True,  # Vérification SSL pour HTTPS
 }

@@ -350,10 +350,6 @@ function AllModulesLayout({ children, userName = 'Super Admin' }) {
               {/* Welcome Message & System Info */}
               <div className="hidden md:block">
                 <div className="flex items-center gap-3 mb-1">
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-                    <span className="text-xs font-medium text-green-400 font-sans">Système opérationnel</span>
-                  </div>
                   <span className="text-xs text-gray-500">•</span>
                   <span className="text-xs text-gray-400 font-sans">
                     {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}

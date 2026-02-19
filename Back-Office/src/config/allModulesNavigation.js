@@ -51,11 +51,6 @@ export const allModulesNavigation = [
         label: 'Notifications Agent', 
         badge: 'notifications'
       },
-      { 
-        path: '/agent/parametres', 
-        icon: Settings, 
-        label: 'Paramètres Agent'
-      },
     ]
   },
 
@@ -76,6 +71,12 @@ export const allModulesNavigation = [
         icon: Globe, 
         label: 'Cartographie Réseau',
         description: 'Carte réseau uFaranga global'
+      },
+      { 
+        path: '/admin/couverture-mondiale', 
+        icon: Globe, 
+        label: 'Couverture Mondiale',
+        description: 'Pays, villes et expansion globale'
       },
       { 
         path: '/admin/agents', 

@@ -3,12 +3,18 @@ CRUD localisation (Pays, Province, District, Quartier, Point de service).
 Réservé aux utilisateurs SYSTEME et SUPER_ADMIN.
 """
 from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from rest_framework.filters import SearchFilter, OrderingFilter
-from drf_spectacular.utils import extend_schema_view, extend_schema
+from django_filters.rest_framework import DjangoFilterBackend
+from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
 
 from .models import Pays, Province, District, Quartier, PointDeService
+from .filters import PaysFilterSet
 from .serializers import (
     PaysSerializer,
+    PaysDetailSerializer,
+    CouverturePaysSerializer,
     ProvinceSerializer,
     DistrictSerializer,
     QuartierSerializer,
@@ -20,7 +26,10 @@ from .permissions import IsSystemeOrSuperAdmin
 @extend_schema_view(
     list=extend_schema(summary='Liste des pays', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     create=extend_schema(summary='Créer un pays', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
-    retrieve=extend_schema(summary='Détail d\'un pays', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
+    retrieve=extend_schema(
+        summary='Détail d\'un pays (avec provinces, districts, quartiers, points de service)',
+        tags=['Localisation (SYSTEME/SUPER_ADMIN)'],
+    ),
     update=extend_schema(summary='Modifier un pays', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     partial_update=extend_schema(summary='Modifier partiellement un pays', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     destroy=extend_schema(summary='Supprimer un pays', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
@@ -29,10 +38,74 @@ class PaysViewSet(viewsets.ModelViewSet):
     queryset = Pays.objects.all()
     serializer_class = PaysSerializer
     permission_classes = [IsSystemeOrSuperAdmin]
-    filter_backends = [SearchFilter, OrderingFilter]
+    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_class = PaysFilterSet
     search_fields = ['code_iso_2', 'code_iso_3', 'nom', 'nom_anglais']
-    ordering_fields = ['nom', 'code_iso_2', 'date_creation']
+    ordering_fields = ['nom', 'code_iso_2', 'date_creation', 'date_modification']
     ordering = ['nom']
+
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return PaysDetailSerializer
+        return PaysSerializer
+
+    def get_queryset(self):
+        qs = Pays.objects.all()
+        if self.action == 'retrieve':
+            qs = qs.prefetch_related(
+                'provinces',
+                'provinces__districts',
+                'provinces__districts__quartiers',
+                'provinces__districts__quartiers__points_de_service',
+            )
+        return qs
+
+    @extend_schema(
+        summary='Couverture mondiale : pays, provinces, districts, quartiers, points de vente',
+        description='Hiérarchie complète des pays couverts avec coordonnées, statistiques (actifs/inactifs) à chaque niveau. '
+                    'Chaque pays contient ses provinces → districts → quartiers → points de service.',
+        tags=['Localisation (SYSTEME/SUPER_ADMIN)'],
+        parameters=[
+            OpenApiParameter(name='pays_id', type=str, description='Filtrer par UUID d’un pays (un seul pays retourné)'),
+            OpenApiParameter(name='code_iso_2', type=str, description='Filtrer par code ISO 2 (ex. BI, RW)'),
+            OpenApiParameter(name='nom', type=str, description='Filtrer par nom du pays (contient)'),
+            OpenApiParameter(name='autorise_systeme', type=bool, description='Filtrer par autorise_systeme (true/false). Si absent : tous les pays.'),
+            OpenApiParameter(name='est_actif', type=bool, description='Filtrer par est_actif (true/false). Si absent : tous les pays.'),
+        ],
+    )
+    @action(detail=False, url_path='couverture', methods=['get'])
+    def couverture(self, request):
+        params = request.query_params
+        qs = Pays.objects.all()
+
+        # Filtres (appliqués seulement si le paramètre est fourni)
+        if params.get('pays_id'):
+            qs = qs.filter(id=params['pays_id'])
+        if params.get('code_iso_2'):
+            qs = qs.filter(code_iso_2__iexact=params['code_iso_2'].strip())
+        if params.get('nom'):
+            qs = qs.filter(nom__icontains=params['nom'].strip())
+        if 'autorise_systeme' in params:
+            val = params.get('autorise_systeme', '').lower()
+            if val in ('true', '1', 'yes'):
+                qs = qs.filter(autorise_systeme=True)
+            elif val in ('false', '0', 'no'):
+                qs = qs.filter(autorise_systeme=False)
+        if 'est_actif' in params:
+            val = params.get('est_actif', '').lower()
+            if val in ('true', '1', 'yes'):
+                qs = qs.filter(est_actif=True)
+            elif val in ('false', '0', 'no'):
+                qs = qs.filter(est_actif=False)
+
+        qs = qs.prefetch_related(
+            'provinces',
+            'provinces__districts',
+            'provinces__districts__quartiers',
+            'provinces__districts__quartiers__points_de_service',
+        ).order_by('nom')
+        serializer = CouverturePaysSerializer(qs, many=True)
+        return Response(serializer.data)
 
 
 @extend_schema_view(

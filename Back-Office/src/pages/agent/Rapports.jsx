@@ -8,7 +8,7 @@ import { Menu } from 'primereact/menu';
 import { Dialog } from 'primereact/dialog';
 import { Toast } from 'primereact/toast';
 import {
-  LineChart, Line, BarChart, Bar,
+  LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend
 } from 'recharts';
 import {

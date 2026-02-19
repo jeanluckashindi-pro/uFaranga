@@ -18,11 +18,15 @@ import AgentFloat from './pages/agent/Float';
 import AgentRapports from './pages/agent/Rapports';
 import AgentCommissions from './pages/agent/Commissions';
 import AgentNotifications from './pages/agent/Notifications';
-import AgentParametres from './pages/agent/Parametres';
 
 // Admin System Pages
 import AdminDashboard from './pages/admin/DashboardPro';
 import CartographieReseau from './pages/admin/CartographieReseau';
+import CouvertureMondiale from './pages/admin/CouvertureMondiale';
+import GestionPays from './pages/admin/GestionPays';
+import DetailsPays from './pages/admin/DetailsPays';
+import CarteMondiale from './pages/admin/CarteMondiale';
+import CartographieCouverture from './pages/admin/CartographieCouverture';
 import GestionAgents from './pages/admin/GestionAgents';
 import GestionClients from './pages/admin/GestionClients';
 import ToutesTransactions from './pages/admin/ToutesTransactions';
@@ -69,7 +73,6 @@ function App() {
                       <Route path="/agent/rapports" element={<ProtectedRoute module="agent"><AgentRapports /></ProtectedRoute>} />
                       <Route path="/agent/commissions" element={<ProtectedRoute module="agent"><AgentCommissions /></ProtectedRoute>} />
                       <Route path="/agent/notifications" element={<ProtectedRoute module="agent"><AgentNotifications /></ProtectedRoute>} />
-                      <Route path="/agent/parametres" element={<ProtectedRoute module="agent"><AgentParametres /></ProtectedRoute>} />
 
                       {/* Profile Route - Accessible à tous */}
                       <Route path="/profile" element={<Profile />} />
@@ -78,6 +81,11 @@ function App() {
                       {/* Admin System Routes */}
                       <Route path="/admin/dashboard" element={<ProtectedRoute module="admin_system"><AdminDashboard /></ProtectedRoute>} />
                       <Route path="/admin/cartographie" element={<ProtectedRoute module="admin_system"><CartographieReseau /></ProtectedRoute>} />
+                      <Route path="/admin/couverture-mondiale" element={<ProtectedRoute module="admin_system"><CouvertureMondiale /></ProtectedRoute>} />
+                      <Route path="/admin/gestion-pays" element={<ProtectedRoute module="admin_system"><GestionPays /></ProtectedRoute>} />
+                      <Route path="/admin/pays/:id" element={<ProtectedRoute module="admin_system"><DetailsPays /></ProtectedRoute>} />
+                      <Route path="/admin/carte-mondiale" element={<ProtectedRoute module="admin_system"><CarteMondiale /></ProtectedRoute>} />
+                      <Route path="/admin/cartographie-couverture" element={<ProtectedRoute module="admin_system"><CartographieCouverture /></ProtectedRoute>} />
                       <Route path="/admin/agents" element={<ProtectedRoute module="admin_system"><GestionAgents /></ProtectedRoute>} />
                       <Route path="/admin/clients" element={<ProtectedRoute module="admin_system"><GestionClients /></ProtectedRoute>} />
                       <Route path="/admin/transactions" element={<ProtectedRoute module="admin_system"><ToutesTransactions /></ProtectedRoute>} />
