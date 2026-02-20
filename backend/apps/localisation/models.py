@@ -34,6 +34,13 @@ class Pays(models.Model):
     
     latitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     longitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
+    
+    # Statistiques
+    nombre_agents = models.IntegerField(default=0, help_text='Nombre total d\'agents dans ce pays')
+    nombre_utilisateurs = models.IntegerField(default=0, help_text='Nombre total d\'utilisateurs dans ce pays')
+    nombre_agents_actifs = models.IntegerField(default=0, help_text='Nombre d\'agents actifs dans ce pays')
+    nombre_utilisateurs_actifs = models.IntegerField(default=0, help_text='Nombre d\'utilisateurs actifs dans ce pays')
+    
     autorise_systeme = models.BooleanField(default=True)
     est_actif = models.BooleanField(default=True)
     date_creation = models.DateTimeField(default=timezone.now)
@@ -62,6 +69,13 @@ class Province(models.Model):
     nom = models.CharField(max_length=100)
     latitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     longitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
+    
+    # Statistiques
+    nombre_agents = models.IntegerField(default=0, help_text='Nombre total d\'agents dans cette province')
+    nombre_utilisateurs = models.IntegerField(default=0, help_text='Nombre total d\'utilisateurs dans cette province')
+    nombre_agents_actifs = models.IntegerField(default=0, help_text='Nombre d\'agents actifs dans cette province')
+    nombre_utilisateurs_actifs = models.IntegerField(default=0, help_text='Nombre d\'utilisateurs actifs dans cette province')
+    
     autorise_systeme = models.BooleanField(default=True)
     est_actif = models.BooleanField(default=True)
     date_creation = models.DateTimeField(default=timezone.now)
@@ -86,6 +100,13 @@ class District(models.Model):
     nom = models.CharField(max_length=100)
     latitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     longitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
+    
+    # Statistiques
+    nombre_agents = models.IntegerField(default=0, help_text='Nombre total d\'agents dans ce district')
+    nombre_utilisateurs = models.IntegerField(default=0, help_text='Nombre total d\'utilisateurs dans ce district')
+    nombre_agents_actifs = models.IntegerField(default=0, help_text='Nombre d\'agents actifs dans ce district')
+    nombre_utilisateurs_actifs = models.IntegerField(default=0, help_text='Nombre d\'utilisateurs actifs dans ce district')
+    
     autorise_systeme = models.BooleanField(default=True)
     est_actif = models.BooleanField(default=True)
     date_creation = models.DateTimeField(default=timezone.now)
@@ -110,6 +131,13 @@ class Quartier(models.Model):
     nom = models.CharField(max_length=100)
     latitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     longitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
+    
+    # Statistiques
+    nombre_agents = models.IntegerField(default=0, help_text='Nombre total d\'agents dans ce quartier')
+    nombre_utilisateurs = models.IntegerField(default=0, help_text='Nombre total d\'utilisateurs dans ce quartier')
+    nombre_agents_actifs = models.IntegerField(default=0, help_text='Nombre d\'agents actifs dans ce quartier')
+    nombre_utilisateurs_actifs = models.IntegerField(default=0, help_text='Nombre d\'utilisateurs actifs dans ce quartier')
+    
     autorise_systeme = models.BooleanField(default=True)
     est_actif = models.BooleanField(default=True)
     date_creation = models.DateTimeField(default=timezone.now)
@@ -149,6 +177,13 @@ class PointDeService(models.Model):
     latitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     adresse_complementaire = models.TextField(blank=True)
+    
+    # Statistiques
+    nombre_agents = models.IntegerField(default=0, help_text='Nombre total d\'agents à ce point de service')
+    nombre_utilisateurs = models.IntegerField(default=0, help_text='Nombre total d\'utilisateurs à ce point de service')
+    nombre_agents_actifs = models.IntegerField(default=0, help_text='Nombre d\'agents actifs à ce point de service')
+    nombre_utilisateurs_actifs = models.IntegerField(default=0, help_text='Nombre d\'utilisateurs actifs à ce point de service')
+    
     autorise_systeme = models.BooleanField(default=True)
     est_actif = models.BooleanField(default=True)
     date_creation = models.DateTimeField(default=timezone.now)
