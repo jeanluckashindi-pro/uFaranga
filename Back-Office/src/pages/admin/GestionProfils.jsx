@@ -1,33 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import { 
+  Users, UserCheck, Shield, Building2, 
+  Zap, Crown, Globe, Filter, Search, 
+  Settings, Plus, Download
+} from 'lucide-react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-import { Tag } from 'primereact/tag';
-import { Dialog } from 'primereact/dialog';
-import { Skeleton } from '../../components/common';
-import { 
-  Search, Download, Plus, Edit, Trash2, Eye, 
-  Users, UserCheck, Shield, Globe, Phone, Mail, Filter, Settings
-} from 'lucide-react';
-import apiService from '../../services/api';
+import Skeleton from '../../components/common/Skeleton';
 
 const GestionProfils = () => {
+  const [selectedProfile, setSelectedProfile] = useState(null);
   const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [initialLoad, setInitialLoad] = useState(true);
   const [totalRecords, setTotalRecords] = useState(0);
   const [globalFilter, setGlobalFilter] = useState('');
-  
-  // Statistiques
-  const [stats, setStats] = useState({
-    total: 0,
-    actifs: 0,
-    kycValide: 0,
-    pays: 0
-  });
-  
-  // Filtres
+  const [showDialog, setShowDialog] = useState(false);
+  const [selectedUser, setSelectedUser] = useState(null);
+  const [dialogMode, setDialogMode] = useState('view');
   const [filters, setFilters] = useState({
     type_utilisateur: '',
     statut: '',
@@ -36,20 +29,21 @@ const GestionProfils = () => {
     est_actif: '',
     telephone_verifie: ''
   });
-
-  // Pagination
   const [lazyParams, setLazyParams] = useState({
     first: 0,
     rows: 10,
     page: 0
   });
-
-  // Dialog
-  const [showDialog, setShowDialog] = useState(false);
-  const [selectedUser, setSelectedUser] = useState(null);
-  const [dialogMode, setDialogMode] = useState('view');
-
-  // Options pour les filtres
+  
+  // Stats mock data - replace with actual API call
+  const stats = {
+    total: '18,527',
+    actifs: '16,234',
+    kycValide: '12,890',
+    pays: '45'
+  };
+  
+  // Dropdown options
   const typeOptions = [
     { label: 'Tous', value: '' },
     { label: 'Client', value: 'CLIENT' },
@@ -57,231 +51,100 @@ const GestionProfils = () => {
     { label: 'Marchand', value: 'MARCHAND' },
     { label: 'Admin', value: 'ADMIN' }
   ];
-
+  
   const statutOptions = [
     { label: 'Tous', value: '' },
     { label: 'Actif', value: 'ACTIF' },
-    { label: 'Suspendu', value: 'SUSPENDU' },
-    { label: 'Bloqué', value: 'BLOQUE' }
+    { label: 'Inactif', value: 'INACTIF' },
+    { label: 'Suspendu', value: 'SUSPENDU' }
   ];
-
+  
   const kycOptions = [
     { label: 'Tous', value: '' },
-    { label: 'Niveau 0', value: '0' },
     { label: 'Niveau 1', value: '1' },
     { label: 'Niveau 2', value: '2' },
     { label: 'Niveau 3', value: '3' }
   ];
-
-  const booleanOptions = [
-    { label: 'Tous', value: '' },
-    { label: 'Oui', value: 'true' },
-    { label: 'Non', value: 'false' }
-  ];
-
-  // Charger les statistiques
-  const loadStats = async () => {
-    try {
-      // Total utilisateurs
-      const totalResponse = await apiService.getUsers({ page_size: 1 });
-      const total = totalResponse.count || 0;
-
-      // Utilisateurs actifs
-      const actifsResponse = await apiService.getUsers({ statut: 'ACTIF', page_size: 1 });
-      const actifs = actifsResponse.count || 0;
-
-      // KYC validé (niveau >= 2)
-      const kycResponse = await apiService.getUsers({ niveau_kyc: 2, page_size: 1 });
-      const kycResponse3 = await apiService.getUsers({ niveau_kyc: 3, page_size: 1 });
-      const kycValide = (kycResponse.count || 0) + (kycResponse3.count || 0);
-
-      // Nombre de pays (on prend un échantillon pour compter)
-      const paysResponse = await apiService.getUsers({ page_size: 100 });
-      const pays = new Set(paysResponse.results?.map(u => u.pays_residence).filter(Boolean)).size;
-
-      setStats({ total, actifs, kycValide, pays });
-    } catch (error) {
-      console.error('Erreur lors du chargement des statistiques:', error);
-    }
-  };
-
-  // Charger les utilisateurs
-  const loadUsers = async () => {
-    setLoading(true);
-    try {
-      const params = {
-        page: lazyParams.page + 1,
-        page_size: lazyParams.rows
-      };
-
-      // Ajouter les filtres actifs
-      if (filters.type_utilisateur) params.type_utilisateur = filters.type_utilisateur;
-      if (filters.statut) params.statut = filters.statut;
-      if (filters.niveau_kyc) params.niveau_kyc = filters.niveau_kyc;
-      if (filters.pays_code) params.pays_code = filters.pays_code;
-      if (filters.est_actif) params.est_actif = filters.est_actif;
-      if (filters.telephone_verifie) params.telephone_verifie = filters.telephone_verifie;
-      if (globalFilter) params.search = globalFilter;
-
-      const response = await apiService.getUsers(params);
-      
-      setUsers(response.results || []);
-      setTotalRecords(response.count || 0);
-      setInitialLoad(false);
-    } catch (error) {
-      console.error('Erreur lors du chargement des utilisateurs:', error);
-      setUsers([]);
-      setTotalRecords(0);
-      setInitialLoad(false);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadStats();
-  }, []);
-
-  useEffect(() => {
-    loadUsers();
-  }, [lazyParams, filters, globalFilter]);
-
-  // Calculer les statistiques - maintenant chargées depuis l'API
+  
+  // Mock functions - replace with actual implementations
   const onPage = (event) => {
     setLazyParams(event);
   };
-
-  // Templates pour les colonnes
+  
+  const handleExport = () => {
+    console.log('Export users');
+  };
+  
+  const formatPhoneNumber = (phone) => {
+    return phone || '-';
+  };
+  
+  // Body templates
+  const idBodyTemplate = (rowData) => {
+    return <span className="text-sm text-gray-600">#{rowData.id}</span>;
+  };
+  
+  const phoneBodyTemplate = (rowData) => {
+    return <span className="text-sm">{formatPhoneNumber(rowData.numero_telephone)}</span>;
+  };
+  
+  const dateBodyTemplate = (rowData) => {
+    return rowData.date_naissance ? new Date(rowData.date_naissance).toLocaleDateString('fr-FR') : '-';
+  };
+  
+  const nationaliteBodyTemplate = (rowData) => {
+    return rowData.nationalite_details?.nom || '-';
+  };
+  
+  const paysResidenceBodyTemplate = (rowData) => {
+    return rowData.pays_residence_details?.nom || '-';
+  };
+  
+  const adresseBodyTemplate = (rowData) => {
+    const parts = [rowData.avenue, rowData.quartier, rowData.commune, rowData.ville].filter(Boolean);
+    return parts.join(', ') || '-';
+  };
+  
   const typeBodyTemplate = (rowData) => {
-    const config = {
-      CLIENT: { label: 'Client', severity: 'info' },
-      AGENT: { label: 'Agent', severity: 'success' },
-      MARCHAND: { label: 'Marchand', severity: 'warning' },
-      ADMIN: { label: 'Admin', severity: 'danger' }
+    const colors = {
+      CLIENT: 'bg-blue-100 text-blue-700',
+      AGENT: 'bg-green-100 text-green-700',
+      MARCHAND: 'bg-orange-100 text-orange-700',
+      ADMIN: 'bg-red-100 text-red-700'
     };
-    const { label, severity } = config[rowData.type_utilisateur] || { label: rowData.type_utilisateur, severity: 'secondary' };
-    return <Tag value={label} severity={severity} />;
+    return (
+      <span className={`px-2 py-1 rounded text-xs font-medium ${colors[rowData.type_utilisateur] || 'bg-gray-100 text-gray-700'}`}>
+        {rowData.type_utilisateur}
+      </span>
+    );
   };
-
+  
   const statutBodyTemplate = (rowData) => {
-    const config = {
-      ACTIF: { label: 'Actif', severity: 'success' },
-      SUSPENDU: { label: 'Suspendu', severity: 'warning' },
-      BLOQUE: { label: 'Bloqué', severity: 'danger' }
+    const colors = {
+      ACTIF: 'bg-green-100 text-green-700',
+      INACTIF: 'bg-gray-100 text-gray-700',
+      SUSPENDU: 'bg-red-100 text-red-700'
     };
-    const { label, severity } = config[rowData.statut] || { label: rowData.statut, severity: 'secondary' };
-    return <Tag value={label} severity={severity} />;
+    return (
+      <span className={`px-2 py-1 rounded text-xs font-medium ${colors[rowData.statut] || 'bg-gray-100 text-gray-700'}`}>
+        {rowData.statut}
+      </span>
+    );
   };
-
+  
   const kycBodyTemplate = (rowData) => {
-    return <Tag value={`Niveau ${rowData.niveau_kyc}`} severity="info" />;
+    return <span className="text-sm">Niveau {rowData.niveau_kyc || 0}</span>;
   };
-
+  
   const verifiedBodyTemplate = (rowData) => {
     return (
-      <div className="flex gap-2">
-        {rowData.telephone_verifie && (
-          <Tag icon={<Phone className="w-3 h-3 mr-1" />} value="Tél" severity="success" />
-        )}
-        {rowData.courriel_verifie && (
-          <Tag icon={<Mail className="w-3 h-3 mr-1" />} value="Email" severity="success" />
-        )}
+      <div className="flex gap-1">
+        {rowData.telephone_verifie && <span className="text-xs text-green-600">✓ Tel</span>}
+        {rowData.courriel_verifie && <span className="text-xs text-green-600">✓ Email</span>}
       </div>
     );
   };
-
-  const nationaliteBodyTemplate = (rowData) => {
-    if (!rowData.nationalite_details) return <span className="text-gray-400">-</span>;
-    return (
-      <div className="flex items-center gap-2">
-        <span className="text-sm">{rowData.nationalite_details.nom}</span>
-        <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full font-medium">
-          {rowData.nationalite_details.code_iso_2}
-        </span>
-      </div>
-    );
-  };
-
-  const paysResidenceBodyTemplate = (rowData) => {
-    if (!rowData.pays_residence_details) return <span className="text-gray-400">-</span>;
-    return (
-      <div className="flex flex-col">
-        <span className="font-medium text-sm">{rowData.pays_residence_details.nom}</span>
-        <span className="text-xs text-gray-400">{rowData.pays_residence_details.continent}</span>
-      </div>
-    );
-  };
-
-  const adresseBodyTemplate = (rowData) => {
-    const parts = [rowData.quartier, rowData.commune, rowData.ville].filter(Boolean);
-    if (parts.length === 0) return <span className="text-gray-400">-</span>;
-    return (
-      <div className="flex flex-col">
-        <span className="text-sm">{parts.join(', ')}</span>
-        {rowData.province && <span className="text-xs text-gray-400">{rowData.province}</span>}
-      </div>
-    );
-  };
-
-  const dateBodyTemplate = (rowData) => {
-    if (!rowData.date_naissance) return <span className="text-gray-400">-</span>;
-    const date = new Date(rowData.date_naissance);
-    return (
-      <span className="text-sm">{date.toLocaleDateString('fr-FR')}</span>
-    );
-  };
-
-  const idBodyTemplate = (rowData) => {
-    return (
-      <button
-        onClick={() => {
-          navigator.clipboard.writeText(rowData.id);
-        }}
-        className="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors"
-        title={`Copier l'ID: ${rowData.id}`}
-      >
-        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-        </svg>
-      </button>
-    );
-  };
-
-  const formatPhoneNumber = (phone) => {
-    if (!phone) return '-';
-    const cleaned = phone.replace(/\D/g, '');
-    if (cleaned.length === 0) return phone;
-    
-    if (phone.startsWith('+')) {
-      const countryCode = cleaned.substring(0, 3);
-      const rest = cleaned.substring(3);
-      const formatted = rest.match(/.{1,2}/g)?.join(' ') || rest;
-      return `+${countryCode} ${formatted}`;
-    }
-    
-    return cleaned.match(/.{1,2}/g)?.join(' ') || phone;
-  };
-
-  const phoneBodyTemplate = (rowData) => {
-    const formatted = formatPhoneNumber(rowData.numero_telephone);
-    return (
-      <div className="flex items-center gap-2">
-        <span className="font-mono text-sm">{formatted}</span>
-        <button
-          onClick={() => {
-            navigator.clipboard.writeText(rowData.numero_telephone);
-          }}
-          className="p-1.5 bg-primary/10 text-primary rounded hover:bg-primary/20 transition-colors"
-          title="Copier le numéro"
-        >
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-          </svg>
-        </button>
-      </div>
-    );
-  };
-
+  
   const actionsBodyTemplate = (rowData) => {
     return (
       <div className="flex gap-2">
@@ -291,47 +154,171 @@ const GestionProfils = () => {
             setDialogMode('view');
             setShowDialog(true);
           }}
-          className="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors"
-          title="Voir"
+          className="p-2 text-primary hover:bg-primary/10 rounded"
         >
-          <Eye className="w-4 h-4" />
-        </button>
-        <button
-          onClick={() => {
-            setSelectedUser(rowData);
-            setDialogMode('edit');
-            setShowDialog(true);
-          }}
-          className="p-2 bg-secondary/10 text-secondary rounded-lg hover:bg-secondary/20 transition-colors"
-          title="Modifier"
-        >
-          <Edit className="w-4 h-4" />
-        </button>
-        <button
-          onClick={() => handleDelete(rowData)}
-          className="p-2 bg-danger/10 text-danger rounded-lg hover:bg-danger/20 transition-colors"
-          title="Supprimer"
-        >
-          <Trash2 className="w-4 h-4" />
+          <Search className="w-4 h-4" />
         </button>
       </div>
     );
   };
-
-  const handleDelete = async (user) => {
-    if (confirm(`Êtes-vous sûr de vouloir supprimer l'utilisateur ${user.nom_complet} ?`)) {
-      try {
-        await apiService.deleteUser(user.id);
-        loadUsers();
-      } catch (error) {
-        console.error('Erreur lors de la suppression:', error);
+  
+  // Profils disponibles avec leurs caractéristiques
+  const profiles = [
+    {
+      id: 'client-standard',
+      name: 'Client Standard',
+      icon: Users,
+      gradient: 'from-blue-500 to-blue-600',
+      bgLight: 'bg-blue-50',
+      textColor: 'text-blue-600',
+      description: 'Profil de base pour les utilisateurs particuliers',
+      features: [
+        'Envoi et réception d\'argent',
+        'Paiement de factures',
+        'Historique des transactions',
+        'Support client 24/7'
+      ],
+      limits: {
+        daily: '5,000 €',
+        monthly: '20,000 €',
+        kyc: 'Niveau 1'
+      },
+      stats: {
+        users: '12,450',
+        growth: '+15%'
+      }
+    },
+    {
+      id: 'client-premium',
+      name: 'Client Premium',
+      icon: Crown,
+      gradient: 'from-purple-500 to-purple-600',
+      bgLight: 'bg-purple-50',
+      textColor: 'text-purple-600',
+      badge: 'Populaire',
+      description: 'Profil avancé avec avantages exclusifs',
+      features: [
+        'Toutes les fonctionnalités Standard',
+        'Frais réduits de 30%',
+        'Virements internationaux',
+        'Gestionnaire de compte dédié',
+        'Carte virtuelle premium'
+      ],
+      limits: {
+        daily: '50,000 €',
+        monthly: '200,000 €',
+        kyc: 'Niveau 2'
+      },
+      stats: {
+        users: '3,280',
+        growth: '+28%'
+      }
+    },
+    {
+      id: 'agent',
+      name: 'Agent',
+      icon: UserCheck,
+      gradient: 'from-green-500 to-green-600',
+      bgLight: 'bg-green-50',
+      textColor: 'text-green-600',
+      description: 'Profil pour les agents de distribution',
+      features: [
+        'Dépôt et retrait d\'espèces',
+        'Gestion de la trésorerie',
+        'Commissions automatiques',
+        'Tableau de bord agent',
+        'Rapports détaillés'
+      ],
+      limits: {
+        daily: '100,000 €',
+        monthly: 'Illimité',
+        kyc: 'Niveau 3'
+      },
+      stats: {
+        users: '1,850',
+        growth: '+12%'
+      }
+    },
+    {
+      id: 'marchand',
+      name: 'Marchand',
+      icon: Building2,
+      gradient: 'from-orange-500 to-orange-600',
+      bgLight: 'bg-orange-50',
+      textColor: 'text-orange-600',
+      description: 'Profil pour les commerçants et entreprises',
+      features: [
+        'Acceptation de paiements',
+        'Point de vente (POS)',
+        'Facturation automatique',
+        'API d\'intégration',
+        'Analytiques avancées',
+        'Multi-utilisateurs'
+      ],
+      limits: {
+        daily: 'Illimité',
+        monthly: 'Illimité',
+        kyc: 'Niveau 3'
+      },
+      stats: {
+        users: '890',
+        growth: '+35%'
+      }
+    },
+    {
+      id: 'admin',
+      name: 'Administrateur',
+      icon: Shield,
+      gradient: 'from-red-500 to-red-600',
+      bgLight: 'bg-red-50',
+      textColor: 'text-red-600',
+      badge: 'Accès complet',
+      description: 'Profil avec tous les privilèges système',
+      features: [
+        'Gestion complète du système',
+        'Configuration des paramètres',
+        'Gestion des utilisateurs',
+        'Accès aux logs et audits',
+        'Contrôle des permissions',
+        'Rapports globaux'
+      ],
+      limits: {
+        daily: 'Illimité',
+        monthly: 'Illimité',
+        kyc: 'Niveau 3'
+      },
+      stats: {
+        users: '45',
+        growth: '+5%'
+      }
+    },
+    {
+      id: 'tech',
+      name: 'Technique',
+      icon: Zap,
+      gradient: 'from-yellow-500 to-yellow-600',
+      bgLight: 'bg-yellow-50',
+      textColor: 'text-yellow-600',
+      description: 'Profil pour l\'équipe technique',
+      features: [
+        'Monitoring système',
+        'Gestion des API',
+        'Configuration serveurs',
+        'Logs et debugging',
+        'Maintenance système',
+        'Webhooks et intégrations'
+      ],
+      limits: {
+        daily: 'N/A',
+        monthly: 'N/A',
+        kyc: 'Niveau 3'
+      },
+      stats: {
+        users: '12',
+        growth: '+0%'
       }
     }
-  };
-
-  const handleExport = () => {
-    console.log('Export des données');
-  };
+  ];
 
   return (
     <div className="p-6 space-y-6">
