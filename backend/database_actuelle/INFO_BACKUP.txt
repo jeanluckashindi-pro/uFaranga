@@ -1,0 +1,12 @@
+Ce dossier contient la structure mise à jour de la base de données PostgreSQL.
+
+Fichiers:
+- ufaranga_structure_updated_20260220.sql : Structure complète avec configuration dynamique
+- README.md : Documentation complète
+
+Pour créer la base:
+psql -U postgres -d ufaranga -f ufaranga_structure_updated_20260220.sql
+
+Pour réinitialiser (ATTENTION: Supprime toutes les données!):
+psql -U postgres -d ufaranga -f ../scripts/reset_database.sql
+psql -U postgres -d ufaranga -f ufaranga_structure_updated_20260220.sql

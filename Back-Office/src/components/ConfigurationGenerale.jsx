@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import { 
   Settings, Shield, Users, Globe, Bell, Lock, 
   Mail, Phone, FileText, Database, CreditCard, 
-  ChevronRight, Palette, Menu, Layout
+  ChevronRight, Palette, Menu, Layout, DollarSign, 
+  TrendingUp, Receipt
 } from 'lucide-react';
 
 const ConfigurationGenerale = () => {
@@ -75,6 +76,29 @@ const ConfigurationGenerale = () => {
           description: 'Configuration des menus et navigation',
           icon: Menu,
           path: '/admin/parametres/navigation'
+        }
+      ]
+    },
+    {
+      title: 'Finance & Tarification',
+      items: [
+        {
+          title: 'Taux de change',
+          description: 'Configuration des taux de change des devises',
+          icon: TrendingUp,
+          path: '/admin/parametres/taux-change'
+        },
+        {
+          title: 'Tarifs d\'opérations',
+          description: 'Visualiser et configurer les frais de transactions',
+          icon: Receipt,
+          path: '/admin/parametres/tarifs'
+        },
+        {
+          title: 'Commissions',
+          description: 'Gestion des commissions agents et marchands',
+          icon: DollarSign,
+          path: '/admin/gestion-commissions'
         }
       ]
     },
