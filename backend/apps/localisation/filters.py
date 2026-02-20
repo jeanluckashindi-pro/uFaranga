@@ -12,9 +12,11 @@ class PaysFilterSet(django_filters.FilterSet):
     code_iso_3 = django_filters.CharFilter(lookup_expr='iexact', label='Code ISO 3 (exact)')
     nom = django_filters.CharFilter(lookup_expr='icontains', label='Nom (contient)')
     nom_anglais = django_filters.CharFilter(lookup_expr='icontains', label='Nom anglais (contient)')
+    continent = django_filters.CharFilter(lookup_expr='iexact', label='Continent (exact)')
+    sous_region = django_filters.CharFilter(lookup_expr='icontains', label='Sous-région (contient)')
     est_actif = django_filters.BooleanFilter(label='Actif')
     autorise_systeme = django_filters.BooleanFilter(label='Autorisé dans le système')
 
     class Meta:
         model = Pays
-        fields = ['code_iso_2', 'code_iso_3', 'nom', 'nom_anglais', 'est_actif', 'autorise_systeme']
+        fields = ['code_iso_2', 'code_iso_3', 'nom', 'nom_anglais', 'continent', 'sous_region', 'est_actif', 'autorise_systeme']

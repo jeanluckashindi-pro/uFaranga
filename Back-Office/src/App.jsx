@@ -37,6 +37,7 @@ import Reporting from './pages/admin/Reporting';
 import ParametresSysteme from './pages/admin/ParametresSysteme';
 import GestionCommissions from './pages/admin/GestionCommissions';
 import GestionProfils from './pages/admin/GestionProfils';
+import CartographieUtilisateurs from './pages/admin/CartographieUtilisateurs';
 
 // Tech Pages
 import CartographieAgents from './pages/tech/CartographieAgents';
@@ -90,6 +91,7 @@ function App() {
                       <Route path="/admin/agents" element={<ProtectedRoute module="admin_system"><GestionAgents /></ProtectedRoute>} />
                       <Route path="/admin/clients" element={<ProtectedRoute module="admin_system"><GestionClients /></ProtectedRoute>} />
                       <Route path="/admin/profils" element={<ProtectedRoute module="admin_system"><GestionProfils /></ProtectedRoute>} />
+                      <Route path="/admin/cartographie-utilisateurs" element={<ProtectedRoute module="admin_system"><CartographieUtilisateurs /></ProtectedRoute>} />
                       <Route path="/admin/transactions" element={<ProtectedRoute module="admin_system"><ToutesTransactions /></ProtectedRoute>} />
                       <Route path="/admin/commissions" element={<ProtectedRoute module="admin_system"><GestionCommissions /></ProtectedRoute>} />
                       <Route path="/admin/float-global" element={<ProtectedRoute module="admin_system"><FloatGlobal /></ProtectedRoute>} />

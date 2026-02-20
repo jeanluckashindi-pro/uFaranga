@@ -3672,3 +3672,248 @@ INFO 2026-02-20 05:08:39,922 basehttp 2400 1748 "GET /api/v1/identite/niveaux-ky
 INFO 2026-02-20 05:08:39,937 basehttp 2400 26216 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
 INFO 2026-02-20 05:08:40,001 basehttp 2400 26216 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
 INFO 2026-02-20 05:08:40,060 basehttp 2400 26216 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:09:17,051 basehttp 2400 26216 "GET /api/v1/localisation/provinces/ HTTP/1.1" 200 8021
+INFO 2026-02-20 05:09:17,111 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=2 HTTP/1.1" 200 7989
+INFO 2026-02-20 05:09:17,176 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=3 HTTP/1.1" 200 7926
+INFO 2026-02-20 05:09:17,238 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=4 HTTP/1.1" 200 8090
+INFO 2026-02-20 05:09:17,303 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=5 HTTP/1.1" 200 7977
+INFO 2026-02-20 05:09:17,363 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=6 HTTP/1.1" 200 8006
+INFO 2026-02-20 05:09:17,430 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=7 HTTP/1.1" 200 8002
+INFO 2026-02-20 05:09:17,493 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=8 HTTP/1.1" 200 8056
+INFO 2026-02-20 05:09:17,558 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=9 HTTP/1.1" 200 8004
+INFO 2026-02-20 05:09:17,619 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=10 HTTP/1.1" 200 8124
+INFO 2026-02-20 05:09:17,682 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=11 HTTP/1.1" 200 7971
+INFO 2026-02-20 05:09:17,742 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=12 HTTP/1.1" 200 7943
+INFO 2026-02-20 05:09:17,805 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=13 HTTP/1.1" 200 8138
+INFO 2026-02-20 05:09:17,870 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=14 HTTP/1.1" 200 7952
+INFO 2026-02-20 05:09:17,941 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=15 HTTP/1.1" 200 7964
+INFO 2026-02-20 05:09:18,011 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=16 HTTP/1.1" 200 7989
+INFO 2026-02-20 05:09:18,078 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=17 HTTP/1.1" 200 8005
+INFO 2026-02-20 05:09:18,141 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=18 HTTP/1.1" 200 7992
+INFO 2026-02-20 05:09:18,210 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=19 HTTP/1.1" 200 7969
+INFO 2026-02-20 05:09:18,272 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=20 HTTP/1.1" 200 7931
+INFO 2026-02-20 05:09:18,339 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=21 HTTP/1.1" 200 8100
+INFO 2026-02-20 05:09:18,405 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=22 HTTP/1.1" 200 8112
+INFO 2026-02-20 05:09:18,474 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=23 HTTP/1.1" 200 8026
+INFO 2026-02-20 05:09:18,551 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=24 HTTP/1.1" 200 7937
+INFO 2026-02-20 05:09:18,614 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=25 HTTP/1.1" 200 7926
+INFO 2026-02-20 05:09:18,678 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=26 HTTP/1.1" 200 7966
+INFO 2026-02-20 05:09:18,743 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=27 HTTP/1.1" 200 8303
+INFO 2026-02-20 05:09:18,802 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=28 HTTP/1.1" 200 8553
+INFO 2026-02-20 05:09:18,866 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=29 HTTP/1.1" 200 8288
+INFO 2026-02-20 05:09:18,929 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=30 HTTP/1.1" 200 8071
+INFO 2026-02-20 05:09:18,993 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=31 HTTP/1.1" 200 8095
+INFO 2026-02-20 05:09:19,054 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=32 HTTP/1.1" 200 7988
+INFO 2026-02-20 05:09:19,118 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=33 HTTP/1.1" 200 8064
+INFO 2026-02-20 05:09:19,184 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=34 HTTP/1.1" 200 8076
+INFO 2026-02-20 05:09:19,245 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=35 HTTP/1.1" 200 7999
+INFO 2026-02-20 05:09:19,308 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=36 HTTP/1.1" 200 7977
+INFO 2026-02-20 05:09:19,373 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=37 HTTP/1.1" 200 7932
+INFO 2026-02-20 05:09:19,435 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=38 HTTP/1.1" 200 7966
+INFO 2026-02-20 05:09:19,499 basehttp 2400 26216 "GET /api/v1/localisation/provinces/?page=39 HTTP/1.1" 200 4870
+INFO 2026-02-20 05:10:01,773 basehttp 2400 26216 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:10:01,805 basehttp 2400 1748 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:10:01,831 basehttp 2400 14096 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:10:01,858 basehttp 2400 13280 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:10:01,892 basehttp 2400 26216 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:10:01,919 basehttp 2400 1748 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:10:01,940 basehttp 2400 14096 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:10:01,965 basehttp 2400 13280 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:10:01,986 basehttp 2400 8868 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:10:02,059 basehttp 2400 13280 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:10:02,074 basehttp 2400 8868 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:10:02,137 basehttp 2400 13280 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:10:08,295 basehttp 2400 13280 "GET /api/v1/localisation/provinces/ HTTP/1.1" 200 8021
+INFO 2026-02-20 05:10:08,368 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=2 HTTP/1.1" 200 7989
+INFO 2026-02-20 05:10:08,436 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=3 HTTP/1.1" 200 7926
+INFO 2026-02-20 05:10:08,498 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=4 HTTP/1.1" 200 8090
+INFO 2026-02-20 05:10:08,560 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=5 HTTP/1.1" 200 7977
+INFO 2026-02-20 05:10:08,622 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=6 HTTP/1.1" 200 8006
+INFO 2026-02-20 05:10:08,685 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=7 HTTP/1.1" 200 8002
+INFO 2026-02-20 05:10:08,753 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=8 HTTP/1.1" 200 8056
+INFO 2026-02-20 05:10:08,818 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=9 HTTP/1.1" 200 8004
+INFO 2026-02-20 05:10:08,882 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=10 HTTP/1.1" 200 8124
+INFO 2026-02-20 05:10:08,945 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=11 HTTP/1.1" 200 7971
+INFO 2026-02-20 05:10:09,014 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=12 HTTP/1.1" 200 7943
+INFO 2026-02-20 05:10:09,085 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=13 HTTP/1.1" 200 8138
+INFO 2026-02-20 05:10:09,152 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=14 HTTP/1.1" 200 7952
+INFO 2026-02-20 05:10:09,219 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=15 HTTP/1.1" 200 7964
+INFO 2026-02-20 05:10:09,283 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=16 HTTP/1.1" 200 7989
+INFO 2026-02-20 05:10:09,346 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=17 HTTP/1.1" 200 8005
+INFO 2026-02-20 05:10:09,420 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=18 HTTP/1.1" 200 7992
+INFO 2026-02-20 05:10:09,487 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=19 HTTP/1.1" 200 7969
+INFO 2026-02-20 05:10:09,560 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=20 HTTP/1.1" 200 7931
+INFO 2026-02-20 05:10:09,626 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=21 HTTP/1.1" 200 8100
+INFO 2026-02-20 05:10:09,698 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=22 HTTP/1.1" 200 8112
+INFO 2026-02-20 05:10:09,775 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=23 HTTP/1.1" 200 8026
+INFO 2026-02-20 05:10:09,852 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=24 HTTP/1.1" 200 7937
+INFO 2026-02-20 05:10:09,934 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=25 HTTP/1.1" 200 7926
+INFO 2026-02-20 05:10:10,016 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=26 HTTP/1.1" 200 7966
+INFO 2026-02-20 05:10:10,087 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=27 HTTP/1.1" 200 8303
+INFO 2026-02-20 05:10:10,151 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=28 HTTP/1.1" 200 8553
+INFO 2026-02-20 05:10:10,223 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=29 HTTP/1.1" 200 8288
+INFO 2026-02-20 05:10:10,291 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=30 HTTP/1.1" 200 8071
+INFO 2026-02-20 05:10:10,354 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=31 HTTP/1.1" 200 8095
+INFO 2026-02-20 05:10:10,419 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=32 HTTP/1.1" 200 7988
+INFO 2026-02-20 05:10:10,485 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=33 HTTP/1.1" 200 8064
+INFO 2026-02-20 05:10:10,553 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=34 HTTP/1.1" 200 8076
+INFO 2026-02-20 05:10:10,616 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=35 HTTP/1.1" 200 7999
+INFO 2026-02-20 05:10:10,682 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=36 HTTP/1.1" 200 7977
+INFO 2026-02-20 05:10:10,745 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=37 HTTP/1.1" 200 7932
+INFO 2026-02-20 05:10:10,821 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=38 HTTP/1.1" 200 7966
+INFO 2026-02-20 05:10:10,885 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=39 HTTP/1.1" 200 4870
+INFO 2026-02-20 05:10:15,516 basehttp 2400 13280 "GET /api/v1/localisation/districts/ HTTP/1.1" 200 8299
+INFO 2026-02-20 05:10:15,584 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=2 HTTP/1.1" 200 8285
+INFO 2026-02-20 05:10:15,647 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=3 HTTP/1.1" 200 8226
+INFO 2026-02-20 05:10:15,715 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=4 HTTP/1.1" 200 8220
+INFO 2026-02-20 05:10:15,776 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=5 HTTP/1.1" 200 8234
+INFO 2026-02-20 05:10:15,839 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=6 HTTP/1.1" 200 8199
+INFO 2026-02-20 05:10:15,903 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=7 HTTP/1.1" 200 7364
+INFO 2026-02-20 05:10:16,610 basehttp 2400 13280 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:10:16,628 basehttp 2400 8868 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:10:16,653 basehttp 2400 14096 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+WARNING 2026-02-20 05:10:16,662 log 2400 1748 Too Many Requests: /api/v1/localisation/pays/
+WARNING 2026-02-20 05:10:16,663 basehttp 2400 1748 "GET /api/v1/localisation/pays/ HTTP/1.1" 429 108
+INFO 2026-02-20 05:10:36,855 basehttp 2400 14096 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:10:36,874 basehttp 2400 8868 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:10:36,889 basehttp 2400 1748 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:10:36,904 basehttp 2400 13280 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:10:36,965 basehttp 2400 13280 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:10:37,022 basehttp 2400 13280 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:13:26,730 basehttp 2400 13280 "GET /api/v1/localisation/provinces/ HTTP/1.1" 200 8021
+INFO 2026-02-20 05:13:26,809 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=2 HTTP/1.1" 200 7989
+INFO 2026-02-20 05:13:26,888 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=3 HTTP/1.1" 200 7926
+INFO 2026-02-20 05:13:26,953 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=4 HTTP/1.1" 200 8090
+INFO 2026-02-20 05:13:27,022 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=5 HTTP/1.1" 200 7977
+INFO 2026-02-20 05:13:27,091 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=6 HTTP/1.1" 200 8006
+INFO 2026-02-20 05:13:27,161 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=7 HTTP/1.1" 200 8002
+INFO 2026-02-20 05:13:27,233 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=8 HTTP/1.1" 200 8056
+INFO 2026-02-20 05:13:27,304 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=9 HTTP/1.1" 200 8004
+INFO 2026-02-20 05:13:27,376 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=10 HTTP/1.1" 200 8124
+INFO 2026-02-20 05:13:27,446 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=11 HTTP/1.1" 200 7971
+INFO 2026-02-20 05:13:27,522 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=12 HTTP/1.1" 200 7943
+INFO 2026-02-20 05:13:27,608 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=13 HTTP/1.1" 200 8138
+INFO 2026-02-20 05:13:27,698 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=14 HTTP/1.1" 200 7952
+INFO 2026-02-20 05:13:27,866 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=15 HTTP/1.1" 200 7964
+INFO 2026-02-20 05:13:27,942 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=16 HTTP/1.1" 200 7989
+INFO 2026-02-20 05:13:28,007 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=17 HTTP/1.1" 200 8005
+INFO 2026-02-20 05:13:28,077 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=18 HTTP/1.1" 200 7992
+INFO 2026-02-20 05:13:28,153 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=19 HTTP/1.1" 200 7969
+INFO 2026-02-20 05:13:28,242 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=20 HTTP/1.1" 200 7931
+INFO 2026-02-20 05:13:28,337 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=21 HTTP/1.1" 200 8100
+INFO 2026-02-20 05:13:28,416 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=22 HTTP/1.1" 200 8112
+INFO 2026-02-20 05:13:28,502 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=23 HTTP/1.1" 200 8026
+INFO 2026-02-20 05:13:28,596 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=24 HTTP/1.1" 200 7937
+INFO 2026-02-20 05:13:28,686 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=25 HTTP/1.1" 200 7926
+INFO 2026-02-20 05:13:28,783 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=26 HTTP/1.1" 200 7966
+INFO 2026-02-20 05:13:28,869 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=27 HTTP/1.1" 200 8303
+INFO 2026-02-20 05:13:28,950 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=28 HTTP/1.1" 200 8553
+INFO 2026-02-20 05:13:29,027 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=29 HTTP/1.1" 200 8288
+INFO 2026-02-20 05:13:29,094 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=30 HTTP/1.1" 200 8071
+INFO 2026-02-20 05:13:29,160 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=31 HTTP/1.1" 200 8095
+INFO 2026-02-20 05:13:29,233 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=32 HTTP/1.1" 200 7988
+INFO 2026-02-20 05:13:29,307 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=33 HTTP/1.1" 200 8064
+INFO 2026-02-20 05:13:29,383 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=34 HTTP/1.1" 200 8076
+INFO 2026-02-20 05:13:29,463 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=35 HTTP/1.1" 200 7999
+INFO 2026-02-20 05:13:29,553 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=36 HTTP/1.1" 200 7977
+INFO 2026-02-20 05:13:29,635 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=37 HTTP/1.1" 200 7932
+INFO 2026-02-20 05:13:29,712 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=38 HTTP/1.1" 200 7966
+INFO 2026-02-20 05:13:29,778 basehttp 2400 13280 "GET /api/v1/localisation/provinces/?page=39 HTTP/1.1" 200 4870
+INFO 2026-02-20 05:13:32,052 basehttp 2400 13280 "GET /api/v1/localisation/districts/ HTTP/1.1" 200 8299
+INFO 2026-02-20 05:13:32,120 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=2 HTTP/1.1" 200 8285
+INFO 2026-02-20 05:13:32,186 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=3 HTTP/1.1" 200 8226
+INFO 2026-02-20 05:13:32,252 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=4 HTTP/1.1" 200 8220
+INFO 2026-02-20 05:13:32,314 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=5 HTTP/1.1" 200 8234
+INFO 2026-02-20 05:13:32,381 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=6 HTTP/1.1" 200 8199
+INFO 2026-02-20 05:13:32,445 basehttp 2400 13280 "GET /api/v1/localisation/districts/?page=7 HTTP/1.1" 200 7364
+INFO 2026-02-20 05:17:56,077 basehttp 2400 13280 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:17:56,095 basehttp 2400 19060 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:17:56,122 basehttp 2400 20628 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:17:56,150 basehttp 2400 22224 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:17:56,223 basehttp 2400 22224 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:17:56,279 basehttp 2400 22224 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:19:27,170 basehttp 2400 19060 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:19:27,211 basehttp 2400 22224 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:19:27,225 basehttp 2400 13280 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:19:27,287 basehttp 2400 20628 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:19:27,477 basehttp 2400 20628 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:19:27,581 basehttp 2400 20628 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:19:29,905 basehttp 2400 13280 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:19:29,948 basehttp 2400 20628 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:19:29,991 basehttp 2400 22224 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:19:30,016 basehttp 2400 19060 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:19:30,160 basehttp 2400 19060 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:19:30,254 basehttp 2400 19060 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:19:31,925 basehttp 2400 19060 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:19:31,956 basehttp 2400 22224 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:19:31,978 basehttp 2400 20628 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:19:31,994 basehttp 2400 13280 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:19:32,065 basehttp 2400 13280 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:19:32,128 basehttp 2400 13280 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:19:35,988 basehttp 2400 13280 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:19:36,029 basehttp 2400 20628 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:19:36,099 basehttp 2400 19060 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:19:36,136 basehttp 2400 22224 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:19:36,178 basehttp 2400 13280 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:19:36,234 basehttp 2400 20628 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:19:36,339 basehttp 2400 10180 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:19:36,344 basehttp 2400 22224 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:19:36,461 basehttp 2400 22224 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:19:36,534 basehttp 2400 10180 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:19:36,547 basehttp 2400 22224 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:19:36,614 basehttp 2400 10180 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:21:08,849 basehttp 2400 19048 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:21:08,864 basehttp 2400 4088 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:21:08,884 basehttp 2400 6036 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:21:08,902 basehttp 2400 24704 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:21:08,973 basehttp 2400 24704 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:21:09,035 basehttp 2400 24704 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:21:09,841 basehttp 2400 24704 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:21:09,859 basehttp 2400 6036 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:21:09,878 basehttp 2400 4088 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:21:09,894 basehttp 2400 19048 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:21:09,956 basehttp 2400 19048 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:21:10,016 basehttp 2400 19048 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:21:45,565 basehttp 2400 19048 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 05:21:45,640 basehttp 2400 19048 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 05:21:52,142 basehttp 2400 24704 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:21:52,164 basehttp 2400 6036 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:21:52,183 basehttp 2400 19048 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:21:52,201 basehttp 2400 4088 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:21:52,230 basehttp 2400 24704 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:21:52,297 basehttp 2400 24704 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:22:38,028 autoreload 23088 14044 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-02-20 05:22:38,266 autoreload 2400 4040 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-02-20 05:22:39,478 autoreload 2468 22368 Watching for file changes with StatReloader
+INFO 2026-02-20 05:22:39,502 autoreload 3784 12168 Watching for file changes with StatReloader
+INFO 2026-02-20 05:22:53,167 autoreload 2468 22368 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-20 05:22:53,175 autoreload 3784 12168 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-20 05:22:54,403 autoreload 13480 25908 Watching for file changes with StatReloader
+INFO 2026-02-20 05:22:54,418 autoreload 5132 12292 Watching for file changes with StatReloader
+INFO 2026-02-20 05:23:04,885 autoreload 5132 12292 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-20 05:23:04,890 autoreload 13480 25908 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-20 05:23:06,042 autoreload 10576 13332 Watching for file changes with StatReloader
+INFO 2026-02-20 05:23:06,074 autoreload 16160 29052 Watching for file changes with StatReloader
+INFO 2026-02-20 05:23:13,281 autoreload 16160 29052 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-20 05:23:14,313 autoreload 10576 13332 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-20 05:23:14,573 autoreload 10456 10872 Watching for file changes with StatReloader
+INFO 2026-02-20 05:23:15,363 autoreload 29592 16232 Watching for file changes with StatReloader
+INFO 2026-02-20 05:23:32,320 autoreload 10456 10872 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\filters.py changed, reloading.
+INFO 2026-02-20 05:23:33,004 autoreload 29592 16232 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\filters.py changed, reloading.
+INFO 2026-02-20 05:23:33,572 autoreload 25796 18652 Watching for file changes with StatReloader
+INFO 2026-02-20 05:23:34,152 autoreload 12880 14928 Watching for file changes with StatReloader
+INFO 2026-02-20 05:28:27,076 basehttp 25796 26480 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 05:28:27,157 basehttp 25796 26480 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 05:32:50,006 basehttp 25796 26404 "GET /api/v1/localisation/pays/?continent=Afrique HTTP/1.1" 200 9579
+INFO 2026-02-20 05:51:55,989 autoreload 12880 14928 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-02-20 05:51:56,213 autoreload 25796 18652 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-02-20 05:51:57,437 autoreload 9112 10460 Watching for file changes with StatReloader
+INFO 2026-02-20 05:51:57,483 autoreload 6068 18876 Watching for file changes with StatReloader
+INFO 2026-02-20 05:52:10,067 autoreload 9112 10460 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-02-20 05:52:10,092 autoreload 6068 18876 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-02-20 05:52:11,553 autoreload 29064 24440 Watching for file changes with StatReloader
+INFO 2026-02-20 05:55:59,662 autoreload 10980 13884 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-02-20 05:55:59,668 autoreload 29064 24440 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-02-20 05:56:00,974 autoreload 14140 12416 Watching for file changes with StatReloader
+INFO 2026-02-20 05:56:00,974 autoreload 21832 9812 Watching for file changes with StatReloader
+INFO 2026-02-20 06:41:02,723 autoreload 11872 8624 Watching for file changes with StatReloader

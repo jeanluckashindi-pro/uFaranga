@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { Dialog } from 'primereact/dialog';
 import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
-import { Calendar } from 'primereact/calendar';
 import { Checkbox } from 'primereact/checkbox';
 import { RadialSpinner } from './common/Spinner';
+import DatePicker from './common/DatePicker';
 import apiService from '../services/api';
 
 function CreateUserDialog({ visible, onHide }) {
@@ -15,7 +15,7 @@ function CreateUserDialog({ visible, onHide }) {
     mot_de_passe_confirmation: '',
     prenom: '',
     nom_famille: '',
-    date_naissance: null,
+    date_naissance: '',
     lieu_naissance: '',
     nationalite: 'BI',
     type_utilisateur_id: 'CLIENT',
@@ -45,6 +45,9 @@ function CreateUserDialog({ visible, onHide }) {
   const [districts, setDistricts] = useState([]);
   const [quartiers, setQuartiers] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [loadingProvinces, setLoadingProvinces] = useState(false);
+  const [loadingDistricts, setLoadingDistricts] = useState(false);
+  const [loadingQuartiers, setLoadingQuartiers] = useState(false);
 
   useEffect(() => {
     if (visible) {
@@ -71,6 +74,7 @@ function CreateUserDialog({ visible, onHide }) {
   };
 
   const loadProvinces = async (paysId) => {
+    setLoadingProvinces(true);
     try {
       const data = await apiService.getProvinces();
       const filtered = data.filter(p => p.pays === paysId);
@@ -80,10 +84,13 @@ function CreateUserDialog({ visible, onHide }) {
       setFormData(prev => ({ ...prev, province_id: '', district_id: '', quartier_id: '' }));
     } catch (error) {
       console.error('Erreur chargement provinces:', error);
+    } finally {
+      setLoadingProvinces(false);
     }
   };
 
   const loadDistricts = async (provinceId) => {
+    setLoadingDistricts(true);
     try {
       const data = await apiService.getDistricts();
       const filtered = data.filter(d => d.province === provinceId);
@@ -92,10 +99,13 @@ function CreateUserDialog({ visible, onHide }) {
       setFormData(prev => ({ ...prev, district_id: '', quartier_id: '' }));
     } catch (error) {
       console.error('Erreur chargement districts:', error);
+    } finally {
+      setLoadingDistricts(false);
     }
   };
 
   const loadQuartiers = async (districtId) => {
+    setLoadingQuartiers(true);
     try {
       const data = await apiService.getQuartiers();
       const filtered = data.filter(q => q.district === districtId);
@@ -103,6 +113,8 @@ function CreateUserDialog({ visible, onHide }) {
       setFormData(prev => ({ ...prev, quartier_id: '' }));
     } catch (error) {
       console.error('Erreur chargement quartiers:', error);
+    } finally {
+      setLoadingQuartiers(false);
     }
   };
 
@@ -111,7 +123,7 @@ function CreateUserDialog({ visible, onHide }) {
     try {
       const payload = {
         ...formData,
-        date_naissance: formData.date_naissance?.toISOString().split('T')[0]
+        date_naissance: formData.date_naissance
       };
 
       await apiService.createUser(payload);
@@ -158,12 +170,10 @@ function CreateUserDialog({ visible, onHide }) {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-400 mb-2">Date de naissance *</label>
-              <Calendar
+              <DatePicker
                 value={formData.date_naissance}
-                onChange={(e) => setFormData({ ...formData, date_naissance: e.value })}
-                dateFormat="dd/mm/yy"
+                onChange={(date) => setFormData({ ...formData, date_naissance: date })}
                 placeholder="Sélectionner une date"
-                className="w-full"
               />
             </div>
             <div>
@@ -287,7 +297,10 @@ function CreateUserDialog({ visible, onHide }) {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">Province *</label>
+              <label className="block text-sm font-medium text-gray-400 mb-2 flex items-center gap-2">
+                Province *
+                {loadingProvinces && <RadialSpinner size="small" color="primary" />}
+              </label>
               <Dropdown
                 value={formData.province_id}
                 options={provinces.map(p => ({ label: p.nom, value: p.id }))}
@@ -295,14 +308,17 @@ function CreateUserDialog({ visible, onHide }) {
                   setFormData({ ...formData, province_id: e.value });
                   loadDistricts(e.value);
                 }}
-                placeholder="Sélectionner une province"
+                placeholder={loadingProvinces ? "Chargement..." : "Sélectionner une province"}
                 className="w-full"
-                disabled={!formData.pays_id}
+                disabled={!formData.pays_id || loadingProvinces}
                 filter
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">District *</label>
+              <label className="block text-sm font-medium text-gray-400 mb-2 flex items-center gap-2">
+                District *
+                {loadingDistricts && <RadialSpinner size="small" color="primary" />}
+              </label>
               <Dropdown
                 value={formData.district_id}
                 options={districts.map(d => ({ label: d.nom, value: d.id }))}
@@ -310,21 +326,24 @@ function CreateUserDialog({ visible, onHide }) {
                   setFormData({ ...formData, district_id: e.value });
                   loadQuartiers(e.value);
                 }}
-                placeholder="Sélectionner un district"
+                placeholder={loadingDistricts ? "Chargement..." : "Sélectionner un district"}
                 className="w-full"
-                disabled={!formData.province_id}
+                disabled={!formData.province_id || loadingDistricts}
                 filter
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2">Quartier *</label>
+              <label className="block text-sm font-medium text-gray-400 mb-2 flex items-center gap-2">
+                Quartier *
+                {loadingQuartiers && <RadialSpinner size="small" color="primary" />}
+              </label>
               <Dropdown
                 value={formData.quartier_id}
                 options={quartiers.map(q => ({ label: q.nom, value: q.id }))}
                 onChange={(e) => setFormData({ ...formData, quartier_id: e.value })}
-                placeholder="Sélectionner un quartier"
+                placeholder={loadingQuartiers ? "Chargement..." : "Sélectionner un quartier"}
                 className="w-full"
-                disabled={!formData.district_id}
+                disabled={!formData.district_id || loadingQuartiers}
                 filter
               />
             </div>

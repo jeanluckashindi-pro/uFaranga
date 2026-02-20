@@ -1,5 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
@@ -9,10 +10,11 @@ import { Dialog } from 'primereact/dialog';
 import CreateUserDialog from '../../components/CreateUserDialog';
 import { 
   Search, Plus, Download, Shield, Users, UserCog, Lock, MoreVertical,
-  Eye, History, FileText, Activity, UserCheck, Clock, Settings, Copy, Edit, Trash2
+  Eye, History, FileText, Activity, UserCheck, Clock, Settings, Copy, Edit, Trash2, Map
 } from 'lucide-react';
 
 function GestionProfils() {
+  const navigate = useNavigate();
   const [globalFilter, setGlobalFilter] = useState('');
   const [selectedType, setSelectedType] = useState('all');
   const [selectedProfil, setSelectedProfil] = useState(null);
@@ -444,13 +446,6 @@ function GestionProfils() {
           <h1 className="text-3xl font-anton uppercase text-text">Gestion des Profils</h1>
           <p className="text-sm text-gray-400 mt-1">Gérer les rôles et permissions du système</p>
         </div>
-        <button 
-          onClick={() => setShowCreateDialog(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
-        >
-          <Plus className="w-5 h-5" />
-          <span>Nouveau Profil</span>
-        </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -514,7 +509,23 @@ function GestionProfils() {
             className="w-full md:w-48"
           />
 
-          <button className="flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors">
+          <button 
+            onClick={() => setShowCreateDialog(true)}
+            className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
+          >
+            <Plus className="w-5 h-5" />
+            <span>Nouveau Profil</span>
+          </button>
+
+          <button 
+            onClick={() => navigate('/admin/cartographie-utilisateurs')}
+            className="flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors"
+          >
+            <Map className="w-5 h-5" />
+            <span>Cartographie</span>
+          </button>
+
+          <button className="flex items-center gap-2 px-4 py-2 bg-white text-black rounded-lg hover:bg-secondary/90 transition-colors">
             <Download className="w-5 h-5" />
             <span>Exporter</span>
           </button>

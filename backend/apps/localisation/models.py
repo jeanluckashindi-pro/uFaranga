@@ -15,6 +15,23 @@ class Pays(models.Model):
     code_iso_3 = models.CharField(max_length=3, blank=True)
     nom = models.CharField(max_length=100)
     nom_anglais = models.CharField(max_length=100, blank=True)
+    
+    # Groupements géographiques
+    continent = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True,
+        db_index=True,
+        help_text='Continent du pays (ex: Afrique, Europe, Asie)'
+    )
+    sous_region = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        db_index=True,
+        help_text='Sous-région géographique (ex: Afrique de l\'Est, Afrique Centrale)'
+    )
+    
     latitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     longitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     autorise_systeme = models.BooleanField(default=True)
@@ -27,6 +44,11 @@ class Pays(models.Model):
         db_table = 'localisation"."pays'
         verbose_name = 'Pays'
         verbose_name_plural = 'Pays'
+        indexes = [
+            models.Index(fields=['continent']),
+            models.Index(fields=['sous_region']),
+            models.Index(fields=['code_iso_2']),
+        ]
 
     def __str__(self):
         return f"{self.nom} ({self.code_iso_2})"

@@ -24,6 +24,7 @@ class PaysSerializer(serializers.ModelSerializer):
         model = Pays
         fields = [
             'id', 'code_iso_2', 'code_iso_3', 'nom', 'nom_anglais',
+            'continent', 'sous_region',
             'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
             'date_creation', 'date_modification', 'metadonnees',
@@ -162,6 +163,7 @@ class CouverturePaysSerializer(serializers.ModelSerializer):
         model = Pays
         fields = [
             'id', 'code_iso_2', 'code_iso_3', 'nom', 'nom_anglais',
+            'continent', 'sous_region',
             'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
             'statistiques',
@@ -234,6 +236,7 @@ class PaysDetailSerializer(serializers.ModelSerializer):
         model = Pays
         fields = [
             'id', 'code_iso_2', 'code_iso_3', 'nom', 'nom_anglais',
+            'continent', 'sous_region',
             'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
             'date_creation', 'date_modification', 'metadonnees',
