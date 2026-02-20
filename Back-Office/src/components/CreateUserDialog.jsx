@@ -127,7 +127,6 @@ function CreateUserDialog({ visible, onHide }) {
       };
 
       await apiService.createUser(payload);
-      console.log('Utilisateur créé avec succès');
       onHide();
     } catch (error) {
       console.error('Erreur:', error);

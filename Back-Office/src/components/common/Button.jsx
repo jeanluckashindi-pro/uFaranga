@@ -73,9 +73,15 @@ const Button = ({
       onClick={onClick}
       {...props}
     >
-      {iconPosition === 'left' && renderIcon()}
-      {children}
-      {iconPosition === 'right' && renderIcon()}
+      {loading ? (
+        <Spinner size="small" color={variant === 'outline' || variant === 'ghost' || variant === 'link' ? 'primary' : 'white'} />
+      ) : (
+        <>
+          {iconPosition === 'left' && renderIcon()}
+          {children}
+          {iconPosition === 'right' && renderIcon()}
+        </>
+      )}
     </button>
   );
 };

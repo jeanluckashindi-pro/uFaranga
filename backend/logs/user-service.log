@@ -3966,3 +3966,693 @@ INFO 2026-02-20 08:36:50,020 basehttp 16696 2996 "GET /api/v1/authentification/m
 INFO 2026-02-20 08:37:45,180 basehttp 16696 2880 "GET / HTTP/1.1" 200 4658
 INFO 2026-02-20 08:37:47,126 basehttp 16696 2880 "GET /api/schema/ HTTP/1.1" 200 299082
 INFO 2026-02-20 08:37:57,336 basehttp 16696 2880 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 08:38:53,355 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-20 08:38:53,482 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:39:01,539 views 16696 2996 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-20 08:39:01,542 basehttp 16696 2996 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+INFO 2026-02-20 08:40:29,876 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-20 08:40:29,992 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:41:05,112 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:41:18,078 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:41:34,389 views 16696 2996 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-20 08:41:34,391 basehttp 16696 2996 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+INFO 2026-02-20 08:41:37,759 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-20 08:41:37,877 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:41:43,543 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:41:50,593 views 16696 2996 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-20 08:41:50,596 basehttp 16696 2996 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+WARNING 2026-02-20 08:41:56,629 log 16696 2996 Unauthorized: /api/v1/authentification/connexion/
+WARNING 2026-02-20 08:41:56,633 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 401 126
+WARNING 2026-02-20 08:43:14,234 log 16696 2996 Unauthorized: /api/v1/authentification/connexion/
+WARNING 2026-02-20 08:43:14,236 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 401 126
+WARNING 2026-02-20 08:43:22,369 log 16696 2996 Unauthorized: /api/v1/authentification/connexion/
+WARNING 2026-02-20 08:43:22,371 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 401 126
+INFO 2026-02-20 08:45:07,069 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-20 08:45:07,195 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:45:20,224 views 16696 2996 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-20 08:45:20,226 basehttp 16696 2996 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+INFO 2026-02-20 08:47:01,761 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-20 08:47:01,854 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:47:36,069 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:49:52,834 autoreload 16696 10544 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\views.py changed, reloading.
+INFO 2026-02-20 08:49:54,637 autoreload 24556 16440 Watching for file changes with StatReloader
+INFO 2026-02-20 08:50:03,510 autoreload 24556 16440 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\urls.py changed, reloading.
+INFO 2026-02-20 08:50:04,876 autoreload 21060 18276 Watching for file changes with StatReloader
+INFO 2026-02-20 08:52:11,907 basehttp 21060 19944 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:52:12,035 basehttp 21060 19944 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:53:05,371 basehttp 21060 19944 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:53:05,507 basehttp 21060 19944 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:53:40,047 basehttp 21060 19944 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:53:40,164 basehttp 21060 19944 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:53:49,136 basehttp 21060 19944 "OPTIONS /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 08:53:49,252 basehttp 21060 10544 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:53:49,313 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:53:49,373 basehttp 21060 10544 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:53:49,463 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:53:49,602 basehttp 21060 10544 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:53:49,745 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:55:09,928 basehttp 21060 19944 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=CLIENT&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 08:55:10,075 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?type_utilisateur=CLIENT&page=1&page_size=10 HTTP/1.1" 200 4687
+INFO 2026-02-20 08:55:11,605 basehttp 21060 19944 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=AGENT&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 08:55:11,775 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?type_utilisateur=AGENT&page=1&page_size=10 HTTP/1.1" 200 2429
+INFO 2026-02-20 08:55:13,975 basehttp 21060 19944 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 08:55:14,118 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&page=1&page_size=10 HTTP/1.1" 200 2412
+INFO 2026-02-20 08:55:14,995 basehttp 21060 19944 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 08:55:15,143 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&page=1&page_size=10 HTTP/1.1" 200 2406
+INFO 2026-02-20 08:55:15,852 basehttp 21060 19944 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 08:55:15,998 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 2406
+INFO 2026-02-20 08:55:16,812 basehttp 21060 19944 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&statut=ACTIF&telephone_verifie=true&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 08:55:16,944 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&statut=ACTIF&telephone_verifie=true&page=1&page_size=10 HTTP/1.1" 200 2406
+INFO 2026-02-20 08:55:17,943 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:56:28,271 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:56:42,597 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:57:50,985 basehttp 21060 19944 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:57:51,149 basehttp 21060 19944 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:57:51,449 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:57:51,627 basehttp 21060 10544 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:57:58,549 basehttp 21060 10544 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:57:58,830 basehttp 21060 10544 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:57:59,125 basehttp 21060 10544 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:57:59,349 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:58:00,587 basehttp 21060 19944 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:58:06,018 views 21060 19944 Déconnexion de 2 autre(s) session(s) pour systeme@ufaranga.bi, session actuelle conservée.
+INFO 2026-02-20 08:58:06,020 basehttp 21060 19944 "POST /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 152
+INFO 2026-02-20 08:59:39,996 basehttp 21060 19560 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 08:59:40,093 basehttp 21060 19560 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 08:59:40,422 basehttp 21060 19560 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 08:59:40,567 basehttp 21060 19560 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:00:11,501 basehttp 21060 19560 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:00:11,750 basehttp 21060 2368 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:00:36,439 basehttp 21060 2308 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:02:24,586 basehttp 21060 2368 "OPTIONS /api/v1/identite/utilisateurs/?telephone_verifie=true&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 09:02:24,774 basehttp 21060 2368 "GET /api/v1/identite/utilisateurs/?telephone_verifie=true&page=1&page_size=10 HTTP/1.1" 200 11944
+INFO 2026-02-20 09:02:30,263 basehttp 21060 2368 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:02:32,841 basehttp 21060 2368 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&page=1&page_size=10 HTTP/1.1" 200 2412
+INFO 2026-02-20 09:02:57,331 basehttp 21060 2368 "GET /api/v1/identite/utilisateurs/?type_utilisateur=CLIENT&page=1&page_size=10 HTTP/1.1" 200 4687
+INFO 2026-02-20 09:03:02,726 basehttp 21060 2368 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:03:02,884 basehttp 21060 19560 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:03:15,368 basehttp 21060 19560 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:03:41,235 basehttp 21060 19560 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:04:03,134 basehttp 21060 19560 "GET /api/v1/identite/utilisateurs/?type_utilisateur=AGENT&page=1&page_size=10 HTTP/1.1" 200 2429
+INFO 2026-02-20 09:04:05,406 basehttp 21060 19560 "GET /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&page=1&page_size=10 HTTP/1.1" 200 2406
+INFO 2026-02-20 09:04:06,910 basehttp 21060 19560 "GET /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 2406
+INFO 2026-02-20 09:04:15,283 basehttp 21060 19560 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:04:15,474 basehttp 21060 2368 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:07:45,375 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:07:45,524 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:11:21,985 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:11:22,086 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+WARNING 2026-02-20 09:13:34,368 log 21060 10068 Not Found: /api/v1/localisation/complete/ 
+WARNING 2026-02-20 09:13:34,369 basehttp 21060 10068 "GET /api/v1/localisation/complete/%20 HTTP/1.1" 404 10820
+INFO 2026-02-20 09:13:34,713 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:13:34,858 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:17:19,276 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:17:19,427 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:18:04,146 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:18:04,283 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:18:45,325 basehttp 21060 872 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:19:21,795 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:19:21,896 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:19:30,976 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:19:31,100 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:19:47,212 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:19:47,341 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:20:27,824 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:20:27,938 basehttp 21060 2368 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:21:53,131 basehttp 21060 11208 "OPTIONS /api/v1/identite/profils HTTP/1.1" 200 0
+WARNING 2026-02-20 09:21:53,159 log 21060 11208 Not Found: /api/v1/identite/profils
+WARNING 2026-02-20 09:21:53,169 basehttp 21060 11208 "GET /api/v1/identite/profils HTTP/1.1" 404 14605
+WARNING 2026-02-20 09:22:53,559 log 21060 11208 Not Found: /api/v1/identite/profils
+WARNING 2026-02-20 09:22:53,560 basehttp 21060 11208 "GET /api/v1/identite/profils HTTP/1.1" 404 14605
+INFO 2026-02-20 09:23:04,855 basehttp 21060 11208 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:23:04,961 basehttp 21060 11208 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+WARNING 2026-02-20 09:23:04,989 log 21060 10108 Not Found: /api/v1/identite/profils
+WARNING 2026-02-20 09:23:04,990 basehttp 21060 10108 "GET /api/v1/identite/profils HTTP/1.1" 404 14605
+WARNING 2026-02-20 09:23:05,025 log 21060 11208 Not Found: /api/v1/identite/profils
+WARNING 2026-02-20 09:23:05,028 basehttp 21060 11208 "GET /api/v1/identite/profils HTTP/1.1" 404 14605
+INFO 2026-02-20 09:24:02,044 basehttp 21060 11208 "OPTIONS /api/v1/identite/utilisateurs/?page=1&page_size=100 HTTP/1.1" 200 0
+INFO 2026-02-20 09:24:02,241 basehttp 21060 11208 "GET /api/v1/identite/utilisateurs/?page=1&page_size=100 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:24:45,637 basehttp 21060 11208 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:24:45,744 basehttp 21060 11208 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:24:45,903 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?page=1&page_size=100 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:24:46,086 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?page=1&page_size=100 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:25:51,359 basehttp 21060 10108 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:25:51,475 basehttp 21060 10108 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:25:51,589 basehttp 21060 11208 "GET /api/v1/identite/utilisateurs/?page=1&page_size=100 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:25:51,756 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?page=1&page_size=100 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:27:29,294 basehttp 21060 11208 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:27:29,321 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:27:29,448 basehttp 21060 11208 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 09:27:29,530 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:27:29,688 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:27:29,837 basehttp 21060 11208 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:29:23,544 basehttp 21060 11208 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:29:23,729 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:30:10,572 basehttp 21060 10108 "OPTIONS /api/v1/identite/utilisateurs/?statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 09:30:10,747 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 14314
+INFO 2026-02-20 09:30:15,293 basehttp 21060 10108 "OPTIONS /api/v1/identite/utilisateurs/?statut=ACTIF&niveau_kyc=1&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 09:30:15,458 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?statut=ACTIF&niveau_kyc=1&page=1&page_size=10 HTTP/1.1" 200 2392
+INFO 2026-02-20 09:30:20,646 basehttp 21060 10108 "OPTIONS /api/v1/identite/utilisateurs/?statut=ACTIF&niveau_kyc=%5Bobject+Object%5D&page=1&page_size=10 HTTP/1.1" 200 0
+ERROR 2026-02-20 09:30:21,060 log 21060 10108 Internal Server Error: /api/v1/identite/utilisateurs/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '[object Object]'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\drf_spectacular\drainage.py", line 207, in wrapped_method
+    return method(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\identite\views.py", line 254, in get_queryset
+    qs = qs.filter(niveau_kyc__niveau=niveau_kyc)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'niveau' expected a number but got '[object Object]'.
+ERROR 2026-02-20 09:30:21,083 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?statut=ACTIF&niveau_kyc=%5Bobject+Object%5D&page=1&page_size=10 HTTP/1.1" 500 177323
+INFO 2026-02-20 09:30:24,782 basehttp 21060 10108 "OPTIONS /api/v1/identite/utilisateurs/?statut=%5Bobject+Object%5D&niveau_kyc=%5Bobject+Object%5D&page=1&page_size=10 HTTP/1.1" 200 0
+ERROR 2026-02-20 09:30:25,076 log 21060 10108 Internal Server Error: /api/v1/identite/utilisateurs/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '[object Object]'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\drf_spectacular\drainage.py", line 207, in wrapped_method
+    return method(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\identite\views.py", line 254, in get_queryset
+    qs = qs.filter(niveau_kyc__niveau=niveau_kyc)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'niveau' expected a number but got '[object Object]'.
+ERROR 2026-02-20 09:30:25,080 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?statut=%5Bobject+Object%5D&niveau_kyc=%5Bobject+Object%5D&page=1&page_size=10 HTTP/1.1" 500 175745
+INFO 2026-02-20 09:30:27,809 basehttp 21060 10108 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=%5Bobject+Object%5D&statut=%5Bobject+Object%5D&niveau_kyc=%5Bobject+Object%5D&page=1&page_size=10 HTTP/1.1" 200 0
+ERROR 2026-02-20 09:30:28,060 log 21060 10108 Internal Server Error: /api/v1/identite/utilisateurs/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '[object Object]'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\drf_spectacular\drainage.py", line 207, in wrapped_method
+    return method(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\identite\views.py", line 254, in get_queryset
+    qs = qs.filter(niveau_kyc__niveau=niveau_kyc)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'niveau' expected a number but got '[object Object]'.
+ERROR 2026-02-20 09:30:28,064 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?type_utilisateur=%5Bobject+Object%5D&statut=%5Bobject+Object%5D&niveau_kyc=%5Bobject+Object%5D&page=1&page_size=10 HTTP/1.1" 500 176563
+INFO 2026-02-20 09:30:32,584 basehttp 21060 10108 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=%5Bobject+Object%5D&niveau_kyc=%5Bobject+Object%5D&page=1&page_size=10 HTTP/1.1" 200 0
+ERROR 2026-02-20 09:30:32,827 log 21060 10108 Internal Server Error: /api/v1/identite/utilisateurs/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\__init__.py", line 2053, in get_prep_value
+    return int(value)
+           ^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '[object Object]'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\drf_spectacular\drainage.py", line 207, in wrapped_method
+    return method(self, request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\mixins.py", line 38, in list
+    queryset = self.filter_queryset(self.get_queryset())
+                                    ^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\identite\views.py", line 254, in get_queryset
+    qs = qs.filter(niveau_kyc__niveau=niveau_kyc)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1436, in filter
+    return self._filter_or_exclude(False, args, kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1454, in _filter_or_exclude
+    clone._filter_or_exclude_inplace(negate, args, kwargs)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1461, in _filter_or_exclude_inplace
+    self._query.add_q(Q(*args, **kwargs))
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1546, in add_q
+    clause, _ = self._add_q(q_object, self.used_aliases)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1577, in _add_q
+    child_clause, needed_inner = self.build_filter(
+                                 ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1492, in build_filter
+    condition = self.build_lookup(lookups, col, value)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\query.py", line 1319, in build_lookup
+    lookup = lookup_class(lhs, rhs)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 27, in __init__
+    self.rhs = self.get_prep_lookup()
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 341, in get_prep_lookup
+    return super().get_prep_lookup()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\lookups.py", line 85, in get_prep_lookup
+    return self.lhs.output_field.get_prep_value(self.rhs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\__init__.py", line 2055, in get_prep_value
+    raise e.__class__(
+ValueError: Field 'niveau' expected a number but got '[object Object]'.
+ERROR 2026-02-20 09:30:32,832 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=%5Bobject+Object%5D&niveau_kyc=%5Bobject+Object%5D&page=1&page_size=10 HTTP/1.1" 500 176406
+INFO 2026-02-20 09:30:37,496 basehttp 21060 10108 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:30:37,679 basehttp 21060 11208 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:30:57,774 basehttp 21060 11208 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:31:53,661 basehttp 21060 11208 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:33:48,787 autoreload 21060 18276 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-20 09:33:51,004 autoreload 21968 22400 Watching for file changes with StatReloader
+INFO 2026-02-20 09:34:10,614 basehttp 21968 22616 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 16609
+INFO 2026-02-20 09:36:22,656 autoreload 21968 22400 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-20 09:36:24,501 autoreload 2060 20408 Watching for file changes with StatReloader
+INFO 2026-02-20 09:39:13,996 basehttp 2060 23616 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 09:39:14,221 basehttp 2060 23616 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 09:40:33,627 basehttp 2060 12228 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:04:04,333 basehttp 2060 13568 "OPTIONS /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 200 0
+INFO 2026-02-20 10:04:04,334 basehttp 2060 3856 "OPTIONS /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 200 0
+INFO 2026-02-20 10:04:04,492 basehttp 2060 13568 "POST /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 200 867
+INFO 2026-02-20 10:04:04,509 basehttp 2060 3856 "POST /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 200 867
+INFO 2026-02-20 10:04:04,640 basehttp 2060 13568 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:04:04,782 basehttp 2060 13568 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:06:18,056 basehttp 2060 13568 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:06:40,008 basehttp 2060 3856 "OPTIONS /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 10:06:40,009 basehttp 2060 13568 "OPTIONS /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 10:06:40,138 basehttp 2060 13568 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11825
+INFO 2026-02-20 10:06:40,224 basehttp 2060 13568 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11825
+INFO 2026-02-20 10:06:50,010 basehttp 2060 13568 "OPTIONS /api/v1/localisation/pays/?page=2&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 10:06:50,108 basehttp 2060 13568 "GET /api/v1/localisation/pays/?page=2&page_size=10 HTTP/1.1" 200 11999
+INFO 2026-02-20 10:06:51,101 basehttp 2060 13568 "OPTIONS /api/v1/localisation/pays/?page=3&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 10:06:51,189 basehttp 2060 13568 "GET /api/v1/localisation/pays/?page=3&page_size=10 HTTP/1.1" 200 8354
+INFO 2026-02-20 10:06:52,489 basehttp 2060 13568 "OPTIONS /api/v1/localisation/pays/?page=4&page_size=10 HTTP/1.1" 200 0
+WARNING 2026-02-20 10:06:52,601 log 2060 13568 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:06:52,610 basehttp 2060 13568 "GET /api/v1/localisation/pays/?page=4&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:07:01,823 basehttp 2060 13568 "OPTIONS /api/v1/localisation/pays/?est_actif=false&page=4&page_size=10 HTTP/1.1" 200 0
+WARNING 2026-02-20 10:07:01,934 log 2060 13568 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:07:01,935 basehttp 2060 13568 "GET /api/v1/localisation/pays/?est_actif=false&page=4&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:07:03,421 basehttp 2060 13568 "OPTIONS /api/v1/localisation/pays/?continent=Afrique&est_actif=false&page=4&page_size=10 HTTP/1.1" 200 0
+WARNING 2026-02-20 10:07:03,526 log 2060 13568 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:07:03,527 basehttp 2060 13568 "GET /api/v1/localisation/pays/?continent=Afrique&est_actif=false&page=4&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:07:07,706 basehttp 2060 13568 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:07:07,846 basehttp 2060 13568 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:07:07,894 basehttp 2060 3856 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11825
+INFO 2026-02-20 10:07:07,993 basehttp 2060 3856 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11825
+INFO 2026-02-20 10:10:18,600 basehttp 2060 3856 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11825
+INFO 2026-02-20 10:10:21,501 basehttp 2060 3856 "OPTIONS /api/v1/localisation/pays/?continent=Afrique&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 10:10:21,600 basehttp 2060 3856 "GET /api/v1/localisation/pays/?continent=Afrique&page=1&page_size=10 HTTP/1.1" 200 11843
+INFO 2026-02-20 10:10:23,009 basehttp 2060 3856 "OPTIONS /api/v1/localisation/pays/?continent=Europe&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 10:10:23,105 basehttp 2060 3856 "GET /api/v1/localisation/pays/?continent=Europe&page=1&page_size=10 HTTP/1.1" 200 52
+INFO 2026-02-20 10:10:24,953 basehttp 2060 3856 "GET /api/v1/localisation/pays/?continent=Afrique&page=1&page_size=10 HTTP/1.1" 200 11843
+INFO 2026-02-20 10:10:46,820 basehttp 2060 3856 "OPTIONS /api/v1/localisation/pays/?continent=Afrique&page=5&page_size=10 HTTP/1.1" 200 0
+WARNING 2026-02-20 10:10:46,916 log 2060 3856 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:10:46,918 basehttp 2060 3856 "GET /api/v1/localisation/pays/?continent=Afrique&page=5&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:10:51,390 basehttp 2060 3856 "OPTIONS /api/v1/localisation/pays/?continent=Afrique&est_actif=false&page=5&page_size=10 HTTP/1.1" 200 0
+WARNING 2026-02-20 10:10:51,485 log 2060 3856 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:10:51,486 basehttp 2060 3856 "GET /api/v1/localisation/pays/?continent=Afrique&est_actif=false&page=5&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:10:54,144 basehttp 2060 3856 "OPTIONS /api/v1/localisation/pays/?continent=Afrique&est_actif=true&page=5&page_size=10 HTTP/1.1" 200 0
+WARNING 2026-02-20 10:10:54,239 log 2060 3856 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:10:54,240 basehttp 2060 3856 "GET /api/v1/localisation/pays/?continent=Afrique&est_actif=true&page=5&page_size=10 HTTP/1.1" 404 74
+WARNING 2026-02-20 10:10:55,110 log 2060 3856 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:10:55,111 basehttp 2060 3856 "GET /api/v1/localisation/pays/?continent=Afrique&est_actif=true&page=5&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:10:58,623 basehttp 2060 3856 "OPTIONS /api/v1/localisation/pays/?page=5&page_size=10 HTTP/1.1" 200 0
+WARNING 2026-02-20 10:10:58,711 log 2060 3856 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:10:58,713 basehttp 2060 3856 "GET /api/v1/localisation/pays/?page=5&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:12:42,582 basehttp 2060 3856 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:12:42,692 basehttp 2060 3856 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:12:42,834 basehttp 2060 3856 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11825
+INFO 2026-02-20 10:12:42,906 basehttp 2060 3856 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11825
+INFO 2026-02-20 10:13:10,207 basehttp 2060 3856 "OPTIONS /api/v1/localisation/provinces/?page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 10:13:10,309 basehttp 2060 3856 "GET /api/v1/localisation/provinces/?page=1&page_size=10 HTTP/1.1" 200 12908
+INFO 2026-02-20 10:13:18,862 basehttp 2060 3856 "OPTIONS /api/v1/localisation/provinces/?page=110&page_size=10 HTTP/1.1" 200 0
+WARNING 2026-02-20 10:13:18,934 log 2060 3856 Not Found: /api/v1/localisation/provinces/
+WARNING 2026-02-20 10:13:18,935 basehttp 2060 3856 "GET /api/v1/localisation/provinces/?page=110&page_size=10 HTTP/1.1" 404 74
+WARNING 2026-02-20 10:13:28,271 log 2060 3856 Not Found: /api/v1/localisation/provinces/
+WARNING 2026-02-20 10:13:28,272 basehttp 2060 3856 "GET /api/v1/localisation/provinces/?page=110&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:14:50,955 basehttp 2060 3856 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:14:51,125 basehttp 2060 3856 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:14:51,203 basehttp 2060 14180 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11825
+INFO 2026-02-20 10:14:51,305 basehttp 2060 3856 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11825
+INFO 2026-02-20 10:21:49,953 basehttp 2060 6268 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-20 10:21:50,312 basehttp 2060 6268 "GET /api/schema/ HTTP/1.1" 200 322447
+INFO 2026-02-20 10:22:05,862 basehttp 2060 6268 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 11810
+INFO 2026-02-20 10:23:22,866 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:24:55,663 basehttp 2060 10688 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-20 10:24:55,667 basehttp 2060 2884 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-20 10:24:55,749 basehttp 2060 10688 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:24:55,836 basehttp 2060 10688 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:24:55,875 basehttp 2060 2884 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:24:55,944 basehttp 2060 2884 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:25:54,399 basehttp 2060 2884 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:26:59,836 basehttp 2060 2884 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:27:23,162 basehttp 2060 2884 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:27:23,252 basehttp 2060 2884 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:27:23,288 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:27:23,356 basehttp 2060 2884 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:28:58,949 basehttp 2060 2884 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:28:59,042 basehttp 2060 2884 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:28:59,070 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:28:59,134 basehttp 2060 2884 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:30:32,719 basehttp 2060 2884 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:30:32,815 basehttp 2060 2884 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:30:32,840 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:30:32,910 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:32:12,470 basehttp 2060 10688 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:32:12,561 basehttp 2060 10688 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:32:12,583 basehttp 2060 2884 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:32:12,651 basehttp 2060 2884 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:32:43,249 basehttp 2060 2884 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:32:43,313 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:33:27,529 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:33:33,852 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=2&page_size=10 HTTP/1.1" 200 11999
+INFO 2026-02-20 10:33:36,010 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=3&page_size=10 HTTP/1.1" 200 8354
+WARNING 2026-02-20 10:33:37,786 log 2060 10688 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:33:37,788 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=4&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:33:47,003 basehttp 2060 10688 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:33:47,103 basehttp 2060 10688 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:33:47,149 basehttp 2060 2884 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:33:47,215 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:33:54,531 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=2&page_size=10 HTTP/1.1" 200 11999
+INFO 2026-02-20 10:33:57,666 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=3&page_size=10 HTTP/1.1" 200 8354
+WARNING 2026-02-20 10:33:59,616 log 2060 10688 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:33:59,617 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=4&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:35:33,090 basehttp 2060 10688 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:35:33,188 basehttp 2060 10688 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:35:33,253 basehttp 2060 2884 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:35:33,324 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:35:40,264 basehttp 2060 10688 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+WARNING 2026-02-20 10:36:08,555 log 2060 24076 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:36:08,555 basehttp 2060 24076 "GET /api/v1/localisation/pays/?page=5&page_size=10 HTTP/1.1" 404 74
+WARNING 2026-02-20 10:36:39,070 log 2060 24076 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:36:39,071 basehttp 2060 24076 "GET /api/v1/localisation/pays/?page=5&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:36:50,062 basehttp 2060 24076 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:36:50,156 basehttp 2060 24076 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:36:50,269 basehttp 2060 24076 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:37:16,212 basehttp 2060 24076 "GET /api/v1/localisation/pays/?page=2&page_size=10 HTTP/1.1" 200 11999
+WARNING 2026-02-20 10:37:17,703 log 2060 24076 Not Found: /api/v1/localisation/pays/
+WARNING 2026-02-20 10:37:17,703 basehttp 2060 24076 "GET /api/v1/localisation/pays/?page=5&page_size=10 HTTP/1.1" 404 74
+INFO 2026-02-20 10:37:27,946 basehttp 2060 24076 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:37:28,038 basehttp 2060 24076 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 10:37:28,088 basehttp 2060 15116 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:37:28,163 basehttp 2060 15116 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:37:28,227 basehttp 2060 15116 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:37:35,911 basehttp 2060 15116 "GET /api/v1/localisation/pays/?page=3&page_size=10 HTTP/1.1" 200 8354
+INFO 2026-02-20 10:37:45,407 basehttp 2060 15116 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:37:59,025 basehttp 2060 15116 "GET /api/v1/localisation/provinces/?page=1&page_size=10 HTTP/1.1" 200 12908
+INFO 2026-02-20 10:37:59,111 basehttp 2060 24076 "GET /api/v1/localisation/provinces/?page=1&page_size=10 HTTP/1.1" 200 12908
+INFO 2026-02-20 10:38:02,101 basehttp 2060 24076 "OPTIONS /api/v1/localisation/districts/?page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 10:38:02,191 basehttp 2060 24076 "GET /api/v1/localisation/districts/?page=1&page_size=10 HTTP/1.1" 200 14050
+INFO 2026-02-20 10:38:02,263 basehttp 2060 15116 "GET /api/v1/localisation/districts/?page=1&page_size=10 HTTP/1.1" 200 14050
+INFO 2026-02-20 10:38:04,188 basehttp 2060 15116 "OPTIONS /api/v1/localisation/quartiers/?page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 10:38:04,324 basehttp 2060 15116 "GET /api/v1/localisation/quartiers/?page=1&page_size=10 HTTP/1.1" 200 15021
+INFO 2026-02-20 10:38:04,428 basehttp 2060 24076 "GET /api/v1/localisation/quartiers/?page=1&page_size=10 HTTP/1.1" 200 15021
+INFO 2026-02-20 10:38:32,483 basehttp 2060 24076 "OPTIONS /api/v1/localisation/points-de-service/?page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 10:38:32,539 basehttp 2060 24076 "GET /api/v1/localisation/points-de-service/?page=1&page_size=10 HTTP/1.1" 200 52
+INFO 2026-02-20 10:38:32,602 basehttp 2060 24076 "GET /api/v1/localisation/points-de-service/?page=1&page_size=10 HTTP/1.1" 200 52
+INFO 2026-02-20 10:38:35,537 basehttp 2060 24076 "GET /api/v1/localisation/quartiers/?page=1&page_size=10 HTTP/1.1" 200 15021
+INFO 2026-02-20 10:38:35,643 basehttp 2060 15116 "GET /api/v1/localisation/quartiers/?page=1&page_size=10 HTTP/1.1" 200 15021
+INFO 2026-02-20 10:38:36,971 basehttp 2060 15116 "GET /api/v1/localisation/districts/?page=1&page_size=10 HTTP/1.1" 200 14050
+INFO 2026-02-20 10:38:37,043 basehttp 2060 24076 "GET /api/v1/localisation/districts/?page=1&page_size=10 HTTP/1.1" 200 14050
+INFO 2026-02-20 10:38:39,194 basehttp 2060 24076 "GET /api/v1/localisation/provinces/?page=1&page_size=10 HTTP/1.1" 200 12908
+INFO 2026-02-20 10:38:39,262 basehttp 2060 15116 "GET /api/v1/localisation/provinces/?page=1&page_size=10 HTTP/1.1" 200 12908
+INFO 2026-02-20 10:38:40,429 basehttp 2060 15116 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:38:40,493 basehttp 2060 24076 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:41:58,328 basehttp 2060 24076 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:41:58,468 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:44:40,132 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:44:40,321 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:44:47,750 basehttp 2060 15116 "OPTIONS /api/v1/identite/utilisateurs/?page=1&page_size=25 HTTP/1.1" 200 0
+INFO 2026-02-20 10:44:47,907 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=25 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:44:53,869 basehttp 2060 15116 "OPTIONS /api/v1/identite/utilisateurs/?page=1&page_size=50 HTTP/1.1" 200 0
+INFO 2026-02-20 10:44:54,018 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=50 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:45:02,223 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=100 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:45:10,160 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:45:42,625 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?telephone_verifie=true&page=1&page_size=10 HTTP/1.1" 200 16039
+INFO 2026-02-20 10:45:51,955 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:45:54,586 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 19228
+INFO 2026-02-20 10:45:55,439 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 19228
+INFO 2026-02-20 10:45:55,651 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 19228
+INFO 2026-02-20 10:45:57,709 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3225
+INFO 2026-02-20 10:46:05,015 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:46:06,606 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:46:06,810 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:49:13,194 basehttp 2060 15116 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:49:13,259 basehttp 2060 15116 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:49:13,326 basehttp 2060 19340 "GET /api/v1/localisation/pays/?page=1&page_size=10 HTTP/1.1" 200 11823
+INFO 2026-02-20 10:49:21,139 basehttp 2060 19340 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:49:21,285 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:50:58,565 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:52:07,330 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:52:37,166 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:52:38,092 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:53:38,186 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:53:56,996 basehttp 2060 15116 "OPTIONS /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 10:53:57,134 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:57:25,253 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 10:58:04,459 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:00:01,419 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:00:48,721 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:01:29,124 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:02:21,721 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:03:23,030 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+WARNING 2026-02-20 11:04:56,267 log 2060 15116 Unauthorized: /api/v1/identite/utilisateurs/
+WARNING 2026-02-20 11:04:56,268 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 401 233
+WARNING 2026-02-20 11:05:16,852 log 2060 15116 Unauthorized: /api/v1/authentification/jeton/actualiser/
+WARNING 2026-02-20 11:05:16,852 basehttp 2060 15116 "POST /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 401 105
+WARNING 2026-02-20 11:05:16,868 log 2060 1920 Unauthorized: /api/v1/authentification/jeton/actualiser/
+WARNING 2026-02-20 11:05:16,869 basehttp 2060 1920 "POST /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 401 105
+INFO 2026-02-20 11:05:18,803 basehttp 2060 1920 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+INFO 2026-02-20 11:05:19,673 basehttp 2060 1920 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1285
+INFO 2026-02-20 11:05:19,755 basehttp 2060 1920 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 11:05:19,983 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:05:20,119 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:05:48,251 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:06:54,854 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 19228
+INFO 2026-02-20 11:06:57,931 basehttp 2060 15116 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 11:06:58,022 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3225
+INFO 2026-02-20 11:06:59,589 basehttp 2060 15116 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 11:06:59,699 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3231
+INFO 2026-02-20 11:07:08,643 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:07:19,303 basehttp 2060 15116 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 11:07:19,409 basehttp 2060 15116 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 11:07:19,551 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:07:19,717 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:10:59,694 basehttp 2060 15116 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-20 11:10:59,694 basehttp 2060 1920 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-20 11:10:59,783 basehttp 2060 15116 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 11:10:59,813 basehttp 2060 1920 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 11:11:27,142 basehttp 2060 15116 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 11:11:27,179 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:11:27,236 basehttp 2060 15116 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 11:11:27,343 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:11:27,469 basehttp 2060 15116 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:11:27,609 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:12:10,821 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342
+INFO 2026-02-20 11:12:15,300 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 19228
+INFO 2026-02-20 11:12:16,564 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=ADMIN&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3225
+INFO 2026-02-20 11:12:17,963 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3231
+INFO 2026-02-20 11:12:21,025 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3231
+INFO 2026-02-20 11:12:22,138 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3231
+INFO 2026-02-20 11:12:22,375 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3231
+INFO 2026-02-20 11:12:22,598 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3231
+INFO 2026-02-20 11:12:23,238 basehttp 2060 1920 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=AGENT&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 11:12:23,326 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=AGENT&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3248
+INFO 2026-02-20 11:12:24,094 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3231
+INFO 2026-02-20 11:12:24,523 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3231
+INFO 2026-02-20 11:12:24,746 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=MARCHAND&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3231
+INFO 2026-02-20 11:12:26,066 basehttp 2060 1920 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=CLIENT&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 11:12:26,146 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=CLIENT&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3211
+INFO 2026-02-20 11:12:27,725 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=CLIENT&statut=ACTIF&page=1&page_size=10 HTTP/1.1" 200 3211
+INFO 2026-02-20 11:12:28,606 basehttp 2060 1920 "OPTIONS /api/v1/identite/utilisateurs/?type_utilisateur=CLIENT&statut=ACTIF&telephone_verifie=true&page=1&page_size=10 HTTP/1.1" 200 0
+INFO 2026-02-20 11:12:28,693 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?type_utilisateur=CLIENT&statut=ACTIF&telephone_verifie=true&page=1&page_size=10 HTTP/1.1" 200 3211
+INFO 2026-02-20 11:12:31,352 basehttp 2060 1920 "GET /api/v1/identite/utilisateurs/?page=1&page_size=10 HTTP/1.1" 200 22342

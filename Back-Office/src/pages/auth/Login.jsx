@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { Checkbox } from 'primereact/checkbox';
-import { Input, PasswordInput, Button, Alert, Skeleton } from '../../components/common';
+import { Input, PasswordInput, Button, Alert } from '../../components/common';
 import { useAuth } from '../../contexts/AuthContext';
 
 const Login = () => {
@@ -51,67 +51,6 @@ const Login = () => {
   // Récupérer la route de redirection ou utiliser le dashboard par défaut
   const from = location.state?.from?.pathname || '/admin/dashboard';
 
-  // Afficher un skeleton pendant la vérification de la session
-  if (authLoading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-md w-full space-y-8">
-          {/* Logo Skeleton */}
-          <div className="text-center">
-            <div className="mb-6">
-              <Skeleton className="h-12 w-48 mx-auto mb-2" />
-              <div className="flex items-center justify-center gap-2">
-                <Skeleton className="h-8 w-20" />
-                <Skeleton className="h-8 w-20" />
-              </div>
-            </div>
-          </div>
-          
-          {/* Formulaire Skeleton */}
-          <div className="bg-card border border-darkGray rounded-lg p-8 shadow-lg">
-            <div className="space-y-6">
-              {/* Input 1 */}
-              <div>
-                <Skeleton className="h-4 w-48 mb-2" />
-                <Skeleton className="h-12 w-full" />
-              </div>
-              
-              {/* Input 2 */}
-              <div>
-                <Skeleton className="h-4 w-32 mb-2" />
-                <Skeleton className="h-12 w-full" />
-              </div>
-              
-              {/* Remember me & Forgot password */}
-              <div className="flex items-center justify-between">
-                <Skeleton className="h-4 w-32" />
-                <Skeleton className="h-4 w-40" />
-              </div>
-              
-              {/* Button */}
-              <Skeleton className="h-12 w-full rounded-lg" />
-            </div>
-            
-            {/* Divider */}
-            <div className="mt-6">
-              <Skeleton className="h-px w-full" />
-            </div>
-            
-            {/* Footer text */}
-            <div className="mt-6 text-center">
-              <Skeleton className="h-4 w-64 mx-auto" />
-            </div>
-          </div>
-          
-          {/* Copyright */}
-          <div className="text-center">
-            <Skeleton className="h-3 w-56 mx-auto" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -145,8 +84,11 @@ const Login = () => {
     }
 
     try {
-      // Utiliser Redux pour la connexion
-      await login(formData.username, formData.password, rememberMe);
+      // Délai minimum pour afficher le spinner (500ms)
+      const [loginResult] = await Promise.all([
+        login(formData.username, formData.password, rememberMe),
+        new Promise(resolve => setTimeout(resolve, 500))
+      ]);
 
       // Rediriger vers la page demandée ou le dashboard
       navigate(from, { replace: true });

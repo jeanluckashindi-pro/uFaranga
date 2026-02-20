@@ -72,10 +72,6 @@ function CartographieUtilisateurs() {
   useEffect(() => {
     if (map.current) return;
 
-    console.log('Initialisation de la carte...');
-    console.log('MapContainer:', mapContainer.current);
-    console.log('MAPBOX_TOKEN:', MAPBOX_TOKEN ? 'Défini' : 'Non défini');
-
     try {
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
@@ -86,8 +82,6 @@ function CartographieUtilisateurs() {
         bearing: 0,
         antialias: true
       });
-
-      console.log('Carte créée avec succès');
 
       map.current.addControl(new mapboxgl.NavigationControl(), 'top-right');
       map.current.addControl(new mapboxgl.FullscreenControl(), 'top-right');
@@ -103,7 +97,6 @@ function CartographieUtilisateurs() {
       });
 
       map.current.on('load', () => {
-        console.log('Carte chargée');
         setMapLoaded(true);
       });
 
@@ -124,21 +117,15 @@ function CartographieUtilisateurs() {
 
   // Mettre à jour les marqueurs
   useEffect(() => {
-    console.log('Effect marqueurs - mapLoaded:', mapLoaded, 'showUsers:', showUsers, 'filteredUsers:', filteredUsers.length);
-    
     if (!map.current || !mapLoaded) {
-      console.log('Carte pas prête');
       return;
     }
 
-    console.log('Suppression des anciens marqueurs:', markersRef.current.length);
     markersRef.current.forEach(marker => marker.remove());
     markersRef.current = [];
 
     if (showUsers) {
-      console.log('Ajout de', filteredUsers.length, 'marqueurs');
       filteredUsers.forEach(user => {
-        console.log('Ajout marqueur pour:', user.nom, 'à', user.lat, user.lng);
         const el = document.createElement('div');
         el.innerHTML = `
           <svg width="28" height="28" viewBox="0 0 24 24" fill="${TYPE_COLORS[user.type]}" stroke="white" stroke-width="1.5" style="filter: drop-shadow(0 2px 6px rgba(0,0,0,0.4)); transition: all 0.2s;">
@@ -227,7 +214,6 @@ function CartographieUtilisateurs() {
 
         markersRef.current.push(marker);
       });
-      console.log('Marqueurs ajoutés:', markersRef.current.length);
     }
   }, [mapLoaded, showUsers, filteredUsers]);
 

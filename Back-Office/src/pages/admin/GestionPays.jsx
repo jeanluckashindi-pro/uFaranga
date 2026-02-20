@@ -5,184 +5,222 @@ import { InputText } from 'primereact/inputtext';
 import { Dropdown } from 'primereact/dropdown';
 import { Tag } from 'primereact/tag';
 import { Dialog } from 'primereact/dialog';
-import { 
-  Globe, MapPin, Plus, Edit2, Search, Download,
-  CheckCircle, XCircle, Map, ArrowLeft, Building2, Eye,
-  Power, Shield, MapPinned, Layers
-} from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 import { Skeleton } from '../../components/common';
-import api from '../../services/api';
+import { 
+  Search, Download, Plus, Edit, Trash2, Eye, 
+  Globe, MapPin, Map, Building, Home, ChevronRight, Save, X
+} from 'lucide-react';
+import apiService from '../../services/api';
 
 const GestionPays = () => {
-  const navigate = useNavigate();
-  const [pays, setPays] = useState([]);
-  const [totalRecords, setTotalRecords] = useState(0);
+  const [activeLevel, setActiveLevel] = useState('pays');
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [initialLoad, setInitialLoad] = useState(true);
+  const [totalRecords, setTotalRecords] = useState(0);
   const [globalFilter, setGlobalFilter] = useState('');
-  const [selectedStatus, setSelectedStatus] = useState('all');
-  const [selectedPays, setSelectedPays] = useState(null);
-  const [showDetailModal, setShowDetailModal] = useState(false);
-  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
-  const [actionType, setActionType] = useState(null);
-  const [actionLoading, setActionLoading] = useState(false);
-  const [paysDetail, setPaysDetail] = useState(null);
-  const [loadingDetail, setLoadingDetail] = useState(false);
+  
+  const [filters, setFilters] = useState({
+    continent: '',
+    sous_region: '',
+    est_actif: '',
+    pays_id: '',
+    province_id: '',
+    district_id: '',
+    quartier_id: ''
+  });
+
   const [lazyParams, setLazyParams] = useState({
     first: 0,
     rows: 10,
-    page: 0,
-  });
-  const [statsGlobales, setStatsGlobales] = useState({
-    total: 0,
-    actifs: 0,
-    autorises: 0,
-    inactifs: 0,
+    page: 0
   });
 
-  // Charger les stats globales
-  useEffect(() => {
-    fetchStatsGlobales();
-  }, []);
+  const [showDialog, setShowDialog] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [dialogMode, setDialogMode] = useState('view');
+  const [formData, setFormData] = useState({});
+  const [metadataFields, setMetadataFields] = useState([]);
 
-  const fetchStatsGlobales = async () => {
+  const levels = [
+    { id: 'pays', label: 'Pays', icon: Globe, endpoint: 'pays' },
+    { id: 'provinces', label: 'Provinces', icon: Map, endpoint: 'provinces' },
+    { id: 'districts', label: 'Districts', icon: MapPin, endpoint: 'districts' },
+    { id: 'quartiers', label: 'Quartiers', icon: Building, endpoint: 'quartiers' },
+    { id: 'points', label: 'Points de Service', icon: Home, endpoint: 'points-de-service' }
+  ];
+
+  const continentOptions = [
+    { label: 'Tous', value: '' },
+    { label: 'Afrique', value: 'Afrique' },
+    { label: 'Europe', value: 'Europe' },
+    { label: 'Asie', value: 'Asie' }
+  ];
+
+  const booleanOptions = [
+    { label: 'Tous', value: '' },
+    { label: 'Oui', value: 'true' },
+    { label: 'Non', value: 'false' }
+  ];
+
+  const loadData = async () => {
+    setLoading(true);
     try {
-      // Charger tous les pays pour les stats
-      const response = await api.request('/api/v1/localisation/pays/?limit=1000');
-      const allPays = response.results || [];
+      const currentLevel = levels.find(l => l.id === activeLevel);
       
-      setStatsGlobales({
-        total: response.count || 0,
-        actifs: allPays.filter(p => p.est_actif).length,
-        autorises: allPays.filter(p => p.autorise_systeme).length,
-        inactifs: allPays.filter(p => !p.est_actif).length,
-      });
-    } catch (error) {
-      console.error('Erreur chargement stats:', error);
-    }
-  };
+      // Construire les paramètres selon le niveau
+      const params = {
+        page: lazyParams.page + 1,
+        page_size: lazyParams.rows
+      };
 
-  // Charger la liste des pays
-  useEffect(() => {
-    fetchPays();
-  }, [globalFilter, selectedStatus, lazyParams]);
-
-  const fetchPays = async () => {
-    try {
-      setLoading(true);
-      
-      // Construire les paramètres de requête
-      const params = new URLSearchParams();
-      
-      // Filtrage par recherche
+      // Ajouter la recherche si présente
       if (globalFilter) {
-        params.append('nom', globalFilter);
+        params.search = globalFilter;
       }
-      
-      // Filtrage par statut
-      if (selectedStatus === 'actif') {
-        params.append('est_actif', 'true');
-      } else if (selectedStatus === 'inactif') {
-        params.append('est_actif', 'false');
-      } else if (selectedStatus === 'autorise') {
-        params.append('autorise_systeme', 'true');
+
+      // Ajouter les filtres spécifiques selon le niveau
+      if (activeLevel === 'pays') {
+        if (filters.continent) params.continent = filters.continent;
+        if (filters.sous_region) params.sous_region = filters.sous_region;
+        if (filters.est_actif) params.est_actif = filters.est_actif;
+      } else if (activeLevel === 'provinces') {
+        if (filters.pays_id) params.pays_id = filters.pays_id;
+        if (filters.est_actif) params.est_actif = filters.est_actif;
+      } else if (activeLevel === 'districts') {
+        if (filters.province_id) params.province_id = filters.province_id;
+        if (filters.est_actif) params.est_actif = filters.est_actif;
+      } else if (activeLevel === 'quartiers') {
+        if (filters.district_id) params.district_id = filters.district_id;
+        if (filters.est_actif) params.est_actif = filters.est_actif;
+      } else if (activeLevel === 'points') {
+        if (filters.quartier_id) params.quartier_id = filters.quartier_id;
+        if (filters.est_actif) params.est_actif = filters.est_actif;
       }
+
+      const response = await apiService.getLocalisation(currentLevel.endpoint, params);
       
-      // Pagination
-      params.append('limit', lazyParams.rows);
-      params.append('offset', lazyParams.first);
-      
-      const queryString = params.toString();
-      const endpoint = `/api/v1/localisation/pays/${queryString ? `?${queryString}` : ''}`;
-      
-      const response = await api.request(endpoint);
-      setPays(response.results || []);
+      setData(response.results || []);
       setTotalRecords(response.count || 0);
+      setInitialLoad(false);
     } catch (error) {
-      console.error('Erreur chargement pays:', error);
+      console.error('Erreur:', error);
+      setData([]);
+      setTotalRecords(0);
+      setInitialLoad(false);
     } finally {
       setLoading(false);
     }
   };
 
+  useEffect(() => {
+    // Reset pagination quand on change de niveau
+    setLazyParams({
+      first: 0,
+      rows: 10,
+      page: 0
+    });
+    setInitialLoad(true);
+  }, [activeLevel]);
+
+  useEffect(() => {
+    loadData();
+  }, [lazyParams, filters, globalFilter, activeLevel]);
+
   const onPage = (event) => {
-    setLazyParams(event);
-  };
-
-  // Charger les détails d'un pays (avec provinces, districts, etc.)
-  const fetchPaysDetail = async (paysId) => {
-    try {
-      setLoadingDetail(true);
-      const response = await api.request(`/api/v1/localisation/pays/${paysId}/`);
-      setPaysDetail(response);
-    } catch (error) {
-      console.error('Erreur chargement détails pays:', error);
-    } finally {
-      setLoadingDetail(false);
-    }
-  };
-
-  const handleViewDetail = async (pays) => {
-    // Naviguer vers la page de détails
-    navigate(`/admin/pays/${pays.id}`);
-  };
-
-  const handleToggleAction = (pays, type) => {
-    setSelectedPays(pays);
-    setActionType(type);
-    setShowConfirmDialog(true);
-  };
-
-  const confirmAction = async () => {
-    if (!selectedPays || !actionType) return;
-
-    try {
-      setActionLoading(true);
-      const updateData = {};
-      
-      if (actionType === 'actif') {
-        updateData.est_actif = !selectedPays.est_actif;
-      } else if (actionType === 'autorise') {
-        updateData.autorise_systeme = !selectedPays.autorise_systeme;
-      }
-
-      await api.request(`/api/v1/localisation/pays/${selectedPays.id}/`, {
-        method: 'PATCH',
-        body: JSON.stringify(updateData),
+    // Vérifier que la page demandée est valide
+    const maxPage = Math.ceil(totalRecords / event.rows) - 1;
+    if (event.page > maxPage && totalRecords > 0) {
+      // Si on dépasse, revenir à la première page
+      setLazyParams({
+        first: 0,
+        rows: event.rows,
+        page: 0
       });
-
-      // Recharger la liste
-      await fetchPays();
-      await fetchStatsGlobales();
-      setShowConfirmDialog(false);
-      setSelectedPays(null);
-      setActionType(null);
-    } catch (error) {
-      console.error('Erreur lors de la mise à jour:', error);
-    } finally {
-      setActionLoading(false);
+    } else {
+      setLazyParams(event);
     }
   };
 
-  const statusOptions = [
-    { label: 'Tous', value: 'all' },
-    { label: 'Actifs', value: 'actif' },
-    { label: 'Autorisés', value: 'autorise' },
-    { label: 'Inactifs', value: 'inactif' }
-  ];
-
-  // Templates pour les colonnes
-  const codeBodyTemplate = (rowData) => {
-    return (
-      <div className="flex items-center gap-2">
-        <span className="font-mono text-primary font-semibold">{rowData.code_iso_2}</span>
-        <span className="text-gray-500">/</span>
-        <span className="font-mono text-gray-400 text-xs">{rowData.code_iso_3}</span>
-      </div>
-    );
+  const handleSave = async () => {
+    try {
+      const currentLevel = levels.find(l => l.id === activeLevel);
+      
+      if (dialogMode === 'create') {
+        await apiService.createLocalisation(currentLevel.endpoint, formData);
+      } else if (dialogMode === 'edit') {
+        await apiService.updateLocalisation(currentLevel.endpoint, selectedItem.id, formData);
+      }
+      
+      setShowDialog(false);
+      loadData();
+    } catch (error) {
+      console.error('Erreur:', error);
+    }
   };
 
-  const statutBodyTemplate = (rowData) => {
+  const handleDelete = async (item) => {
+    if (confirm(`Supprimer ${item.nom} ?`)) {
+      try {
+        const currentLevel = levels.find(l => l.id === activeLevel);
+        await apiService.deleteLocalisation(currentLevel.endpoint, item.id);
+        loadData();
+      } catch (error) {
+        console.error('Erreur:', error);
+      }
+    }
+  };
+
+  const openCreateDialog = () => {
+    setSelectedItem(null);
+    setDialogMode('create');
+    setFormData({
+      code: '',
+      nom: '',
+      est_actif: true,
+      metadonnees: {}
+    });
+    setMetadataFields([]);
+    setShowDialog(true);
+  };
+
+  const openEditDialog = (item) => {
+    setSelectedItem(item);
+    setDialogMode('edit');
+    setFormData({ ...item });
+    setMetadataFields(item.metadonnees ? Object.keys(item.metadonnees) : []);
+    setShowDialog(true);
+  };
+
+  const openViewDialog = (item) => {
+    setSelectedItem(item);
+    setDialogMode('view');
+    setShowDialog(true);
+  };
+
+  const addMetadataField = () => {
+    const fieldName = prompt('Nom du champ:');
+    if (fieldName && !metadataFields.includes(fieldName)) {
+      setMetadataFields([...metadataFields, fieldName]);
+      setFormData({
+        ...formData,
+        metadonnees: { ...formData.metadonnees, [fieldName]: '' }
+      });
+    }
+  };
+
+  const removeMetadataField = (fieldName) => {
+    setMetadataFields(metadataFields.filter(f => f !== fieldName));
+    const newMetadata = { ...formData.metadonnees };
+    delete newMetadata[fieldName];
+    setFormData({ ...formData, metadonnees: newMetadata });
+  };
+
+  const codeBodyTemplate = (rowData) => {
+    return <Tag value={rowData.code || rowData.code_iso_2 || rowData.code_iso_3} severity="info" />;
+  };
+
+  const activeBodyTemplate = (rowData) => {
     return (
       <Tag 
         value={rowData.est_actif ? 'Actif' : 'Inactif'} 
@@ -191,447 +229,619 @@ const GestionPays = () => {
     );
   };
 
-  const autoriseBodyTemplate = (rowData) => {
-    return (
-      <Tag 
-        value={rowData.autorise_systeme ? 'Oui' : 'Non'} 
-        severity={rowData.autorise_systeme ? 'info' : 'warning'} 
-      />
-    );
-  };
-
-  const coordonneesBodyTemplate = (rowData) => {
-    return (
-      <div className="text-xs font-mono text-gray-400">
-        <div>{rowData.latitude_centre}</div>
-        <div>{rowData.longitude_centre}</div>
-      </div>
-    );
-  };
-
-  const dateBodyTemplate = (rowData) => {
-    return new Date(rowData.date_creation).toLocaleDateString('fr-FR');
+  const metadataBodyTemplate = (rowData) => {
+    if (!rowData.metadonnees || Object.keys(rowData.metadonnees).length === 0) {
+      return <span className="text-gray-400 text-sm">Aucune</span>;
+    }
+    const count = Object.keys(rowData.metadonnees).length;
+    return <Tag value={`${count} champ${count > 1 ? 's' : ''}`} severity="secondary" />;
   };
 
   const actionsBodyTemplate = (rowData) => {
     return (
       <div className="flex gap-2">
         <button
-          onClick={() => handleViewDetail(rowData)}
-          className="p-2 bg-primary/10 text-primary rounded hover:bg-primary/20 transition-colors"
-          title="Voir détails"
+          onClick={() => openViewDialog(rowData)}
+          className="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors"
+          title="Voir"
         >
           <Eye className="w-4 h-4" />
         </button>
         <button
-          onClick={() => handleToggleAction(rowData, 'actif')}
-          className={`p-2 rounded transition-colors ${
-            rowData.est_actif 
-              ? 'bg-red-500/10 text-red-400 hover:bg-red-500/20' 
-              : 'bg-green-500/10 text-green-400 hover:bg-green-500/20'
-          }`}
-          title={rowData.est_actif ? 'Désactiver' : 'Activer'}
+          onClick={() => openEditDialog(rowData)}
+          className="p-2 bg-secondary/10 text-secondary rounded-lg hover:bg-secondary/20 transition-colors"
+          title="Modifier"
         >
-          <Power className="w-4 h-4" />
+          <Edit className="w-4 h-4" />
         </button>
         <button
-          onClick={() => handleToggleAction(rowData, 'autorise')}
-          className={`p-2 rounded transition-colors ${
-            rowData.autorise_systeme 
-              ? 'bg-orange-500/10 text-orange-400 hover:bg-orange-500/20' 
-              : 'bg-blue-500/10 text-blue-400 hover:bg-blue-500/20'
-          }`}
-          title={rowData.autorise_systeme ? 'Retirer autorisation' : 'Autoriser'}
+          onClick={() => handleDelete(rowData)}
+          className="p-2 bg-danger/10 text-danger rounded-lg hover:bg-danger/20 transition-colors"
+          title="Supprimer"
         >
-          <Shield className="w-4 h-4" />
+          <Trash2 className="w-4 h-4" />
         </button>
       </div>
     );
   };
 
-  // Skeleton Loading Component
-  const DataTableSkeleton = () => (
-    <div className="bg-card border border-darkGray rounded-lg p-6">
-      <div className="space-y-4">
-        {[...Array(10)].map((_, i) => (
-          <div key={i} className="flex items-center gap-4">
-            <Skeleton className="h-12 w-full" />
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background p-6 md:p-10">
-        {/* Header Skeleton */}
-        <div className="mb-6">
-          <Skeleton className="h-8 w-64 mb-4" />
-          <div className="flex items-center justify-between">
-            <div>
-              <Skeleton className="h-10 w-80 mb-2" />
-              <Skeleton className="h-4 w-96" />
-            </div>
-            <Skeleton className="h-10 w-40" />
-          </div>
-        </div>
-
-        {/* Stats Skeleton */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          {[...Array(4)].map((_, i) => (
-            <div key={i} className="bg-card border border-darkGray rounded-lg p-4">
-              <div className="flex items-center gap-3">
-                <Skeleton className="h-12 w-12 rounded-lg" />
-                <div className="flex-1">
-                  <Skeleton className="h-4 w-24 mb-2" />
-                  <Skeleton className="h-8 w-16" />
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Filters Skeleton */}
-        <div className="bg-card border border-darkGray rounded-lg p-4 mb-6">
-          <div className="flex gap-4">
-            <Skeleton className="h-10 flex-1" />
-            <Skeleton className="h-10 w-48" />
-            <Skeleton className="h-10 w-32" />
-          </div>
-        </div>
-
-        {/* DataTable Skeleton */}
-        <DataTableSkeleton />
-      </div>
-    );
-  }
+  const stats = {
+    total: totalRecords,
+    actifs: data.filter(d => d.est_actif).length,
+    inactifs: data.filter(d => !d.est_actif).length
+  };
 
   return (
-    <div className="min-h-screen bg-background p-6 md:p-10">
-      {/* Header */}
-      <div className="mb-6">
-        <button
-          onClick={() => navigate('/admin/couverture-mondiale')}
-          className="flex items-center gap-2 text-gray-400 hover:text-text transition-colors mb-4"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Retour à Couverture Mondiale</span>
-        </button>
-        
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-anton uppercase text-text">Gestion des Pays</h1>
-            <p className="text-sm text-gray-400 mt-1">Configuration et gestion des pays dans le système</p>
-          </div>
-          <div className="flex gap-3">
-            <button 
-              onClick={() => navigate('/admin/cartographie-couverture')}
-              className="flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors"
-            >
-              <Layers className="w-5 h-5" />
-              <span>Cartographie</span>
-            </button>
-            <button 
-              onClick={() => navigate('/admin/carte-mondiale')}
-              className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors"
-            >
-              <MapPinned className="w-5 h-5" />
-              <span>Carte Mondiale</span>
-            </button>
-            <button className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors">
-              <Plus className="w-5 h-5" />
-              <span>Ajouter un pays</span>
-            </button>
-          </div>
+    <div className="p-6 space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-anton uppercase text-text">Gestion Localisation</h1>
+          <p className="text-sm text-gray-400 mt-1">Hiérarchie géographique complète</p>
         </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div className="bg-card border border-darkGray rounded-lg p-4">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-primary/10 rounded-lg">
+      {/* Navigation par niveaux */}
+      <div className="bg-card border border-darkGray rounded-lg p-4">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2">
+          {levels.map((level, index) => {
+            const Icon = level.icon;
+            const isActive = activeLevel === level.id;
+            
+            return (
+              <div key={level.id} className="flex items-center gap-2">
+                <button
+                  onClick={() => setActiveLevel(level.id)}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-lg whitespace-nowrap transition-all ${
+                    isActive
+                      ? 'bg-primary text-white shadow-lg shadow-primary/30'
+                      : 'bg-background text-gray-400 hover:text-text hover:bg-darkGray'
+                  }`}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span className="font-medium">{level.label}</span>
+                </button>
+                {index < levels.length - 1 && (
+                  <ChevronRight className="w-4 h-4 text-gray-400 flex-shrink-0" />
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Statistiques */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-3 bg-primary/20 rounded-lg">
               <Globe className="w-6 h-6 text-primary" />
             </div>
-            <div>
-              <p className="text-sm text-gray-400">Total Pays</p>
-              <p className="text-2xl font-bold text-text">{statsGlobales.total}</p>
-            </div>
+            <span className="text-3xl font-bold text-primary">{stats.total}</span>
           </div>
+          <p className="text-sm text-gray-400">Total</p>
         </div>
 
-        <div className="bg-card border border-darkGray rounded-lg p-4">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-secondary/10 rounded-lg">
-              <CheckCircle className="w-6 h-6 text-secondary" />
+        <div className="bg-gradient-to-br from-success/10 to-success/5 border border-success/20 rounded-xl p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-3 bg-success/20 rounded-lg">
+              <Globe className="w-6 h-6 text-success" />
             </div>
-            <div>
-              <p className="text-sm text-gray-400">Actifs</p>
-              <p className="text-2xl font-bold text-secondary">{statsGlobales.actifs}</p>
-            </div>
+            <span className="text-3xl font-bold text-success">{stats.actifs}</span>
           </div>
+          <p className="text-sm text-gray-400">Actifs</p>
         </div>
 
-        <div className="bg-card border border-darkGray rounded-lg p-4">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-primary/10 rounded-lg">
-              <Map className="w-6 h-6 text-primary" />
+        <div className="bg-gradient-to-br from-danger/10 to-danger/5 border border-danger/20 rounded-xl p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-3 bg-danger/20 rounded-lg">
+              <Globe className="w-6 h-6 text-danger" />
             </div>
-            <div>
-              <p className="text-sm text-gray-400">Autorisés</p>
-              <p className="text-2xl font-bold text-text">{statsGlobales.autorises}</p>
-            </div>
+            <span className="text-3xl font-bold text-danger">{stats.inactifs}</span>
           </div>
-        </div>
-
-        <div className="bg-card border border-darkGray rounded-lg p-4">
-          <div className="flex items-center gap-3">
-            <div className="p-3 bg-danger/10 rounded-lg">
-              <XCircle className="w-6 h-6 text-danger" />
-            </div>
-            <div>
-              <p className="text-sm text-gray-400">Inactifs</p>
-              <p className="text-2xl font-bold text-danger">{statsGlobales.inactifs}</p>
-            </div>
-          </div>
+          <p className="text-sm text-gray-400">Inactifs</p>
         </div>
       </div>
 
-      {/* Filters */}
-      <div className="bg-card border border-darkGray rounded-lg p-4 mb-6">
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-            <InputText
-              value={globalFilter}
-              onChange={(e) => setGlobalFilter(e.target.value)}
-              placeholder="Rechercher par nom, code ISO..."
-              className="w-full pl-10 pr-4 py-2 bg-background border border-darkGray rounded-lg text-text"
-            />
+      {/* Filtres */}
+      <div className="bg-card border border-darkGray rounded-lg p-4">
+        <div className="space-y-4">
+          <div>
+            <h3 className="text-sm font-semibold text-gray-400 uppercase mb-3">Filtres rapides</h3>
+            <div className="flex flex-wrap gap-3">
+              <button
+                onClick={() => setFilters({ ...filters, est_actif: 'true' })}
+                className="px-4 py-2 bg-success/10 text-success rounded-lg hover:bg-success/20 transition-colors font-medium"
+              >
+                Actifs
+              </button>
+              <button
+                onClick={() => setFilters({ ...filters, est_actif: 'false' })}
+                className="px-4 py-2 bg-danger/10 text-danger rounded-lg hover:bg-danger/20 transition-colors font-medium"
+              >
+                Inactifs
+              </button>
+              {activeLevel === 'pays' && (
+                <>
+                  <button
+                    onClick={() => setFilters({ ...filters, continent: 'Afrique' })}
+                    className="px-4 py-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors font-medium"
+                  >
+                    Afrique
+                  </button>
+                  <button
+                    onClick={() => setFilters({ ...filters, continent: 'Europe' })}
+                    className="px-4 py-2 bg-secondary/10 text-secondary rounded-lg hover:bg-secondary/20 transition-colors font-medium"
+                  >
+                    Europe
+                  </button>
+                </>
+              )}
+              <button
+                onClick={() => setFilters({ continent: '', sous_region: '', est_actif: '', pays_id: '', province_id: '', district_id: '', quartier_id: '' })}
+                className="px-4 py-2 bg-darkGray text-text rounded-lg hover:bg-darkGray/80 transition-colors font-medium"
+              >
+                Réinitialiser
+              </button>
+            </div>
           </div>
-          
-          <Dropdown
-            value={selectedStatus}
-            options={statusOptions}
-            onChange={(e) => setSelectedStatus(e.value)}
-            className="w-full md:w-48"
-          />
 
-          <button className="flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors">
-            <Download className="w-5 h-5" />
-            <span>Exporter</span>
-          </button>
+          <div className="pt-4 border-t border-darkGray">
+            <h3 className="text-sm font-semibold text-gray-400 uppercase mb-3">Recherche et filtres</h3>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <InputText
+                  value={globalFilter}
+                  onChange={(e) => setGlobalFilter(e.target.value)}
+                  placeholder="Rechercher..."
+                  className="w-full pl-10 pr-4 py-2 bg-background border border-darkGray rounded-lg text-text"
+                />
+              </div>
+
+              {activeLevel === 'pays' && (
+                <Dropdown
+                  value={filters.continent}
+                  options={continentOptions}
+                  onChange={(e) => setFilters({ ...filters, continent: e.value })}
+                  placeholder="Continent"
+                  className="w-full"
+                />
+              )}
+
+              <Dropdown
+                value={filters.est_actif}
+                options={booleanOptions}
+                onChange={(e) => setFilters({ ...filters, est_actif: e.value })}
+                placeholder="Statut"
+                className="w-full"
+              />
+            </div>
+          </div>
+
+          <div className="pt-4 border-t border-darkGray">
+            <h3 className="text-sm font-semibold text-gray-400 uppercase mb-3">Actions</h3>
+            <div className="flex gap-3">
+              <button
+                onClick={openCreateDialog}
+                className="flex items-center justify-center gap-2 px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium"
+              >
+                <Plus className="w-5 h-5" />
+                Nouveau
+              </button>
+
+              <button
+                onClick={() => console.log('Export')}
+                className="flex items-center justify-center gap-2 px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium"
+              >
+                <Download className="w-5 h-5" />
+                Exporter
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* DataTable */}
       <div className="bg-card border border-darkGray rounded-lg overflow-hidden">
-        <DataTable
-          value={pays}
-          lazy
-          paginator
-          first={lazyParams.first}
-          rows={lazyParams.rows}
-          totalRecords={totalRecords}
-          onPage={onPage}
-          rowsPerPageOptions={[5, 10, 25, 50]}
-          loading={loading}
-          className="custom-datatable"
-          emptyMessage="Aucun pays trouvé"
-        >
-          <Column field="nom" header="Pays" sortable style={{ minWidth: '150px' }} />
-          <Column field="nom_anglais" header="Nom Anglais" sortable />
-          <Column header="Codes ISO" body={codeBodyTemplate} />
-          <Column header="Coordonnées" body={coordonneesBodyTemplate} />
-          <Column field="est_actif" header="Statut" body={statutBodyTemplate} sortable />
-          <Column field="autorise_systeme" header="Autorisé" body={autoriseBodyTemplate} sortable />
-          <Column field="date_creation" header="Date Création" body={dateBodyTemplate} sortable />
-          <Column header="Actions" body={actionsBodyTemplate} />
-        </DataTable>
+        {initialLoad ? (
+          <div className="p-6 space-y-4">
+            {[...Array(10)].map((_, index) => (
+              <div key={index} className="flex items-center gap-4 py-3 border-b border-darkGray">
+                <Skeleton className="h-6 w-24" />
+                <Skeleton className="h-6 w-48" />
+                <Skeleton className="h-6 w-32" />
+                <Skeleton className="h-6 w-24" />
+                <div className="ml-auto flex gap-2">
+                  <Skeleton className="h-8 w-8 rounded-lg" />
+                  <Skeleton className="h-8 w-8 rounded-lg" />
+                  <Skeleton className="h-8 w-8 rounded-lg" />
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <DataTable
+            value={data}
+            lazy
+            paginator
+            first={lazyParams.first}
+            rows={lazyParams.rows}
+            totalRecords={totalRecords}
+            onPage={onPage}
+            loading={loading}
+            rowsPerPageOptions={[10, 25, 50, 100]}
+            className="custom-datatable"
+            emptyMessage="Aucune donnée"
+            scrollable
+            scrollHeight="600px"
+          >
+            <Column 
+              field={activeLevel === 'pays' ? 'code_iso_2' : 'code'}
+              header="Code" 
+              body={codeBodyTemplate}
+              sortable 
+              frozen
+              style={{ minWidth: '100px', whiteSpace: 'nowrap' }} 
+            />
+            <Column 
+              field="nom" 
+              header="Nom" 
+              sortable 
+              frozen
+              style={{ minWidth: '200px', whiteSpace: 'nowrap' }} 
+            />
+            {activeLevel === 'pays' && (
+              <>
+                <Column 
+                  field="continent" 
+                  header="Continent" 
+                  sortable 
+                  style={{ minWidth: '150px', whiteSpace: 'nowrap' }} 
+                />
+                <Column 
+                  field="sous_region" 
+                  header="Sous-région" 
+                  sortable 
+                  style={{ minWidth: '150px', whiteSpace: 'nowrap' }} 
+                />
+                <Column 
+                  field="code_iso_3" 
+                  header="ISO 3" 
+                  sortable 
+                  style={{ minWidth: '100px', whiteSpace: 'nowrap' }} 
+                />
+              </>
+            )}
+            <Column 
+              header="Métadonnées" 
+              body={metadataBodyTemplate} 
+              style={{ minWidth: '120px', whiteSpace: 'nowrap' }} 
+            />
+            <Column 
+              field="est_actif" 
+              header="Statut" 
+              body={activeBodyTemplate} 
+              sortable 
+              style={{ minWidth: '100px', whiteSpace: 'nowrap' }} 
+            />
+            <Column 
+              header="Actions" 
+              body={actionsBodyTemplate} 
+              frozen 
+              alignFrozen="right" 
+              style={{ width: '150px', whiteSpace: 'nowrap' }} 
+            />
+          </DataTable>
+        )}
       </div>
 
-      {/* Dialog Détails Pays */}
+      {/* Dialog */}
       <Dialog
-        visible={showDetailModal}
-        onHide={() => {
-          setShowDetailModal(false);
-          setSelectedPays(null);
-          setPaysDetail(null);
-        }}
-        header="Détails du Pays"
-        style={{ width: '700px' }}
+        visible={showDialog}
+        onHide={() => setShowDialog(false)}
+        header={dialogMode === 'create' ? 'Nouveau' : dialogMode === 'edit' ? 'Modifier' : 'Détails'}
+        style={{ width: '900px', maxHeight: '90vh' }}
         className="custom-dialog"
       >
-        {selectedPays && (
-          <div className="space-y-4">
-            <div className="flex items-center gap-4 p-4 bg-background rounded-lg">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
-                <Globe className="w-8 h-8 text-primary" />
+        {dialogMode === 'view' && selectedItem ? (
+          <div className="space-y-6">
+            {/* Informations principales */}
+            <div className="grid grid-cols-2 gap-6">
+              <div>
+                <p className="text-sm text-gray-400 mb-1">Code ISO 2</p>
+                <p className="font-semibold text-text">{selectedItem.code || selectedItem.code_iso_2}</p>
               </div>
               <div>
-                <h3 className="text-xl font-bold text-text">{selectedPays.nom}</h3>
-                <p className="text-sm text-gray-400">{selectedPays.nom_anglais}</p>
-                <p className="text-xs text-gray-500 font-mono mt-1">
-                  {selectedPays.code_iso_2} / {selectedPays.code_iso_3}
-                </p>
+                <p className="text-sm text-gray-400 mb-1">Code ISO 3</p>
+                <p className="font-semibold text-text">{selectedItem.code_iso_3 || '-'}</p>
               </div>
-            </div>
-
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-3 bg-background rounded-lg">
-                <p className="text-xs text-gray-400 mb-1">Latitude Centre</p>
-                <p className="text-sm font-medium text-text font-mono">{selectedPays.latitude_centre}</p>
-              </div>
-              <div className="p-3 bg-background rounded-lg">
-                <p className="text-xs text-gray-400 mb-1">Longitude Centre</p>
-                <p className="text-sm font-medium text-text font-mono">{selectedPays.longitude_centre}</p>
-              </div>
-            </div>
-
-            <div className="flex gap-2">
-              <div className={`flex-1 p-3 rounded-lg ${
-                selectedPays.autorise_systeme 
-                  ? 'bg-secondary/10 border border-secondary/30' 
-                  : 'bg-gray-500/10 border border-gray-500/30'
-              }`}>
-                <p className="text-xs text-gray-400 mb-1">Autorisé Système</p>
-                <p className={`text-sm font-bold ${
-                  selectedPays.autorise_systeme ? 'text-secondary' : 'text-gray-400'
-                }`}>
-                  {selectedPays.autorise_systeme ? 'Oui' : 'Non'}
-                </p>
-              </div>
-              <div className={`flex-1 p-3 rounded-lg ${
-                selectedPays.est_actif 
-                  ? 'bg-green-500/10 border border-green-500/30' 
-                  : 'bg-red-500/10 border border-red-500/30'
-              }`}>
-                <p className="text-xs text-gray-400 mb-1">Statut</p>
-                <p className={`text-sm font-bold ${
-                  selectedPays.est_actif ? 'text-green-400' : 'text-red-400'
-                }`}>
-                  {selectedPays.est_actif ? 'Actif' : 'Inactif'}
-                </p>
-              </div>
-            </div>
-
-            <div className="p-3 bg-background rounded-lg">
-              <p className="text-xs text-gray-400 mb-1">Date de création</p>
-              <p className="text-sm font-medium text-text">
-                {new Date(selectedPays.date_creation).toLocaleString('fr-FR')}
-              </p>
-            </div>
-
-            {loadingDetail ? (
-              <div className="flex items-center justify-center py-8">
-                <Skeleton className="h-20 w-full" />
-              </div>
-            ) : paysDetail && paysDetail.provinces && paysDetail.provinces.length > 0 ? (
               <div>
-                <h4 className="text-sm font-bold text-text mb-3 flex items-center gap-2">
-                  <Building2 className="w-4 h-4 text-primary" />
-                  Provinces ({paysDetail.provinces.length})
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-60 overflow-y-auto">
-                  {paysDetail.provinces.map((province) => (
-                    <div
-                      key={province.id}
-                      className="p-3 bg-background border border-darkGray rounded-lg"
-                    >
-                      <div className="flex items-center justify-between mb-2">
-                        <p className="text-sm font-medium text-text">{province.nom}</p>
-                        <span className="text-xs text-gray-400 font-mono">{province.code}</span>
+                <p className="text-sm text-gray-400 mb-1">Nom</p>
+                <p className="font-semibold text-text">{selectedItem.nom}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-400 mb-1">Nom anglais</p>
+                <p className="font-semibold text-text">{selectedItem.nom_anglais || '-'}</p>
+              </div>
+              {selectedItem.continent && (
+                <div>
+                  <p className="text-sm text-gray-400 mb-1">Continent</p>
+                  <p className="font-semibold text-text">{selectedItem.continent}</p>
+                </div>
+              )}
+              {selectedItem.sous_region && (
+                <div>
+                  <p className="text-sm text-gray-400 mb-1">Sous-région</p>
+                  <p className="font-semibold text-text">{selectedItem.sous_region}</p>
+                </div>
+              )}
+              {selectedItem.latitude_centre && (
+                <div>
+                  <p className="text-sm text-gray-400 mb-1">Latitude</p>
+                  <p className="font-semibold text-text">{selectedItem.latitude_centre}</p>
+                </div>
+              )}
+              {selectedItem.longitude_centre && (
+                <div>
+                  <p className="text-sm text-gray-400 mb-1">Longitude</p>
+                  <p className="font-semibold text-text">{selectedItem.longitude_centre}</p>
+                </div>
+              )}
+              <div>
+                <p className="text-sm text-gray-400 mb-1">Autorisé système</p>
+                <Tag 
+                  value={selectedItem.autorise_systeme ? 'Oui' : 'Non'} 
+                  severity={selectedItem.autorise_systeme ? 'success' : 'secondary'} 
+                />
+              </div>
+              <div>
+                <p className="text-sm text-gray-400 mb-1">Statut</p>
+                {activeBodyTemplate(selectedItem)}
+              </div>
+            </div>
+
+            {/* Métadonnées détaillées */}
+            {selectedItem.metadonnees && Object.keys(selectedItem.metadonnees).length > 0 && (
+              <div className="pt-6 border-t border-darkGray">
+                <h3 className="text-lg font-semibold text-text mb-4">Informations complémentaires</h3>
+                <div className="space-y-4">
+                  {/* Langues en chips */}
+                  {selectedItem.metadonnees.langues && Array.isArray(selectedItem.metadonnees.langues) && (
+                    <div>
+                      <p className="text-sm text-gray-400 mb-2">Langues parlées</p>
+                      <div className="flex flex-wrap gap-2">
+                        {selectedItem.metadonnees.langues.map((langue, index) => (
+                          <Tag 
+                            key={index} 
+                            value={langue} 
+                            severity="info"
+                            className="px-3 py-1"
+                          />
+                        ))}
                       </div>
-                      <p className="text-xs text-gray-400">
-                        {province.districts?.length || 0} district(s)
-                      </p>
+                    </div>
+                  )}
+
+                  {/* Autres métadonnées en grille */}
+                  <div className="grid grid-cols-2 gap-4">
+                    {selectedItem.metadonnees.capitale && (
+                      <div className="p-3 bg-background rounded-lg">
+                        <p className="text-xs text-gray-400 mb-1">Capitale</p>
+                        <p className="text-sm text-text font-medium">{selectedItem.metadonnees.capitale}</p>
+                      </div>
+                    )}
+                    {selectedItem.metadonnees.population && (
+                      <div className="p-3 bg-background rounded-lg">
+                        <p className="text-xs text-gray-400 mb-1">Population</p>
+                        <p className="text-sm text-text font-medium">{selectedItem.metadonnees.population.toLocaleString()}</p>
+                      </div>
+                    )}
+                    {selectedItem.metadonnees.devise && (
+                      <div className="p-3 bg-background rounded-lg">
+                        <p className="text-xs text-gray-400 mb-1">Devise</p>
+                        <p className="text-sm text-text font-medium">{selectedItem.metadonnees.devise}</p>
+                      </div>
+                    )}
+                    {selectedItem.metadonnees.indicatif_tel && (
+                      <div className="p-3 bg-background rounded-lg">
+                        <p className="text-xs text-gray-400 mb-1">Indicatif téléphonique</p>
+                        <p className="text-sm text-text font-medium">{selectedItem.metadonnees.indicatif_tel}</p>
+                      </div>
+                    )}
+                    {selectedItem.metadonnees.fuseau_horaire && (
+                      <div className="p-3 bg-background rounded-lg">
+                        <p className="text-xs text-gray-400 mb-1">Fuseau horaire</p>
+                        <p className="text-sm text-text font-medium">{selectedItem.metadonnees.fuseau_horaire}</p>
+                      </div>
+                    )}
+                    {selectedItem.metadonnees.superficie_km2 && (
+                      <div className="p-3 bg-background rounded-lg">
+                        <p className="text-xs text-gray-400 mb-1">Superficie</p>
+                        <p className="text-sm text-text font-medium">{selectedItem.metadonnees.superficie_km2.toLocaleString()} km²</p>
+                      </div>
+                    )}
+                    
+                    {/* Autres métadonnées non standard */}
+                    {Object.entries(selectedItem.metadonnees)
+                      .filter(([key]) => !['langues', 'capitale', 'population', 'devise', 'indicatif_tel', 'fuseau_horaire', 'superficie_km2'].includes(key))
+                      .map(([key, value]) => (
+                        <div key={key} className="p-3 bg-background rounded-lg">
+                          <p className="text-xs text-gray-400 mb-1">{key}</p>
+                          <p className="text-sm text-text font-medium">
+                            {typeof value === 'object' ? JSON.stringify(value) : value}
+                          </p>
+                        </div>
+                      ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Dates */}
+            <div className="pt-6 border-t border-darkGray">
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-400 mb-1">Date de création</p>
+                  <p className="text-sm text-text">{new Date(selectedItem.date_creation).toLocaleString('fr-FR')}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400 mb-1">Dernière modification</p>
+                  <p className="text-sm text-text">{new Date(selectedItem.date_modification).toLocaleString('fr-FR')}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="space-y-6">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">
+                  Code {activeLevel === 'pays' ? 'ISO 2' : ''} *
+                </label>
+                <InputText
+                  value={formData.code || formData.code_iso_2 || ''}
+                  onChange={(e) => setFormData({ ...formData, [activeLevel === 'pays' ? 'code_iso_2' : 'code']: e.target.value })}
+                  className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text"
+                  placeholder="Ex: BI"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Nom *</label>
+                <InputText
+                  value={formData.nom || ''}
+                  onChange={(e) => setFormData({ ...formData, nom: e.target.value })}
+                  className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text"
+                  placeholder="Ex: Burundi"
+                />
+              </div>
+
+              {activeLevel === 'pays' && (
+                <>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Code ISO 3</label>
+                    <InputText
+                      value={formData.code_iso_3 || ''}
+                      onChange={(e) => setFormData({ ...formData, code_iso_3: e.target.value })}
+                      className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text"
+                      placeholder="Ex: BDI"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Continent</label>
+                    <Dropdown
+                      value={formData.continent || ''}
+                      options={continentOptions.filter(c => c.value !== '')}
+                      onChange={(e) => setFormData({ ...formData, continent: e.value })}
+                      placeholder="Sélectionner"
+                      className="w-full"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Sous-région</label>
+                    <InputText
+                      value={formData.sous_region || ''}
+                      onChange={(e) => setFormData({ ...formData, sous_region: e.target.value })}
+                      className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text"
+                      placeholder="Ex: Afrique de l'Est"
+                    />
+                  </div>
+                </>
+              )}
+
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Latitude</label>
+                <InputText
+                  type="number"
+                  step="0.0001"
+                  value={formData.latitude_centre || ''}
+                  onChange={(e) => setFormData({ ...formData, latitude_centre: parseFloat(e.target.value) })}
+                  className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text"
+                  placeholder="Ex: -3.3731"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-400 mb-2">Longitude</label>
+                <InputText
+                  type="number"
+                  step="0.0001"
+                  value={formData.longitude_centre || ''}
+                  onChange={(e) => setFormData({ ...formData, longitude_centre: parseFloat(e.target.value) })}
+                  className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text"
+                  placeholder="Ex: 29.9189"
+                />
+              </div>
+
+              <div className="col-span-2">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={formData.est_actif || false}
+                    onChange={(e) => setFormData({ ...formData, est_actif: e.target.checked })}
+                    className="w-5 h-5 text-primary rounded border-darkGray"
+                  />
+                  <span className="text-sm text-text">Actif</span>
+                </label>
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-darkGray">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-semibold text-text">Métadonnées</h3>
+                <button
+                  onClick={addMetadataField}
+                  className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors text-sm"
+                >
+                  <Plus className="w-4 h-4" />
+                  Ajouter un champ
+                </button>
+              </div>
+
+              {metadataFields.length > 0 ? (
+                <div className="space-y-3">
+                  {metadataFields.map((field) => (
+                    <div key={field} className="flex items-center gap-3">
+                      <div className="flex-1">
+                        <label className="block text-xs text-gray-400 mb-1">{field}</label>
+                        <InputText
+                          value={formData.metadonnees?.[field] || ''}
+                          onChange={(e) => setFormData({
+                            ...formData,
+                            metadonnees: { ...formData.metadonnees, [field]: e.target.value }
+                          })}
+                          className="w-full px-3 py-2 bg-background border border-darkGray rounded-lg text-text text-sm"
+                        />
+                      </div>
+                      <button
+                        onClick={() => removeMetadataField(field)}
+                        className="p-2 text-danger hover:bg-danger/10 rounded-lg transition-colors"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
                     </div>
                   ))}
                 </div>
-              </div>
-            ) : null}
-          </div>
-        )}
-      </Dialog>
-
-      {/* Dialog Confirmation Action */}
-      <Dialog
-        visible={showConfirmDialog}
-        onHide={() => {
-          setShowConfirmDialog(false);
-          setSelectedPays(null);
-          setActionType(null);
-        }}
-        header="Confirmation"
-        style={{ width: '450px' }}
-        className="custom-dialog"
-      >
-        {selectedPays && actionType && (
-          <div className="space-y-4">
-            <div className="flex items-center gap-3 p-4 bg-background rounded-lg">
-              <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
-                actionType === 'actif' 
-                  ? (selectedPays.est_actif ? 'bg-red-500/10' : 'bg-green-500/10')
-                  : (selectedPays.autorise_systeme ? 'bg-orange-500/10' : 'bg-blue-500/10')
-              }`}>
-                {actionType === 'actif' ? (
-                  <Power className={`w-6 h-6 ${selectedPays.est_actif ? 'text-red-400' : 'text-green-400'}`} />
-                ) : (
-                  <Shield className={`w-6 h-6 ${selectedPays.autorise_systeme ? 'text-orange-400' : 'text-blue-400'}`} />
-                )}
-              </div>
-              <div>
-                <h3 className="text-base font-bold text-text">{selectedPays.nom}</h3>
-                <p className="text-sm text-gray-400">{selectedPays.code_iso_2}</p>
-              </div>
+              ) : (
+                <p className="text-sm text-gray-400 text-center py-4">Aucune métadonnée</p>
+              )}
             </div>
 
-            <p className="text-sm text-gray-300">
-              {actionType === 'actif' ? (
-                selectedPays.est_actif 
-                  ? `Êtes-vous sûr de vouloir désactiver ce pays ? Il ne sera plus visible dans le système.`
-                  : `Êtes-vous sûr de vouloir activer ce pays ? Il sera visible dans le système.`
-              ) : (
-                selectedPays.autorise_systeme 
-                  ? `Êtes-vous sûr de vouloir retirer l'autorisation système pour ce pays ?`
-                  : `Êtes-vous sûr de vouloir autoriser ce pays dans le système ?`
-              )}
-            </p>
-
-            <div className="flex gap-3 justify-end">
+            <div className="flex gap-3 pt-4 border-t border-darkGray">
               <button
-                onClick={() => {
-                  setShowConfirmDialog(false);
-                  setSelectedPays(null);
-                  setActionType(null);
-                }}
-                disabled={actionLoading}
-                className="px-4 py-2 bg-darkGray text-text rounded-lg hover:bg-darkGray/80 transition-colors"
+                onClick={handleSave}
+                className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-primary hover:bg-primary/90 text-white rounded-lg transition-colors"
               >
-                Annuler
+                <Save className="w-4 h-4" />
+                Enregistrer
               </button>
               <button
-                onClick={confirmAction}
-                disabled={actionLoading}
-                className={`px-4 py-2 rounded-lg transition-colors flex items-center gap-2 ${
-                  actionType === 'actif'
-                    ? (selectedPays.est_actif 
-                        ? 'bg-red-500 hover:bg-red-600 text-white' 
-                        : 'bg-green-500 hover:bg-green-600 text-white')
-                    : (selectedPays.autorise_systeme 
-                        ? 'bg-orange-500 hover:bg-orange-600 text-white' 
-                        : 'bg-blue-500 hover:bg-blue-600 text-white')
-                }`}
+                onClick={() => setShowDialog(false)}
+                className="flex-1 px-4 py-3 bg-darkGray hover:bg-darkGray/80 text-text rounded-lg transition-colors"
               >
-                {actionLoading ? (
-                  <>
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Traitement...</span>
-                  </>
-                ) : (
-                  <span>Confirmer</span>
-                )}
+                Annuler
               </button>
             </div>
           </div>

@@ -7,12 +7,12 @@ import { Tag } from 'primereact/tag';
 import { Dialog } from 'primereact/dialog';
 import { Skeleton } from '../../components/common';
 import { 
-  Search, Download, Plus, Edit, Trash2, Eye, 
-  Users, UserCheck, Shield, Globe, Phone, Mail, Filter, Settings
+  Search, Filter, Download, Plus, Edit, Trash2, Eye, 
+  Users, UserCheck, Shield, Globe, Phone, Mail
 } from 'lucide-react';
 import apiService from '../../services/api';
 
-const GestionProfils = () => {
+const GestionUtilisateurs = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [initialLoad, setInitialLoad] = useState(true);
@@ -39,7 +39,7 @@ const GestionProfils = () => {
   // Dialog
   const [showDialog, setShowDialog] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [dialogMode, setDialogMode] = useState('view');
+  const [dialogMode, setDialogMode] = useState('view'); // view, edit, create
 
   // Options pour les filtres
   const typeOptions = [
@@ -91,6 +91,7 @@ const GestionProfils = () => {
 
       const response = await apiService.getUsers(params);
       
+      // L'API retourne { count, next, previous, results }
       setUsers(response.results || []);
       setTotalRecords(response.count || 0);
       setInitialLoad(false);
@@ -164,6 +165,7 @@ const GestionProfils = () => {
       <button
         onClick={() => {
           navigator.clipboard.writeText(rowData.id);
+          // TODO: Ajouter un toast de confirmation
         }}
         className="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors"
         title={`Copier l'ID: ${rowData.id}`}
@@ -177,9 +179,11 @@ const GestionProfils = () => {
 
   const formatPhoneNumber = (phone) => {
     if (!phone) return '-';
+    // Format: +257 XX XX XX XX ou similaire
     const cleaned = phone.replace(/\D/g, '');
     if (cleaned.length === 0) return phone;
     
+    // Si commence par un code pays
     if (phone.startsWith('+')) {
       const countryCode = cleaned.substring(0, 3);
       const rest = cleaned.substring(3);
@@ -187,6 +191,7 @@ const GestionProfils = () => {
       return `+${countryCode} ${formatted}`;
     }
     
+    // Sinon format simple par groupes de 2
     return cleaned.match(/.{1,2}/g)?.join(' ') || phone;
   };
 
@@ -258,244 +263,163 @@ const GestionProfils = () => {
   };
 
   const handleExport = () => {
+    // TODO: Implémenter l'export
     console.log('Export des données');
   };
 
   return (
-    <div className="p-6 space-y-6">
-      {/* Header */}
-      <div className="mb-6">
-        <h1 className="text-3xl font-anton uppercase text-text mb-2">Gestion des Utilisateurs</h1>
-        <p className="text-sm text-gray-400">Gérez tous les utilisateurs du système</p>
-      </div>
-
-      {/* Statistiques - Disposition professionnelle */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Carte 1 - Total Utilisateurs - Gradient Primary */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-primary to-primary/80 rounded-xl p-4 shadow-md hover:shadow-lg transition-all group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-12 -mt-12"></div>
-          <div className="relative z-10">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-xs text-white/80 mb-2">Total Utilisateurs</p>
-                <p className="text-3xl font-bold text-white mb-1">{stats.total}</p>
-                <p className="text-xs text-white/70">Tous les profils</p>
-              </div>
-              <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl group-hover:scale-110 transition-transform">
-                <Users className="w-6 h-6 text-white" />
-              </div>
+    <div className="space-y-6">
+      {/* Statistiques */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-3 bg-primary/20 rounded-lg">
+              <Users className="w-6 h-6 text-primary" />
             </div>
+            <span className="text-3xl font-bold text-primary">{stats.total}</span>
           </div>
+          <p className="text-sm text-gray-400">Total Utilisateurs</p>
         </div>
 
-        {/* Carte 2 - Actifs - Fond secondary */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-secondary to-secondary/80 rounded-xl p-4 shadow-md hover:shadow-lg transition-all group">
-          <div className="absolute bottom-0 left-0 w-20 h-20 bg-white/10 rounded-full -ml-10 -mb-10"></div>
-          <div className="relative z-10">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-xs text-white/80 mb-2">Utilisateurs Actifs</p>
-                <p className="text-3xl font-bold text-white mb-1">{stats.actifs}</p>
-                <p className="text-xs text-white/70">Comptes actifs</p>
-              </div>
-              <div className="p-3 bg-white/20 backdrop-blur-sm rounded-xl group-hover:scale-110 transition-transform">
-                <UserCheck className="w-6 h-6 text-white" />
-              </div>
+        <div className="bg-gradient-to-br from-secondary/10 to-secondary/5 border border-secondary/20 rounded-xl p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-3 bg-secondary/20 rounded-lg">
+              <UserCheck className="w-6 h-6 text-secondary" />
             </div>
+            <span className="text-3xl font-bold text-secondary">{stats.actifs}</span>
           </div>
+          <p className="text-sm text-gray-400">Actifs</p>
         </div>
 
-        {/* Carte 3 - KYC Validé - Fond gris propre */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl p-4 shadow-md hover:shadow-lg transition-all border border-gray-200 group">
-          <div className="absolute top-0 right-0 w-22 h-22 bg-success/5 rounded-full -mr-11 -mt-11"></div>
-          <div className="relative z-10">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-xs text-gray-600 mb-2">KYC Validé</p>
-                <p className="text-3xl font-bold text-success mb-1">{stats.kycValide}</p>
-                <p className="text-xs text-gray-500">Identité vérifiée</p>
-              </div>
-              <div className="p-3 bg-gradient-to-br from-success to-success/80 rounded-xl shadow-sm group-hover:scale-110 transition-transform">
-                <Shield className="w-6 h-6 text-white" />
-              </div>
+        <div className="bg-gradient-to-br from-success/10 to-success/5 border border-success/20 rounded-xl p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-3 bg-success/20 rounded-lg">
+              <Shield className="w-6 h-6 text-success" />
             </div>
+            <span className="text-3xl font-bold text-success">{stats.kycValide}</span>
           </div>
+          <p className="text-sm text-gray-400">KYC Validé</p>
         </div>
 
-        {/* Carte 4 - Pays - Fond blanc */}
-        <div className="relative overflow-hidden bg-white rounded-xl p-4 shadow-md hover:shadow-lg transition-all border border-gray-200 group">
-          <div className="absolute bottom-0 left-0 w-18 h-18 bg-warning/10 rounded-full -ml-9 -mb-9"></div>
-          <div className="relative z-10">
-            <div className="flex items-start justify-between">
-              <div>
-                <p className="text-xs text-gray-500 mb-2">Pays Couverts</p>
-                <p className="text-3xl font-bold text-gray-900 mb-1">{stats.pays}</p>
-                <p className="text-xs text-gray-400">Couverture globale</p>
-              </div>
-              <div className="p-3 bg-gradient-to-br from-warning to-warning/80 rounded-xl group-hover:scale-110 transition-transform">
-                <Globe className="w-6 h-6 text-white" />
-              </div>
+        <div className="bg-gradient-to-br from-warning/10 to-warning/5 border border-warning/20 rounded-xl p-5">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-3 bg-warning/20 rounded-lg">
+              <Globe className="w-6 h-6 text-warning" />
             </div>
+            <span className="text-3xl font-bold text-warning">{stats.pays}</span>
           </div>
+          <p className="text-sm text-gray-400">Pays</p>
         </div>
       </div>
 
-      {/* Filtres - Disposition professionnelle */}
-      <div className="bg-card border border-darkGray rounded-xl overflow-hidden">
-        {/* Filtres rapides */}
-        <div className="p-5 border-b border-darkGray">
-          <div className="flex items-center gap-2 mb-4">
-            <Filter className="w-4 h-4 text-primary" />
-            <h3 className="text-sm font-semibold text-text uppercase tracking-wide">Filtres rapides</h3>
-          </div>
-          <div className="flex flex-wrap gap-2">
-            <button
-              onClick={() => setFilters({ ...filters, type_utilisateur: 'CLIENT' })}
-              className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
-                filters.type_utilisateur === 'CLIENT'
-                  ? 'bg-primary text-white shadow-md'
-                  : 'bg-primary/10 text-primary hover:bg-primary/20'
-              }`}
-            >
-              Clients
-            </button>
-            <button
-              onClick={() => setFilters({ ...filters, type_utilisateur: 'AGENT' })}
-              className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
-                filters.type_utilisateur === 'AGENT'
-                  ? 'bg-secondary text-white shadow-md'
-                  : 'bg-secondary/10 text-secondary hover:bg-secondary/20'
-              }`}
-            >
-              Agents
-            </button>
-            <button
-              onClick={() => setFilters({ ...filters, type_utilisateur: 'MARCHAND' })}
-              className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
-                filters.type_utilisateur === 'MARCHAND'
-                  ? 'bg-warning text-white shadow-md'
-                  : 'bg-warning/10 text-warning hover:bg-warning/20'
-              }`}
-            >
-              Marchands
-            </button>
-            <button
-              onClick={() => setFilters({ ...filters, type_utilisateur: 'ADMIN' })}
-              className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
-                filters.type_utilisateur === 'ADMIN'
-                  ? 'bg-danger text-white shadow-md'
-                  : 'bg-danger/10 text-danger hover:bg-danger/20'
-              }`}
-            >
-              Admins
-            </button>
-            <button
-              onClick={() => setFilters({ ...filters, statut: 'ACTIF' })}
-              className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
-                filters.statut === 'ACTIF'
-                  ? 'bg-success text-white shadow-md'
-                  : 'bg-success/10 text-success hover:bg-success/20'
-              }`}
-            >
-              Actifs
-            </button>
-            <button
-              onClick={() => setFilters({ ...filters, telephone_verifie: 'true' })}
-              className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
-                filters.telephone_verifie === 'true'
-                  ? 'bg-primary text-white shadow-md'
-                  : 'bg-primary/10 text-primary hover:bg-primary/20'
-              }`}
-            >
-              Téléphone vérifié
-            </button>
-            <button
-              onClick={() => setFilters({ type_utilisateur: '', statut: '', niveau_kyc: '', pays_code: '', est_actif: '', telephone_verifie: '' })}
-              className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all font-medium text-sm ml-auto"
-            >
-              Réinitialiser
-            </button>
-          </div>
+      {/* Filtres rapides */}
+      <div className="bg-card border border-darkGray rounded-lg p-4">
+        <div className="flex flex-wrap gap-3 mb-4">
+          <button
+            onClick={() => setFilters({ ...filters, type_utilisateur: 'CLIENT' })}
+            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium"
+          >
+            Clients
+          </button>
+          <button
+            onClick={() => setFilters({ ...filters, type_utilisateur: 'AGENT' })}
+            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium"
+          >
+            Agents
+          </button>
+          <button
+            onClick={() => setFilters({ ...filters, type_utilisateur: 'MARCHAND' })}
+            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium"
+          >
+            Marchands
+          </button>
+          <button
+            onClick={() => setFilters({ ...filters, type_utilisateur: 'ADMIN' })}
+            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium"
+          >
+            Admins
+          </button>
+          <button
+            onClick={() => setFilters({ ...filters, statut: 'ACTIF' })}
+            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium"
+          >
+            Actifs
+          </button>
+          <button
+            onClick={() => setFilters({ ...filters, telephone_verifie: 'true' })}
+            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium"
+          >
+            Téléphone vérifié
+          </button>
+          <button
+            onClick={() => setFilters({ type_utilisateur: '', statut: '', niveau_kyc: '', pays_code: '', est_actif: '', telephone_verifie: '' })}
+            className="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium"
+          >
+            Réinitialiser
+          </button>
         </div>
 
-        {/* Recherche et filtres avancés */}
-        <div className="p-5 bg-background/50">
-          <div className="flex items-center gap-2 mb-4">
-            <Search className="w-4 h-4 text-secondary" />
-            <h3 className="text-sm font-semibold text-text uppercase tracking-wide">Recherche et filtres</h3>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <InputText
-                value={globalFilter}
-                onChange={(e) => setGlobalFilter(e.target.value)}
-                placeholder="Rechercher..."
-                className="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-lg text-text text-sm focus:border-primary focus:ring-1 focus:ring-primary"
-              />
-            </div>
-
-            <Dropdown
-              value={filters.type_utilisateur}
-              options={typeOptions}
-              onChange={(e) => setFilters({ ...filters, type_utilisateur: e.value })}
-              placeholder="Type"
-              className="w-full text-sm"
-            />
-
-            <Dropdown
-              value={filters.statut}
-              options={statutOptions}
-              onChange={(e) => setFilters({ ...filters, statut: e.value })}
-              placeholder="Statut"
-              className="w-full text-sm"
-            />
-
-            <Dropdown
-              value={filters.niveau_kyc}
-              options={kycOptions}
-              onChange={(e) => setFilters({ ...filters, niveau_kyc: e.value })}
-              placeholder="Niveau KYC"
-              className="w-full text-sm"
+        <div className="grid grid-cols-1 md:grid-cols-6 gap-3">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <InputText
+              value={globalFilter}
+              onChange={(e) => setGlobalFilter(e.target.value)}
+              placeholder="Rechercher..."
+              className="w-full pl-10 pr-4 py-2 bg-background border border-darkGray rounded-lg text-text"
             />
           </div>
-        </div>
 
-        {/* Actions */}
-        <div className="p-5 border-t border-darkGray bg-card">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Settings className="w-4 h-4 text-warning" />
-              <h3 className="text-sm font-semibold text-text uppercase tracking-wide">Actions</h3>
-            </div>
-            <div className="flex gap-3">
-              <button
-                onClick={() => {
-                  setSelectedUser(null);
-                  setDialogMode('create');
-                  setShowDialog(true);
-                }}
-                className="flex items-center justify-center gap-2 px-5 py-2.5 bg-primary text-white rounded-lg hover:bg-primary/90 transition-all font-medium text-sm shadow-sm hover:shadow-md"
-              >
-                <Plus className="w-4 h-4" />
-                Nouveau
-              </button>
+          <Dropdown
+            value={filters.type_utilisateur}
+            options={typeOptions}
+            onChange={(e) => setFilters({ ...filters, type_utilisateur: e.value })}
+            placeholder="Type"
+            className="w-full"
+          />
 
-              <button
-                onClick={handleExport}
-                className="flex items-center justify-center gap-2 px-5 py-2.5 bg-white text-gray-700 border border-gray-200 rounded-lg hover:bg-gray-50 transition-all font-medium text-sm shadow-sm"
-              >
-                <Download className="w-4 h-4" />
-                Exporter
-              </button>
-            </div>
-          </div>
+          <Dropdown
+            value={filters.statut}
+            options={statutOptions}
+            onChange={(e) => setFilters({ ...filters, statut: e.value })}
+            placeholder="Statut"
+            className="w-full"
+          />
+
+          <Dropdown
+            value={filters.niveau_kyc}
+            options={kycOptions}
+            onChange={(e) => setFilters({ ...filters, niveau_kyc: e.value })}
+            placeholder="Niveau KYC"
+            className="w-full"
+          />
+
+          <button
+            onClick={() => {
+              setSelectedUser(null);
+              setDialogMode('create');
+              setShowDialog(true);
+            }}
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium"
+          >
+            <Plus className="w-5 h-5" />
+            Nouveau
+          </button>
+
+          <button
+            onClick={handleExport}
+            className="flex items-center justify-center gap-2 px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-100 transition-colors font-medium"
+          >
+            <Download className="w-5 h-5" />
+            Exporter
+          </button>
         </div>
       </div>
 
       {/* DataTable */}
       <div className="bg-card border border-darkGray rounded-lg overflow-hidden">
         {initialLoad ? (
+          // Skeleton pour le chargement initial
           <div className="p-6 space-y-4">
             <div className="flex items-center justify-between mb-4">
               <Skeleton className="h-8 w-48" />
@@ -648,4 +572,4 @@ const GestionProfils = () => {
   );
 };
 
-export default GestionProfils;
+export default GestionUtilisateurs;

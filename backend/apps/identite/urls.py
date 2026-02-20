@@ -10,6 +10,7 @@ from .views import (
     NiveauKYCViewSet,
     StatutUtilisateurViewSet,
     NumeroTelephoneViewSet,
+    UtilisateurViewSet,
 )
 
 app_name = 'identite'
@@ -20,6 +21,7 @@ router.register(r'types-utilisateurs', TypeUtilisateurViewSet, basename='type-ut
 router.register(r'niveaux-kyc', NiveauKYCViewSet, basename='niveau-kyc')
 router.register(r'statuts-utilisateurs', StatutUtilisateurViewSet, basename='statut-utilisateur')
 router.register(r'numeros-telephone', NumeroTelephoneViewSet, basename='numero-telephone')
+router.register(r'utilisateurs', UtilisateurViewSet, basename='utilisateur')
 
 urlpatterns = [
     # Inscription publique (CLIENT)

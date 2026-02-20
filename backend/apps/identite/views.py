@@ -204,6 +204,137 @@ class StatutUtilisateurViewSet(viewsets.ReadOnlyModelViewSet):
 # =============================================================================
 # GESTION DES NUMÉROS DE TÉLÉPHONE
 # =============================================================================
+@extend_schema_view(
+    list=extend_schema(
+        summary='Liste de tous les utilisateurs',
+        description='Retourne tous les utilisateurs avec leurs détails complets (type, KYC, statut, localisation, etc.)',
+        tags=['Identité - Utilisateurs']
+    ),
+    retrieve=extend_schema(
+        summary='Détail d\'un utilisateur',
+        description='Retourne les détails complets d\'un utilisateur spécifique',
+        tags=['Identité - Utilisateurs']
+    ),
+)
+class UtilisateurViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    ViewSet pour consulter tous les utilisateurs du système.
+    
+    - Liste complète avec filtres par type, statut, KYC
+    - Détail d'un utilisateur avec toutes ses informations
+    - Recherche par email, téléphone, nom
+    """
+    queryset = Utilisateur.objects.select_related(
+        'type_utilisateur',
+        'niveau_kyc',
+        'statut',
+        'pays',
+        'province_geo',
+        'district',
+        'quartier_geo',
+        'point_de_service'
+    ).all()
+    serializer_class = UtilisateurIdentiteSerializer
+    permission_classes = [AllowAny]
+    
+    def get_queryset(self):
+        qs = super().get_queryset()
+        
+        # Filtres par query params
+        type_utilisateur = self.request.query_params.get('type_utilisateur')
+        if type_utilisateur:
+            qs = qs.filter(type_utilisateur__code=type_utilisateur.upper())
+        
+        statut = self.request.query_params.get('statut')
+        if statut:
+            qs = qs.filter(statut__code=statut.upper())
+        
+        niveau_kyc = self.request.query_params.get('niveau_kyc')
+        if niveau_kyc:
+            qs = qs.filter(niveau_kyc__niveau=niveau_kyc)
+        
+        pays_code = self.request.query_params.get('pays_code')
+        if pays_code:
+            qs = qs.filter(pays__code_iso_2__iexact=pays_code)
+        
+        est_actif = self.request.query_params.get('est_actif')
+        if est_actif is not None:
+            qs = qs.filter(est_actif=est_actif.lower() in ('true', '1', 'yes'))
+        
+        telephone_verifie = self.request.query_params.get('telephone_verifie')
+        if telephone_verifie is not None:
+            qs = qs.filter(telephone_verifie=telephone_verifie.lower() in ('true', '1', 'yes'))
+        
+        courriel_verifie = self.request.query_params.get('courriel_verifie')
+        if courriel_verifie is not None:
+            qs = qs.filter(courriel_verifie=courriel_verifie.lower() in ('true', '1', 'yes'))
+        
+        # Recherche par nom, email ou téléphone
+        search = self.request.query_params.get('search')
+        if search:
+            from django.db.models import Q
+            qs = qs.filter(
+                Q(prenom__icontains=search) |
+                Q(nom_famille__icontains=search) |
+                Q(courriel__icontains=search) |
+                Q(numero_telephone__icontains=search)
+            )
+        
+        return qs.order_by('-date_creation')
+    
+    @action(detail=False, methods=['get'], url_path='statistiques')
+    def statistiques(self, request):
+        """
+        Statistiques globales des utilisateurs.
+        
+        Retourne le nombre d'utilisateurs par type, statut, niveau KYC, etc.
+        """
+        from django.db.models import Count
+        
+        stats = {
+            'total_utilisateurs': Utilisateur.objects.count(),
+            'utilisateurs_actifs': Utilisateur.objects.filter(est_actif=True).count(),
+            'par_type': list(
+                Utilisateur.objects.values('type_utilisateur__code', 'type_utilisateur__libelle')
+                .annotate(count=Count('id'))
+                .order_by('-count')
+            ),
+            'par_statut': list(
+                Utilisateur.objects.values('statut__code', 'statut__libelle')
+                .annotate(count=Count('id'))
+                .order_by('-count')
+            ),
+            'par_niveau_kyc': list(
+                Utilisateur.objects.values('niveau_kyc__niveau', 'niveau_kyc__libelle')
+                .annotate(count=Count('id'))
+                .order_by('niveau_kyc__niveau')
+            ),
+            'telephones_verifies': Utilisateur.objects.filter(telephone_verifie=True).count(),
+            'courriels_verifies': Utilisateur.objects.filter(courriel_verifie=True).count(),
+        }
+        
+        return Response(stats)
+    
+    @action(detail=False, methods=['get'], url_path='par-type/(?P<type_code>[^/.]+)')
+    def par_type(self, request, type_code=None):
+        """
+        Liste des utilisateurs d'un type spécifique.
+        
+        Exemples:
+        - /api/v1/identite/utilisateurs/par-type/CLIENT/
+        - /api/v1/identite/utilisateurs/par-type/AGENT/
+        - /api/v1/identite/utilisateurs/par-type/MARCHAND/
+        """
+        utilisateurs = self.get_queryset().filter(type_utilisateur__code=type_code.upper())
+        serializer = self.get_serializer(utilisateurs, many=True)
+        
+        return Response({
+            'type': type_code.upper(),
+            'count': utilisateurs.count(),
+            'utilisateurs': serializer.data
+        })
+
+
 @extend_schema(tags=['Identité - Numéros'])
 class NumeroTelephoneViewSet(viewsets.ModelViewSet):
     """

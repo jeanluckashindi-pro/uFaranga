@@ -35,6 +35,7 @@ import Securite from './pages/admin/Securite';
 import Fraude from './pages/admin/Fraude';
 import Reporting from './pages/admin/Reporting';
 import ParametresSysteme from './pages/admin/ParametresSysteme';
+import ParametresSecurite from './pages/admin/parametres/Securite';
 import GestionCommissions from './pages/admin/GestionCommissions';
 import GestionProfils from './pages/admin/GestionProfils';
 import CartographieUtilisateurs from './pages/admin/CartographieUtilisateurs';
@@ -99,6 +100,7 @@ function App() {
                       <Route path="/admin/fraude" element={<ProtectedRoute module="admin_system"><Fraude /></ProtectedRoute>} />
                       <Route path="/admin/securite" element={<ProtectedRoute module="admin_system"><Securite /></ProtectedRoute>} />
                       <Route path="/admin/parametres" element={<ProtectedRoute module="admin_system"><ParametresSysteme /></ProtectedRoute>} />
+                      <Route path="/admin/parametres/securite" element={<ProtectedRoute module="admin_system"><ParametresSecurite /></ProtectedRoute>} />
 
                       {/* Admin Tech Routes */}
                       <Route path="/tech/monitoring" element={<ProtectedRoute module="admin_tech"><TechMonitoring /></ProtectedRoute>} />

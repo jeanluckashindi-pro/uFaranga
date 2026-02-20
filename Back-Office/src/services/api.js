@@ -199,6 +199,43 @@ class ApiService {
     return this.request(`/api/v1/clients/${queryString ? `?${queryString}` : ''}`);
   }
 
+  // Méthode pour récupérer les utilisateurs avec filtres
+  async getUsers(params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return this.request(`/api/v1/identite/utilisateurs/${queryString ? `?${queryString}` : ''}`);
+  }
+
+  async deleteUser(userId) {
+    return this.request(`/api/v1/identite/utilisateurs/${userId}/`, {
+      method: 'DELETE'
+    });
+  }
+
+  // Méthodes pour les profils/rôles
+  async getProfils() {
+    return this.getAllPages('/api/v1/identite/profils');
+  }
+
+  async createProfil(profilData) {
+    return this.request('/api/v1/identite/profils/', {
+      method: 'POST',
+      body: JSON.stringify(profilData)
+    });
+  }
+
+  async updateProfil(profilId, profilData) {
+    return this.request(`/api/v1/identite/profils/${profilId}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(profilData)
+    });
+  }
+
+  async deleteProfil(profilId) {
+    return this.request(`/api/v1/identite/profils/${profilId}/`, {
+      method: 'DELETE'
+    });
+  }
+
   // Méthode pour récupérer toutes les pages d'un endpoint paginé
   async getAllPages(endpoint) {
     let allResults = [];
@@ -255,6 +292,37 @@ class ApiService {
 
   async getQuartiers() {
     return this.getAllPages('/api/v1/localisation/quartiers');
+  }
+
+  // Méthodes génériques pour la localisation
+  async getLocalisation(endpoint, params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return this.request(`/api/v1/localisation/${endpoint}/${queryString ? `?${queryString}` : ''}`);
+  }
+
+  async createLocalisation(endpoint, data) {
+    return this.request(`/api/v1/localisation/${endpoint}/`, {
+      method: 'POST',
+      body: JSON.stringify(data)
+    });
+  }
+
+  async updateLocalisation(endpoint, id, data) {
+    return this.request(`/api/v1/localisation/${endpoint}/${id}/`, {
+      method: 'PATCH',
+      body: JSON.stringify(data)
+    });
+  }
+
+  async deleteLocalisation(endpoint, id) {
+    return this.request(`/api/v1/localisation/${endpoint}/${id}/`, {
+      method: 'DELETE'
+    });
+  }
+
+  async getLocalisationComplete(params = {}) {
+    const queryString = new URLSearchParams(params).toString();
+    return this.request(`/api/v1/localisation/complete/${queryString ? `?${queryString}` : ''}`);
   }
 }
 

@@ -1,19 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import {
-  Settings, Palette, Layout, Menu, Plus, Edit2, Trash2, Save,
-  X, ChevronDown, ChevronRight, Eye, EyeOff, Globe, Shield
+  Settings, Palette, Layout, Menu, Shield, Globe, Bell, Lock,
+  User, CreditCard, Database, Mail, Smartphone, Save, ChevronRight,
+  Check, X, AlertCircle, Info
 } from 'lucide-react';
-import { Card } from '../../components/common';
 import GestionProfils from './GestionProfils';
+import ConfigurationGenerale from '../../components/ConfigurationGenerale';
 
 const ParametresSysteme = () => {
-  const [activeTab, setActiveTab] = useState('general');
-  const [showModuleModal, setShowModuleModal] = useState(false);
-  const [showMenuModal, setShowMenuModal] = useState(false);
-  const [editingModule, setEditingModule] = useState(null);
-  const [editingMenu, setEditingMenu] = useState(null);
+  const location = useLocation();
+  
+  // Détecter la section active depuis l'URL
+  const getSectionFromPath = () => {
+    const path = location.pathname;
+    if (path.includes('/apparence')) return 'apparence';
+    if (path.includes('/profils')) return 'profils';
+    if (path.includes('/securite')) return 'securite';
+    if (path.includes('/notifications')) return 'notifications';
+    if (path.includes('/localisation') || path.includes('/regionalisation')) return 'localisation';
+    if (path.includes('/informations')) return 'general';
+    if (path.includes('/contact')) return 'general';
+    if (path.includes('/database')) return 'general';
+    if (path.includes('/paiements')) return 'general';
+    if (path.includes('/modules')) return 'general';
+    if (path.includes('/navigation')) return 'general';
+    return 'general';
+  };
 
-  // État pour la configuration générale
+  const [activeSection, setActiveSection] = useState(getSectionFromPath());
+  
+  // Mettre à jour la section quand l'URL change
+  useEffect(() => {
+    setActiveSection(getSectionFromPath());
+  }, [location.pathname]);
   const [config, setConfig] = useState({
     platformName: 'uFaranga',
     platformSlogan: 'Simply Money',
@@ -24,515 +44,425 @@ const ParametresSysteme = () => {
     textColor: '#F9F9F9',
   });
 
-  // État pour les modules
-  const [modules, setModules] = useState([
-    { id: 'admin_system', name: 'Administration Système', icon: 'Shield', color: 'danger', active: true },
-    { id: 'admin_tech', name: 'Administration Technique', icon: 'Server', color: 'primary', active: true },
-    { id: 'agent', name: 'Espace Agent', icon: 'Users', color: 'primary', active: true },
-    { id: 'client', name: 'Espace Client', icon: 'User', color: 'primary', active: true },
-  ]);
-
-  // État pour les menus
-  const [menus, setMenus] = useState({
-    admin_system: [
-      { id: 1, label: 'Dashboard Global', path: '/admin/dashboard', icon: 'LayoutDashboard', active: true },
-      { id: 2, label: 'Gestion Agents', path: '/admin/agents', icon: 'Users', active: true },
-    ],
-  });
-
-  const handleSaveConfig = () => {
-    console.log('Configuration sauvegardée:', config);
-    // TODO: Appel API pour sauvegarder
-  };
+  const sections = [
+    { id: 'general', label: 'Général', icon: Settings },
+    { id: 'apparence', label: 'Apparence', icon: Palette },
+    { id: 'profils', label: 'Profils & Utilisateurs', icon: Shield },
+    { id: 'securite', label: 'Sécurité', icon: Lock },
+    { id: 'notifications', label: 'Notifications', icon: Bell },
+    { id: 'localisation', label: 'Localisation', icon: Globe },
+  ];
 
   return (
-    <div className="min-h-screen bg-background p-6 md:p-10">
-      {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-heading font-bold text-text mb-2">Paramètres Système</h1>
-        <p className="text-gray-400 font-sans">Configuration complète de la plateforme uFaranga</p>
+    <div className="min-h-screen bg-background p-6">
+      {/* Header avec navigation horizontale moderne */}
+      <div className="max-w-7xl mx-auto mb-8">
+        <div className="mb-6">
+          <h1 className="text-4xl font-anton uppercase text-text mb-2">Paramètres</h1>
+          <p className="text-gray-400">Configurez votre plateforme uFaranga</p>
+        </div>
+
+        {/* Navigation Pills moderne */}
+        <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+          {sections.map((section) => {
+            const Icon = section.icon;
+            return (
+              <button
+                key={section.id}
+                onClick={() => setActiveSection(section.id)}
+                className={`flex items-center gap-2 px-6 py-3 rounded-full whitespace-nowrap transition-all ${
+                  activeSection === section.id
+                    ? 'bg-primary text-white shadow-lg shadow-primary/30'
+                    : 'bg-card border border-darkGray text-gray-400 hover:text-text hover:border-primary/50'
+                }`}
+              >
+                <Icon className="w-4 h-4" />
+                <span className="font-medium">{section.label}</span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
-      {/* Onglets */}
-      <Card className="mb-6 p-0 overflow-hidden">
-        <div className="flex gap-0 overflow-x-auto">
-          {[
-            { id: 'general', label: 'Général', icon: Settings },
-            { id: 'apparence', label: 'Apparence', icon: Palette },
-            { id: 'modules', label: 'Modules', icon: Layout },
-            { id: 'navigation', label: 'Navigation', icon: Menu },
-            { id: 'profils', label: 'Gestion des Profils', icon: Shield },
-          ].map(tab => (
-            <button
-              key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
-              className={`flex items-center gap-2 px-6 py-4 border-b-2 transition-all whitespace-nowrap font-sans ${
-                activeTab === tab.id
-                  ? 'border-primary text-primary bg-primary/10'
-                  : 'border-transparent text-gray-400 hover:text-text hover:bg-darkGray'
-              }`}
-            >
-              <tab.icon className="w-4 h-4" />
-              <span className="text-sm font-medium">{tab.label}</span>
-            </button>
-          ))}
-        </div>
-      </Card>
-
-      {/* Contenu des onglets */}
-      {activeTab === 'general' && (
-        <Card className="p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-heading font-bold text-text">Configuration Générale</h2>
-            <button
-              onClick={handleSaveConfig}
-              className="px-4 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2 font-sans"
-            >
-              <Save className="w-4 h-4" />
-              Enregistrer
-            </button>
+      {/* Contenu avec animations */}
+      <div className="max-w-7xl mx-auto">
+        {/* Section: Général */}
+        {activeSection === 'general' && (
+          <div className="animate-fadeIn">
+            <ConfigurationGenerale />
           </div>
+        )}
 
-          <div className="space-y-6">
-            <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">Nom de la plateforme</label>
-              <input
-                type="text"
-                value={config.platformName}
-                onChange={(e) => setConfig({ ...config, platformName: e.target.value })}
-                className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-              />
+        {/* Section: Apparence */}
+        {activeSection === 'apparence' && (
+          <div className="animate-fadeIn space-y-6">
+            <div className="bg-gradient-to-br from-primary/5 to-secondary/5 border border-primary/20 rounded-2xl p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-primary/20 rounded-xl">
+                  <Palette className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-text">Personnalisation du thème</h2>
+                  <p className="text-sm text-gray-400">Créez une identité visuelle unique</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <ColorCard
+                  label="Primaire"
+                  description="Couleur principale"
+                  value={config.primaryColor}
+                  onChange={(color) => setConfig({ ...config, primaryColor: color })}
+                />
+                <ColorCard
+                  label="Secondaire"
+                  description="Couleur d'accent"
+                  value={config.secondaryColor}
+                  onChange={(color) => setConfig({ ...config, secondaryColor: color })}
+                />
+                <ColorCard
+                  label="Arrière-plan"
+                  description="Fond de page"
+                  value={config.backgroundColor}
+                  onChange={(color) => setConfig({ ...config, backgroundColor: color })}
+                />
+                <ColorCard
+                  label="Cartes"
+                  description="Fond des cartes"
+                  value={config.cardBackground}
+                  onChange={(color) => setConfig({ ...config, cardBackground: color })}
+                />
+                <ColorCard
+                  label="Texte"
+                  description="Couleur du texte"
+                  value={config.textColor}
+                  onChange={(color) => setConfig({ ...config, textColor: color })}
+                />
+              </div>
+
+              <div className="mt-8 flex gap-3">
+                <button className="px-6 py-3 bg-primary hover:bg-primary/90 text-white rounded-xl transition-all flex items-center gap-2 shadow-lg shadow-primary/30">
+                  <Save className="w-4 h-4" />
+                  Enregistrer les modifications
+                </button>
+                <button className="px-6 py-3 bg-card border border-darkGray hover:border-primary/50 text-text rounded-xl transition-all">
+                  Réinitialiser
+                </button>
+              </div>
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">Slogan</label>
-              <input
-                type="text"
-                value={config.platformSlogan}
-                onChange={(e) => setConfig({ ...config, platformSlogan: e.target.value })}
-                className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-              />
+            {/* Aperçu en temps réel */}
+            <div className="bg-card border border-darkGray rounded-2xl p-8">
+              <h3 className="text-xl font-bold text-text mb-4">Aperçu en temps réel</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="p-4 bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-xl">
+                  <div className="w-10 h-10 bg-primary/20 rounded-lg mb-3"></div>
+                  <p className="text-sm text-gray-400">Carte primaire</p>
+                </div>
+                <div className="p-4 bg-gradient-to-br from-secondary/10 to-secondary/5 border border-secondary/20 rounded-xl">
+                  <div className="w-10 h-10 bg-secondary/20 rounded-lg mb-3"></div>
+                  <p className="text-sm text-gray-400">Carte secondaire</p>
+                </div>
+                <div className="p-4 bg-gradient-to-br from-success/10 to-success/5 border border-success/20 rounded-xl">
+                  <div className="w-10 h-10 bg-success/20 rounded-lg mb-3"></div>
+                  <p className="text-sm text-gray-400">Carte succès</p>
+                </div>
+              </div>
             </div>
           </div>
-        </Card>
-      )}
+        )}
 
-      {activeTab === 'apparence' && (
-        <Card className="p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-heading font-bold text-text">Personnalisation de l'apparence</h2>
-            <button
-              onClick={handleSaveConfig}
-              className="px-4 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2 font-sans"
-            >
-              <Save className="w-4 h-4" />
-              Enregistrer
-            </button>
+        {/* Section: Profils & Utilisateurs */}
+        {activeSection === 'profils' && (
+          <div className="animate-fadeIn">
+            <GestionProfils />
           </div>
+        )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <ColorPicker
-              label="Couleur primaire"
-              value={config.primaryColor}
-              onChange={(color) => setConfig({ ...config, primaryColor: color })}
-            />
-            <ColorPicker
-              label="Couleur secondaire"
-              value={config.secondaryColor}
-              onChange={(color) => setConfig({ ...config, secondaryColor: color })}
-            />
-            <ColorPicker
-              label="Arrière-plan"
-              value={config.backgroundColor}
-              onChange={(color) => setConfig({ ...config, backgroundColor: color })}
-            />
-            <ColorPicker
-              label="Arrière-plan des cartes"
-              value={config.cardBackground}
-              onChange={(color) => setConfig({ ...config, cardBackground: color })}
-            />
-            <ColorPicker
-              label="Couleur du texte"
-              value={config.textColor}
-              onChange={(color) => setConfig({ ...config, textColor: color })}
-            />
-          </div>
-        </Card>
-      )}
+        {/* Section: Sécurité */}
+        {activeSection === 'securite' && (
+          <div className="animate-fadeIn space-y-6">
+            {/* Authentification */}
+            <div className="bg-gradient-to-br from-danger/5 to-danger/5 border border-danger/20 rounded-2xl p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-danger/20 rounded-xl">
+                  <Lock className="w-6 h-6 text-danger" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-text">Authentification</h2>
+                  <p className="text-sm text-gray-400">Sécurisez l'accès à votre plateforme</p>
+                </div>
+              </div>
 
-      {activeTab === 'modules' && (
-        <div className="space-y-6">
-          <Card className="p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-heading font-bold text-text">Gestion des Modules</h2>
-              <button
-                onClick={() => {
-                  setEditingModule(null);
-                  setShowModuleModal(true);
-                }}
-                className="px-4 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2 font-sans"
-              >
-                <Plus className="w-4 h-4" />
-                Nouveau Module
-              </button>
+              <div className="space-y-4">
+                <SettingRow
+                  icon={Shield}
+                  title="Authentification à deux facteurs"
+                  description="Sécurité renforcée avec code OTP"
+                  type="toggle"
+                  defaultChecked={false}
+                />
+                <SettingRow
+                  icon={User}
+                  title="Sessions multiples"
+                  description="Autoriser plusieurs connexions simultanées"
+                  type="toggle"
+                  defaultChecked={true}
+                />
+                <SettingRow
+                  icon={AlertCircle}
+                  title="Expiration de session"
+                  description="Durée avant déconnexion automatique"
+                  type="select"
+                  options={['15 minutes', '30 minutes', '1 heure', '4 heures', '24 heures']}
+                />
+              </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {modules.map((module) => (
-                <div
-                  key={module.id}
-                  className="p-4 bg-background border border-darkGray rounded-lg hover:border-primary transition-colors"
-                >
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-3">
-                      <div className={`w-10 h-10 rounded-lg bg-${module.color}/10 flex items-center justify-center`}>
-                        <Shield className={`w-5 h-5 text-${module.color}`} />
-                      </div>
-                      <div>
-                        <h3 className="text-sm font-bold text-text font-sans">{module.name}</h3>
-                        <p className="text-xs text-gray-400 font-mono">{module.id}</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => {
-                          setEditingModule(module);
-                          setShowModuleModal(true);
-                        }}
-                        className="p-1.5 hover:bg-darkGray rounded transition-colors"
-                      >
-                        <Edit2 className="w-4 h-4 text-gray-400" />
-                      </button>
-                      <button
-                        onClick={() => {
-                          if (confirm(`Supprimer le module "${module.name}" ?`)) {
-                            setModules(modules.filter(m => m.id !== module.id));
-                          }
-                        }}
-                        className="p-1.5 hover:bg-darkGray rounded transition-colors"
-                      >
-                        <Trash2 className="w-4 h-4 text-red-400" />
-                      </button>
-                    </div>
+            {/* Politique de mot de passe */}
+            <div className="bg-card border border-darkGray rounded-2xl p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-primary/20 rounded-xl">
+                  <Lock className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-text">Politique de mot de passe</h2>
+                  <p className="text-sm text-gray-400">Définissez les règles de sécurité</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Longueur minimale</label>
+                    <input
+                      type="number"
+                      defaultValue="8"
+                      min="6"
+                      max="32"
+                      className="w-full px-4 py-3 bg-background border border-darkGray rounded-xl text-text focus:outline-none focus:border-primary"
+                    />
                   </div>
-                  <div className="flex items-center justify-between">
-                    <span className={`px-2 py-1 rounded text-xs font-medium font-sans ${
-                      module.active ? 'bg-green-400/20 text-green-400' : 'bg-gray-400/20 text-gray-400'
-                    }`}>
-                      {module.active ? 'Actif' : 'Inactif'}
-                    </span>
-                    <button
-                      onClick={() => {
-                        setModules(modules.map(m =>
-                          m.id === module.id ? { ...m, active: !m.active } : m
-                        ));
-                      }}
-                      className="text-xs text-primary hover:text-blue-400 font-sans"
-                    >
-                      {module.active ? 'Désactiver' : 'Activer'}
-                    </button>
+                  <div className="flex items-center justify-between p-4 bg-background rounded-xl">
+                    <span className="text-sm text-text">Caractères spéciaux requis</span>
+                    <ToggleSwitch defaultChecked={true} />
                   </div>
                 </div>
-              ))}
-            </div>
-          </Card>
-        </div>
-      )}
-
-      {activeTab === 'navigation' && (
-        <div className="space-y-6">
-          <Card className="p-6">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-xl font-heading font-bold text-text">Gestion de la Navigation</h2>
-              <button
-                onClick={() => {
-                  setEditingMenu(null);
-                  setShowMenuModal(true);
-                }}
-                className="px-4 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2 font-sans"
-              >
-                <Plus className="w-4 h-4" />
-                Nouveau Menu
-              </button>
-            </div>
-
-            <div className="space-y-4">
-              {modules.map((module) => (
-                <div key={module.id} className="border border-darkGray rounded-lg overflow-hidden">
-                  <div className="p-4 bg-card flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <Shield className="w-5 h-5 text-primary" />
-                      <span className="font-bold text-text font-sans">{module.name}</span>
-                    </div>
-                    <ChevronDown className="w-5 h-5 text-gray-400" />
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-2">Expiration du mot de passe</label>
+                    <select className="w-full px-4 py-3 bg-background border border-darkGray rounded-xl text-text focus:outline-none focus:border-primary">
+                      <option>Jamais</option>
+                      <option>30 jours</option>
+                      <option>60 jours</option>
+                      <option>90 jours</option>
+                      <option>180 jours</option>
+                    </select>
                   </div>
-                  <div className="p-4 space-y-2">
-                    {menus[module.id]?.map((menu) => (
-                      <div
-                        key={menu.id}
-                        className="flex items-center justify-between p-3 bg-background rounded-lg hover:bg-darkGray transition-colors"
-                      >
-                        <div className="flex items-center gap-3">
-                          <Menu className="w-4 h-4 text-gray-400" />
-                          <div>
-                            <p className="text-sm font-medium text-text font-sans">{menu.label}</p>
-                            <p className="text-xs text-gray-400 font-mono">{menu.path}</p>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2">
-                          {menu.active ? (
-                            <Eye className="w-4 h-4 text-green-400" />
-                          ) : (
-                            <EyeOff className="w-4 h-4 text-gray-400" />
-                          )}
-                          <button className="p-1.5 hover:bg-card rounded transition-colors">
-                            <Edit2 className="w-4 h-4 text-gray-400" />
-                          </button>
-                          <button className="p-1.5 hover:bg-card rounded transition-colors">
-                            <Trash2 className="w-4 h-4 text-red-400" />
-                          </button>
-                        </div>
-                      </div>
-                    ))}
+                  <div className="flex items-center justify-between p-4 bg-background rounded-xl">
+                    <span className="text-sm text-text">Majuscules requises</span>
+                    <ToggleSwitch defaultChecked={true} />
                   </div>
                 </div>
-              ))}
+              </div>
             </div>
-          </Card>
-        </div>
-      )}
+          </div>
+        )}
 
-      {activeTab === 'profils' && <GestionProfils />}
+        {/* Section: Notifications */}
+        {activeSection === 'notifications' && (
+          <div className="animate-fadeIn">
+            <div className="bg-gradient-to-br from-warning/5 to-warning/5 border border-warning/20 rounded-2xl p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-warning/20 rounded-xl">
+                  <Bell className="w-6 h-6 text-warning" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-text">Notifications</h2>
+                  <p className="text-sm text-gray-400">Gérez les canaux de communication</p>
+                </div>
+              </div>
 
-      {/* Modal Nouveau/Éditer Module */}
-      {showModuleModal && (
-        <Modal
-          title={editingModule ? 'Modifier le Module' : 'Nouveau Module'}
-          onClose={() => setShowModuleModal(false)}
-        >
-          <ModuleForm
-            module={editingModule}
-            onSave={(module) => {
-              if (editingModule) {
-                setModules(modules.map(m => m.id === module.id ? module : m));
-              } else {
-                setModules([...modules, { ...module, id: `module_${Date.now()}` }]);
-              }
-              setShowModuleModal(false);
-            }}
-            onCancel={() => setShowModuleModal(false)}
-          />
-        </Modal>
-      )}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <NotificationCard
+                  icon={Mail}
+                  title="Email"
+                  description="Notifications par email"
+                  color="primary"
+                  defaultChecked={true}
+                />
+                <NotificationCard
+                  icon={Smartphone}
+                  title="SMS"
+                  description="Alertes par SMS"
+                  color="secondary"
+                  defaultChecked={false}
+                />
+                <NotificationCard
+                  icon={Bell}
+                  title="Push"
+                  description="Notifications push"
+                  color="warning"
+                  defaultChecked={true}
+                />
+              </div>
 
-      {/* Modal Nouveau/Éditer Menu */}
-      {showMenuModal && (
-        <Modal
-          title={editingMenu ? 'Modifier le Menu' : 'Nouveau Menu'}
-          onClose={() => setShowMenuModal(false)}
-        >
-          <MenuForm
-            menu={editingMenu}
-            modules={modules}
-            onSave={(menu) => {
-              // TODO: Logique de sauvegarde
-              setShowMenuModal(false);
-            }}
-            onCancel={() => setShowMenuModal(false)}
-          />
-        </Modal>
-      )}
+              <div className="mt-8 p-6 bg-primary/5 border border-primary/20 rounded-xl">
+                <div className="flex items-start gap-3">
+                  <Info className="w-5 h-5 text-primary mt-0.5" />
+                  <div>
+                    <p className="text-sm font-medium text-text mb-1">Configuration avancée</p>
+                    <p className="text-xs text-gray-400">Les notifications peuvent être personnalisées par type d'événement dans les paramètres avancés.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Section: Localisation */}
+        {activeSection === 'localisation' && (
+          <div className="animate-fadeIn">
+            <div className="bg-gradient-to-br from-success/5 to-success/5 border border-success/20 rounded-2xl p-8">
+              <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-success/20 rounded-xl">
+                  <Globe className="w-6 h-6 text-success" />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-text">Localisation</h2>
+                  <p className="text-sm text-gray-400">Paramètres régionaux et linguistiques</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-3">Langue par défaut</label>
+                    <select className="w-full px-4 py-3 bg-background border border-darkGray rounded-xl text-text focus:outline-none focus:border-primary">
+                      <option>🇫🇷 Français</option>
+                      <option>🇬🇧 English</option>
+                      <option>🇧🇮 Kirundi</option>
+                      <option>🇹🇿 Swahili</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-3">Fuseau horaire</label>
+                    <select className="w-full px-4 py-3 bg-background border border-darkGray rounded-xl text-text focus:outline-none focus:border-primary">
+                      <option>Africa/Bujumbura (GMT+2)</option>
+                      <option>Africa/Nairobi (GMT+3)</option>
+                      <option>Africa/Kigali (GMT+2)</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-6">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-3">Format de date</label>
+                    <select className="w-full px-4 py-3 bg-background border border-darkGray rounded-xl text-text focus:outline-none focus:border-primary">
+                      <option>DD/MM/YYYY</option>
+                      <option>MM/DD/YYYY</option>
+                      <option>YYYY-MM-DD</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-gray-400 mb-3">Devise par défaut</label>
+                    <select className="w-full px-4 py-3 bg-background border border-darkGray rounded-xl text-text focus:outline-none focus:border-primary">
+                      <option>BIF - Franc Burundais</option>
+                      <option>USD - Dollar Américain</option>
+                      <option>EUR - Euro</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-// Composant ColorPicker
-const ColorPicker = ({ label, value, onChange }) => {
+// Composant ColorCard moderne
+const ColorCard = ({ label, description, value, onChange }) => {
   return (
-    <div>
-      <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">{label}</label>
-      <div className="flex items-center gap-3">
+    <div className="bg-card border border-darkGray rounded-xl p-5 hover:border-primary/50 transition-all group">
+      <div className="flex items-center gap-3 mb-4">
+        <div
+          className="w-12 h-12 rounded-lg border-2 border-darkGray group-hover:border-primary/50 transition-all"
+          style={{ backgroundColor: value }}
+        ></div>
+        <div>
+          <p className="text-sm font-semibold text-text">{label}</p>
+          <p className="text-xs text-gray-400">{description}</p>
+        </div>
+      </div>
+      <div className="flex gap-2">
         <input
           type="color"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-12 h-12 rounded-lg cursor-pointer border-2 border-darkGray"
+          className="w-full h-10 rounded-lg cursor-pointer border border-darkGray"
         />
         <input
           type="text"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="flex-1 px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-mono"
+          className="w-28 px-3 py-2 bg-background border border-darkGray rounded-lg text-text text-xs font-mono focus:outline-none focus:border-primary"
         />
       </div>
     </div>
   );
 };
 
-// Composant Modal
-const Modal = ({ title, children, onClose }) => {
+// Composant SettingRow
+const SettingRow = ({ icon: Icon, title, description, type, defaultChecked, options }) => {
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-card border border-darkGray rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-card border-b border-darkGray p-6 flex items-center justify-between">
-          <h3 className="text-xl font-heading font-bold text-text">{title}</h3>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-darkGray rounded-lg transition-colors"
-          >
-            <X className="w-5 h-5 text-gray-400" />
-          </button>
+    <div className="flex items-center justify-between p-5 bg-card rounded-xl border border-darkGray hover:border-primary/30 transition-all">
+      <div className="flex items-center gap-4">
+        <div className="p-2 bg-primary/10 rounded-lg">
+          <Icon className="w-5 h-5 text-primary" />
         </div>
-        <div className="p-6">
-          {children}
+        <div>
+          <p className="text-sm font-medium text-text">{title}</p>
+          <p className="text-xs text-gray-400">{description}</p>
         </div>
       </div>
-    </div>
-  );
-};
-
-// Composant ModuleForm
-const ModuleForm = ({ module, onSave, onCancel }) => {
-  const [formData, setFormData] = useState(module || {
-    name: '',
-    icon: 'Shield',
-    color: 'primary',
-    active: true,
-  });
-
-  return (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">Nom du module</label>
-        <input
-          type="text"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-          className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-          placeholder="Ex: Administration Système"
-        />
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">Icône</label>
-        <select
-          value={formData.icon}
-          onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-          className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-        >
-          <option value="Shield">Shield</option>
-          <option value="Users">Users</option>
-          <option value="Server">Server</option>
-          <option value="Globe">Globe</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">Couleur</label>
-        <select
-          value={formData.color}
-          onChange={(e) => setFormData({ ...formData, color: e.target.value })}
-          className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-        >
-          <option value="primary">Primaire (Bleu)</option>
-          <option value="secondary">Secondaire (Orange)</option>
-          <option value="danger">Danger (Rouge)</option>
-        </select>
-      </div>
-
-      <div className="flex items-center gap-3 pt-4">
-        <button
-          onClick={() => onSave(formData)}
-          className="flex-1 px-4 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg transition-colors font-sans"
-        >
-          Enregistrer
-        </button>
-        <button
-          onClick={onCancel}
-          className="flex-1 px-4 py-2 bg-darkGray hover:bg-gray-700 text-text rounded-lg transition-colors font-sans"
-        >
-          Annuler
-        </button>
-      </div>
-    </div>
-  );
-};
-
-// Composant MenuForm
-const MenuForm = ({ menu, modules, onSave, onCancel }) => {
-  const [formData, setFormData] = useState(menu || {
-    label: '',
-    path: '',
-    icon: 'Menu',
-    moduleId: modules[0]?.id || '',
-    active: true,
-  });
-
-  return (
-    <div className="space-y-4">
-      <div>
-        <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">Module parent</label>
-        <select
-          value={formData.moduleId}
-          onChange={(e) => setFormData({ ...formData, moduleId: e.target.value })}
-          className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-        >
-          {modules.map(m => (
-            <option key={m.id} value={m.id}>{m.name}</option>
+      {type === 'toggle' && <ToggleSwitch defaultChecked={defaultChecked} />}
+      {type === 'select' && (
+        <select className="px-4 py-2 bg-background border border-darkGray rounded-lg text-text text-sm focus:outline-none focus:border-primary">
+          {options.map((opt, idx) => (
+            <option key={idx}>{opt}</option>
           ))}
         </select>
-      </div>
+      )}
+    </div>
+  );
+};
 
-      <div>
-        <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">Label du menu</label>
-        <input
-          type="text"
-          value={formData.label}
-          onChange={(e) => setFormData({ ...formData, label: e.target.value })}
-          className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-          placeholder="Ex: Dashboard Global"
-        />
-      </div>
+// Composant ToggleSwitch
+const ToggleSwitch = ({ defaultChecked }) => {
+  return (
+    <label className="relative inline-flex items-center cursor-pointer">
+      <input type="checkbox" className="sr-only peer" defaultChecked={defaultChecked} />
+      <div className="w-11 h-6 bg-darkGray peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+    </label>
+  );
+};
 
-      <div>
-        <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">Chemin (URL)</label>
-        <input
-          type="text"
-          value={formData.path}
-          onChange={(e) => setFormData({ ...formData, path: e.target.value })}
-          className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-mono"
-          placeholder="/admin/dashboard"
-        />
+// Composant NotificationCard
+const NotificationCard = ({ icon: Icon, title, description, color, defaultChecked }) => {
+  return (
+    <div className={`bg-gradient-to-br from-${color}/10 to-${color}/5 border border-${color}/20 rounded-xl p-6 hover:shadow-lg transition-all`}>
+      <div className="flex items-center justify-between mb-4">
+        <div className={`p-3 bg-${color}/20 rounded-xl`}>
+          <Icon className={`w-6 h-6 text-${color}`} />
+        </div>
+        <ToggleSwitch defaultChecked={defaultChecked} />
       </div>
-
-      <div>
-        <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">Icône</label>
-        <select
-          value={formData.icon}
-          onChange={(e) => setFormData({ ...formData, icon: e.target.value })}
-          className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-        >
-          <option value="LayoutDashboard">Dashboard</option>
-          <option value="Users">Users</option>
-          <option value="Activity">Activity</option>
-          <option value="Settings">Settings</option>
-        </select>
-      </div>
-
-      <div className="flex items-center gap-3 pt-4">
-        <button
-          onClick={() => onSave(formData)}
-          className="flex-1 px-4 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg transition-colors font-sans"
-        >
-          Enregistrer
-        </button>
-        <button
-          onClick={onCancel}
-          className="flex-1 px-4 py-2 bg-darkGray hover:bg-gray-700 text-text rounded-lg transition-colors font-sans"
-        >
-          Annuler
-        </button>
-      </div>
+      <h3 className="text-lg font-bold text-text mb-1">{title}</h3>
+      <p className="text-sm text-gray-400">{description}</p>
     </div>
   );
 };

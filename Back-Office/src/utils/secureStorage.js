@@ -17,21 +17,46 @@ class SecureStorage {
 
     // Clé de chiffrement (générée ou récupérée)
     this.encryptionKey = null;
+    this.isInitialized = false;
     
     // Générer un ID de session unique
     this.sessionId = this.generateSessionId();
     
-    // Initialiser la clé de chiffrement
-    this.initEncryptionKey().then(() => {
-      // Charger rememberMe depuis localStorage si existe
-      const savedRememberMe = localStorage.getItem('rememberMe');
-      if (savedRememberMe === 'true') {
-        this.memoryStorage.rememberMe = true;
-      }
+    // Initialiser la clé de chiffrement et charger les données
+    this.initialize();
+  }
 
-      // Charger les données depuis le storage au démarrage
-      this.loadFromSessionStorage();
-    });
+  /**
+   * Initialiser le storage de manière asynchrone
+   */
+  async initialize() {
+    await this.initEncryptionKey();
+    
+    // Charger rememberMe depuis localStorage si existe
+    const savedRememberMe = localStorage.getItem('rememberMe');
+    if (savedRememberMe === 'true') {
+      this.memoryStorage.rememberMe = true;
+    }
+
+    // Charger les données depuis le storage
+    await this.loadFromSessionStorage();
+    
+    this.isInitialized = true;
+  }
+
+  /**
+   * Attendre que l'initialisation soit terminée
+   */
+  async waitForInit() {
+    if (this.isInitialized) return;
+    
+    // Attendre maximum 2 secondes
+    const maxWait = 2000;
+    const startTime = Date.now();
+    
+    while (!this.isInitialized && (Date.now() - startTime) < maxWait) {
+      await new Promise(resolve => setTimeout(resolve, 50));
+    }
   }
 
   /**
@@ -148,35 +173,32 @@ class SecureStorage {
   /**
    * Charger les données depuis sessionStorage ou localStorage
    */
-  loadFromSessionStorage() {
-    // Cette fonction sera appelée après l'initialisation de la clé
-    setTimeout(async () => {
-      try {
-        // Vérifier d'abord si rememberMe est activé
-        const rememberMe = localStorage.getItem('rememberMe') === 'true';
-        
-        // Choisir le storage approprié
-        const storage = rememberMe ? localStorage : sessionStorage;
-        
-        const encryptedAccessToken = storage.getItem('_at');
-        const encryptedRefreshToken = storage.getItem('_rt');
-        const encryptedUserData = storage.getItem('_ud');
+  async loadFromSessionStorage() {
+    try {
+      // Vérifier d'abord si rememberMe est activé
+      const rememberMe = localStorage.getItem('rememberMe') === 'true';
+      
+      // Choisir le storage approprié
+      const storage = rememberMe ? localStorage : sessionStorage;
+      
+      const encryptedAccessToken = storage.getItem('_at');
+      const encryptedRefreshToken = storage.getItem('_rt');
+      const encryptedUserData = storage.getItem('_ud');
 
-        if (encryptedAccessToken) {
-          this.memoryStorage.accessToken = await this.decrypt(encryptedAccessToken);
-        }
-        if (encryptedRefreshToken) {
-          this.memoryStorage.refreshToken = await this.decrypt(encryptedRefreshToken);
-        }
-        if (encryptedUserData) {
-          this.memoryStorage.user = await this.decrypt(encryptedUserData);
-        }
-        
-        this.memoryStorage.rememberMe = rememberMe;
-      } catch (e) {
-        console.error('Erreur lors du chargement depuis le storage:', e);
+      if (encryptedAccessToken) {
+        this.memoryStorage.accessToken = await this.decrypt(encryptedAccessToken);
       }
-    }, 100); // Petit délai pour s'assurer que la clé est initialisée
+      if (encryptedRefreshToken) {
+        this.memoryStorage.refreshToken = await this.decrypt(encryptedRefreshToken);
+      }
+      if (encryptedUserData) {
+        this.memoryStorage.user = await this.decrypt(encryptedUserData);
+      }
+      
+      this.memoryStorage.rememberMe = rememberMe;
+    } catch (e) {
+      console.error('Erreur lors du chargement depuis le storage:', e);
+    }
   }
 
   /**
@@ -384,9 +406,7 @@ const secureStorage = new SecureStorage();
 
 // Nettoyer la session quand l'onglet/fenêtre est fermé
 window.addEventListener('beforeunload', () => {
-  // Note: Les données en mémoire seront automatiquement perdues
-  // On peut logger la déconnexion si nécessaire
-  console.log('Session terminée');
+  // Les données en mémoire seront automatiquement perdues
 });
 
 // Nettoyer la session en cas d'inactivité prolongée

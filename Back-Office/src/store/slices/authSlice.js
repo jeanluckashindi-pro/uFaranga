@@ -98,6 +98,9 @@ export const loadUserFromStorage = createAsyncThunk(
   'auth/loadFromStorage',
   async (_, { rejectWithValue }) => {
     try {
+      // Attendre que secureStorage soit initialisé
+      await secureStorage.waitForInit();
+      
       const token = secureStorage.getAccessToken();
       const userData = secureStorage.getUser();
       

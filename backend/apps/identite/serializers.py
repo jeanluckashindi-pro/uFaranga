@@ -630,6 +630,10 @@ class UtilisateurIdentiteSerializer(serializers.ModelSerializer):
     province_details = serializers.SerializerMethodField()
     district_details = serializers.SerializerMethodField()
     quartier_details = serializers.SerializerMethodField()
+    
+    # Informations de nationalité (basé sur le code pays)
+    nationalite_details = serializers.SerializerMethodField()
+    pays_residence_details = serializers.SerializerMethodField()
 
     class Meta:
         model = Utilisateur
@@ -643,7 +647,9 @@ class UtilisateurIdentiteSerializer(serializers.ModelSerializer):
             'date_naissance',
             'lieu_naissance',
             'nationalite',
+            'nationalite_details',  # EXPAND - Détails du pays de nationalité
             'pays_residence',
+            'pays_residence_details',  # EXPAND - Détails du pays de résidence
             'province',
             'ville',
             'commune',
@@ -677,7 +683,7 @@ class UtilisateurIdentiteSerializer(serializers.ModelSerializer):
             'is_superuser',
             'profil',
             'numeros_telephone',  # EXPAND - Liste des numéros
-            'pays_details',  # EXPAND
+            'pays_details',  # EXPAND - Localisation hiérarchique (si définie)
             'province_details',  # EXPAND
             'district_details',  # EXPAND
             'quartier_details',  # EXPAND
@@ -685,8 +691,56 @@ class UtilisateurIdentiteSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = fields
     
+    def get_nationalite_details(self, obj):
+        """Détails du pays de nationalité basé sur le code ISO"""
+        if obj.nationalite:
+            from apps.localisation.models import Pays
+            try:
+                pays = Pays.objects.get(code_iso_2=obj.nationalite)
+                return {
+                    'id': str(pays.id),
+                    'code_iso_2': pays.code_iso_2,
+                    'code_iso_3': pays.code_iso_3,
+                    'nom': pays.nom,
+                    'nom_anglais': pays.nom_anglais,
+                    'continent': pays.continent,
+                    'sous_region': pays.sous_region,
+                    'metadonnees': pays.metadonnees,
+                }
+            except Pays.DoesNotExist:
+                return {
+                    'code_iso_2': obj.nationalite,
+                    'nom': obj.nationalite,
+                    'note': 'Pays non trouvé dans la base de données'
+                }
+        return None
+    
+    def get_pays_residence_details(self, obj):
+        """Détails du pays de résidence basé sur le code ISO"""
+        if obj.pays_residence:
+            from apps.localisation.models import Pays
+            try:
+                pays = Pays.objects.get(code_iso_2=obj.pays_residence)
+                return {
+                    'id': str(pays.id),
+                    'code_iso_2': pays.code_iso_2,
+                    'code_iso_3': pays.code_iso_3,
+                    'nom': pays.nom,
+                    'nom_anglais': pays.nom_anglais,
+                    'continent': pays.continent,
+                    'sous_region': pays.sous_region,
+                    'metadonnees': pays.metadonnees,
+                }
+            except Pays.DoesNotExist:
+                return {
+                    'code_iso_2': obj.pays_residence,
+                    'nom': obj.pays_residence,
+                    'note': 'Pays non trouvé dans la base de données'
+                }
+        return None
+    
     def get_pays_details(self, obj):
-        """Détails du pays de localisation"""
+        """Détails complets du pays de localisation"""
         if obj.pays:
             return {
                 'id': str(obj.pays.id),
@@ -694,38 +748,80 @@ class UtilisateurIdentiteSerializer(serializers.ModelSerializer):
                 'code_iso_3': obj.pays.code_iso_3,
                 'nom': obj.pays.nom,
                 'nom_anglais': obj.pays.nom_anglais,
-                'telephonie': obj.pays.metadonnees.get('telephonie', {}),
-                'devise': obj.pays.metadonnees.get('devise', {}),
-                'geographie': obj.pays.metadonnees.get('geographie', {}),
+                'continent': obj.pays.continent,
+                'sous_region': obj.pays.sous_region,
+                'latitude_centre': float(obj.pays.latitude_centre) if obj.pays.latitude_centre else None,
+                'longitude_centre': float(obj.pays.longitude_centre) if obj.pays.longitude_centre else None,
+                'autorise_systeme': obj.pays.autorise_systeme,
+                'est_actif': obj.pays.est_actif,
+                'metadonnees': obj.pays.metadonnees,
             }
         return None
     
     def get_province_details(self, obj):
-        """Détails de la province"""
+        """Détails complets de la province"""
         if obj.province_geo:
             return {
                 'id': str(obj.province_geo.id),
                 'code': obj.province_geo.code,
                 'nom': obj.province_geo.nom,
+                'pays': {
+                    'id': str(obj.province_geo.pays.id),
+                    'code_iso_2': obj.province_geo.pays.code_iso_2,
+                    'nom': obj.province_geo.pays.nom,
+                },
+                'latitude_centre': float(obj.province_geo.latitude_centre) if obj.province_geo.latitude_centre else None,
+                'longitude_centre': float(obj.province_geo.longitude_centre) if obj.province_geo.longitude_centre else None,
+                'autorise_systeme': obj.province_geo.autorise_systeme,
+                'est_actif': obj.province_geo.est_actif,
+                'metadonnees': obj.province_geo.metadonnees,
             }
         return None
     
     def get_district_details(self, obj):
-        """Détails du district"""
+        """Détails complets du district"""
         if obj.district:
             return {
                 'id': str(obj.district.id),
                 'code': obj.district.code,
                 'nom': obj.district.nom,
+                'province': {
+                    'id': str(obj.district.province.id),
+                    'code': obj.district.province.code,
+                    'nom': obj.district.province.nom,
+                    'pays': {
+                        'code_iso_2': obj.district.province.pays.code_iso_2,
+                        'nom': obj.district.province.pays.nom,
+                    }
+                },
+                'latitude_centre': float(obj.district.latitude_centre) if obj.district.latitude_centre else None,
+                'longitude_centre': float(obj.district.longitude_centre) if obj.district.longitude_centre else None,
+                'autorise_systeme': obj.district.autorise_systeme,
+                'est_actif': obj.district.est_actif,
+                'metadonnees': obj.district.metadonnees,
             }
         return None
     
     def get_quartier_details(self, obj):
-        """Détails du quartier"""
+        """Détails complets du quartier"""
         if obj.quartier_geo:
             return {
                 'id': str(obj.quartier_geo.id),
                 'code': obj.quartier_geo.code,
                 'nom': obj.quartier_geo.nom,
+                'district': {
+                    'id': str(obj.quartier_geo.district.id),
+                    'code': obj.quartier_geo.district.code,
+                    'nom': obj.quartier_geo.district.nom,
+                    'province': {
+                        'code': obj.quartier_geo.district.province.code,
+                        'nom': obj.quartier_geo.district.province.nom,
+                    }
+                },
+                'latitude_centre': float(obj.quartier_geo.latitude_centre) if obj.quartier_geo.latitude_centre else None,
+                'longitude_centre': float(obj.quartier_geo.longitude_centre) if obj.quartier_geo.longitude_centre else None,
+                'autorise_systeme': obj.quartier_geo.autorise_systeme,
+                'est_actif': obj.quartier_geo.est_actif,
+                'metadonnees': obj.quartier_geo.metadonnees,
             }
         return None
