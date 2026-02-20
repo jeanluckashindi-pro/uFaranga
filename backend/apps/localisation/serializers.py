@@ -340,3 +340,39 @@ class PointDeServiceSerializer(serializers.ModelSerializer):
             if quartier:
                 data = {**data, 'quartier': str(quartier.id)}
         return super().to_internal_value(data)
+
+
+# --- Sérialiseur pour l'endpoint personnalisé de localisation complète ---
+
+class LocalisationCompleteSerializer(serializers.Serializer):
+    """Sérialiseur pour retourner toutes les données de localisation avec métadonnées."""
+    pays = serializers.SerializerMethodField()
+    provinces = serializers.SerializerMethodField()
+    districts = serializers.SerializerMethodField()
+    quartiers = serializers.SerializerMethodField()
+    points_de_service = serializers.SerializerMethodField()
+    statistiques_globales = serializers.SerializerMethodField()
+
+    def get_pays(self, obj):
+        return PaysSerializer(obj['pays'], many=True).data
+
+    def get_provinces(self, obj):
+        return ProvinceSerializer(obj['provinces'], many=True).data
+
+    def get_districts(self, obj):
+        return DistrictSerializer(obj['districts'], many=True).data
+
+    def get_quartiers(self, obj):
+        return QuartierSerializer(obj['quartiers'], many=True).data
+
+    def get_points_de_service(self, obj):
+        return PointDeServiceSerializer(obj['points_de_service'], many=True).data
+
+    def get_statistiques_globales(self, obj):
+        return {
+            'total_pays': obj['pays'].count(),
+            'total_provinces': obj['provinces'].count(),
+            'total_districts': obj['districts'].count(),
+            'total_quartiers': obj['quartiers'].count(),
+            'total_points_de_service': obj['points_de_service'].count(),
+        }

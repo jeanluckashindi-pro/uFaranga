@@ -23,6 +23,7 @@ from .serializers import (
     DistrictSerializer,
     QuartierSerializer,
     PointDeServiceSerializer,
+    LocalisationCompleteSerializer,
 )
 from .permissions import IsSystemeOrSuperAdmin
 
@@ -255,3 +256,138 @@ class PointDeServiceViewSet(viewsets.ModelViewSet):
         if quartier_id:
             qs = qs.filter(quartier_id=quartier_id)
         return qs
+
+
+@extend_schema_view(
+    list=extend_schema(
+        summary='Localisation complète : tous les pays, provinces, districts, quartiers et points de service',
+        description='Retourne toutes les données de localisation avec métadonnées complètes. '
+                    'Supporte les filtres par continent, sous-région, pays, province, district et quartier.',
+        tags=['Localisation'],
+        parameters=[
+            OpenApiParameter(name='continent', type=str, description='Filtrer par continent (ex: Afrique, Europe)'),
+            OpenApiParameter(name='sous_region', type=str, description='Filtrer par sous-région (ex: Afrique de l\'Est)'),
+            OpenApiParameter(name='pays_id', type=str, description='Filtrer par UUID du pays'),
+            OpenApiParameter(name='pays_code', type=str, description='Filtrer par code ISO 2 du pays (ex: BI, RW)'),
+            OpenApiParameter(name='province_id', type=str, description='Filtrer par UUID de la province'),
+            OpenApiParameter(name='district_id', type=str, description='Filtrer par UUID du district'),
+            OpenApiParameter(name='quartier_id', type=str, description='Filtrer par UUID du quartier'),
+            OpenApiParameter(name='est_actif', type=bool, description='Filtrer par statut actif (true/false)'),
+            OpenApiParameter(name='autorise_systeme', type=bool, description='Filtrer par autorisation système (true/false)'),
+        ],
+    ),
+)
+class LocalisationCompleteViewSet(viewsets.ViewSet):
+    """
+    ViewSet personnalisé pour retourner toutes les données de localisation
+    avec filtres avancés et métadonnées complètes.
+    """
+    permission_classes = [AllowAny]
+
+    @extend_schema(responses={200: LocalisationCompleteSerializer})
+    def list(self, request):
+        params = request.query_params
+
+        # Initialiser les querysets
+        pays_qs = Pays.objects.all()
+        provinces_qs = Province.objects.select_related('pays').all()
+        districts_qs = District.objects.select_related('province', 'province__pays').all()
+        quartiers_qs = Quartier.objects.select_related('district', 'district__province', 'district__province__pays').all()
+        points_qs = PointDeService.objects.select_related(
+            'quartier', 'quartier__district', 'quartier__district__province', 'quartier__district__province__pays'
+        ).all()
+
+        # Filtres par continent
+        if params.get('continent'):
+            continent = params['continent'].strip()
+            pays_qs = pays_qs.filter(continent__iexact=continent)
+            provinces_qs = provinces_qs.filter(pays__continent__iexact=continent)
+            districts_qs = districts_qs.filter(province__pays__continent__iexact=continent)
+            quartiers_qs = quartiers_qs.filter(district__province__pays__continent__iexact=continent)
+            points_qs = points_qs.filter(quartier__district__province__pays__continent__iexact=continent)
+
+        # Filtres par sous-région
+        if params.get('sous_region'):
+            sous_region = params['sous_region'].strip()
+            pays_qs = pays_qs.filter(sous_region__icontains=sous_region)
+            provinces_qs = provinces_qs.filter(pays__sous_region__icontains=sous_region)
+            districts_qs = districts_qs.filter(province__pays__sous_region__icontains=sous_region)
+            quartiers_qs = quartiers_qs.filter(district__province__pays__sous_region__icontains=sous_region)
+            points_qs = points_qs.filter(quartier__district__province__pays__sous_region__icontains=sous_region)
+
+        # Filtres par pays
+        if params.get('pays_id'):
+            pays_id = params['pays_id']
+            pays_qs = pays_qs.filter(id=pays_id)
+            provinces_qs = provinces_qs.filter(pays_id=pays_id)
+            districts_qs = districts_qs.filter(province__pays_id=pays_id)
+            quartiers_qs = quartiers_qs.filter(district__province__pays_id=pays_id)
+            points_qs = points_qs.filter(quartier__district__province__pays_id=pays_id)
+
+        if params.get('pays_code'):
+            pays_code = params['pays_code'].strip()
+            pays_qs = pays_qs.filter(code_iso_2__iexact=pays_code)
+            provinces_qs = provinces_qs.filter(pays__code_iso_2__iexact=pays_code)
+            districts_qs = districts_qs.filter(province__pays__code_iso_2__iexact=pays_code)
+            quartiers_qs = quartiers_qs.filter(district__province__pays__code_iso_2__iexact=pays_code)
+            points_qs = points_qs.filter(quartier__district__province__pays__code_iso_2__iexact=pays_code)
+
+        # Filtres par province
+        if params.get('province_id'):
+            province_id = params['province_id']
+            provinces_qs = provinces_qs.filter(id=province_id)
+            districts_qs = districts_qs.filter(province_id=province_id)
+            quartiers_qs = quartiers_qs.filter(district__province_id=province_id)
+            points_qs = points_qs.filter(quartier__district__province_id=province_id)
+
+        # Filtres par district
+        if params.get('district_id'):
+            district_id = params['district_id']
+            districts_qs = districts_qs.filter(id=district_id)
+            quartiers_qs = quartiers_qs.filter(district_id=district_id)
+            points_qs = points_qs.filter(quartier__district_id=district_id)
+
+        # Filtres par quartier
+        if params.get('quartier_id'):
+            quartier_id = params['quartier_id']
+            quartiers_qs = quartiers_qs.filter(id=quartier_id)
+            points_qs = points_qs.filter(quartier_id=quartier_id)
+
+        # Filtres par statut actif
+        if 'est_actif' in params:
+            val = params.get('est_actif', '').lower()
+            est_actif = val in ('true', '1', 'yes')
+            pays_qs = pays_qs.filter(est_actif=est_actif)
+            provinces_qs = provinces_qs.filter(est_actif=est_actif)
+            districts_qs = districts_qs.filter(est_actif=est_actif)
+            quartiers_qs = quartiers_qs.filter(est_actif=est_actif)
+            points_qs = points_qs.filter(est_actif=est_actif)
+
+        # Filtres par autorisation système
+        if 'autorise_systeme' in params:
+            val = params.get('autorise_systeme', '').lower()
+            autorise = val in ('true', '1', 'yes')
+            pays_qs = pays_qs.filter(autorise_systeme=autorise)
+            provinces_qs = provinces_qs.filter(autorise_systeme=autorise)
+            districts_qs = districts_qs.filter(autorise_systeme=autorise)
+            quartiers_qs = quartiers_qs.filter(autorise_systeme=autorise)
+            points_qs = points_qs.filter(autorise_systeme=autorise)
+
+        # Ordonner les résultats
+        pays_qs = pays_qs.order_by('continent', 'sous_region', 'nom')
+        provinces_qs = provinces_qs.order_by('pays__nom', 'nom')
+        districts_qs = districts_qs.order_by('province__nom', 'nom')
+        quartiers_qs = quartiers_qs.order_by('district__nom', 'nom')
+        points_qs = points_qs.order_by('quartier__nom', 'nom')
+
+        # Préparer les données
+        data = {
+            'pays': pays_qs,
+            'provinces': provinces_qs,
+            'districts': districts_qs,
+            'quartiers': quartiers_qs,
+            'points_de_service': points_qs,
+        }
+
+        serializer = LocalisationCompleteSerializer(data)
+        return Response(serializer.data)

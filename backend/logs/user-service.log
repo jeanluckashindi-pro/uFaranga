@@ -3918,3 +3918,51 @@ INFO 2026-02-20 05:56:00,974 autoreload 14140 12416 Watching for file changes wi
 INFO 2026-02-20 05:56:00,974 autoreload 21832 9812 Watching for file changes with StatReloader
 INFO 2026-02-20 06:41:02,723 autoreload 11872 8624 Watching for file changes with StatReloader
 INFO 2026-02-20 06:43:03,800 autoreload 15180 24184 Watching for file changes with StatReloader
+INFO 2026-02-20 08:13:24,787 autoreload 11924 21328 Watching for file changes with StatReloader
+INFO 2026-02-20 08:15:35,705 basehttp 11924 9284 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+INFO 2026-02-20 08:15:37,526 basehttp 11924 9284 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1285
+INFO 2026-02-20 08:15:37,536 basehttp 11924 9284 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-20 08:15:37,740 basehttp 11924 9284 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 08:21:59,930 basehttp 11924 18624 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-20 08:22:00,110 basehttp 11924 18624 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:22:01,862 autoreload 11924 21328 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 08:22:04,284 autoreload 20056 21228 Watching for file changes with StatReloader
+INFO 2026-02-20 08:22:28,013 autoreload 20056 21228 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\urls.py changed, reloading.
+INFO 2026-02-20 08:22:29,651 autoreload 13780 6352 Watching for file changes with StatReloader
+INFO 2026-02-20 08:24:16,358 basehttp 13780 14852 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-20 08:24:16,580 basehttp 13780 14852 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:24:23,282 basehttp 13780 18612 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:24:23,455 basehttp 13780 18612 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:24:27,869 autoreload 13780 6352 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\urls.py changed, reloading.
+INFO 2026-02-20 08:24:30,116 autoreload 22384 16220 Watching for file changes with StatReloader
+INFO 2026-02-20 08:27:28,458 autoreload 22384 16220 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-20 08:27:30,225 autoreload 16696 10544 Watching for file changes with StatReloader
+WARNING 2026-02-20 08:27:43,449 log 16696 20316 Method Not Allowed: /api/v1/localisation/complete/
+WARNING 2026-02-20 08:27:43,450 basehttp 16696 20316 "POST /api/v1/localisation/complete/ HTTP/1.1" 405 95
+INFO 2026-02-20 08:28:07,466 basehttp 16696 20316 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15274825
+INFO 2026-02-20 08:29:41,493 basehttp 16696 8328 "GET /api/v1/localisation/complete/?sous_region=Afrique%20de%20l%27Est HTTP/1.1" 200 3697975
+INFO 2026-02-20 08:30:58,675 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-20 08:30:58,831 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:31:27,249 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:31:27,379 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:32:03,758 basehttp 16696 2996 "OPTIONS /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 0
+INFO 2026-02-20 08:32:03,886 views 16696 2996 Déconnexion de 3 autre(s) session(s) pour systeme@ufaranga.bi, session actuelle conservée.
+INFO 2026-02-20 08:32:03,888 basehttp 16696 2996 "POST /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 152
+INFO 2026-02-20 08:32:08,287 basehttp 16696 2996 "OPTIONS /api/v1/authentification/deconnexion/ HTTP/1.1" 200 0
+INFO 2026-02-20 08:32:08,401 views 16696 2996 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-20 08:32:08,402 basehttp 16696 2996 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+INFO 2026-02-20 08:32:14,548 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1285
+INFO 2026-02-20 08:32:14,681 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 08:32:27,722 views 16696 2996 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-20 08:32:27,724 basehttp 16696 2996 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+INFO 2026-02-20 08:32:59,282 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1285
+INFO 2026-02-20 08:32:59,386 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 08:33:11,516 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 08:33:25,066 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 08:33:45,360 basehttp 16696 2996 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-20 08:33:45,536 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:33:52,190 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:36:50,020 basehttp 16696 2996 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2540
+INFO 2026-02-20 08:37:45,180 basehttp 16696 2880 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-20 08:37:47,126 basehttp 16696 2880 "GET /api/schema/ HTTP/1.1" 200 299082
+INFO 2026-02-20 08:37:57,336 basehttp 16696 2880 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025

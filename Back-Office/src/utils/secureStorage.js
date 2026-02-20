@@ -1,7 +1,7 @@
 /**
  * Gestionnaire de stockage sécurisé pour les données sensibles
  * Utilise sessionStorage pour la persistance pendant la session
- * et localStorage uniquement pour rememberMe
+ * et localStorage uniquement pour rememberMe avec chiffrement AES-GCM
  */
 
 class SecureStorage {
@@ -15,34 +15,168 @@ class SecureStorage {
       rememberMe: false,
     };
 
+    // Clé de chiffrement (générée ou récupérée)
+    this.encryptionKey = null;
+    
     // Générer un ID de session unique
     this.sessionId = this.generateSessionId();
     
-    // Charger rememberMe depuis localStorage si existe
-    const savedRememberMe = localStorage.getItem('rememberMe');
-    if (savedRememberMe === 'true') {
-      this.memoryStorage.rememberMe = true;
-    }
+    // Initialiser la clé de chiffrement
+    this.initEncryptionKey().then(() => {
+      // Charger rememberMe depuis localStorage si existe
+      const savedRememberMe = localStorage.getItem('rememberMe');
+      if (savedRememberMe === 'true') {
+        this.memoryStorage.rememberMe = true;
+      }
 
-    // Charger les données depuis sessionStorage au démarrage
-    this.loadFromSessionStorage();
+      // Charger les données depuis le storage au démarrage
+      this.loadFromSessionStorage();
+    });
   }
 
   /**
-   * Charger les données depuis sessionStorage
+   * Initialiser ou récupérer la clé de chiffrement
+   */
+  async initEncryptionKey() {
+    try {
+      // Vérifier si une clé existe déjà
+      const storedKey = localStorage.getItem('_ek');
+      
+      if (storedKey) {
+        // Importer la clé existante
+        const keyData = JSON.parse(atob(storedKey));
+        this.encryptionKey = await crypto.subtle.importKey(
+          'jwk',
+          keyData,
+          { name: 'AES-GCM', length: 256 },
+          true,
+          ['encrypt', 'decrypt']
+        );
+      } else {
+        // Générer une nouvelle clé
+        this.encryptionKey = await crypto.subtle.generateKey(
+          { name: 'AES-GCM', length: 256 },
+          true,
+          ['encrypt', 'decrypt']
+        );
+        
+        // Exporter et stocker la clé
+        const exportedKey = await crypto.subtle.exportKey('jwk', this.encryptionKey);
+        localStorage.setItem('_ek', btoa(JSON.stringify(exportedKey)));
+      }
+    } catch (e) {
+      console.error('Erreur lors de l\'initialisation de la clé de chiffrement:', e);
+      // Fallback: utiliser une clé dérivée du navigateur
+      this.encryptionKey = null;
+    }
+  }
+
+  /**
+   * Chiffrer des données
+   */
+  async encrypt(data) {
+    if (!this.encryptionKey) {
+      // Fallback: encoder en base64 si pas de clé
+      return btoa(JSON.stringify(data));
+    }
+
+    try {
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const encodedData = new TextEncoder().encode(JSON.stringify(data));
+      
+      const encryptedData = await crypto.subtle.encrypt(
+        { name: 'AES-GCM', iv },
+        this.encryptionKey,
+        encodedData
+      );
+      
+      // Combiner IV et données chiffrées
+      const combined = new Uint8Array(iv.length + encryptedData.byteLength);
+      combined.set(iv, 0);
+      combined.set(new Uint8Array(encryptedData), iv.length);
+      
+      // Convertir en base64
+      return btoa(String.fromCharCode(...combined));
+    } catch (e) {
+      console.error('Erreur de chiffrement:', e);
+      return btoa(JSON.stringify(data));
+    }
+  }
+
+  /**
+   * Déchiffrer des données
+   */
+  async decrypt(encryptedData) {
+    if (!encryptedData) return null;
+    
+    if (!this.encryptionKey) {
+      // Fallback: décoder depuis base64
+      try {
+        return JSON.parse(atob(encryptedData));
+      } catch (e) {
+        return null;
+      }
+    }
+
+    try {
+      // Décoder depuis base64
+      const combined = Uint8Array.from(atob(encryptedData), c => c.charCodeAt(0));
+      
+      // Extraire IV et données
+      const iv = combined.slice(0, 12);
+      const data = combined.slice(12);
+      
+      const decryptedData = await crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv },
+        this.encryptionKey,
+        data
+      );
+      
+      const decodedData = new TextDecoder().decode(decryptedData);
+      return JSON.parse(decodedData);
+    } catch (e) {
+      console.error('Erreur de déchiffrement:', e);
+      // Essayer le fallback
+      try {
+        return JSON.parse(atob(encryptedData));
+      } catch (e2) {
+        return null;
+      }
+    }
+  }
+
+  /**
+   * Charger les données depuis sessionStorage ou localStorage
    */
   loadFromSessionStorage() {
-    try {
-      const accessToken = sessionStorage.getItem('accessToken');
-      const refreshToken = sessionStorage.getItem('refreshToken');
-      const userData = sessionStorage.getItem('userData');
+    // Cette fonction sera appelée après l'initialisation de la clé
+    setTimeout(async () => {
+      try {
+        // Vérifier d'abord si rememberMe est activé
+        const rememberMe = localStorage.getItem('rememberMe') === 'true';
+        
+        // Choisir le storage approprié
+        const storage = rememberMe ? localStorage : sessionStorage;
+        
+        const encryptedAccessToken = storage.getItem('_at');
+        const encryptedRefreshToken = storage.getItem('_rt');
+        const encryptedUserData = storage.getItem('_ud');
 
-      if (accessToken) this.memoryStorage.accessToken = accessToken;
-      if (refreshToken) this.memoryStorage.refreshToken = refreshToken;
-      if (userData) this.memoryStorage.user = JSON.parse(userData);
-    } catch (e) {
-      console.error('Erreur lors du chargement depuis sessionStorage:', e);
-    }
+        if (encryptedAccessToken) {
+          this.memoryStorage.accessToken = await this.decrypt(encryptedAccessToken);
+        }
+        if (encryptedRefreshToken) {
+          this.memoryStorage.refreshToken = await this.decrypt(encryptedRefreshToken);
+        }
+        if (encryptedUserData) {
+          this.memoryStorage.user = await this.decrypt(encryptedUserData);
+        }
+        
+        this.memoryStorage.rememberMe = rememberMe;
+      } catch (e) {
+        console.error('Erreur lors du chargement depuis le storage:', e);
+      }
+    }, 100); // Petit délai pour s'assurer que la clé est initialisée
   }
 
   /**
@@ -57,10 +191,14 @@ class SecureStorage {
    */
   setAccessToken(token) {
     this.memoryStorage.accessToken = token;
+    const storage = this.memoryStorage.rememberMe ? localStorage : sessionStorage;
+    
     if (token) {
-      sessionStorage.setItem('accessToken', token);
+      this.encrypt(token).then(encrypted => {
+        storage.setItem('_at', encrypted);
+      });
     } else {
-      sessionStorage.removeItem('accessToken');
+      storage.removeItem('_at');
     }
   }
 
@@ -68,7 +206,12 @@ class SecureStorage {
    * Récupérer le token d'accès
    */
   getAccessToken() {
-    return this.memoryStorage.accessToken || sessionStorage.getItem('accessToken');
+    if (this.memoryStorage.accessToken) {
+      return this.memoryStorage.accessToken;
+    }
+    
+    // Les tokens sont chargés de manière asynchrone au démarrage
+    return null;
   }
 
   /**
@@ -76,10 +219,14 @@ class SecureStorage {
    */
   setRefreshToken(token) {
     this.memoryStorage.refreshToken = token;
+    const storage = this.memoryStorage.rememberMe ? localStorage : sessionStorage;
+    
     if (token) {
-      sessionStorage.setItem('refreshToken', token);
+      this.encrypt(token).then(encrypted => {
+        storage.setItem('_rt', encrypted);
+      });
     } else {
-      sessionStorage.removeItem('refreshToken');
+      storage.removeItem('_rt');
     }
   }
 
@@ -87,7 +234,11 @@ class SecureStorage {
    * Récupérer le refresh token
    */
   getRefreshToken() {
-    return this.memoryStorage.refreshToken || sessionStorage.getItem('refreshToken');
+    if (this.memoryStorage.refreshToken) {
+      return this.memoryStorage.refreshToken;
+    }
+    
+    return null;
   }
 
   /**
@@ -95,10 +246,14 @@ class SecureStorage {
    */
   setUser(user) {
     this.memoryStorage.user = user;
+    const storage = this.memoryStorage.rememberMe ? localStorage : sessionStorage;
+    
     if (user) {
-      sessionStorage.setItem('userData', JSON.stringify(user));
+      this.encrypt(user).then(encrypted => {
+        storage.setItem('_ud', encrypted);
+      });
     } else {
-      sessionStorage.removeItem('userData');
+      storage.removeItem('_ud');
     }
   }
 
@@ -108,16 +263,6 @@ class SecureStorage {
   getUser() {
     if (this.memoryStorage.user) {
       return this.memoryStorage.user;
-    }
-    
-    try {
-      const userData = sessionStorage.getItem('userData');
-      if (userData) {
-        this.memoryStorage.user = JSON.parse(userData);
-        return this.memoryStorage.user;
-      }
-    } catch (e) {
-      console.error('Erreur lors de la lecture des données utilisateur:', e);
     }
     
     return null;
@@ -145,17 +290,24 @@ class SecureStorage {
       rememberMe: false,
     };
     
-    // Nettoyer sessionStorage
+    // Nettoyer les données chiffrées dans les deux storages
+    sessionStorage.removeItem('_at');
+    sessionStorage.removeItem('_rt');
+    sessionStorage.removeItem('_ud');
+    
+    localStorage.removeItem('_at');
+    localStorage.removeItem('_rt');
+    localStorage.removeItem('_ud');
+    
+    // Nettoyer les anciennes clés non chiffrées (migration)
     sessionStorage.removeItem('accessToken');
     sessionStorage.removeItem('refreshToken');
     sessionStorage.removeItem('userData');
-    
-    // Nettoyer localStorage (anciennes sessions)
-    localStorage.removeItem('authToken');
+    localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('userData');
     
-    // Ne pas supprimer rememberMe si c'était activé
+    // Ne pas supprimer rememberMe et la clé de chiffrement
     if (!rememberMe) {
       localStorage.removeItem('rememberMe');
     }
