@@ -26,10 +26,14 @@ class PaysSerializer(serializers.ModelSerializer):
             'id', 'code_iso_2', 'code_iso_3', 'nom', 'nom_anglais',
             'continent', 'sous_region',
             'latitude_centre', 'longitude_centre',
+            'nombre_agents', 'nombre_utilisateurs',
+            'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
             'autorise_systeme', 'est_actif',
             'date_creation', 'date_modification', 'metadonnees',
         ]
-        read_only_fields = ['id', 'date_creation', 'date_modification']
+        read_only_fields = ['id', 'date_creation', 'date_modification', 
+                           'nombre_agents', 'nombre_utilisateurs',
+                           'nombre_agents_actifs', 'nombre_utilisateurs_actifs']
 
 
 # --- Couverture mondiale : hiérarchie complète avec statistiques (actifs / inactifs) à chaque niveau ---
@@ -42,7 +46,11 @@ class PointDeServiceCouvertureSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'code', 'nom', 'type_point',
             'latitude', 'longitude',
+            'adresse_complementaire',
+            'nombre_agents', 'nombre_utilisateurs',
+            'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
             'autorise_systeme', 'est_actif',
+            'metadonnees',
         ]
 
 
@@ -56,7 +64,10 @@ class QuartierCouvertureSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'code', 'nom',
             'latitude_centre', 'longitude_centre',
+            'nombre_agents', 'nombre_utilisateurs',
+            'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
             'autorise_systeme', 'est_actif',
+            'metadonnees',
             'statistiques',
             'points_de_service',
         ]
@@ -81,7 +92,10 @@ class DistrictCouvertureSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'code', 'nom',
             'latitude_centre', 'longitude_centre',
+            'nombre_agents', 'nombre_utilisateurs',
+            'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
             'autorise_systeme', 'est_actif',
+            'metadonnees',
             'statistiques',
             'quartiers',
         ]
@@ -108,7 +122,10 @@ class ProvinceCouvertureSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'code', 'nom',
             'latitude_centre', 'longitude_centre',
+            'nombre_agents', 'nombre_utilisateurs',
+            'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
             'autorise_systeme', 'est_actif',
+            'metadonnees',
             'statistiques',
             'districts',
         ]
@@ -165,7 +182,10 @@ class CouverturePaysSerializer(serializers.ModelSerializer):
             'id', 'code_iso_2', 'code_iso_3', 'nom', 'nom_anglais',
             'continent', 'sous_region',
             'latitude_centre', 'longitude_centre',
+            'nombre_agents', 'nombre_utilisateurs',
+            'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
             'autorise_systeme', 'est_actif',
+            'metadonnees',
             'statistiques',
             'provinces',
         ]

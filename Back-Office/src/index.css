@@ -102,6 +102,38 @@ select option:hover {
   border-top-color: #F9F9F9 !important;
 }
 
+/* Skeleton loading - shimmer fluide */
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--dark-gray) 0%,
+    var(--card) 20%,
+    var(--dark-gray) 40%,
+    var(--dark-gray) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.skeleton-shimmer-dark {
+  background: linear-gradient(
+    90deg,
+    rgba(52, 58, 64, 0.4) 0%,
+    rgba(52, 58, 64, 0.7) 20%,
+    rgba(52, 58, 64, 0.4) 40%,
+    rgba(52, 58, 64, 0.4) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
 @layer utilities {
   /* Couleurs du projet */
   .bg-primary {

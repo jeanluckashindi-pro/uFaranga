@@ -4,3 +4,180 @@ INFO 2026-02-20 13:39:33,517 basehttp 2060 25188 "GET /api/v1/authentification/m
 INFO 2026-02-20 13:39:33,610 basehttp 2060 25188 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
 INFO 2026-02-20 13:57:33,799 autoreload 2060 20408 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
 INFO 2026-02-20 13:57:35,863 autoreload 21480 12128 Watching for file changes with StatReloader
+INFO 2026-02-20 14:14:21,492 autoreload 21480 12128 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-20 14:14:22,939 autoreload 19904 4908 Watching for file changes with StatReloader
+INFO 2026-02-20 14:14:32,322 autoreload 19904 4908 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-20 14:14:33,682 autoreload 23992 23600 Watching for file changes with StatReloader
+INFO 2026-02-20 14:14:43,011 autoreload 23992 23600 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-20 14:14:44,423 autoreload 21920 21904 Watching for file changes with StatReloader
+INFO 2026-02-20 14:14:53,764 autoreload 21920 21904 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-02-20 14:14:55,233 autoreload 20420 10568 Watching for file changes with StatReloader
+INFO 2026-02-20 14:18:04,904 autoreload 20420 10568 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\migrations\0005_add_statistiques_columns.py changed, reloading.
+INFO 2026-02-20 14:18:06,193 autoreload 1468 20844 Watching for file changes with StatReloader
+INFO 2026-02-20 14:19:34,024 autoreload 1468 20844 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\migrations\0001_initial.py changed, reloading.
+INFO 2026-02-20 14:19:35,156 autoreload 19332 16212 Watching for file changes with StatReloader
+INFO 2026-02-20 14:20:30,959 autoreload 19332 16212 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\migrations\0001_initial.py changed, reloading.
+INFO 2026-02-20 14:20:32,096 autoreload 11064 19560 Watching for file changes with StatReloader
+INFO 2026-02-20 14:21:06,624 autoreload 11064 19560 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\migrations\0001_initial.py changed, reloading.
+INFO 2026-02-20 14:21:08,119 autoreload 19832 9084 Watching for file changes with StatReloader
+INFO 2026-02-20 14:21:47,012 basehttp 19832 23984 "GET /api/v1/localisation/pays/couverture/ HTTP/1.1" 200 15420379
+INFO 2026-02-20 14:40:52,660 basehttp 19832 15244 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 13770
+INFO 2026-02-20 14:42:20,648 basehttp 19832 2728 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-20 14:42:20,782 basehttp 19832 2728 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3359
+INFO 2026-02-20 14:50:36,085 basehttp 19832 16028 "OPTIONS /api/v1/localisation/complete/ HTTP/1.1" 200 0
+INFO 2026-02-20 14:50:43,101 basehttp 19832 16028 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:50:50,065 basehttp 19832 5492 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:51:06,618 basehttp 19832 5492 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:51:57,978 basehttp 19832 5492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3359
+INFO 2026-02-20 14:51:58,076 basehttp 19832 5492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3359
+INFO 2026-02-20 14:52:01,923 views 19832 5492 Déconnexion de 1 autre(s) session(s) pour systeme@ufaranga.bi, session actuelle conservée.
+INFO 2026-02-20 14:52:02,585 basehttp 19832 5492 "POST /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 152
+INFO 2026-02-20 14:52:04,926 basehttp 19832 16028 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:52:10,789 basehttp 19832 5492 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:52:19,327 basehttp 19832 25616 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 14:52:19,455 basehttp 19832 25616 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 14:52:26,893 basehttp 19832 22204 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:52:33,872 basehttp 19832 25616 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:55:01,581 basehttp 19832 25616 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:55:13,915 basehttp 19832 25616 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:55:30,233 basehttp 19832 25616 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:55:42,667 basehttp 19832 22204 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:55:51,949 basehttp 19832 25616 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 14:55:59,563 basehttp 19832 22204 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 15:00:04,664 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 15:00:28,667 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 15:00:36,914 basehttp 19832 1316 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 15:00:44,858 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 15:01:00,173 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 15:01:09,332 basehttp 19832 1316 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 15:01:16,488 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 15:01:25,206 basehttp 19832 1316 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 15:01:33,000 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 15:01:47,125 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280115
+INFO 2026-02-20 15:02:38,876 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:02:55,294 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:03:22,794 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:07:17,752 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:07:33,744 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:07:40,577 basehttp 19832 24880 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:07:49,328 basehttp 19832 24880 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:07:49,435 basehttp 19832 24880 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:07:56,666 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:08:04,340 basehttp 19832 24880 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:08:10,700 basehttp 19832 16448 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:08:11,431 basehttp 19832 16448 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:08:20,164 basehttp 19832 24880 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:08:30,342 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:08:44,640 basehttp 19832 24880 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:08:53,902 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:09:02,088 basehttp 19832 25652 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:09:21,874 basehttp 19832 25652 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:09:32,597 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:09:41,783 basehttp 19832 25652 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:09:50,842 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:09:59,880 basehttp 19832 25652 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:10:33,024 basehttp 19832 25652 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:10:33,172 basehttp 19832 25652 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:10:42,983 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:10:52,682 basehttp 19832 26828 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:12:03,678 basehttp 19832 26828 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:12:19,232 basehttp 19832 26828 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:12:46,642 basehttp 19832 26828 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:12:46,735 basehttp 19832 26828 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:12:47,662 basehttp 19832 16448 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:12:48,102 basehttp 19832 16448 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:12:54,800 basehttp 19832 26828 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:13:02,591 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:13:10,048 basehttp 19832 26828 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:13:17,936 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:13:24,225 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:13:44,845 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:14:01,744 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:14:29,493 basehttp 19832 16448 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:14:32,330 basehttp 19832 16448 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:14:38,450 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:14:46,802 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:14:57,744 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:15:08,637 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:15:15,136 basehttp 19832 26828 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:15:39,692 basehttp 19832 26828 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:15:58,653 basehttp 19832 26828 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:15:58,768 basehttp 19832 26828 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:16:08,824 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:16:18,620 basehttp 19832 26828 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:17:29,834 basehttp 19832 26828 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:17:51,054 basehttp 19832 26828 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:18:01,126 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:18:11,038 basehttp 19832 26828 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:18:17,943 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:18:26,687 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:18:36,302 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:18:45,182 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:19:13,433 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:19:56,177 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:20:17,743 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:20:37,358 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:20:47,757 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:21:39,296 basehttp 19832 23300 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:21:39,923 basehttp 19832 23300 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:21:46,435 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:21:54,735 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:22:02,142 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:22:13,020 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:22:22,733 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:23:01,577 basehttp 19832 16448 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:23:01,674 basehttp 19832 16448 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:23:10,538 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:23:19,684 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:24:02,495 basehttp 19832 16448 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-20 15:24:02,495 basehttp 19832 23300 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-20 15:24:02,583 basehttp 19832 23300 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:24:02,677 basehttp 19832 23300 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:24:10,541 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:24:17,830 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:24:43,275 basehttp 19832 16448 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:24:45,050 basehttp 19832 16448 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:24:49,684 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:24:56,747 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:25:04,953 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:25:12,074 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:25:28,733 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:25:44,361 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:26:13,945 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:26:28,302 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:28:47,270 basehttp 19832 23300 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:28:47,889 basehttp 19832 23300 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:28:55,104 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:29:02,214 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:29:11,245 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:29:19,304 basehttp 19832 23300 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:29:24,210 basehttp 19832 20420 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:30:07,942 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:30:22,673 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:30:40,255 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:35:15,636 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:35:41,331 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:35:48,277 basehttp 19832 14444 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:35:56,145 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:36:13,279 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:36:20,360 basehttp 19832 14444 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:36:28,037 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:36:43,338 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:36:56,161 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:37:10,989 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:37:30,859 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:37:39,988 basehttp 19832 14444 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:37:50,028 basehttp 19832 16448 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:37:58,910 basehttp 19832 14444 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:41:25,337 basehttp 19832 14236 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:41:31,641 basehttp 19832 26688 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:41:32,190 basehttp 19832 26688 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-20 15:41:41,952 basehttp 19832 14236 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:41:51,885 basehttp 19832 26688 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:42:04,652 basehttp 19832 14236 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:42:11,513 basehttp 19832 21016 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:42:17,035 basehttp 19832 27848 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:42:24,775 basehttp 19832 14236 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 15:42:29,667 basehttp 19832 26688 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+WARNING 2026-02-20 15:45:12,308 log 19832 26688 Unauthorized: /api/v1/localisation/complete/
+WARNING 2026-02-20 15:45:12,309 basehttp 19832 26688 "GET /api/v1/localisation/complete/ HTTP/1.1" 401 233
