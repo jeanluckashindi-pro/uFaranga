@@ -86,7 +86,8 @@ function buildLocalisationTree(response) {
 
   const provincesById = {};
   provincesList.forEach((pr) => {
-    const paysId = sid(pr.pays ?? pr.pays_id);
+    const paysRef = pr.pays ?? pr.pays_id;
+    const paysId = sid(typeof paysRef === 'object' && paysRef != null ? paysRef.id : paysRef);
     if (paysId && paysById[paysId]) {
       const prov = { ...pr, districts: [] };
       provincesById[sid(pr.id)] = prov;
@@ -95,11 +96,15 @@ function buildLocalisationTree(response) {
   });
 
   districtsList.forEach((d) => {
-    const provId = sid(d.province ?? d.province_id);
+    const provRef = d.province ?? d.province_id;
+    const provId = sid(typeof provRef === 'object' && provRef != null ? provRef.id : provRef);
     if (provId && provincesById[provId]) {
       const dist = {
         ...d,
-        quartiers: (quartiersList || []).filter((q) => sid(q.district ?? q.district_id) === sid(d.id)),
+        quartiers: (quartiersList || []).filter((q) => {
+          const qDist = q.district ?? q.district_id;
+          return sid(typeof qDist === 'object' && qDist != null ? qDist.id : qDist) === sid(d.id);
+        }),
       };
       provincesById[provId].districts.push(dist);
     }
@@ -134,29 +139,25 @@ function CartographieReseau() {
   const selectedCountryRef = useRef(null);
   selectedCountryRef.current = selectedCountry;
 
-  // Fetch données localisation complète (pays → provinces → districts → quartiers)
-  useEffect(() => {
-    let cancelled = false;
-    async function fetchData() {
-      setLoading(true);
-      try {
-        setFetchError(null);
-        const response = await apiService.getLocalisationComplete();
-        const list = buildLocalisationTree(response);
-        if (!cancelled) setCountriesData(list);
-      } catch (err) {
-        console.error('Erreur chargement localisation complète:', err);
-        if (!cancelled) {
-          setCountriesData([]);
-          setFetchError(err?.message || 'Impossible de charger les données.');
-        }
-      } finally {
-        if (!cancelled) setLoading(false);
-      }
+  const fetchLocalisationComplete = useCallback(async () => {
+    setLoading(true);
+    setFetchError(null);
+    try {
+      const response = await apiService.getLocalisationComplete();
+      const list = buildLocalisationTree(response);
+      setCountriesData(list);
+    } catch (err) {
+      console.error('Erreur chargement localisation complète:', err);
+      setCountriesData([]);
+      setFetchError(err?.message || 'Impossible de charger les données.');
+    } finally {
+      setLoading(false);
     }
-    fetchData();
-    return () => { cancelled = true; };
   }, []);
+
+  useEffect(() => {
+    fetchLocalisationComplete();
+  }, [fetchLocalisationComplete]);
 
   const allCountryCodes = countriesData.map((p) => p.code_iso_2).filter(Boolean);
   const activeCountryCodes = countriesData
@@ -427,13 +428,22 @@ function CartographieReseau() {
       return;
     }
 
-    const countryLng = parseFloat(selectedCountry.longitude_centre);
-    const countryLat = parseFloat(selectedCountry.latitude_centre);
-    const countryCentre = Number.isFinite(countryLng) && Number.isFinite(countryLat) ? [countryLng, countryLat] : null;
+    const parseCoord = (v) => {
+      if (v == null) return NaN;
+      const s = String(v).trim().replace(',', '.');
+      const n = parseFloat(s);
+      return Number.isFinite(n) ? n : NaN;
+    };
+    const countryLng = parseCoord(selectedCountry.longitude_centre);
+    const countryLat = parseCoord(selectedCountry.latitude_centre);
+    const defaultMapCentre = [25, -2];
+    const countryCentre = Number.isFinite(countryLng) && Number.isFinite(countryLat)
+      ? [countryLng, countryLat]
+      : defaultMapCentre;
 
     const lngLat = (item, fallback) => {
-      const lat = parseFloat(item.latitude_centre ?? item.latitude);
-      const lng = parseFloat(item.longitude_centre ?? item.longitude);
+      const lat = parseCoord(item.latitude_centre ?? item.latitude);
+      const lng = parseCoord(item.longitude_centre ?? item.longitude);
       if (Number.isFinite(lat) && Number.isFinite(lng)) return [lng, lat];
       return fallback ?? null;
     };
@@ -961,8 +971,16 @@ function CartographieReseau() {
             </div>
             <div className="flex-1 overflow-y-auto p-2">
               {fetchError && (
-                <div className="p-3 mb-2 rounded-lg bg-red-500/10 border border-red-500/30 text-sm text-red-400">
-                  {fetchError}
+                <div className="p-3 mb-2 rounded-lg bg-red-500/10 border border-red-500/30 text-sm text-red-400 space-y-2">
+                  <p>{fetchError}</p>
+                  <p className="text-xs opacity-90">Vérifiez que le backend est démarré et que <code className="bg-red-500/20 px-1 rounded">VITE_API_URL</code> pointe vers l’API (ex. http://127.0.0.1:8000).</p>
+                  <button
+                    type="button"
+                    onClick={() => fetchLocalisationComplete()}
+                    className="text-xs font-medium text-primary hover:underline"
+                  >
+                    Réessayer
+                  </button>
                 </div>
               )}
               {loading ? (
@@ -982,9 +1000,18 @@ function CartographieReseau() {
                 <>
                   <p className="text-xs text-gray-400 px-2 py-1 mb-2">
                     {filteredCountries.length === 0
-                      ? 'Aucun pays chargé. Vérifiez l’API /api/v1/localisation/complete/'
+                      ? `Aucun pays chargé. Vérifiez `
                       : `${filteredCountries.length} pays — cliquez sur la carte ou sur un pays`}
                   </p>
+                  {filteredCountries.length === 0 && !fetchError && (
+                    <button
+                      type="button"
+                      onClick={() => fetchLocalisationComplete()}
+                      className="text-xs font-medium text-primary hover:underline mb-2"
+                    >
+                      Réessayer le chargement
+                    </button>
+                  )}
                   <div className="space-y-4">
                     {filteredCountriesBySousRegion.map(([sousRegionLabel, countries]) => {
                       const color = getCouleurSousRegion(sousRegionLabel);
