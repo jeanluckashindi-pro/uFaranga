@@ -19,6 +19,14 @@ const GestionProfils = () => {
   const [totalRecords, setTotalRecords] = useState(0);
   const [globalFilter, setGlobalFilter] = useState('');
   
+  // Statistiques
+  const [stats, setStats] = useState({
+    total: 0,
+    actifs: 0,
+    kycValide: 0,
+    pays: 0
+  });
+  
   // Filtres
   const [filters, setFilters] = useState({
     type_utilisateur: '',
@@ -71,23 +79,49 @@ const GestionProfils = () => {
     { label: 'Non', value: 'false' }
   ];
 
+  // Charger les statistiques
+  const loadStats = async () => {
+    try {
+      // Total utilisateurs
+      const totalResponse = await apiService.getUsers({ page_size: 1 });
+      const total = totalResponse.count || 0;
+
+      // Utilisateurs actifs
+      const actifsResponse = await apiService.getUsers({ statut: 'ACTIF', page_size: 1 });
+      const actifs = actifsResponse.count || 0;
+
+      // KYC validé (niveau >= 2)
+      const kycResponse = await apiService.getUsers({ niveau_kyc: 2, page_size: 1 });
+      const kycResponse3 = await apiService.getUsers({ niveau_kyc: 3, page_size: 1 });
+      const kycValide = (kycResponse.count || 0) + (kycResponse3.count || 0);
+
+      // Nombre de pays (on prend un échantillon pour compter)
+      const paysResponse = await apiService.getUsers({ page_size: 100 });
+      const pays = new Set(paysResponse.results?.map(u => u.pays_residence).filter(Boolean)).size;
+
+      setStats({ total, actifs, kycValide, pays });
+    } catch (error) {
+      console.error('Erreur lors du chargement des statistiques:', error);
+    }
+  };
+
   // Charger les utilisateurs
   const loadUsers = async () => {
     setLoading(true);
     try {
       const params = {
-        ...filters,
-        search: globalFilter,
         page: lazyParams.page + 1,
         page_size: lazyParams.rows
       };
 
-      // Nettoyer les paramètres vides
-      Object.keys(params).forEach(key => {
-        if (params[key] === '' || params[key] === null || params[key] === undefined) {
-          delete params[key];
-        }
-      });
+      // Ajouter les filtres actifs
+      if (filters.type_utilisateur) params.type_utilisateur = filters.type_utilisateur;
+      if (filters.statut) params.statut = filters.statut;
+      if (filters.niveau_kyc) params.niveau_kyc = filters.niveau_kyc;
+      if (filters.pays_code) params.pays_code = filters.pays_code;
+      if (filters.est_actif) params.est_actif = filters.est_actif;
+      if (filters.telephone_verifie) params.telephone_verifie = filters.telephone_verifie;
+      if (globalFilter) params.search = globalFilter;
 
       const response = await apiService.getUsers(params);
       
@@ -105,17 +139,14 @@ const GestionProfils = () => {
   };
 
   useEffect(() => {
+    loadStats();
+  }, []);
+
+  useEffect(() => {
     loadUsers();
   }, [lazyParams, filters, globalFilter]);
 
-  // Calculer les statistiques
-  const stats = {
-    total: totalRecords,
-    actifs: users.filter(u => u.statut === 'ACTIF').length,
-    kycValide: users.filter(u => u.niveau_kyc >= 2).length,
-    pays: new Set(users.map(u => u.pays_residence).filter(Boolean)).size
-  };
-
+  // Calculer les statistiques - maintenant chargées depuis l'API
   const onPage = (event) => {
     setLazyParams(event);
   };
@@ -156,6 +187,47 @@ const GestionProfils = () => {
           <Tag icon={<Mail className="w-3 h-3 mr-1" />} value="Email" severity="success" />
         )}
       </div>
+    );
+  };
+
+  const nationaliteBodyTemplate = (rowData) => {
+    if (!rowData.nationalite_details) return <span className="text-gray-400">-</span>;
+    return (
+      <div className="flex items-center gap-2">
+        <span className="text-sm">{rowData.nationalite_details.nom}</span>
+        <span className="px-2 py-0.5 bg-gray-100 text-gray-600 text-xs rounded-full font-medium">
+          {rowData.nationalite_details.code_iso_2}
+        </span>
+      </div>
+    );
+  };
+
+  const paysResidenceBodyTemplate = (rowData) => {
+    if (!rowData.pays_residence_details) return <span className="text-gray-400">-</span>;
+    return (
+      <div className="flex flex-col">
+        <span className="font-medium text-sm">{rowData.pays_residence_details.nom}</span>
+        <span className="text-xs text-gray-400">{rowData.pays_residence_details.continent}</span>
+      </div>
+    );
+  };
+
+  const adresseBodyTemplate = (rowData) => {
+    const parts = [rowData.quartier, rowData.commune, rowData.ville].filter(Boolean);
+    if (parts.length === 0) return <span className="text-gray-400">-</span>;
+    return (
+      <div className="flex flex-col">
+        <span className="text-sm">{parts.join(', ')}</span>
+        {rowData.province && <span className="text-xs text-gray-400">{rowData.province}</span>}
+      </div>
+    );
+  };
+
+  const dateBodyTemplate = (rowData) => {
+    if (!rowData.date_naissance) return <span className="text-gray-400">-</span>;
+    const date = new Date(rowData.date_naissance);
+    return (
+      <span className="text-sm">{date.toLocaleDateString('fr-FR')}</span>
     );
   };
 
@@ -350,7 +422,10 @@ const GestionProfils = () => {
           </div>
           <div className="flex flex-wrap gap-2">
             <button
-              onClick={() => setFilters({ ...filters, type_utilisateur: 'CLIENT' })}
+              onClick={() => {
+                setFilters({ ...filters, type_utilisateur: 'CLIENT' });
+                setLazyParams({ ...lazyParams, page: 0 });
+              }}
               className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
                 filters.type_utilisateur === 'CLIENT'
                   ? 'bg-primary text-white shadow-md'
@@ -360,7 +435,10 @@ const GestionProfils = () => {
               Clients
             </button>
             <button
-              onClick={() => setFilters({ ...filters, type_utilisateur: 'AGENT' })}
+              onClick={() => {
+                setFilters({ ...filters, type_utilisateur: 'AGENT' });
+                setLazyParams({ ...lazyParams, page: 0 });
+              }}
               className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
                 filters.type_utilisateur === 'AGENT'
                   ? 'bg-secondary text-white shadow-md'
@@ -370,7 +448,10 @@ const GestionProfils = () => {
               Agents
             </button>
             <button
-              onClick={() => setFilters({ ...filters, type_utilisateur: 'MARCHAND' })}
+              onClick={() => {
+                setFilters({ ...filters, type_utilisateur: 'MARCHAND' });
+                setLazyParams({ ...lazyParams, page: 0 });
+              }}
               className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
                 filters.type_utilisateur === 'MARCHAND'
                   ? 'bg-warning text-white shadow-md'
@@ -380,7 +461,10 @@ const GestionProfils = () => {
               Marchands
             </button>
             <button
-              onClick={() => setFilters({ ...filters, type_utilisateur: 'ADMIN' })}
+              onClick={() => {
+                setFilters({ ...filters, type_utilisateur: 'ADMIN' });
+                setLazyParams({ ...lazyParams, page: 0 });
+              }}
               className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
                 filters.type_utilisateur === 'ADMIN'
                   ? 'bg-danger text-white shadow-md'
@@ -390,7 +474,10 @@ const GestionProfils = () => {
               Admins
             </button>
             <button
-              onClick={() => setFilters({ ...filters, statut: 'ACTIF' })}
+              onClick={() => {
+                setFilters({ ...filters, statut: 'ACTIF' });
+                setLazyParams({ ...lazyParams, page: 0 });
+              }}
               className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
                 filters.statut === 'ACTIF'
                   ? 'bg-success text-white shadow-md'
@@ -400,7 +487,10 @@ const GestionProfils = () => {
               Actifs
             </button>
             <button
-              onClick={() => setFilters({ ...filters, telephone_verifie: 'true' })}
+              onClick={() => {
+                setFilters({ ...filters, telephone_verifie: 'true' });
+                setLazyParams({ ...lazyParams, page: 0 });
+              }}
               className={`px-4 py-2 rounded-lg transition-all font-medium text-sm ${
                 filters.telephone_verifie === 'true'
                   ? 'bg-primary text-white shadow-md'
@@ -410,7 +500,10 @@ const GestionProfils = () => {
               Téléphone vérifié
             </button>
             <button
-              onClick={() => setFilters({ type_utilisateur: '', statut: '', niveau_kyc: '', pays_code: '', est_actif: '', telephone_verifie: '' })}
+              onClick={() => {
+                setFilters({ type_utilisateur: '', statut: '', niveau_kyc: '', pays_code: '', est_actif: '', telephone_verifie: '' });
+                setLazyParams({ ...lazyParams, page: 0 });
+              }}
               className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-all font-medium text-sm ml-auto"
             >
               Réinitialiser
@@ -438,7 +531,10 @@ const GestionProfils = () => {
             <Dropdown
               value={filters.type_utilisateur}
               options={typeOptions}
-              onChange={(e) => setFilters({ ...filters, type_utilisateur: e.value })}
+              onChange={(e) => {
+                setFilters({ ...filters, type_utilisateur: e.value });
+                setLazyParams({ ...lazyParams, page: 0 });
+              }}
               placeholder="Type"
               className="w-full text-sm"
             />
@@ -446,7 +542,10 @@ const GestionProfils = () => {
             <Dropdown
               value={filters.statut}
               options={statutOptions}
-              onChange={(e) => setFilters({ ...filters, statut: e.value })}
+              onChange={(e) => {
+                setFilters({ ...filters, statut: e.value });
+                setLazyParams({ ...lazyParams, page: 0 });
+              }}
               placeholder="Statut"
               className="w-full text-sm"
             />
@@ -454,7 +553,10 @@ const GestionProfils = () => {
             <Dropdown
               value={filters.niveau_kyc}
               options={kycOptions}
-              onChange={(e) => setFilters({ ...filters, niveau_kyc: e.value })}
+              onChange={(e) => {
+                setFilters({ ...filters, niveau_kyc: e.value });
+                setLazyParams({ ...lazyParams, page: 0 });
+              }}
               placeholder="Niveau KYC"
               className="w-full text-sm"
             />
@@ -563,6 +665,32 @@ const GestionProfils = () => {
               style={{ minWidth: '180px', whiteSpace: 'nowrap' }} 
             />
             <Column 
+              field="date_naissance" 
+              header="Date naissance" 
+              body={dateBodyTemplate}
+              sortable 
+              style={{ minWidth: '130px', whiteSpace: 'nowrap' }} 
+            />
+            <Column 
+              field="nationalite" 
+              header="Nationalité" 
+              body={nationaliteBodyTemplate}
+              sortable 
+              style={{ minWidth: '150px', whiteSpace: 'nowrap' }} 
+            />
+            <Column 
+              field="pays_residence" 
+              header="Pays résidence" 
+              body={paysResidenceBodyTemplate}
+              sortable 
+              style={{ minWidth: '150px', whiteSpace: 'nowrap' }} 
+            />
+            <Column 
+              header="Adresse" 
+              body={adresseBodyTemplate}
+              style={{ minWidth: '200px', whiteSpace: 'nowrap' }} 
+            />
+            <Column 
               field="type_utilisateur" 
               header="Type" 
               body={typeBodyTemplate} 
@@ -589,12 +717,6 @@ const GestionProfils = () => {
               style={{ minWidth: '150px', whiteSpace: 'nowrap' }} 
             />
             <Column 
-              field="pays_residence" 
-              header="Pays" 
-              sortable 
-              style={{ minWidth: '100px', whiteSpace: 'nowrap' }} 
-            />
-            <Column 
               header="Actions" 
               body={actionsBodyTemplate} 
               frozen 
@@ -614,31 +736,96 @@ const GestionProfils = () => {
         className="custom-dialog"
       >
         {selectedUser && (
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <p className="text-sm text-gray-400">Nom complet</p>
-                <p className="font-semibold text-text">{selectedUser.nom_complet}</p>
+          <div className="space-y-6">
+            {/* Informations personnelles */}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-3 border-b border-darkGray pb-2">Informations personnelles</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-400">Nom complet</p>
+                  <p className="font-semibold text-text">{selectedUser.nom_complet}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Date de naissance</p>
+                  <p className="font-semibold text-text">{selectedUser.date_naissance ? new Date(selectedUser.date_naissance).toLocaleDateString('fr-FR') : '-'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Lieu de naissance</p>
+                  <p className="font-semibold text-text">{selectedUser.lieu_naissance || '-'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Nationalité</p>
+                  <p className="font-semibold text-text">{selectedUser.nationalite_details?.nom || '-'}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-gray-400">Email</p>
-                <p className="font-semibold text-text">{selectedUser.courriel}</p>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-3 border-b border-darkGray pb-2">Contact</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-400">Email</p>
+                  <p className="font-semibold text-text">{selectedUser.courriel}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Téléphone</p>
+                  <p className="font-semibold text-text">{formatPhoneNumber(selectedUser.numero_telephone)}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-gray-400">Téléphone</p>
-                <p className="font-semibold text-text">{selectedUser.numero_telephone}</p>
+            </div>
+
+            {/* Adresse */}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-3 border-b border-darkGray pb-2">Adresse</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-400">Pays de résidence</p>
+                  <p className="font-semibold text-text">{selectedUser.pays_residence_details?.nom || '-'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Province</p>
+                  <p className="font-semibold text-text">{selectedUser.province || '-'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Ville</p>
+                  <p className="font-semibold text-text">{selectedUser.ville || '-'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Commune</p>
+                  <p className="font-semibold text-text">{selectedUser.commune || '-'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Quartier</p>
+                  <p className="font-semibold text-text">{selectedUser.quartier || '-'}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Avenue</p>
+                  <p className="font-semibold text-text">{selectedUser.avenue || '-'}</p>
+                </div>
               </div>
-              <div>
-                <p className="text-sm text-gray-400">Type</p>
-                {typeBodyTemplate(selectedUser)}
-              </div>
-              <div>
-                <p className="text-sm text-gray-400">Statut</p>
-                {statutBodyTemplate(selectedUser)}
-              </div>
-              <div>
-                <p className="text-sm text-gray-400">Niveau KYC</p>
-                {kycBodyTemplate(selectedUser)}
+            </div>
+
+            {/* Compte */}
+            <div>
+              <h3 className="text-sm font-semibold text-gray-400 uppercase mb-3 border-b border-darkGray pb-2">Compte</h3>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <p className="text-sm text-gray-400">Type</p>
+                  {typeBodyTemplate(selectedUser)}
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Statut</p>
+                  {statutBodyTemplate(selectedUser)}
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Niveau KYC</p>
+                  {kycBodyTemplate(selectedUser)}
+                </div>
+                <div>
+                  <p className="text-sm text-gray-400">Vérifications</p>
+                  {verifiedBodyTemplate(selectedUser)}
+                </div>
               </div>
             </div>
           </div>
