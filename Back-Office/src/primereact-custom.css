@@ -296,3 +296,33 @@
 .p-datatable .p-datatable-wrapper::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
 }
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Frozen columns z-index fix */
+.p-datatable .p-datatable-frozen-tbody,
+.p-datatable .p-datatable-frozen-column,
+.p-datatable .p-datatable-thead > tr > th,
+.p-datatable .p-datatable-tbody > tr > td {
+  z-index: 1 !important;
+}
+
+.p-datatable .p-datatable-scrollable-body {
+  z-index: 0 !important;
+}
+
+/* Force menu to be on top */
+div[style*="z-index: 99999"] {
+  z-index: 99999 !important;
+  position: fixed !important;
+}

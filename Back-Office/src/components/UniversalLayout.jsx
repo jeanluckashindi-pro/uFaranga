@@ -240,10 +240,24 @@ function UniversalLayout({ children, navigation, role = 'agent', userName = 'Uti
 
               {/* Welcome Message */}
               <div className="hidden md:block">
-                <p className="text-sm text-gray-400">
-                  {new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}
-                </p>
-                <h2 className="text-lg font-heading font-semibold text-text">Bonjour, {userName}</h2>
+                <div className="flex items-center gap-3">
+                  <span className="text-xs text-gray-500">•</span>
+                  <span className="text-xs text-gray-400 font-sans">
+                    {new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' })}
+                  </span>
+                  <span className="text-xs text-gray-500">•</span>
+                  <span className="text-xs text-gray-400 font-sans">
+                    {new Date().toLocaleDateString('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                  </span>
+                  <span className="text-xs text-gray-500">•</span>
+                  <span className="text-xs text-gray-400 font-sans">
+                    USD/CDF: 2,850
+                  </span>
+                  <span className="text-xs text-gray-500">•</span>
+                  <span className="text-xs text-gray-400 font-sans">
+                    EUR/CDF: 3,120
+                  </span>
+                </div>
               </div>
             </div>
 

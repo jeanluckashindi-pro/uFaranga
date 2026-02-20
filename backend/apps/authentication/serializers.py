@@ -87,6 +87,17 @@ def sync_identite_to_user(utilisateur_identite, password):
     pour que le JWT soit émis sur le même modèle que le reste de l'app.
     """
     email = utilisateur_identite.courriel
+    
+    # Extraire le niveau KYC (integer) depuis la relation ForeignKey
+    niveau_kyc_value = 0
+    if hasattr(utilisateur_identite, 'niveau_kyc') and utilisateur_identite.niveau_kyc:
+        # Si c'est un objet NiveauKYC, extraire l'attribut 'niveau'
+        if hasattr(utilisateur_identite.niveau_kyc, 'niveau'):
+            niveau_kyc_value = utilisateur_identite.niveau_kyc.niveau
+        else:
+            # Sinon c'est déjà un integer
+            niveau_kyc_value = utilisateur_identite.niveau_kyc
+    
     user, created = User.objects.update_or_create(
         email=email,
         defaults={
@@ -97,7 +108,7 @@ def sync_identite_to_user(utilisateur_identite, password):
             'is_staff': utilisateur_identite.is_staff,
             'is_superuser': getattr(utilisateur_identite, 'is_superuser', False),
             'is_active': utilisateur_identite.est_actif,
-            'kyc_level': getattr(utilisateur_identite, 'niveau_kyc', 0),
+            'kyc_level': niveau_kyc_value,
             'is_phone_verified': getattr(utilisateur_identite, 'telephone_verifie', False),
             'is_email_verified': getattr(utilisateur_identite, 'courriel_verifie', False),
         },

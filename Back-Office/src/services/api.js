@@ -198,6 +198,64 @@ class ApiService {
     const queryString = new URLSearchParams(params).toString();
     return this.request(`/api/v1/clients/${queryString ? `?${queryString}` : ''}`);
   }
+
+  // Méthode pour récupérer toutes les pages d'un endpoint paginé
+  async getAllPages(endpoint) {
+    let allResults = [];
+    let nextUrl = endpoint;
+
+    while (nextUrl) {
+      const data = await this.request(nextUrl.replace(this.baseURL, ''));
+      
+      // Si la réponse contient results (pagination Django REST)
+      if (data.results) {
+        allResults = [...allResults, ...data.results];
+        nextUrl = data.next;
+      } else {
+        // Si pas de pagination, retourner directement les données
+        return data;
+      }
+    }
+
+    return allResults;
+  }
+
+  // Méthodes pour la gestion des utilisateurs
+  async getTypesUtilisateurs() {
+    return this.getAllPages('/api/v1/identite/types-utilisateurs');
+  }
+
+  async getNiveauxKYC() {
+    return this.getAllPages('/api/v1/identite/niveaux-kyc');
+  }
+
+  async getStatutsUtilisateurs() {
+    return this.getAllPages('/api/v1/identite/statuts-utilisateurs');
+  }
+
+  async createUser(userData) {
+    return this.request('/api/v1/identite/admin/creer-utilisateur', {
+      method: 'POST',
+      body: JSON.stringify(userData),
+    });
+  }
+
+  // Méthodes pour la localisation
+  async getPays() {
+    return this.getAllPages('/api/v1/localisation/pays');
+  }
+
+  async getProvinces() {
+    return this.getAllPages('/api/v1/localisation/provinces');
+  }
+
+  async getDistricts() {
+    return this.getAllPages('/api/v1/localisation/districts');
+  }
+
+  async getQuartiers() {
+    return this.getAllPages('/api/v1/localisation/quartiers');
+  }
 }
 
 // Instance singleton

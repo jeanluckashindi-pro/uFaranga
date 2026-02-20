@@ -25,6 +25,9 @@ urlpatterns = [
     # Authentification (connexion, inscription, jeton, déconnexion)
     path('api/v1/authentification/', include('apps.authentication.urls')),
 
+    # Identité (Utilisateurs complets, Types, KYC, Statuts, Numéros)
+    path('api/v1/identite/', include('apps.identite.urls')),
+
     # Utilisateurs (CRUD, profils, sessions)
     path('api/v1/utilisateurs/', include('apps.users.urls')),
 

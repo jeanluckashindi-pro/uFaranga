@@ -91,6 +91,12 @@ export const allModulesNavigation = [
         description: 'KYC, plafonds, suspensions'
       },
       { 
+        path: '/admin/profils', 
+        icon: Shield, 
+        label: 'Gestion Profils',
+        description: 'Rôles et permissions utilisateurs'
+      },
+      { 
         path: '/admin/transactions', 
         icon: Activity, 
         label: 'Toutes Transactions',

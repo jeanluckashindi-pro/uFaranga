@@ -1,10 +1,14 @@
 """
 CRUD localisation (Pays, Province, District, Quartier, Point de service).
-Réservé aux utilisateurs SYSTEME et SUPER_ADMIN.
+
+Permissions:
+- GET (list, retrieve): Accès public (AllowAny)
+- POST, PUT, PATCH, DELETE: Réservé aux utilisateurs SYSTEME et SUPER_ADMIN
 """
 from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from drf_spectacular.utils import extend_schema_view, extend_schema, OpenApiParameter
@@ -24,11 +28,11 @@ from .permissions import IsSystemeOrSuperAdmin
 
 
 @extend_schema_view(
-    list=extend_schema(summary='Liste des pays', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
+    list=extend_schema(summary='Liste des pays (Public)', tags=['Localisation']),
     create=extend_schema(summary='Créer un pays', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     retrieve=extend_schema(
-        summary='Détail d\'un pays (avec provinces, districts, quartiers, points de service)',
-        tags=['Localisation (SYSTEME/SUPER_ADMIN)'],
+        summary='Détail d\'un pays (Public)',
+        tags=['Localisation'],
     ),
     update=extend_schema(summary='Modifier un pays', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     partial_update=extend_schema(summary='Modifier partiellement un pays', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
@@ -37,12 +41,21 @@ from .permissions import IsSystemeOrSuperAdmin
 class PaysViewSet(viewsets.ModelViewSet):
     queryset = Pays.objects.all()
     serializer_class = PaysSerializer
-    permission_classes = [IsSystemeOrSuperAdmin]
+    permission_classes = [IsSystemeOrSuperAdmin]  # Default, overridden by get_permissions()
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     filterset_class = PaysFilterSet
     search_fields = ['code_iso_2', 'code_iso_3', 'nom', 'nom_anglais']
     ordering_fields = ['nom', 'code_iso_2', 'date_creation', 'date_modification']
     ordering = ['nom']
+    
+    def get_permissions(self):
+        """
+        Permissions publiques pour GET (list, retrieve, couverture).
+        Permissions admin pour POST/PUT/PATCH/DELETE.
+        """
+        if self.action in ['list', 'retrieve', 'couverture']:
+            return [AllowAny()]
+        return [IsSystemeOrSuperAdmin()]
 
     def get_serializer_class(self):
         if self.action == 'retrieve':
@@ -109,9 +122,9 @@ class PaysViewSet(viewsets.ModelViewSet):
 
 
 @extend_schema_view(
-    list=extend_schema(summary='Liste des provinces', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
+    list=extend_schema(summary='Liste des provinces (Public)', tags=['Localisation']),
     create=extend_schema(summary='Créer une province', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
-    retrieve=extend_schema(summary='Détail d\'une province', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
+    retrieve=extend_schema(summary='Détail d\'une province (Public)', tags=['Localisation']),
     update=extend_schema(summary='Modifier une province', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     partial_update=extend_schema(summary='Modifier partiellement une province', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     destroy=extend_schema(summary='Supprimer une province', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
@@ -119,11 +132,20 @@ class PaysViewSet(viewsets.ModelViewSet):
 class ProvinceViewSet(viewsets.ModelViewSet):
     queryset = Province.objects.select_related('pays').all()
     serializer_class = ProvinceSerializer
-    permission_classes = [IsSystemeOrSuperAdmin]
+    permission_classes = [IsSystemeOrSuperAdmin]  # Default, overridden by get_permissions()
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['code', 'nom', 'pays__code_iso_2', 'pays__nom']
     ordering_fields = ['nom', 'code', 'date_creation']
     ordering = ['pays__nom', 'nom']
+    
+    def get_permissions(self):
+        """
+        Permissions publiques pour GET (list, retrieve).
+        Permissions admin pour POST/PUT/PATCH/DELETE.
+        """
+        if self.action in ['list', 'retrieve']:
+            return [AllowAny()]
+        return [IsSystemeOrSuperAdmin()]
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -134,9 +156,9 @@ class ProvinceViewSet(viewsets.ModelViewSet):
 
 
 @extend_schema_view(
-    list=extend_schema(summary='Liste des districts', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
+    list=extend_schema(summary='Liste des districts (Public)', tags=['Localisation']),
     create=extend_schema(summary='Créer un district', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
-    retrieve=extend_schema(summary='Détail d\'un district', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
+    retrieve=extend_schema(summary='Détail d\'un district (Public)', tags=['Localisation']),
     update=extend_schema(summary='Modifier un district', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     partial_update=extend_schema(summary='Modifier partiellement un district', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     destroy=extend_schema(summary='Supprimer un district', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
@@ -144,11 +166,20 @@ class ProvinceViewSet(viewsets.ModelViewSet):
 class DistrictViewSet(viewsets.ModelViewSet):
     queryset = District.objects.select_related('province', 'province__pays').all()
     serializer_class = DistrictSerializer
-    permission_classes = [IsSystemeOrSuperAdmin]
+    permission_classes = [IsSystemeOrSuperAdmin]  # Default, overridden by get_permissions()
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['code', 'nom', 'province__nom']
     ordering_fields = ['nom', 'code', 'date_creation']
     ordering = ['province__nom', 'nom']
+    
+    def get_permissions(self):
+        """
+        Permissions publiques pour GET (list, retrieve).
+        Permissions admin pour POST/PUT/PATCH/DELETE.
+        """
+        if self.action in ['list', 'retrieve']:
+            return [AllowAny()]
+        return [IsSystemeOrSuperAdmin()]
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -159,9 +190,9 @@ class DistrictViewSet(viewsets.ModelViewSet):
 
 
 @extend_schema_view(
-    list=extend_schema(summary='Liste des quartiers', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
+    list=extend_schema(summary='Liste des quartiers (Public)', tags=['Localisation']),
     create=extend_schema(summary='Créer un quartier', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
-    retrieve=extend_schema(summary='Détail d\'un quartier', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
+    retrieve=extend_schema(summary='Détail d\'un quartier (Public)', tags=['Localisation']),
     update=extend_schema(summary='Modifier un quartier', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     partial_update=extend_schema(summary='Modifier partiellement un quartier', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     destroy=extend_schema(summary='Supprimer un quartier', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
@@ -169,11 +200,20 @@ class DistrictViewSet(viewsets.ModelViewSet):
 class QuartierViewSet(viewsets.ModelViewSet):
     queryset = Quartier.objects.select_related('district', 'district__province').all()
     serializer_class = QuartierSerializer
-    permission_classes = [IsSystemeOrSuperAdmin]
+    permission_classes = [IsSystemeOrSuperAdmin]  # Default, overridden by get_permissions()
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['code', 'nom', 'district__nom']
     ordering_fields = ['nom', 'code', 'date_creation']
     ordering = ['district__nom', 'nom']
+    
+    def get_permissions(self):
+        """
+        Permissions publiques pour GET (list, retrieve).
+        Permissions admin pour POST/PUT/PATCH/DELETE.
+        """
+        if self.action in ['list', 'retrieve']:
+            return [AllowAny()]
+        return [IsSystemeOrSuperAdmin()]
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -184,9 +224,9 @@ class QuartierViewSet(viewsets.ModelViewSet):
 
 
 @extend_schema_view(
-    list=extend_schema(summary='Liste des points de service', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
+    list=extend_schema(summary='Liste des points de service (Public)', tags=['Localisation']),
     create=extend_schema(summary='Créer un point de service', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
-    retrieve=extend_schema(summary='Détail d\'un point de service', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
+    retrieve=extend_schema(summary='Détail d\'un point de service (Public)', tags=['Localisation']),
     update=extend_schema(summary='Modifier un point de service', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     partial_update=extend_schema(summary='Modifier partiellement un point de service', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
     destroy=extend_schema(summary='Supprimer un point de service', tags=['Localisation (SYSTEME/SUPER_ADMIN)']),
@@ -194,11 +234,20 @@ class QuartierViewSet(viewsets.ModelViewSet):
 class PointDeServiceViewSet(viewsets.ModelViewSet):
     queryset = PointDeService.objects.select_related('quartier', 'quartier__district', 'agent_utilisateur').all()
     serializer_class = PointDeServiceSerializer
-    permission_classes = [IsSystemeOrSuperAdmin]
+    permission_classes = [IsSystemeOrSuperAdmin]  # Default, overridden by get_permissions()
     filter_backends = [SearchFilter, OrderingFilter]
     search_fields = ['code', 'nom', 'quartier__nom']
     ordering_fields = ['nom', 'code', 'type_point', 'date_creation']
     ordering = ['quartier__nom', 'nom']
+    
+    def get_permissions(self):
+        """
+        Permissions publiques pour GET (list, retrieve).
+        Permissions admin pour POST/PUT/PATCH/DELETE.
+        """
+        if self.action in ['list', 'retrieve']:
+            return [AllowAny()]
+        return [IsSystemeOrSuperAdmin()]
 
     def get_queryset(self):
         qs = super().get_queryset()

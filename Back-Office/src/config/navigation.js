@@ -89,6 +89,12 @@ export const adminSystemNavigation = [
         label: 'Gestion Clients',
         description: 'KYC, plafonds, suspensions'
       },
+      { 
+        path: '/admin/profils', 
+        icon: Shield, 
+        label: 'Gestion Profils',
+        description: 'Rôles et permissions utilisateurs'
+      },
     ]
   },
   {

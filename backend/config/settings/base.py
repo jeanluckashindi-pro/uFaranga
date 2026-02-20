@@ -218,17 +218,27 @@ CORS_ALLOW_CREDENTIALS = True
 REDIS_URL = os.environ.get('REDIS_URL', 'redis://localhost:6379/0')
 
 # Configuration du cache Django avec Redis
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': REDIS_URL,
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        },
-        'KEY_PREFIX': 'ufaranga',
-        'TIMEOUT': 300,  # 5 minutes par défaut
+# Note: Redis doit être démarré (localhost:6379) ou utiliser le cache en mémoire ci-dessous
+USE_REDIS = os.environ.get('USE_REDIS', 'False').lower() in ('true', '1', 'yes')
+
+if USE_REDIS:
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+            'LOCATION': REDIS_URL,
+            'KEY_PREFIX': 'ufaranga',
+            'TIMEOUT': 300,  # 5 minutes par défaut
+        }
     }
-}
+else:
+    # Cache en mémoire pour le développement (quand Redis n'est pas disponible)
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+            'LOCATION': 'ufaranga-cache',
+            'TIMEOUT': 300,
+        }
+    }
 
 # Celery
 CELERY_BROKER_URL = REDIS_URL

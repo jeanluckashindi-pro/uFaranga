@@ -1,711 +1,669 @@
-import { useState } from 'react';
-import {
-  Users, Plus, Edit2, Trash2, Search, Filter, Eye, EyeOff,
-  Lock, Unlock, Shield, Clock, Key, CheckCircle, XCircle,
-  MoreVertical, Calendar, Activity, AlertTriangle
+import { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
+import { InputText } from 'primereact/inputtext';
+import { Dropdown } from 'primereact/dropdown';
+import { Tag } from 'primereact/tag';
+import { Dialog } from 'primereact/dialog';
+import CreateUserDialog from '../../components/CreateUserDialog';
+import { 
+  Search, Plus, Download, Shield, Users, UserCog, Lock, MoreVertical,
+  Eye, History, FileText, Activity, UserCheck, Clock, Settings, Copy, Edit, Trash2
 } from 'lucide-react';
-import { Card } from '../../components/common';
 
-const GestionProfils = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const [filterRole, setFilterRole] = useState('all');
-  const [filterStatus, setFilterStatus] = useState('all');
-  const [showModal, setShowModal] = useState(false);
-  const [showHistoryModal, setShowHistoryModal] = useState(false);
-  const [selectedProfile, setSelectedProfile] = useState(null);
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
+function GestionProfils() {
+  const [globalFilter, setGlobalFilter] = useState('');
+  const [selectedType, setSelectedType] = useState('all');
+  const [selectedProfil, setSelectedProfil] = useState(null);
+  const [showDialog, setShowDialog] = useState(false);
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [openMenuId, setOpenMenuId] = useState(null);
+  const [menuPosition, setMenuPosition] = useState({ top: 0, right: 20 });
+  
+  const menuRef = useRef(null);
+  const buttonRef = useRef(null);
 
-  // État pour les profils utilisateurs
-  const [profiles, setProfiles] = useState([
-    {
-      id: 1,
-      username: 'admin.system',
-      email: 'admin@ufaranga.com',
-      fullName: 'Administrateur Système',
-      role: 'super_admin',
-      status: 'active',
-      lastLogin: '2024-02-19 10:30',
-      createdAt: '2024-01-01',
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target) && 
+          buttonRef.current && !buttonRef.current.contains(event.target)) {
+        setOpenMenuId(null);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
+  const profils = [
+    { 
+      id: 'PR001', 
+      nom: 'Super Administrateur', 
+      code: 'SUPER_ADMIN', 
+      type: 'systeme',
+      utilisateurs: 2, 
       permissions: ['all'],
-      twoFactorEnabled: true,
+      description: 'Accès complet au système',
+      status: 'actif', 
+      dateCreation: '2023-01-01',
+      modifiable: false
     },
-    {
-      id: 2,
-      username: 'tech.admin',
-      email: 'tech@ufaranga.com',
-      fullName: 'Admin Technique',
-      role: 'admin_tech',
-      status: 'active',
-      lastLogin: '2024-02-19 09:15',
-      createdAt: '2024-01-15',
-      permissions: ['monitoring', 'api', 'logs'],
-      twoFactorEnabled: false,
+    { 
+      id: 'PR002', 
+      nom: 'Administrateur', 
+      code: 'ADMIN', 
+      type: 'systeme',
+      utilisateurs: 5, 
+      permissions: ['gestion_users', 'gestion_agents', 'reporting', 'transactions', 'parametres'],
+      description: 'Gestion complète de la plateforme',
+      status: 'actif', 
+      dateCreation: '2023-01-01',
+      modifiable: false
     },
-    {
-      id: 3,
-      username: 'agent.001',
-      email: 'agent001@ufaranga.com',
-      fullName: 'Agent Commercial',
-      role: 'agent',
-      status: 'inactive',
-      lastLogin: '2024-02-10 14:20',
-      createdAt: '2024-02-01',
-      permissions: ['transactions', 'clients'],
-      twoFactorEnabled: false,
+    { 
+      id: 'PR003', 
+      nom: 'Agent Principal', 
+      code: 'AGENT_PRINCIPAL', 
+      type: 'operationnel',
+      utilisateurs: 12, 
+      permissions: ['transactions', 'float', 'commissions', 'rapports'],
+      description: 'Agent avec accès complet aux opérations',
+      status: 'actif', 
+      dateCreation: '2023-02-15',
+      modifiable: true
     },
-  ]);
-
-  const roles = [
-    { value: 'super_admin', label: 'Super Administrateur', color: 'red' },
-    { value: 'admin_system', label: 'Admin Système', color: 'orange' },
-    { value: 'admin_tech', label: 'Admin Technique', color: 'blue' },
-    { value: 'agent', label: 'Agent', color: 'green' },
-    { value: 'client', label: 'Client', color: 'gray' },
+    { 
+      id: 'PR004', 
+      nom: 'Agent Standard', 
+      code: 'AGENT', 
+      type: 'operationnel',
+      utilisateurs: 45, 
+      permissions: ['transactions', 'float', 'commissions'],
+      description: 'Agent avec accès standard',
+      status: 'actif', 
+      dateCreation: '2023-02-15',
+      modifiable: true
+    },
+    { 
+      id: 'PR005', 
+      nom: 'Client Premium', 
+      code: 'CLIENT_PREMIUM', 
+      type: 'client',
+      utilisateurs: 234, 
+      permissions: ['transactions', 'historique', 'profil'],
+      description: 'Client avec plafonds élevés',
+      status: 'actif', 
+      dateCreation: '2023-03-01',
+      modifiable: true
+    },
+    { 
+      id: 'PR006', 
+      nom: 'Client Standard', 
+      code: 'CLIENT', 
+      type: 'client',
+      utilisateurs: 1567, 
+      permissions: ['transactions', 'historique', 'profil'],
+      description: 'Client avec plafonds standards',
+      status: 'actif', 
+      dateCreation: '2023-03-01',
+      modifiable: true
+    },
+    { 
+      id: 'PR007', 
+      nom: 'Technicien', 
+      code: 'TECH', 
+      type: 'technique',
+      utilisateurs: 3, 
+      permissions: ['monitoring', 'logs', 'api', 'maintenance'],
+      description: 'Support technique et maintenance',
+      status: 'actif', 
+      dateCreation: '2023-04-10',
+      modifiable: true
+    },
+    { 
+      id: 'PR008', 
+      nom: 'Superviseur', 
+      code: 'SUPERVISEUR', 
+      type: 'operationnel',
+      utilisateurs: 8, 
+      permissions: ['gestion_agents', 'reporting', 'validation', 'fraude'],
+      description: 'Supervision des agents et opérations',
+      status: 'actif', 
+      dateCreation: '2024-01-15',
+      modifiable: true
+    },
   ];
 
-  const permissions = [
-    { id: 'all', label: 'Tous les droits', category: 'system' },
-    { id: 'users', label: 'Gestion utilisateurs', category: 'admin' },
-    { id: 'transactions', label: 'Transactions', category: 'operations' },
-    { id: 'float', label: 'Gestion Float', category: 'operations' },
-    { id: 'commissions', label: 'Commissions', category: 'finance' },
-    { id: 'reporting', label: 'Rapports', category: 'analytics' },
-    { id: 'monitoring', label: 'Monitoring', category: 'tech' },
-    { id: 'api', label: 'API Management', category: 'tech' },
-    { id: 'logs', label: 'Logs système', category: 'tech' },
+  const typeOptions = [
+    { label: 'Tous', value: 'all' },
+    { label: 'Système', value: 'systeme' },
+    { label: 'Opérationnel', value: 'operationnel' },
+    { label: 'Client', value: 'client' },
+    { label: 'Technique', value: 'technique' }
   ];
 
-  const filteredProfiles = profiles.filter(profile => {
-    const matchSearch = profile.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                       profile.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                       profile.fullName.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchRole = filterRole === 'all' || profile.role === filterRole;
-    const matchStatus = filterStatus === 'all' || profile.status === filterStatus;
-    return matchSearch && matchRole && matchStatus;
+  const filteredProfils = profils.filter(profil => {
+    const matchesType = selectedType === 'all' || profil.type === selectedType;
+    const matchesSearch = !globalFilter || 
+      profil.nom.toLowerCase().includes(globalFilter.toLowerCase()) ||
+      profil.code.toLowerCase().includes(globalFilter.toLowerCase()) ||
+      profil.description.toLowerCase().includes(globalFilter.toLowerCase());
+    return matchesType && matchesSearch;
   });
 
-  const getRoleColor = (role) => {
-    const roleObj = roles.find(r => r.value === role);
-    return roleObj?.color || 'gray';
+  const stats = {
+    total: profils.length,
+    systeme: profils.filter(p => p.type === 'systeme').length,
+    operationnel: profils.filter(p => p.type === 'operationnel').length,
+    totalUtilisateurs: profils.reduce((sum, p) => sum + p.utilisateurs, 0)
   };
 
-  const toggleStatus = (profileId) => {
-    setProfiles(profiles.map(p =>
-      p.id === profileId ? { ...p, status: p.status === 'active' ? 'inactive' : 'active' } : p
-    ));
+  const codeBodyTemplate = (rowData) => {
+    return <Tag value={rowData.code} severity="info" />;
+  };
+
+  const typeBodyTemplate = (rowData) => {
+    const config = {
+      systeme: { label: 'Système', severity: 'danger' },
+      operationnel: { label: 'Opérationnel', severity: 'success' },
+      client: { label: 'Client', severity: 'info' },
+      technique: { label: 'Technique', severity: 'warning' }
+    };
+    const { label, severity } = config[rowData.type];
+    return <Tag value={label} severity={severity} />;
+  };
+
+  const statusBodyTemplate = (rowData) => {
+    return <Tag value={rowData.status} severity={rowData.status === 'actif' ? 'success' : 'danger'} />;
+  };
+
+  const permissionsBodyTemplate = (rowData) => {
+    const count = rowData.permissions.length;
+    return (
+      <div className="flex gap-1 flex-wrap">
+        {rowData.permissions[0] === 'all' ? (
+          <Tag value="Toutes" severity="danger" />
+        ) : (
+          <Tag value={`${count} permissions`} severity="info" />
+        )}
+      </div>
+    );
+  };
+
+  const utilisateursBodyTemplate = (rowData) => {
+    return <Tag value={rowData.utilisateurs} severity="secondary" />;
+  };
+
+  const actionsBodyTemplate = (rowData) => {
+    const isOpen = openMenuId === rowData.id;
+
+    const handleMenuAction = (action) => {
+      setOpenMenuId(null);
+      action();
+    };
+
+    const calculateMenuPosition = (buttonElement) => {
+      const buttonRect = buttonElement.getBoundingClientRect();
+      const menuHeight = 500; // Hauteur approximative du menu
+      const menuWidth = 280;
+      const windowHeight = window.innerHeight;
+      const windowWidth = window.innerWidth;
+
+      let top = buttonRect.bottom + 5;
+      let left = buttonRect.right - menuWidth;
+
+      // Si le menu dépasse en bas, le positionner au-dessus du bouton
+      if (top + menuHeight > windowHeight) {
+        top = buttonRect.top - menuHeight - 5;
+      }
+
+      // Si le menu dépasse encore en haut, le positionner au milieu de l'écran
+      if (top < 0) {
+        top = Math.max(10, (windowHeight - menuHeight) / 2);
+      }
+
+      // Si le menu dépasse à gauche, l'aligner à gauche du bouton
+      if (left < 10) {
+        left = buttonRect.left;
+      }
+
+      // Si le menu dépasse à droite, l'aligner à droite de l'écran
+      if (left + menuWidth > windowWidth - 10) {
+        left = windowWidth - menuWidth - 10;
+      }
+
+      return { top, left };
+    };
+
+    const MenuContent = () => (
+      <div 
+        ref={menuRef}
+        className="bg-card border border-darkGray rounded-xl shadow-2xl py-2 min-w-[280px] max-h-[500px] overflow-y-auto"
+        style={{ 
+          animation: 'fadeIn 0.15s ease-out',
+          zIndex: 99999,
+          position: 'fixed',
+          top: `${menuPosition.top}px`,
+          left: `${menuPosition.left}px`
+        }}
+      >
+        <button
+          onClick={() => handleMenuAction(() => {
+            setSelectedProfil(rowData);
+            setShowDialog(true);
+          })}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <Eye className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Consulter</span>
+        </button>
+
+        <button
+          onClick={() => handleMenuAction(() => console.log('Historique', rowData.id))}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <History className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Historique</span>
+        </button>
+
+        <button
+          onClick={() => handleMenuAction(() => console.log('Logs', rowData.id))}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <FileText className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Logs d'activité</span>
+        </button>
+
+        <button
+          onClick={() => handleMenuAction(() => console.log('Activités', rowData.id))}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <Activity className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Activités en cours</span>
+        </button>
+
+        <div className="border-t border-darkGray my-2"></div>
+
+        <button
+          onClick={() => handleMenuAction(() => console.log('Utilisateurs', rowData.id))}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <UserCheck className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Utilisateurs associés</span>
+        </button>
+
+        <button
+          onClick={() => handleMenuAction(() => console.log('Sessions', rowData.id))}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <Clock className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Sessions actives</span>
+        </button>
+
+        <div className="border-t border-darkGray my-2"></div>
+        <div className="px-3 py-2">
+          <span className="text-xs font-semibold text-gray-500 uppercase">Contrôle Bancaire</span>
+        </div>
+
+        <button
+          onClick={() => handleMenuAction(() => console.log('Vérifier identité', rowData.id))}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <Shield className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Vérifier l'identité</span>
+        </button>
+
+        <button
+          onClick={() => handleMenuAction(() => console.log('Comptes bancaires', rowData.id))}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <Users className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Comptes bancaires</span>
+        </button>
+
+        <button
+          onClick={() => handleMenuAction(() => console.log('Historique transactions', rowData.id))}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <Activity className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Historique des transactions</span>
+        </button>
+
+        <button
+          onClick={() => handleMenuAction(() => console.log('Limites et plafonds', rowData.id))}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <Settings className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Limites et plafonds</span>
+        </button>
+
+        <button
+          onClick={() => handleMenuAction(() => console.log('Documents KYC', rowData.id))}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <FileText className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Documents KYC</span>
+        </button>
+
+        <button
+          onClick={() => handleMenuAction(() => console.log('Alertes fraude', rowData.id))}
+          className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+        >
+          <Lock className="w-4 h-4 text-gray-400" />
+          <span className="text-sm">Alertes de fraude</span>
+        </button>
+
+        {rowData.modifiable ? (
+          <>
+            <div className="border-t border-darkGray my-2"></div>
+
+            <button
+              onClick={() => handleMenuAction(() => console.log('Modifier droits', rowData.id))}
+              className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+            >
+              <Settings className="w-4 h-4 text-gray-400" />
+              <span className="text-sm">Modifier les droits</span>
+            </button>
+
+            <button
+              onClick={() => handleMenuAction(() => console.log('Dupliquer', rowData.id))}
+              className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+            >
+              <Copy className="w-4 h-4 text-gray-400" />
+              <span className="text-sm">Dupliquer le profil</span>
+            </button>
+
+            <button
+              onClick={() => handleMenuAction(() => console.log('Modifier', rowData.id))}
+              className="w-full flex items-center gap-3 px-4 py-3 text-text hover:bg-darkGray transition-colors text-left"
+            >
+              <Edit className="w-4 h-4 text-gray-400" />
+              <span className="text-sm">Modifier</span>
+            </button>
+
+            <div className="border-t border-darkGray my-2"></div>
+
+            <button
+              onClick={() => handleMenuAction(() => console.log('Bloquer le compte', rowData.id))}
+              className="w-full flex items-center gap-3 px-4 py-3 text-danger hover:bg-danger/10 transition-colors text-left"
+            >
+              <Lock className="w-4 h-4" />
+              <span className="text-sm">Bloquer le compte</span>
+            </button>
+
+            <button
+              onClick={() => handleMenuAction(() => console.log('Supprimer', rowData.id))}
+              className="w-full flex items-center gap-3 px-4 py-3 text-danger hover:bg-danger/10 transition-colors text-left"
+            >
+              <Trash2 className="w-4 h-4" />
+              <span className="text-sm">Supprimer</span>
+            </button>
+          </>
+        ) : (
+          <>
+            <div className="border-t border-darkGray my-2"></div>
+            <div className="flex items-center gap-3 px-4 py-3 text-gray-500 opacity-50 cursor-not-allowed">
+              <Lock className="w-4 h-4" />
+              <span className="text-sm">Profil système</span>
+            </div>
+          </>
+        )}
+      </div>
+    );
+
+    return (
+      <div className="flex justify-center">
+        <button
+          ref={buttonRef}
+          onClick={(e) => {
+            e.stopPropagation();
+            if (!isOpen) {
+              const position = calculateMenuPosition(e.currentTarget);
+              setMenuPosition(position);
+              setOpenMenuId(rowData.id);
+            } else {
+              setOpenMenuId(null);
+            }
+          }}
+          className="p-2 bg-primary/10 text-primary rounded-lg hover:bg-primary/20 transition-colors"
+          title="Actions"
+        >
+          <MoreVertical className="w-4 h-4" />
+        </button>
+
+        {isOpen && createPortal(<MenuContent />, document.body)}
+      </div>
+    );
   };
 
   return (
-    <div className="space-y-6">
-      <Card className="p-6">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h2 className="text-2xl font-heading font-bold text-text mb-1">Gestion des Profils</h2>
-            <p className="text-sm text-gray-400 font-sans">
-              Gérez les utilisateurs, rôles, permissions et sécurité
-            </p>
+    <div className="p-6 space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-anton uppercase text-text">Gestion des Profils</h1>
+          <p className="text-sm text-gray-400 mt-1">Gérer les rôles et permissions du système</p>
+        </div>
+        <button 
+          onClick={() => setShowCreateDialog(true)}
+          className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors"
+        >
+          <Plus className="w-5 h-5" />
+          <span>Nouveau Profil</span>
+        </button>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-5 hover:shadow-lg transition-all">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-3 bg-primary/20 rounded-lg">
+              <Shield className="w-6 h-6 text-primary" />
+            </div>
+            <span className="text-3xl font-bold text-primary">{stats.total}</span>
           </div>
-          <button
-            onClick={() => {
-              setSelectedProfile(null);
-              setShowModal(true);
-            }}
-            className="px-4 py-2 bg-primary hover:bg-blue-700 text-white rounded-lg transition-colors flex items-center gap-2 font-sans"
-          >
-            <Plus className="w-4 h-4" />
-            Nouveau Profil
+          <p className="text-sm text-gray-400">Total Profils</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-danger/10 to-danger/5 border border-danger/20 rounded-xl p-5 hover:shadow-lg transition-all">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-3 bg-danger/20 rounded-lg">
+              <Lock className="w-6 h-6 text-danger" />
+            </div>
+            <span className="text-3xl font-bold text-danger">{stats.systeme}</span>
+          </div>
+          <p className="text-sm text-gray-400">Profils Système</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-secondary/10 to-secondary/5 border border-secondary/20 rounded-xl p-5 hover:shadow-lg transition-all">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-3 bg-secondary/20 rounded-lg">
+              <UserCog className="w-6 h-6 text-secondary" />
+            </div>
+            <span className="text-3xl font-bold text-secondary">{stats.operationnel}</span>
+          </div>
+          <p className="text-sm text-gray-400">Opérationnels</p>
+        </div>
+
+        <div className="bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/20 rounded-xl p-5 hover:shadow-lg transition-all">
+          <div className="flex items-center justify-between mb-3">
+            <div className="p-3 bg-primary/20 rounded-lg">
+              <Users className="w-6 h-6 text-primary" />
+            </div>
+            <span className="text-3xl font-bold text-primary">{stats.totalUtilisateurs}</span>
+          </div>
+          <p className="text-sm text-gray-400">Utilisateurs</p>
+        </div>
+      </div>
+
+      <div className="bg-card border border-darkGray rounded-lg p-4">
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex-1 relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+            <InputText
+              value={globalFilter}
+              onChange={(e) => setGlobalFilter(e.target.value)}
+              placeholder="Rechercher par nom, code, description..."
+              className="w-full pl-10 pr-4 py-2 bg-background border border-darkGray rounded-lg text-text"
+            />
+          </div>
+          
+          <Dropdown
+            value={selectedType}
+            options={typeOptions}
+            onChange={(e) => setSelectedType(e.value)}
+            className="w-full md:w-48"
+          />
+
+          <button className="flex items-center gap-2 px-4 py-2 bg-secondary text-white rounded-lg hover:bg-secondary/90 transition-colors">
+            <Download className="w-5 h-5" />
+            <span>Exporter</span>
           </button>
         </div>
+      </div>
 
-        {/* Filtres et recherche */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="md:col-span-2">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Rechercher par nom, email, username..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-              />
-            </div>
-          </div>
-          <select
-            value={filterRole}
-            onChange={(e) => setFilterRole(e.target.value)}
-            className="px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-          >
-            <option value="all">Tous les rôles</option>
-            {roles.map(role => (
-              <option key={role.value} value={role.value}>{role.label}</option>
-            ))}
-          </select>
-          <select
-            value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-          >
-            <option value="all">Tous les statuts</option>
-            <option value="active">Actifs</option>
-            <option value="inactive">Inactifs</option>
-          </select>
-        </div>
+      <div className="bg-card border border-darkGray rounded-lg overflow-hidden">
+        <DataTable
+          value={filteredProfils}
+          paginator
+          rows={10}
+          rowsPerPageOptions={[5, 10, 25, 50]}
+          className="custom-datatable"
+          emptyMessage="Aucun profil trouvé"
+          scrollable
+          scrollHeight="600px"
+        >
+          <Column 
+            field="code" 
+            header="Code" 
+            body={codeBodyTemplate}
+            sortable 
+            frozen
+            style={{ whiteSpace: 'nowrap' }}
+          />
+          <Column 
+            field="nom" 
+            header="Nom du Profil" 
+            sortable 
+            frozen
+            style={{ whiteSpace: 'nowrap' }}
+          />
+          <Column 
+            field="type" 
+            header="Type" 
+            body={typeBodyTemplate} 
+            sortable 
+            frozen
+            style={{ whiteSpace: 'nowrap' }}
+          />
+          <Column 
+            field="utilisateurs" 
+            header="Utilisateurs" 
+            body={utilisateursBodyTemplate}
+            sortable 
+            style={{ whiteSpace: 'nowrap' }}
+          />
+          <Column 
+            field="permissions" 
+            header="Permissions" 
+            body={permissionsBodyTemplate} 
+            style={{ whiteSpace: 'nowrap' }}
+          />
+          <Column 
+            field="status" 
+            header="Statut" 
+            body={statusBodyTemplate} 
+            sortable 
+            frozen
+            alignFrozen="right"
+            style={{ whiteSpace: 'nowrap' }}
+          />
+          <Column 
+            field="dateCreation" 
+            header="Date Création" 
+            sortable 
+            frozen
+            alignFrozen="right"
+            style={{ whiteSpace: 'nowrap' }}
+          />
+          <Column 
+            header="Actions" 
+            body={actionsBodyTemplate} 
+            frozen
+            alignFrozen="right"
+            style={{ whiteSpace: 'nowrap' }}
+          />
+        </DataTable>
+      </div>
 
-        {/* Statistiques */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="p-4 bg-background rounded-lg border border-darkGray">
-            <div className="flex items-center justify-between">
+      <Dialog
+        visible={showDialog}
+        onHide={() => setShowDialog(false)}
+        header="Détails du Profil"
+        style={{ width: '700px' }}
+        className="custom-dialog"
+      >
+        {selectedProfil && (
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
               <div>
-                <p className="text-sm text-gray-400 font-sans">Total Profils</p>
-                <p className="text-2xl font-bold text-text font-heading">{profiles.length}</p>
+                <p className="text-sm text-gray-400">Code</p>
+                <p className="font-semibold text-text">{selectedProfil.code}</p>
               </div>
-              <Users className="w-8 h-8 text-primary" />
-            </div>
-          </div>
-          <div className="p-4 bg-background rounded-lg border border-darkGray">
-            <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-400 font-sans">Actifs</p>
-                <p className="text-2xl font-bold text-green-400 font-heading">
-                  {profiles.filter(p => p.status === 'active').length}
-                </p>
+                <p className="text-sm text-gray-400">Nom</p>
+                <p className="font-semibold text-text">{selectedProfil.nom}</p>
               </div>
-              <CheckCircle className="w-8 h-8 text-green-400" />
-            </div>
-          </div>
-          <div className="p-4 bg-background rounded-lg border border-darkGray">
-            <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-400 font-sans">Inactifs</p>
-                <p className="text-2xl font-bold text-red-400 font-heading">
-                  {profiles.filter(p => p.status === 'inactive').length}
-                </p>
+                <p className="text-sm text-gray-400">Type</p>
+                {typeBodyTemplate(selectedProfil)}
               </div>
-              <XCircle className="w-8 h-8 text-red-400" />
-            </div>
-          </div>
-          <div className="p-4 bg-background rounded-lg border border-darkGray">
-            <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-400 font-sans">2FA Activé</p>
-                <p className="text-2xl font-bold text-blue-400 font-heading">
-                  {profiles.filter(p => p.twoFactorEnabled).length}
-                </p>
+                <p className="text-sm text-gray-400">Statut</p>
+                {statusBodyTemplate(selectedProfil)}
               </div>
-              <Shield className="w-8 h-8 text-blue-400" />
+              <div>
+                <p className="text-sm text-gray-400">Utilisateurs</p>
+                <p className="font-semibold text-primary">{selectedProfil.utilisateurs}</p>
+              </div>
+              <div>
+                <p className="text-sm text-gray-400">Date création</p>
+                <p className="font-semibold text-text">{selectedProfil.dateCreation}</p>
+              </div>
+              <div className="col-span-2">
+                <p className="text-sm text-gray-400">Description</p>
+                <p className="font-semibold text-text">{selectedProfil.description}</p>
+              </div>
+              <div className="col-span-2">
+                <p className="text-sm text-gray-400 mb-2">Permissions</p>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProfil.permissions[0] === 'all' ? (
+                    <Tag value="Toutes les permissions" severity="danger" />
+                  ) : (
+                    selectedProfil.permissions.map((perm, index) => (
+                      <Tag key={index} value={perm.replace(/_/g, ' ')} severity="info" />
+                    ))
+                  )}
+                </div>
+              </div>
+              <div className="col-span-2">
+                <p className="text-sm text-gray-400">Modifiable</p>
+                <Tag 
+                  value={selectedProfil.modifiable ? 'Oui' : 'Non (Profil système)'} 
+                  severity={selectedProfil.modifiable ? 'success' : 'danger'} 
+                />
+              </div>
             </div>
           </div>
-        </div>
+        )}
+      </Dialog>
 
-        {/* Table des profils */}
-        <div className="overflow-x-auto">
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-darkGray">
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400 font-sans">Utilisateur</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400 font-sans">Rôle</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400 font-sans">Statut</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400 font-sans">Dernière connexion</th>
-                <th className="text-left py-3 px-4 text-sm font-medium text-gray-400 font-sans">Sécurité</th>
-                <th className="text-right py-3 px-4 text-sm font-medium text-gray-400 font-sans">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {filteredProfiles.map((profile) => (
-                <tr key={profile.id} className="border-b border-darkGray hover:bg-background transition-colors">
-                  <td className="py-4 px-4">
-                    <div>
-                      <p className="text-sm font-medium text-text font-sans">{profile.fullName}</p>
-                      <p className="text-xs text-gray-400 font-mono">{profile.username}</p>
-                      <p className="text-xs text-gray-500">{profile.email}</p>
-                    </div>
-                  </td>
-                  <td className="py-4 px-4">
-                    <span className={`px-2 py-1 rounded text-xs font-medium font-sans bg-${getRoleColor(profile.role)}-400/20 text-${getRoleColor(profile.role)}-400`}>
-                      {roles.find(r => r.value === profile.role)?.label}
-                    </span>
-                  </td>
-                  <td className="py-4 px-4">
-                    <div className="flex items-center gap-2">
-                      {profile.status === 'active' ? (
-                        <CheckCircle className="w-4 h-4 text-green-400" />
-                      ) : (
-                        <XCircle className="w-4 h-4 text-red-400" />
-                      )}
-                      <span className={`text-sm font-sans ${profile.status === 'active' ? 'text-green-400' : 'text-red-400'}`}>
-                        {profile.status === 'active' ? 'Actif' : 'Inactif'}
-                      </span>
-                    </div>
-                  </td>
-                  <td className="py-4 px-4">
-                    <div className="flex items-center gap-2 text-sm text-gray-400 font-mono">
-                      <Clock className="w-4 h-4" />
-                      {profile.lastLogin}
-                    </div>
-                  </td>
-                  <td className="py-4 px-4">
-                    <div className="flex items-center gap-2">
-                      {profile.twoFactorEnabled ? (
-                        <Shield className="w-4 h-4 text-green-400" title="2FA activé" />
-                      ) : (
-                        <AlertTriangle className="w-4 h-4 text-orange-400" title="2FA désactivé" />
-                      )}
-                    </div>
-                  </td>
-                  <td className="py-4 px-4">
-                    <div className="flex items-center justify-end gap-2">
-                      <button
-                        onClick={() => {
-                          setSelectedProfile(profile);
-                          setShowHistoryModal(true);
-                        }}
-                        className="p-2 hover:bg-darkGray rounded transition-colors"
-                        title="Historique"
-                      >
-                        <Activity className="w-4 h-4 text-gray-400" />
-                      </button>
-                      <button
-                        onClick={() => {
-                          setSelectedProfile(profile);
-                          setShowPasswordModal(true);
-                        }}
-                        className="p-2 hover:bg-darkGray rounded transition-colors"
-                        title="Réinitialiser mot de passe"
-                      >
-                        <Key className="w-4 h-4 text-gray-400" />
-                      </button>
-                      <button
-                        onClick={() => toggleStatus(profile.id)}
-                        className="p-2 hover:bg-darkGray rounded transition-colors"
-                        title={profile.status === 'active' ? 'Désactiver' : 'Activer'}
-                      >
-                        {profile.status === 'active' ? (
-                          <Lock className="w-4 h-4 text-orange-400" />
-                        ) : (
-                          <Unlock className="w-4 h-4 text-green-400" />
-                        )}
-                      </button>
-                      <button
-                        onClick={() => {
-                          setSelectedProfile(profile);
-                          setShowModal(true);
-                        }}
-                        className="p-2 hover:bg-darkGray rounded transition-colors"
-                        title="Modifier"
-                      >
-                        <Edit2 className="w-4 h-4 text-blue-400" />
-                      </button>
-                      <button
-                        onClick={() => {
-                          if (confirm(`Supprimer le profil "${profile.fullName}" ?`)) {
-                            setProfiles(profiles.filter(p => p.id !== profile.id));
-                          }
-                        }}
-                        className="p-2 hover:bg-darkGray rounded transition-colors"
-                        title="Supprimer"
-                      >
-                        <Trash2 className="w-4 h-4 text-red-400" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </Card>
-
-      {/* Modal Créer/Modifier Profil */}
-      {showModal && (
-        <ProfileModal
-          profile={selectedProfile}
-          roles={roles}
-          permissions={permissions}
-          onClose={() => setShowModal(false)}
-          onSave={(profile) => {
-            if (selectedProfile) {
-              setProfiles(profiles.map(p => p.id === profile.id ? profile : p));
-            } else {
-              setProfiles([...profiles, { ...profile, id: Date.now() }]);
-            }
-            setShowModal(false);
-          }}
-        />
-      )}
-
-      {/* Modal Historique */}
-      {showHistoryModal && selectedProfile && (
-        <HistoryModal
-          profile={selectedProfile}
-          onClose={() => setShowHistoryModal(false)}
-        />
-      )}
-
-      {/* Modal Réinitialiser Mot de Passe */}
-      {showPasswordModal && selectedProfile && (
-        <PasswordModal
-          profile={selectedProfile}
-          onClose={() => setShowPasswordModal(false)}
-          onReset={() => {
-            alert(`Mot de passe réinitialisé pour ${selectedProfile.username}`);
-            setShowPasswordModal(false);
-          }}
-        />
-      )}
+      {/* Dialog Création Utilisateur */}
+      <CreateUserDialog
+        visible={showCreateDialog}
+        onHide={() => setShowCreateDialog(false)}
+      />
     </div>
   );
-};
+}
 
 export default GestionProfils;
-
-// Modal pour créer/modifier un profil
-const ProfileModal = ({ profile, roles, permissions, onClose, onSave }) => {
-  const [formData, setFormData] = useState(profile || {
-    username: '',
-    email: '',
-    fullName: '',
-    role: 'agent',
-    status: 'active',
-    permissions: [],
-    twoFactorEnabled: false,
-  });
-
-  const [selectedPermissions, setSelectedPermissions] = useState(
-    profile?.permissions || []
-  );
-
-  const togglePermission = (permId) => {
-    if (selectedPermissions.includes(permId)) {
-      setSelectedPermissions(selectedPermissions.filter(p => p !== permId));
-    } else {
-      setSelectedPermissions([...selectedPermissions, permId]);
-    }
-  };
-
-  const handleSubmit = () => {
-    onSave({
-      ...formData,
-      permissions: selectedPermissions,
-      createdAt: profile?.createdAt || new Date().toISOString().split('T')[0],
-      lastLogin: profile?.lastLogin || '-',
-    });
-  };
-
-  const permissionsByCategory = permissions.reduce((acc, perm) => {
-    if (!acc[perm.category]) acc[perm.category] = [];
-    acc[perm.category].push(perm);
-    return acc;
-  }, {});
-
-  return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-card border border-darkGray rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-card border-b border-darkGray p-6 flex items-center justify-between">
-          <h3 className="text-xl font-heading font-bold text-text">
-            {profile ? 'Modifier le Profil' : 'Nouveau Profil'}
-          </h3>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-darkGray rounded-lg transition-colors"
-          >
-            <XCircle className="w-5 h-5 text-gray-400" />
-          </button>
-        </div>
-
-        <div className="p-6 space-y-6">
-          {/* Informations de base */}
-          <div>
-            <h4 className="text-lg font-bold text-text mb-4 font-heading">Informations de base</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">
-                  Nom complet
-                </label>
-                <input
-                  type="text"
-                  value={formData.fullName}
-                  onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-                  placeholder="Ex: Jean Dupont"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">
-                  Nom d'utilisateur
-                </label>
-                <input
-                  type="text"
-                  value={formData.username}
-                  onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                  className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-mono"
-                  placeholder="Ex: jean.dupont"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-                  placeholder="jean.dupont@ufaranga.com"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">
-                  Rôle
-                </label>
-                <select
-                  value={formData.role}
-                  onChange={(e) => setFormData({ ...formData, role: e.target.value })}
-                  className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-sans"
-                >
-                  {roles.map(role => (
-                    <option key={role.value} value={role.value}>{role.label}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-
-          {/* Permissions */}
-          <div>
-            <h4 className="text-lg font-bold text-text mb-4 font-heading">Permissions</h4>
-            <div className="space-y-4">
-              {Object.entries(permissionsByCategory).map(([category, perms]) => (
-                <div key={category} className="p-4 bg-background rounded-lg border border-darkGray">
-                  <h5 className="text-sm font-bold text-text mb-3 uppercase font-sans">{category}</h5>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                    {perms.map(perm => (
-                      <label
-                        key={perm.id}
-                        className="flex items-center gap-2 p-2 hover:bg-card rounded cursor-pointer transition-colors"
-                      >
-                        <input
-                          type="checkbox"
-                          checked={selectedPermissions.includes(perm.id)}
-                          onChange={() => togglePermission(perm.id)}
-                          className="w-4 h-4 rounded border-darkGray text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm text-gray-300 font-sans">{perm.label}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Sécurité */}
-          <div>
-            <h4 className="text-lg font-bold text-text mb-4 font-heading">Sécurité</h4>
-            <div className="space-y-3">
-              <label className="flex items-center justify-between p-4 bg-background rounded-lg border border-darkGray cursor-pointer hover:border-primary transition-colors">
-                <div className="flex items-center gap-3">
-                  <Shield className="w-5 h-5 text-primary" />
-                  <div>
-                    <p className="text-sm font-medium text-text font-sans">Authentification à deux facteurs (2FA)</p>
-                    <p className="text-xs text-gray-400 font-sans">Sécurité renforcée pour ce compte</p>
-                  </div>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={formData.twoFactorEnabled}
-                  onChange={(e) => setFormData({ ...formData, twoFactorEnabled: e.target.checked })}
-                  className="w-5 h-5 rounded border-darkGray text-primary focus:ring-primary"
-                />
-              </label>
-
-              <label className="flex items-center justify-between p-4 bg-background rounded-lg border border-darkGray cursor-pointer hover:border-primary transition-colors">
-                <div className="flex items-center gap-3">
-                  {formData.status === 'active' ? (
-                    <CheckCircle className="w-5 h-5 text-green-400" />
-                  ) : (
-                    <XCircle className="w-5 h-5 text-red-400" />
-                  )}
-                  <div>
-                    <p className="text-sm font-medium text-text font-sans">Compte actif</p>
-                    <p className="text-xs text-gray-400 font-sans">Autoriser l'accès à ce compte</p>
-                  </div>
-                </div>
-                <input
-                  type="checkbox"
-                  checked={formData.status === 'active'}
-                  onChange={(e) => setFormData({ ...formData, status: e.target.checked ? 'active' : 'inactive' })}
-                  className="w-5 h-5 rounded border-darkGray text-primary focus:ring-primary"
-                />
-              </label>
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="flex items-center gap-3 pt-4 border-t border-darkGray">
-            <button
-              onClick={handleSubmit}
-              className="flex-1 px-4 py-3 bg-primary hover:bg-blue-700 text-white rounded-lg transition-colors font-sans font-medium"
-            >
-              {profile ? 'Enregistrer les modifications' : 'Créer le profil'}
-            </button>
-            <button
-              onClick={onClose}
-              className="flex-1 px-4 py-3 bg-darkGray hover:bg-gray-700 text-text rounded-lg transition-colors font-sans font-medium"
-            >
-              Annuler
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Modal Historique
-const HistoryModal = ({ profile, onClose }) => {
-  const historyData = [
-    { id: 1, action: 'Connexion réussie', date: '2024-02-19 10:30', ip: '192.168.1.100', type: 'login' },
-    { id: 2, action: 'Modification du profil', date: '2024-02-18 15:20', ip: '192.168.1.100', type: 'update' },
-    { id: 3, action: 'Changement de mot de passe', date: '2024-02-15 09:10', ip: '192.168.1.100', type: 'security' },
-    { id: 4, action: 'Connexion réussie', date: '2024-02-14 14:45', ip: '192.168.1.101', type: 'login' },
-    { id: 5, action: 'Échec de connexion', date: '2024-02-14 14:40', ip: '192.168.1.101', type: 'failed_login' },
-  ];
-
-  const getActionIcon = (type) => {
-    switch (type) {
-      case 'login': return <CheckCircle className="w-4 h-4 text-green-400" />;
-      case 'failed_login': return <XCircle className="w-4 h-4 text-red-400" />;
-      case 'update': return <Edit2 className="w-4 h-4 text-blue-400" />;
-      case 'security': return <Shield className="w-4 h-4 text-orange-400" />;
-      default: return <Activity className="w-4 h-4 text-gray-400" />;
-    }
-  };
-
-  return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-card border border-darkGray rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-card border-b border-darkGray p-6 flex items-center justify-between">
-          <div>
-            <h3 className="text-xl font-heading font-bold text-text">Historique d'activité</h3>
-            <p className="text-sm text-gray-400 font-sans mt-1">{profile.fullName} ({profile.username})</p>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-darkGray rounded-lg transition-colors"
-          >
-            <XCircle className="w-5 h-5 text-gray-400" />
-          </button>
-        </div>
-
-        <div className="p-6">
-          <div className="space-y-3">
-            {historyData.map((item) => (
-              <div
-                key={item.id}
-                className="flex items-start gap-4 p-4 bg-background rounded-lg border border-darkGray hover:border-primary transition-colors"
-              >
-                <div className="mt-1">{getActionIcon(item.type)}</div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-text font-sans">{item.action}</p>
-                  <div className="flex items-center gap-4 mt-1">
-                    <span className="text-xs text-gray-400 font-mono flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {item.date}
-                    </span>
-                    <span className="text-xs text-gray-400 font-mono">IP: {item.ip}</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Modal Réinitialiser Mot de Passe
-const PasswordModal = ({ profile, onClose, onReset }) => {
-  const [sendEmail, setSendEmail] = useState(true);
-  const [generatePassword, setGeneratePassword] = useState(true);
-  const [newPassword, setNewPassword] = useState('');
-
-  return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-card border border-darkGray rounded-lg max-w-md w-full">
-        <div className="bg-card border-b border-darkGray p-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Key className="w-6 h-6 text-primary" />
-            <h3 className="text-xl font-heading font-bold text-text">Réinitialiser le mot de passe</h3>
-          </div>
-          <button
-            onClick={onClose}
-            className="p-2 hover:bg-darkGray rounded-lg transition-colors"
-          >
-            <XCircle className="w-5 h-5 text-gray-400" />
-          </button>
-        </div>
-
-        <div className="p-6 space-y-4">
-          <div className="p-4 bg-orange-400/10 border border-orange-400/30 rounded-lg">
-            <p className="text-sm text-orange-400 font-sans">
-              Vous êtes sur le point de réinitialiser le mot de passe de <strong>{profile.fullName}</strong>
-            </p>
-          </div>
-
-          <label className="flex items-center justify-between p-4 bg-background rounded-lg border border-darkGray cursor-pointer">
-            <span className="text-sm text-text font-sans">Générer un mot de passe automatiquement</span>
-            <input
-              type="checkbox"
-              checked={generatePassword}
-              onChange={(e) => setGeneratePassword(e.target.checked)}
-              className="w-4 h-4 rounded border-darkGray text-primary focus:ring-primary"
-            />
-          </label>
-
-          {!generatePassword && (
-            <div>
-              <label className="block text-sm font-medium text-gray-400 mb-2 font-sans">
-                Nouveau mot de passe
-              </label>
-              <input
-                type="password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className="w-full px-4 py-2 bg-background border border-darkGray rounded-lg text-text focus:outline-none focus:border-primary font-mono"
-                placeholder="Entrez le nouveau mot de passe"
-              />
-            </div>
-          )}
-
-          <label className="flex items-center justify-between p-4 bg-background rounded-lg border border-darkGray cursor-pointer">
-            <span className="text-sm text-text font-sans">Envoyer par email à l'utilisateur</span>
-            <input
-              type="checkbox"
-              checked={sendEmail}
-              onChange={(e) => setSendEmail(e.target.checked)}
-              className="w-4 h-4 rounded border-darkGray text-primary focus:ring-primary"
-            />
-          </label>
-
-          <div className="flex items-center gap-3 pt-4">
-            <button
-              onClick={onReset}
-              className="flex-1 px-4 py-3 bg-primary hover:bg-blue-700 text-white rounded-lg transition-colors font-sans font-medium"
-            >
-              Réinitialiser
-            </button>
-            <button
-              onClick={onClose}
-              className="flex-1 px-4 py-3 bg-darkGray hover:bg-gray-700 text-text rounded-lg transition-colors font-sans font-medium"
-            >
-              Annuler
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};

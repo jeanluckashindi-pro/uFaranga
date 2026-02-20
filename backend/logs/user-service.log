@@ -1924,3 +1924,1751 @@ INFO 2026-02-19 03:29:43,457 autoreload 19188 20684 D:\Projets\Decima Techno\uFa
 INFO 2026-02-19 03:29:44,367 autoreload 21516 27524 Watching for file changes with StatReloader
 INFO 2026-02-19 03:31:04,307 autoreload 21516 27524 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
 INFO 2026-02-19 03:31:05,218 autoreload 24412 25812 Watching for file changes with StatReloader
+INFO 2026-02-19 09:18:18,759 autoreload 6556 13060 Watching for file changes with StatReloader
+ERROR 2026-02-19 09:19:11,056 log 6556 11112 Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\connection.py", line 1102, in get_connection
+    connection = self._available_connections.pop()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IndexError: pop from empty list
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 416, in initial
+    self.check_throttles(request)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 359, in check_throttles
+    if not throttle.allow_request(request, self):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\cache\backends\redis.py", line 187, in get
+    return self._cache.get(key, default)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\cache\backends\redis.py", line 99, in get
+    value = client.get(key)
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\commands\core.py", line 1830, in get
+    return self.execute_command("GET", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\connection.py", line 1104, in get_connection
+    connection = self.make_connection()
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\connection.py", line 1144, in make_connection
+    return self.connection_class(**self.connection_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\connection.py", line 593, in __init__
+    super().__init__(**kwargs)
+TypeError: AbstractConnection.__init__() got an unexpected keyword argument 'CLIENT_CLASS'
+ERROR 2026-02-19 09:19:11,072 basehttp 6556 11112 "GET / HTTP/1.1" 500 149911
+INFO 2026-02-19 09:19:51,037 autoreload 6556 13060 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-19 09:19:52,646 autoreload 26380 17380 Watching for file changes with StatReloader
+ERROR 2026-02-19 09:20:03,099 log 26380 21732 Internal Server Error: /
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\connection.py", line 276, in connect
+    sock = self.retry.call_with_retry(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\retry.py", line 46, in call_with_retry
+    return do()
+           ^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\connection.py", line 277, in <lambda>
+    lambda: self._connect(), lambda error: self.disconnect(error)
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\connection.py", line 639, in _connect
+    raise err
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\connection.py", line 627, in _connect
+    sock.connect(socket_address)
+ConnectionRefusedError: [WinError 10061] No connection could be made because the target machine actively refused it
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 497, in dispatch
+    self.initial(request, *args, **kwargs)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 416, in initial
+    self.check_throttles(request)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 359, in check_throttles
+    if not throttle.allow_request(request, self):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\throttling.py", line 123, in allow_request
+    self.history = self.cache.get(self.key, [])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\cache\backends\redis.py", line 187, in get
+    return self._cache.get(key, default)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\cache\backends\redis.py", line 99, in get
+    value = client.get(key)
+            ^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\commands\core.py", line 1830, in get
+    return self.execute_command("GET", name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\client.py", line 542, in execute_command
+    conn = self.connection or pool.get_connection(command_name, **options)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\connection.py", line 1109, in get_connection
+    connection.connect()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\redis\connection.py", line 282, in connect
+    raise ConnectionError(self._error_message(e))
+redis.exceptions.ConnectionError: Error 10061 connecting to localhost:6379. No connection could be made because the target machine actively refused it.
+ERROR 2026-02-19 09:20:03,115 basehttp 26380 21732 "GET / HTTP/1.1" 500 162945
+INFO 2026-02-19 09:20:35,518 autoreload 26380 17380 D:\Projets\Decima Techno\uFaranga\backend\config\settings\base.py changed, reloading.
+INFO 2026-02-19 09:20:37,169 autoreload 14928 9080 Watching for file changes with StatReloader
+INFO 2026-02-19 09:20:54,743 basehttp 14928 23144 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-19 09:20:55,355 basehttp 14928 23144 "GET /api/schema/ HTTP/1.1" 200 217365
+INFO 2026-02-19 09:22:09,339 basehttp 14928 27652 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+INFO 2026-02-19 09:22:10,948 basehttp 14928 27652 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-19 09:22:10,955 basehttp 14928 27652 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-19 09:22:11,069 basehttp 14928 27652 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-19 09:33:01,674 basehttp 14928 25956 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-19 09:33:01,773 basehttp 14928 25956 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-19 09:34:10,605 basehttp 14928 25956 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-19 09:34:10,692 basehttp 14928 25956 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-19 09:34:30,662 basehttp 14928 25956 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-19 09:34:30,747 basehttp 14928 25956 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-19 09:34:36,677 basehttp 14928 25956 "OPTIONS /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 0
+INFO 2026-02-19 09:34:36,822 views 14928 25956 Déconnexion de 1 autre(s) session(s) pour systeme@ufaranga.bi, session actuelle conservée.
+INFO 2026-02-19 09:34:36,824 basehttp 14928 25956 "POST /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 152
+INFO 2026-02-19 09:34:40,210 basehttp 14928 25956 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-19 09:34:40,342 basehttp 14928 25956 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-19 09:37:48,821 basehttp 14928 25956 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-19 09:37:48,926 basehttp 14928 25956 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-19 09:40:12,590 basehttp 14928 25956 "OPTIONS /api/v1/authentification/deconnexion/ HTTP/1.1" 200 0
+INFO 2026-02-19 09:40:12,774 views 14928 25956 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-19 09:40:12,776 basehttp 14928 25956 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+ERROR 2026-02-19 09:40:29,664 log 14928 25956 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 916, in get_or_create
+    return self.get(**kwargs), False
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+apps.users.models.User.DoesNotExist: User matching query does not exist.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UniqueViolation: duplicate key value violates unique constraint "users_phone_number_key"
+DETAIL:  Key (phone_number)=(+25779000002) already exists.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 177, in validate
+    user = sync_identite_to_user(utilisateur_identite, attrs['password'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 90, in sync_identite_to_user
+    user, created = User.objects.update_or_create(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 949, in update_or_create
+    obj, created = self.select_for_update().get_or_create(defaults, **kwargs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 923, in get_or_create
+    return self.create(**params), True
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\contrib\auth\base_user.py", line 76, in save
+    super().save(*args, **kwargs)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "users_phone_number_key"
+DETAIL:  Key (phone_number)=(+25779000002) already exists.
+ERROR 2026-02-19 09:40:29,681 basehttp 14928 25956 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 254931
+INFO 2026-02-19 09:40:38,422 basehttp 14928 25956 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1285
+INFO 2026-02-19 09:40:38,522 basehttp 14928 25956 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1744
+INFO 2026-02-19 11:44:57,979 basehttp 14928 28844 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-19 11:44:58,791 basehttp 14928 28844 "GET /api/schema/ HTTP/1.1" 200 217365
+INFO 2026-02-19 11:45:32,845 basehttp 14928 28844 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-19 11:45:33,252 basehttp 14928 28844 "GET /api/schema/ HTTP/1.1" 200 217365
+INFO 2026-02-19 12:57:03,766 autoreload 11064 26012 Watching for file changes with StatReloader
+INFO 2026-02-19 12:57:07,863 basehttp 11064 10584 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-19 12:57:08,203 basehttp 11064 10584 "GET /api/schema/ HTTP/1.1" 200 217365
+WARNING 2026-02-19 12:58:13,175 log 11064 192 Unauthorized: /api/v1/authentification/moi/
+WARNING 2026-02-19 12:58:13,175 basehttp 11064 192 "GET /api/v1/authentification/moi/ HTTP/1.1" 401 103
+WARNING 2026-02-19 12:58:31,607 log 11064 6032 Unauthorized: /api/v1/authentification/moi/
+WARNING 2026-02-19 12:58:31,608 basehttp 11064 6032 "POST /api/v1/authentification/moi/ HTTP/1.1" 401 103
+INFO 2026-02-19 22:06:14,133 autoreload 25840 18040 Watching for file changes with StatReloader
+INFO 2026-02-19 22:07:11,316 basehttp 25840 9460 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+INFO 2026-02-19 22:07:13,108 basehttp 25840 9460 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-19 22:07:13,115 basehttp 25840 9460 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-19 22:07:13,280 basehttp 25840 9460 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1743
+INFO 2026-02-19 22:12:56,295 autoreload 25840 18040 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-02-19 22:12:58,171 autoreload 3276 10180 Watching for file changes with StatReloader
+INFO 2026-02-19 22:13:09,387 autoreload 3276 10180 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-02-19 22:13:11,147 autoreload 23040 24652 Watching for file changes with StatReloader
+INFO 2026-02-19 22:13:47,677 autoreload 23040 24652 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-02-19 22:13:49,293 autoreload 11756 19792 Watching for file changes with StatReloader
+ERROR 2026-02-19 22:15:20,203 log 11756 27436 Internal Server Error: /api/v1/authentification/moi/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py", line 338, in get
+    utilisateur_identite = self._get_utilisateur_identite(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py", line 334, in _get_utilisateur_identite
+    ).select_related('profil').first()
+                               ^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1057, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+ERROR 2026-02-19 22:15:20,213 basehttp 11756 27436 "GET /api/v1/authentification/moi/ HTTP/1.1" 500 235248
+ERROR 2026-02-19 22:15:20,367 log 11756 17060 Internal Server Error: /api/v1/authentification/moi/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py", line 338, in get
+    utilisateur_identite = self._get_utilisateur_identite(request)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py", line 334, in _get_utilisateur_identite
+    ).select_related('profil').first()
+                               ^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1057, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+ERROR 2026-02-19 22:15:20,372 basehttp 11756 17060 "GET /api/v1/authentification/moi/ HTTP/1.1" 500 235248
+ERROR 2026-02-19 22:18:12,052 log 11756 17060 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 154, in validate
+    utilisateur_identite = get_utilisateur_identite_by_email_or_phone(credential)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 76, in get_utilisateur_identite_by_email_or_phone
+    return UtilisateurIdentite.objects.filter(courriel__iexact=value).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1057, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+ERROR 2026-02-19 22:18:12,059 basehttp 11756 17060 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 229810
+ERROR 2026-02-19 22:18:17,189 log 11756 17060 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 154, in validate
+    utilisateur_identite = get_utilisateur_identite_by_email_or_phone(credential)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 76, in get_utilisateur_identite_by_email_or_phone
+    return UtilisateurIdentite.objects.filter(courriel__iexact=value).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1057, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+ERROR 2026-02-19 22:18:17,194 basehttp 11756 17060 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 229810
+INFO 2026-02-19 22:18:36,614 autoreload 12744 5016 Watching for file changes with StatReloader
+ERROR 2026-02-19 22:18:40,548 log 11756 17060 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 154, in validate
+    utilisateur_identite = get_utilisateur_identite_by_email_or_phone(credential)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 76, in get_utilisateur_identite_by_email_or_phone
+    return UtilisateurIdentite.objects.filter(courriel__iexact=value).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1057, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+ERROR 2026-02-19 22:18:40,553 basehttp 11756 17060 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 229810
+ERROR 2026-02-19 22:18:53,969 log 11756 17060 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 154, in validate
+    utilisateur_identite = get_utilisateur_identite_by_email_or_phone(credential)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 76, in get_utilisateur_identite_by_email_or_phone
+    return UtilisateurIdentite.objects.filter(courriel__iexact=value).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1057, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+ERROR 2026-02-19 22:18:53,974 basehttp 11756 17060 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 229810
+INFO 2026-02-19 22:19:13,524 basehttp 11756 20184 "GET / HTTP/1.1" 200 4658
+INFO 2026-02-19 22:19:13,856 basehttp 11756 20184 "GET /api/schema/ HTTP/1.1" 200 217365
+ERROR 2026-02-19 22:21:51,578 log 11756 17060 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 154, in validate
+    utilisateur_identite = get_utilisateur_identite_by_email_or_phone(credential)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 76, in get_utilisateur_identite_by_email_or_phone
+    return UtilisateurIdentite.objects.filter(courriel__iexact=value).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1057, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column utilisateurs.province_fk_id does not exist
+LINE 1: ...ode_postal", "identite"."utilisateurs"."pays_id", "identite"...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "utilisateurs.province_id".
+ERROR 2026-02-19 22:21:51,584 basehttp 11756 17060 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 229810
+INFO 2026-02-19 22:24:26,327 autoreload 12744 5016 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-02-19 22:24:27,071 autoreload 11756 19792 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-02-19 22:24:28,012 autoreload 14668 12008 Watching for file changes with StatReloader
+INFO 2026-02-19 22:24:28,461 autoreload 8540 15188 Watching for file changes with StatReloader
+INFO 2026-02-19 22:24:55,796 autoreload 14668 12008 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\migrations\0002_niveaukyc_statututilisateur_typeutilisateur_and_more.py changed, reloading.
+INFO 2026-02-19 22:24:56,164 autoreload 8540 15188 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\migrations\0002_niveaukyc_statututilisateur_typeutilisateur_and_more.py changed, reloading.
+INFO 2026-02-19 22:24:57,356 autoreload 21796 1144 Watching for file changes with StatReloader
+INFO 2026-02-19 22:24:57,709 autoreload 16280 27836 Watching for file changes with StatReloader
+ERROR 2026-02-19 22:31:33,059 log 21796 21540 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 218, in __get__
+    rel_obj = self.field.get_cached_value(instance)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\mixins.py", line 15, in get_cached_value
+    return instance._state.fields_cache[cache_name]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'niveau_kyc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.InsufficientPrivilege: permission denied for relation niveaux_kyc
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 177, in validate
+    user = sync_identite_to_user(utilisateur_identite, attrs['password'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 100, in sync_identite_to_user
+    'kyc_level': getattr(utilisateur_identite, 'niveau_kyc', 0),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 236, in __get__
+    rel_obj = self.get_object(instance)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 199, in get_object
+    return qs.get(self.field.get_reverse_related_filter(instance))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: permission denied for relation niveaux_kyc
+ERROR 2026-02-19 22:31:33,066 basehttp 21796 21540 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 216695
+INFO 2026-02-19 22:31:37,336 basehttp 21796 21540 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1739
+INFO 2026-02-19 22:31:37,455 basehttp 21796 21540 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1739
+INFO 2026-02-20 03:19:23,740 basehttp 21796 29020 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+ERROR 2026-02-20 03:19:25,053 log 21796 29020 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 218, in __get__
+    rel_obj = self.field.get_cached_value(instance)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\mixins.py", line 15, in get_cached_value
+    return instance._state.fields_cache[cache_name]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'niveau_kyc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.InsufficientPrivilege: permission denied for relation niveaux_kyc
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 177, in validate
+    user = sync_identite_to_user(utilisateur_identite, attrs['password'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 100, in sync_identite_to_user
+    'kyc_level': getattr(utilisateur_identite, 'niveau_kyc', 0),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 236, in __get__
+    rel_obj = self.get_object(instance)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 199, in get_object
+    return qs.get(self.field.get_reverse_related_filter(instance))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: permission denied for relation niveaux_kyc
+ERROR 2026-02-20 03:19:25,061 basehttp 21796 29020 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 216695
+INFO 2026-02-20 03:20:16,852 autoreload 9044 25840 Watching for file changes with StatReloader
+ERROR 2026-02-20 03:20:59,995 log 16280 25940 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 218, in __get__
+    rel_obj = self.field.get_cached_value(instance)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\mixins.py", line 15, in get_cached_value
+    return instance._state.fields_cache[cache_name]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^
+KeyError: 'niveau_kyc'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.InsufficientPrivilege: permission denied for relation niveaux_kyc
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 177, in validate
+    user = sync_identite_to_user(utilisateur_identite, attrs['password'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 100, in sync_identite_to_user
+    'kyc_level': getattr(utilisateur_identite, 'niveau_kyc', 0),
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 236, in __get__
+    rel_obj = self.get_object(instance)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\related_descriptors.py", line 199, in get_object
+    return qs.get(self.field.get_reverse_related_filter(instance))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: permission denied for relation niveaux_kyc
+ERROR 2026-02-20 03:21:00,012 basehttp 16280 25940 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 215360
+ERROR 2026-02-20 03:30:13,727 log 16280 28128 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 177, in validate
+    user = sync_identite_to_user(utilisateur_identite, attrs['password'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 90, in sync_identite_to_user
+    user, created = User.objects.update_or_create(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 970, in update_or_create
+    obj.save(using=self.db, update_fields=update_fields)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\contrib\auth\base_user.py", line 76, in save
+    super().save(*args, **kwargs)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 990, in _save_table
+    updated = self._do_update(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1054, in _do_update
+    return filtered._update(values) > 0
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1231, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1984, in execute_sql
+    cursor = super().execute_sql(result_type)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1549, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1942, in as_sql
+    raise TypeError(
+TypeError: Tried to update field users.User.kyc_level with a model instance, <NiveauKYC: Niveau 3 - Premium>. Use a value compatible with IntegerField.
+ERROR 2026-02-20 03:30:13,735 basehttp 16280 28128 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 194337
+ERROR 2026-02-20 03:31:34,477 log 16280 28128 Internal Server Error: /api/v1/authentification/connexion/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework_simplejwt\views.py", line 44, in post
+    serializer.is_valid(raise_exception=True)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 223, in is_valid
+    self._validated_data = self.run_validation(self.initial_data)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 445, in run_validation
+    value = self.validate(value)
+            ^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 177, in validate
+    user = sync_identite_to_user(utilisateur_identite, attrs['password'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py", line 90, in sync_identite_to_user
+    user, created = User.objects.update_or_create(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 970, in update_or_create
+    obj.save(using=self.db, update_fields=update_fields)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\contrib\auth\base_user.py", line 76, in save
+    super().save(*args, **kwargs)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 990, in _save_table
+    updated = self._do_update(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 1054, in _do_update
+    return filtered._update(values) > 0
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1231, in _update
+    return query.get_compiler(self.db).execute_sql(CURSOR)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1984, in execute_sql
+    cursor = super().execute_sql(result_type)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1549, in execute_sql
+    sql, params = self.as_sql()
+                  ^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1942, in as_sql
+    raise TypeError(
+TypeError: Tried to update field users.User.kyc_level with a model instance, <NiveauKYC: Niveau 3 - Premium>. Use a value compatible with IntegerField.
+ERROR 2026-02-20 03:31:34,481 basehttp 16280 28128 "POST /api/v1/authentification/connexion/ HTTP/1.1" 500 194337
+INFO 2026-02-20 03:32:24,909 autoreload 16280 27836 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-20 03:32:24,938 autoreload 9044 25840 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\serializers.py changed, reloading.
+INFO 2026-02-20 03:32:26,470 autoreload 13384 19500 Watching for file changes with StatReloader
+INFO 2026-02-20 03:32:26,470 autoreload 25680 22244 Watching for file changes with StatReloader
+INFO 2026-02-20 03:33:47,563 basehttp 25680 17492 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-02-20 03:33:47,574 basehttp 25680 17492 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-20 03:33:47,701 basehttp 25680 17492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1739
+INFO 2026-02-20 03:36:34,086 basehttp 25680 17492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1739
+INFO 2026-02-20 03:36:34,183 basehttp 25680 17492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1739
+INFO 2026-02-20 03:36:52,091 basehttp 25680 17492 "OPTIONS /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 0
+INFO 2026-02-20 03:36:52,215 views 25680 17492 Déconnexion de 2 autre(s) session(s) pour systeme@ufaranga.bi, session actuelle conservée.
+INFO 2026-02-20 03:36:52,217 basehttp 25680 17492 "POST /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 152
+INFO 2026-02-20 03:36:52,325 basehttp 25680 17492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:44:59,153 basehttp 25680 14684 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:44:59,222 basehttp 25680 14684 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:45:13,887 basehttp 25680 14684 "OPTIONS /api/v1/authentification/deconnexion/ HTTP/1.1" 200 0
+INFO 2026-02-20 03:45:13,969 views 25680 14684 Utilisateur déconnecté: systeme@ufaranga.bi
+INFO 2026-02-20 03:45:13,972 basehttp 25680 14684 "POST /api/v1/authentification/deconnexion/ HTTP/1.1" 200 35
+WARNING 2026-02-20 03:45:19,133 log 25680 14684 Unauthorized: /api/v1/authentification/connexion/
+WARNING 2026-02-20 03:45:19,134 basehttp 25680 14684 "POST /api/v1/authentification/connexion/ HTTP/1.1" 401 126
+WARNING 2026-02-20 03:45:21,880 log 25680 14684 Unauthorized: /api/v1/authentification/connexion/
+WARNING 2026-02-20 03:45:21,882 basehttp 25680 14684 "POST /api/v1/authentification/connexion/ HTTP/1.1" 401 126
+INFO 2026-02-20 03:45:30,951 basehttp 25680 14684 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1285
+INFO 2026-02-20 03:45:31,013 basehttp 25680 14684 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:45:43,776 basehttp 25680 14684 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:45:43,852 basehttp 25680 14684 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:47:45,639 basehttp 25680 4224 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:47:45,709 basehttp 25680 4224 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:47:55,146 basehttp 25680 4224 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:47:55,207 basehttp 25680 4224 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:50:21,378 basehttp 25680 15736 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:50:21,453 basehttp 25680 15736 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:50:33,301 basehttp 25680 15736 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:50:33,371 basehttp 25680 15736 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:50:59,328 basehttp 25680 15736 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:50:59,405 basehttp 25680 15736 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:51:09,168 basehttp 25680 15736 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:51:09,236 basehttp 25680 15736 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 1740
+INFO 2026-02-20 03:59:10,457 autoreload 20296 19276 Watching for file changes with StatReloader
+INFO 2026-02-20 04:14:57,745 autoreload 20296 19276 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-02-20 04:14:58,771 autoreload 20684 15352 Watching for file changes with StatReloader
+INFO 2026-02-20 04:17:55,286 autoreload 20684 15352 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-20 04:17:56,515 autoreload 11272 12932 Watching for file changes with StatReloader
+INFO 2026-02-20 04:18:14,095 autoreload 11272 12932 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-20 04:18:15,501 autoreload 11220 17664 Watching for file changes with StatReloader
+INFO 2026-02-20 04:21:51,171 basehttp 11220 3272 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 04:21:51,257 basehttp 11220 3272 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 04:22:41,873 basehttp 11220 3272 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 04:22:41,952 basehttp 11220 3272 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 04:23:12,487 basehttp 11220 3272 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 04:23:12,583 basehttp 11220 3272 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2541
+INFO 2026-02-20 04:25:01,416 autoreload 11220 17664 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-20 04:25:02,653 autoreload 13468 21288 Watching for file changes with StatReloader
+INFO 2026-02-20 04:25:04,069 autoreload 13468 21288 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-20 04:25:05,111 autoreload 23716 1116 Watching for file changes with StatReloader
+INFO 2026-02-20 04:25:06,580 autoreload 23716 1116 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-20 04:25:07,582 autoreload 16212 27428 Watching for file changes with StatReloader
+INFO 2026-02-20 04:25:08,976 autoreload 16212 27428 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-20 04:25:10,004 autoreload 27952 13824 Watching for file changes with StatReloader
+INFO 2026-02-20 04:25:11,411 autoreload 27952 13824 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-20 04:25:12,514 autoreload 3720 5944 Watching for file changes with StatReloader
+INFO 2026-02-20 04:26:27,332 autoreload 3720 5944 D:\Projets\Decima Techno\uFaranga\backend\config\urls.py changed, reloading.
+INFO 2026-02-20 04:26:28,664 autoreload 15772 14788 Watching for file changes with StatReloader
+INFO 2026-02-20 04:33:39,911 autoreload 15772 14788 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py changed, reloading.
+INFO 2026-02-20 04:33:41,050 autoreload 13564 18704 Watching for file changes with StatReloader
+INFO 2026-02-20 04:34:12,435 autoreload 13564 18704 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\views.py changed, reloading.
+INFO 2026-02-20 04:34:14,165 autoreload 13172 10340 Watching for file changes with StatReloader
+INFO 2026-02-20 04:41:44,327 autoreload 23172 10896 Watching for file changes with StatReloader
+INFO 2026-02-20 04:41:55,820 autoreload 13172 10340 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\views.py changed, reloading.
+INFO 2026-02-20 04:41:56,192 autoreload 23172 10896 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\views.py changed, reloading.
+INFO 2026-02-20 04:41:56,916 autoreload 1480 27812 Watching for file changes with StatReloader
+INFO 2026-02-20 04:41:57,308 autoreload 5468 26460 Watching for file changes with StatReloader
+INFO 2026-02-20 04:53:59,886 basehttp 1480 16080 "OPTIONS /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 200 0
+INFO 2026-02-20 04:53:59,887 basehttp 1480 25208 "OPTIONS /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 200 0
+INFO 2026-02-20 04:53:59,983 basehttp 1480 16080 "POST /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 200 867
+WARNING 2026-02-20 04:53:59,990 log 1480 25208 Unauthorized: /api/v1/authentification/jeton/actualiser/
+WARNING 2026-02-20 04:53:59,992 basehttp 1480 25208 "POST /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 401 105
+INFO 2026-02-20 04:54:00,190 basehttp 1480 16080 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 04:57:59,730 basehttp 1480 12656 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 04:58:30,796 basehttp 1480 15716 "OPTIONS /api/v1/identite/types-utilisateurs HTTP/1.1" 200 0
+INFO 2026-02-20 04:58:30,798 basehttp 1480 15716 "OPTIONS /api/v1/identite/statuts-utilisateurs HTTP/1.1" 200 0
+INFO 2026-02-20 04:58:30,799 basehttp 1480 15704 "OPTIONS /api/v1/identite/niveaux-kyc HTTP/1.1" 200 0
+INFO 2026-02-20 04:58:30,807 basehttp 1480 15704 "OPTIONS /api/v1/localisation/pays HTTP/1.1" 200 0
+INFO 2026-02-20 04:58:30,856 basehttp 1480 15704 "GET /api/v1/localisation/pays HTTP/1.1" 301 0
+INFO 2026-02-20 04:58:30,860 basehttp 1480 15716 "GET /api/v1/identite/niveaux-kyc HTTP/1.1" 301 0
+INFO 2026-02-20 04:58:30,861 basehttp 1480 23752 "GET /api/v1/identite/types-utilisateurs HTTP/1.1" 301 0
+INFO 2026-02-20 04:58:30,861 basehttp 1480 25252 "GET /api/v1/identite/statuts-utilisateurs HTTP/1.1" 301 0
+INFO 2026-02-20 04:58:30,864 basehttp 1480 15472 "OPTIONS /api/v1/localisation/pays/ HTTP/1.1" 200 0
+INFO 2026-02-20 04:58:30,866 basehttp 1480 29492 "OPTIONS /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 0
+INFO 2026-02-20 04:58:30,877 basehttp 1480 6984 "OPTIONS /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 0
+INFO 2026-02-20 04:58:30,885 basehttp 1480 18684 "OPTIONS /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 0
+WARNING 2026-02-20 04:58:30,940 log 1480 15472 Forbidden: /api/v1/localisation/pays/
+WARNING 2026-02-20 04:58:30,941 basehttp 1480 15472 "GET /api/v1/localisation/pays/ HTTP/1.1" 403 120
+INFO 2026-02-20 04:58:30,955 basehttp 1480 29492 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 04:58:30,976 basehttp 1480 6984 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 04:58:30,996 basehttp 1480 18684 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 04:58:39,973 basehttp 1480 18684 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+WARNING 2026-02-20 04:58:39,993 log 1480 15472 Forbidden: /api/v1/localisation/pays/
+WARNING 2026-02-20 04:58:39,994 basehttp 1480 15472 "GET /api/v1/localisation/pays/ HTTP/1.1" 403 120
+INFO 2026-02-20 04:58:40,012 basehttp 1480 6984 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 04:58:40,044 basehttp 1480 29492 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 04:58:57,771 basehttp 1480 29492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 04:58:57,889 basehttp 1480 29492 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 04:59:03,398 basehttp 1480 20684 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 04:59:03,430 basehttp 1480 10672 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 04:59:03,454 basehttp 1480 10252 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+WARNING 2026-02-20 04:59:03,478 log 1480 29476 Forbidden: /api/v1/localisation/pays/
+WARNING 2026-02-20 04:59:03,479 basehttp 1480 29476 "GET /api/v1/localisation/pays/ HTTP/1.1" 403 120
+INFO 2026-02-20 05:01:18,885 basehttp 1480 15356 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:01:18,902 basehttp 1480 16632 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:01:18,920 basehttp 1480 23264 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+WARNING 2026-02-20 05:01:18,937 log 1480 16980 Forbidden: /api/v1/localisation/pays/
+WARNING 2026-02-20 05:01:18,937 basehttp 1480 16980 "GET /api/v1/localisation/pays/ HTTP/1.1" 403 120
+INFO 2026-02-20 05:01:58,187 autoreload 1480 27812 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:01:58,613 autoreload 5468 26460 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:01:59,385 autoreload 9072 24904 Watching for file changes with StatReloader
+INFO 2026-02-20 05:01:59,649 autoreload 23572 20688 Watching for file changes with StatReloader
+INFO 2026-02-20 05:02:07,847 basehttp 9072 23136 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 05:02:07,941 basehttp 9072 23136 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 05:02:09,966 autoreload 23572 20688 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:02:10,197 autoreload 9072 24904 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:02:11,280 autoreload 7700 19192 Watching for file changes with StatReloader
+INFO 2026-02-20 05:02:11,465 autoreload 16688 564 Watching for file changes with StatReloader
+INFO 2026-02-20 05:02:13,719 basehttp 7700 8908 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:02:13,727 basehttp 7700 8552 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:02:13,739 basehttp 7700 17448 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:02:13,751 basehttp 7700 29296 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:02:22,767 autoreload 16688 564 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:02:22,896 autoreload 7700 19192 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:02:23,761 autoreload 17040 9400 Watching for file changes with StatReloader
+INFO 2026-02-20 05:02:23,892 autoreload 8328 10180 Watching for file changes with StatReloader
+INFO 2026-02-20 05:02:34,052 autoreload 17040 9400 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:02:34,139 autoreload 8328 10180 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:02:35,223 autoreload 25520 19136 Watching for file changes with StatReloader
+INFO 2026-02-20 05:02:35,245 autoreload 10988 26600 Watching for file changes with StatReloader
+INFO 2026-02-20 05:02:43,477 autoreload 10988 26600 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:02:43,480 autoreload 25520 19136 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:02:44,521 autoreload 24796 5496 Watching for file changes with StatReloader
+INFO 2026-02-20 05:02:44,521 autoreload 24032 19688 Watching for file changes with StatReloader
+INFO 2026-02-20 05:02:54,891 autoreload 24032 19688 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:02:54,896 autoreload 24796 5496 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:02:56,335 autoreload 7076 800 Watching for file changes with StatReloader
+INFO 2026-02-20 05:02:56,339 autoreload 11844 21884 Watching for file changes with StatReloader
+INFO 2026-02-20 05:03:09,906 basehttp 11844 15884 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 05:04:22,913 basehttp 11844 15884 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 05:04:51,019 autoreload 11844 21884 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:04:51,591 autoreload 7076 800 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-02-20 05:04:52,280 autoreload 2400 4040 Watching for file changes with StatReloader
+INFO 2026-02-20 05:04:52,811 autoreload 23088 14044 Watching for file changes with StatReloader
+INFO 2026-02-20 05:04:58,064 basehttp 2400 17700 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:04:58,068 basehttp 2400 24924 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:04:58,068 basehttp 2400 19968 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:04:58,076 basehttp 2400 27540 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:04:58,081 basehttp 2400 27540 "OPTIONS /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 0
+INFO 2026-02-20 05:04:58,146 basehttp 2400 27540 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:04:58,150 basehttp 2400 27540 "OPTIONS /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 0
+INFO 2026-02-20 05:04:58,208 basehttp 2400 27540 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:05:04,088 basehttp 2400 27540 "OPTIONS /api/v1/localisation/provinces HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,115 basehttp 2400 27540 "GET /api/v1/localisation/provinces HTTP/1.1" 301 0
+INFO 2026-02-20 05:05:04,121 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/ HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,191 basehttp 2400 24924 "GET /api/v1/localisation/provinces/ HTTP/1.1" 200 8021
+INFO 2026-02-20 05:05:04,196 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=2 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,264 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=2 HTTP/1.1" 200 7989
+INFO 2026-02-20 05:05:04,268 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=3 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,335 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=3 HTTP/1.1" 200 7926
+INFO 2026-02-20 05:05:04,338 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=4 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,399 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=4 HTTP/1.1" 200 8090
+INFO 2026-02-20 05:05:04,403 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=5 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,465 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=5 HTTP/1.1" 200 7977
+INFO 2026-02-20 05:05:04,468 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=6 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,533 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=6 HTTP/1.1" 200 8006
+INFO 2026-02-20 05:05:04,536 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=7 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,604 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=7 HTTP/1.1" 200 8002
+INFO 2026-02-20 05:05:04,609 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=8 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,669 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=8 HTTP/1.1" 200 8056
+INFO 2026-02-20 05:05:04,674 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=9 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,735 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=9 HTTP/1.1" 200 8004
+INFO 2026-02-20 05:05:04,740 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=10 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,801 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=10 HTTP/1.1" 200 8124
+INFO 2026-02-20 05:05:04,805 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=11 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,868 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=11 HTTP/1.1" 200 7971
+INFO 2026-02-20 05:05:04,875 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=12 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:04,939 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=12 HTTP/1.1" 200 7943
+INFO 2026-02-20 05:05:04,943 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=13 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,004 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=13 HTTP/1.1" 200 8138
+INFO 2026-02-20 05:05:05,010 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=14 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,072 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=14 HTTP/1.1" 200 7952
+INFO 2026-02-20 05:05:05,077 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=15 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,140 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=15 HTTP/1.1" 200 7964
+INFO 2026-02-20 05:05:05,144 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=16 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,207 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=16 HTTP/1.1" 200 7989
+INFO 2026-02-20 05:05:05,213 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=17 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,284 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=17 HTTP/1.1" 200 8005
+INFO 2026-02-20 05:05:05,292 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=18 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,367 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=18 HTTP/1.1" 200 7992
+INFO 2026-02-20 05:05:05,372 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=19 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,449 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=19 HTTP/1.1" 200 7969
+INFO 2026-02-20 05:05:05,453 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=20 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,520 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=20 HTTP/1.1" 200 7931
+INFO 2026-02-20 05:05:05,525 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=21 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,589 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=21 HTTP/1.1" 200 8100
+INFO 2026-02-20 05:05:05,597 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=22 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,663 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=22 HTTP/1.1" 200 8112
+INFO 2026-02-20 05:05:05,668 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=23 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,732 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=23 HTTP/1.1" 200 8026
+INFO 2026-02-20 05:05:05,736 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=24 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,800 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=24 HTTP/1.1" 200 7937
+INFO 2026-02-20 05:05:05,806 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=25 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,868 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=25 HTTP/1.1" 200 7926
+INFO 2026-02-20 05:05:05,874 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=26 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:05,936 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=26 HTTP/1.1" 200 7966
+INFO 2026-02-20 05:05:05,941 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=27 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,006 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=27 HTTP/1.1" 200 8303
+INFO 2026-02-20 05:05:06,011 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=28 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,074 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=28 HTTP/1.1" 200 8553
+INFO 2026-02-20 05:05:06,079 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=29 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,141 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=29 HTTP/1.1" 200 8288
+INFO 2026-02-20 05:05:06,146 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=30 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,209 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=30 HTTP/1.1" 200 8071
+INFO 2026-02-20 05:05:06,213 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=31 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,279 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=31 HTTP/1.1" 200 8095
+INFO 2026-02-20 05:05:06,282 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=32 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,351 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=32 HTTP/1.1" 200 7988
+INFO 2026-02-20 05:05:06,357 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=33 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,419 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=33 HTTP/1.1" 200 8064
+INFO 2026-02-20 05:05:06,424 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=34 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,497 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=34 HTTP/1.1" 200 8076
+INFO 2026-02-20 05:05:06,501 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=35 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,567 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=35 HTTP/1.1" 200 7999
+INFO 2026-02-20 05:05:06,572 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=36 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,641 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=36 HTTP/1.1" 200 7977
+INFO 2026-02-20 05:05:06,646 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=37 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,709 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=37 HTTP/1.1" 200 7932
+INFO 2026-02-20 05:05:06,714 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=38 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,777 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=38 HTTP/1.1" 200 7966
+INFO 2026-02-20 05:05:06,781 basehttp 2400 24924 "OPTIONS /api/v1/localisation/provinces/?page=39 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:06,846 basehttp 2400 24924 "GET /api/v1/localisation/provinces/?page=39 HTTP/1.1" 200 4870
+INFO 2026-02-20 05:05:13,426 basehttp 2400 24924 "OPTIONS /api/v1/localisation/districts HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:13,437 basehttp 2400 24924 "GET /api/v1/localisation/districts HTTP/1.1" 301 0
+INFO 2026-02-20 05:05:13,457 basehttp 2400 19968 "OPTIONS /api/v1/localisation/districts/ HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:13,530 basehttp 2400 19968 "GET /api/v1/localisation/districts/ HTTP/1.1" 200 8299
+INFO 2026-02-20 05:05:13,534 basehttp 2400 19968 "OPTIONS /api/v1/localisation/districts/?page=2 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:13,600 basehttp 2400 19968 "GET /api/v1/localisation/districts/?page=2 HTTP/1.1" 200 8285
+INFO 2026-02-20 05:05:13,605 basehttp 2400 19968 "OPTIONS /api/v1/localisation/districts/?page=3 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:13,681 basehttp 2400 19968 "GET /api/v1/localisation/districts/?page=3 HTTP/1.1" 200 8226
+INFO 2026-02-20 05:05:13,688 basehttp 2400 19968 "OPTIONS /api/v1/localisation/districts/?page=4 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:13,754 basehttp 2400 19968 "GET /api/v1/localisation/districts/?page=4 HTTP/1.1" 200 8220
+INFO 2026-02-20 05:05:13,759 basehttp 2400 19968 "OPTIONS /api/v1/localisation/districts/?page=5 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:13,826 basehttp 2400 19968 "GET /api/v1/localisation/districts/?page=5 HTTP/1.1" 200 8234
+INFO 2026-02-20 05:05:13,830 basehttp 2400 19968 "OPTIONS /api/v1/localisation/districts/?page=6 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:13,896 basehttp 2400 19968 "GET /api/v1/localisation/districts/?page=6 HTTP/1.1" 200 8199
+INFO 2026-02-20 05:05:13,899 basehttp 2400 19968 "OPTIONS /api/v1/localisation/districts/?page=7 HTTP/1.1" 200 0
+INFO 2026-02-20 05:05:13,969 basehttp 2400 19968 "GET /api/v1/localisation/districts/?page=7 HTTP/1.1" 200 7364
+INFO 2026-02-20 05:05:22,985 basehttp 2400 19968 "GET /api/v1/localisation/provinces/ HTTP/1.1" 200 8021
+INFO 2026-02-20 05:05:23,052 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=2 HTTP/1.1" 200 7989
+INFO 2026-02-20 05:05:23,116 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=3 HTTP/1.1" 200 7926
+INFO 2026-02-20 05:05:23,182 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=4 HTTP/1.1" 200 8090
+INFO 2026-02-20 05:05:23,245 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=5 HTTP/1.1" 200 7977
+INFO 2026-02-20 05:05:23,312 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=6 HTTP/1.1" 200 8006
+INFO 2026-02-20 05:05:23,380 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=7 HTTP/1.1" 200 8002
+INFO 2026-02-20 05:05:23,447 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=8 HTTP/1.1" 200 8056
+INFO 2026-02-20 05:05:23,514 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=9 HTTP/1.1" 200 8004
+INFO 2026-02-20 05:05:23,584 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=10 HTTP/1.1" 200 8124
+INFO 2026-02-20 05:05:23,647 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=11 HTTP/1.1" 200 7971
+INFO 2026-02-20 05:05:23,710 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=12 HTTP/1.1" 200 7943
+INFO 2026-02-20 05:05:23,773 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=13 HTTP/1.1" 200 8138
+INFO 2026-02-20 05:05:23,835 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=14 HTTP/1.1" 200 7952
+INFO 2026-02-20 05:05:23,899 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=15 HTTP/1.1" 200 7964
+INFO 2026-02-20 05:05:23,976 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=16 HTTP/1.1" 200 7989
+INFO 2026-02-20 05:05:24,046 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=17 HTTP/1.1" 200 8005
+INFO 2026-02-20 05:05:24,121 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=18 HTTP/1.1" 200 7992
+INFO 2026-02-20 05:05:24,206 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=19 HTTP/1.1" 200 7969
+INFO 2026-02-20 05:05:24,295 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=20 HTTP/1.1" 200 7931
+INFO 2026-02-20 05:05:24,378 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=21 HTTP/1.1" 200 8100
+INFO 2026-02-20 05:05:24,452 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=22 HTTP/1.1" 200 8112
+INFO 2026-02-20 05:05:24,550 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=23 HTTP/1.1" 200 8026
+INFO 2026-02-20 05:05:24,629 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=24 HTTP/1.1" 200 7937
+INFO 2026-02-20 05:05:24,704 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=25 HTTP/1.1" 200 7926
+INFO 2026-02-20 05:05:24,790 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=26 HTTP/1.1" 200 7966
+INFO 2026-02-20 05:05:24,882 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=27 HTTP/1.1" 200 8303
+INFO 2026-02-20 05:05:24,948 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=28 HTTP/1.1" 200 8553
+INFO 2026-02-20 05:05:25,016 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=29 HTTP/1.1" 200 8288
+INFO 2026-02-20 05:05:25,081 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=30 HTTP/1.1" 200 8071
+INFO 2026-02-20 05:05:25,145 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=31 HTTP/1.1" 200 8095
+INFO 2026-02-20 05:05:25,220 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=32 HTTP/1.1" 200 7988
+INFO 2026-02-20 05:05:25,290 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=33 HTTP/1.1" 200 8064
+INFO 2026-02-20 05:05:25,366 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=34 HTTP/1.1" 200 8076
+INFO 2026-02-20 05:05:25,448 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=35 HTTP/1.1" 200 7999
+INFO 2026-02-20 05:05:25,518 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=36 HTTP/1.1" 200 7977
+INFO 2026-02-20 05:05:25,601 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=37 HTTP/1.1" 200 7932
+INFO 2026-02-20 05:05:25,670 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=38 HTTP/1.1" 200 7966
+INFO 2026-02-20 05:05:25,745 basehttp 2400 19968 "GET /api/v1/localisation/provinces/?page=39 HTTP/1.1" 200 4870
+INFO 2026-02-20 05:07:04,807 basehttp 2400 19968 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:07:04,845 basehttp 2400 17700 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:07:04,862 basehttp 2400 17160 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:07:04,888 basehttp 2400 29592 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:07:04,956 basehttp 2400 29592 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:07:05,027 basehttp 2400 29592 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:07:16,869 basehttp 2400 29592 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:07:16,884 basehttp 2400 19968 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:07:16,907 basehttp 2400 17160 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:07:16,922 basehttp 2400 17700 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:07:16,953 basehttp 2400 19968 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:07:17,014 basehttp 2400 19968 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:07:26,690 basehttp 2400 19968 "OPTIONS /api/v1/identite/admin/creer-utilisateur HTTP/1.1" 200 0
+ERROR 2026-02-20 05:07:26,735 log 2400 19968 Internal Server Error: /api/v1/identite/admin/creer-utilisateur
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/v1/identite/admin/creer-utilisateur/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2026-02-20 05:07:26,738 basehttp 2400 19968 "POST /api/v1/identite/admin/creer-utilisateur HTTP/1.1" 500 84713
+ERROR 2026-02-20 05:07:27,652 log 2400 17700 Internal Server Error: /api/v1/identite/admin/creer-utilisateur
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/v1/identite/admin/creer-utilisateur/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2026-02-20 05:07:27,654 basehttp 2400 17700 "POST /api/v1/identite/admin/creer-utilisateur HTTP/1.1" 500 84713
+ERROR 2026-02-20 05:07:28,040 log 2400 17160 Internal Server Error: /api/v1/identite/admin/creer-utilisateur
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/v1/identite/admin/creer-utilisateur/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2026-02-20 05:07:28,042 basehttp 2400 17160 "POST /api/v1/identite/admin/creer-utilisateur HTTP/1.1" 500 84713
+ERROR 2026-02-20 05:07:29,360 log 2400 29592 Internal Server Error: /api/v1/identite/admin/creer-utilisateur
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/v1/identite/admin/creer-utilisateur/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2026-02-20 05:07:29,362 basehttp 2400 29592 "POST /api/v1/identite/admin/creer-utilisateur HTTP/1.1" 500 84713
+ERROR 2026-02-20 05:07:30,144 log 2400 24144 Internal Server Error: /api/v1/identite/admin/creer-utilisateur
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 136, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/v1/identite/admin/creer-utilisateur/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+ERROR 2026-02-20 05:07:30,146 basehttp 2400 24144 "POST /api/v1/identite/admin/creer-utilisateur HTTP/1.1" 500 84713
+INFO 2026-02-20 05:07:59,599 basehttp 2400 26216 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 05:07:59,690 basehttp 2400 26216 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 2480
+INFO 2026-02-20 05:08:03,148 basehttp 2400 26216 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:08:03,174 basehttp 2400 13280 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:08:03,190 basehttp 2400 1748 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:08:03,210 basehttp 2400 14096 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:08:03,279 basehttp 2400 14096 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:08:03,339 basehttp 2400 14096 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:08:14,355 basehttp 2400 13280 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:08:14,374 basehttp 2400 1748 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:08:14,390 basehttp 2400 14096 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:08:14,410 basehttp 2400 26216 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:08:14,478 basehttp 2400 26216 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:08:14,538 basehttp 2400 26216 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:08:37,866 basehttp 2400 26216 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:08:37,886 basehttp 2400 13280 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:08:37,906 basehttp 2400 14096 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:08:37,923 basehttp 2400 1748 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:08:37,968 basehttp 2400 13280 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:08:38,038 basehttp 2400 13280 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
+INFO 2026-02-20 05:08:39,883 basehttp 2400 13280 "GET /api/v1/identite/types-utilisateurs/ HTTP/1.1" 200 857
+INFO 2026-02-20 05:08:39,905 basehttp 2400 14096 "GET /api/v1/identite/statuts-utilisateurs/ HTTP/1.1" 200 1054
+INFO 2026-02-20 05:08:39,922 basehttp 2400 1748 "GET /api/v1/identite/niveaux-kyc/ HTTP/1.1" 200 1025
+INFO 2026-02-20 05:08:39,937 basehttp 2400 26216 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7756
+INFO 2026-02-20 05:08:40,001 basehttp 2400 26216 "GET /api/v1/localisation/pays/?page=2 HTTP/1.1" 200 7880
+INFO 2026-02-20 05:08:40,060 basehttp 2400 26216 "GET /api/v1/localisation/pays/?page=3 HTTP/1.1" 200 5621
