@@ -212,3 +212,276 @@ INFO 2026-02-20 16:02:03,159 basehttp 19832 26596 "GET /api/v1/authentification/
 INFO 2026-02-20 16:02:03,239 basehttp 19832 26596 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
 INFO 2026-02-20 16:02:10,299 basehttp 19832 25636 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
 INFO 2026-02-20 16:02:16,294 basehttp 19832 26596 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 16:22:05,525 basehttp 19832 22584 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 16:22:06,130 basehttp 19832 22584 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 16:22:16,162 basehttp 19832 25808 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 16:22:22,352 basehttp 19832 28056 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 16:22:28,726 basehttp 19832 25808 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 16:22:34,193 basehttp 19832 28056 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-20 16:39:10,869 basehttp 19832 25924 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-20 16:39:10,948 basehttp 19832 25924 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3299
+INFO 2026-02-27 09:39:01,651 autoreload 28332 21408 Watching for file changes with StatReloader
+INFO 2026-02-27 09:39:48,811 autoreload 26164 17300 Watching for file changes with StatReloader
+INFO 2026-02-27 09:40:25,565 basehttp 26164 25120 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+INFO 2026-02-27 09:40:26,622 basehttp 26164 25120 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1285
+INFO 2026-02-27 09:40:26,629 basehttp 26164 25120 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-02-27 09:40:26,817 basehttp 26164 25120 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-02-27 09:40:34,214 basehttp 26164 25120 "OPTIONS /api/v1/localisation/complete/ HTTP/1.1" 200 0
+INFO 2026-02-27 09:40:39,885 basehttp 26164 25120 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-02-27 09:40:46,040 basehttp 26164 19864 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 00:43:40,977 autoreload 30416 7104 Watching for file changes with StatReloader
+INFO 2026-03-01 00:44:10,054 basehttp 30416 26436 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+INFO 2026-03-01 00:44:11,503 basehttp 30416 26436 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-03-01 00:44:11,510 basehttp 30416 26436 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+INFO 2026-03-01 00:44:11,734 basehttp 30416 26436 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3359
+INFO 2026-03-01 00:44:30,253 basehttp 30416 20604 "OPTIONS /api/v1/localisation/complete/ HTTP/1.1" 200 0
+INFO 2026-03-01 00:44:39,235 basehttp 30416 20604 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 00:44:47,645 basehttp 30416 2388 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 00:49:29,491 basehttp 30416 12416 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3359
+INFO 2026-03-01 00:49:29,859 basehttp 30416 12416 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3359
+INFO 2026-03-01 00:49:33,732 basehttp 30416 12416 "OPTIONS /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 0
+INFO 2026-03-01 00:49:34,306 views 30416 12416 Déconnexion de 1 autre(s) session(s) pour systeme@ufaranga.bi, session actuelle conservée.
+INFO 2026-03-01 00:49:34,416 basehttp 30416 12416 "POST /api/v1/authentification/deconnexion-autres/ HTTP/1.1" 200 152
+INFO 2026-03-01 00:49:38,480 basehttp 30416 10788 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 00:49:40,287 basehttp 30416 272 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 00:50:18,012 basehttp 30416 13200 - Broken pipe from ('127.0.0.1', 64604)
+INFO 2026-03-01 00:50:27,122 basehttp 30416 10788 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 00:50:30,975 basehttp 30416 12416 - Broken pipe from ('127.0.0.1', 50902)
+INFO 2026-03-01 00:50:33,514 basehttp 30416 24404 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 00:51:28,390 basehttp 30416 23528 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 00:51:28,589 basehttp 30416 23528 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 00:51:41,071 basehttp 30416 24144 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 00:51:47,755 basehttp 30416 7204 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 00:52:50,467 basehttp 30416 23212 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 00:52:57,717 basehttp 30416 22128 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 00:54:15,938 basehttp 30416 22128 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 00:54:16,098 basehttp 30416 22128 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 00:54:22,709 basehttp 30416 22128 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 00:54:29,723 basehttp 30416 23212 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 00:55:57,254 basehttp 30416 5268 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+WARNING 2026-03-01 00:56:02,952 log 30416 12100 Not Found: /favicon.ico
+WARNING 2026-03-01 00:56:02,954 basehttp 30416 12100 "GET /favicon.ico HTTP/1.1" 404 3761
+INFO 2026-03-01 00:56:24,148 basehttp 30416 20204 "GET / HTTP/1.1" 200 4658
+INFO 2026-03-01 00:56:30,561 basehttp 30416 20204 "GET /api/schema/ HTTP/1.1" 200 323553
+INFO 2026-03-01 00:56:49,728 basehttp 30416 20204 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 15280113
+INFO 2026-03-01 01:01:49,355 basehttp 30416 25868 "GET / HTTP/1.1" 200 4658
+INFO 2026-03-01 01:01:50,505 basehttp 30416 25868 "GET /api/schema/ HTTP/1.1" 200 323553
+INFO 2026-03-01 01:02:47,391 basehttp 30416 25868 "GET /api/v1/localisation/complete/?est_actif=true HTTP/1.1" 200 14634664
+INFO 2026-03-01 01:05:32,432 basehttp 30416 3648 "GET / HTTP/1.1" 200 4658
+INFO 2026-03-01 01:05:33,015 basehttp 30416 3648 "GET /api/schema/ HTTP/1.1" 200 323553
+INFO 2026-03-01 01:07:41,396 autoreload 30416 7104 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-01 01:07:45,283 autoreload 9780 10296 Watching for file changes with StatReloader
+INFO 2026-03-01 01:07:49,317 autoreload 9780 10296 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-03-01 01:07:50,837 autoreload 16516 28044 Watching for file changes with StatReloader
+INFO 2026-03-01 01:08:14,407 autoreload 16516 28044 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-03-01 01:08:16,442 autoreload 15392 26128 Watching for file changes with StatReloader
+INFO 2026-03-01 01:08:18,181 basehttp 15392 7728 "GET / HTTP/1.1" 200 4658
+INFO 2026-03-01 01:08:18,724 basehttp 15392 7728 "GET /api/schema/ HTTP/1.1" 200 321121
+ERROR 2026-03-01 01:08:25,024 log 15392 7728 Internal Server Error: /api/v1/localisation/complete/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column pays.est_defaut does not exist
+LINE 1: ...rise_systeme", "localisation"."pays"."est_actif", "localisat...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py", line 280, in list
+    pays_defaut = Pays.objects.filter(est_defaut=True).first()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1057, in first
+    for obj in queryset[:1]:
+               ~~~~~~~~^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column pays.est_defaut does not exist
+LINE 1: ...rise_systeme", "localisation"."pays"."est_actif", "localisat...
+                                                             ^
+ERROR 2026-03-01 01:08:25,032 basehttp 15392 7728 "GET /api/v1/localisation/complete/ HTTP/1.1" 500 186987
+INFO 2026-03-01 01:08:27,152 autoreload 15392 26128 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-03-01 01:08:28,851 autoreload 21492 16548 Watching for file changes with StatReloader
+INFO 2026-03-01 01:09:14,254 autoreload 21492 16548 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-01 01:09:16,155 autoreload 21964 2612 Watching for file changes with StatReloader
+INFO 2026-03-01 01:09:22,847 autoreload 21964 2612 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-03-01 01:09:24,688 autoreload 29540 7968 Watching for file changes with StatReloader
+INFO 2026-03-01 01:09:33,927 autoreload 29540 7968 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-03-01 01:09:35,638 autoreload 29680 3648 Watching for file changes with StatReloader
+INFO 2026-03-01 01:10:37,788 basehttp 29680 384 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:14:41,683 autoreload 29680 3648 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-03-01 01:14:43,559 autoreload 14856 15108 Watching for file changes with StatReloader
+INFO 2026-03-01 01:14:52,517 autoreload 14856 15108 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-03-01 01:14:54,779 autoreload 6800 15560 Watching for file changes with StatReloader
+INFO 2026-03-01 01:15:06,188 autoreload 6800 15560 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\urls.py changed, reloading.
+INFO 2026-03-01 01:15:08,225 autoreload 2272 18208 Watching for file changes with StatReloader
+INFO 2026-03-01 01:15:22,042 basehttp 2272 12376 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:15:22,324 basehttp 2272 12376 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:15:22,405 basehttp 2272 22832 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:15:22,662 basehttp 2272 22832 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:15:23,476 autoreload 2272 18208 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-03-01 01:15:25,304 autoreload 25452 22548 Watching for file changes with StatReloader
+INFO 2026-03-01 01:18:28,149 basehttp 25452 21304 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:18:34,038 basehttp 25452 21304 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:19:12,157 basehttp 25452 21304 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:19:12,385 basehttp 25452 21304 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:19:12,468 basehttp 25452 15272 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:19:12,751 basehttp 25452 15272 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:19:30,622 autoreload 25452 22548 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views.py changed, reloading.
+INFO 2026-03-01 01:19:33,479 autoreload 28024 25784 Watching for file changes with StatReloader
+INFO 2026-03-01 01:20:35,722 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:20:39,976 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:21:10,479 basehttp 28024 20064 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 415477
+INFO 2026-03-01 01:22:52,020 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:23:51,005 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:25:23,213 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:25:31,807 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:27:54,104 basehttp 28024 29712 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:27:54,340 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:27:54,531 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:28:08,361 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:28:13,767 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:28:14,055 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:28:19,069 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:28:19,380 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:28:29,034 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:28:50,412 basehttp 28024 29712 "OPTIONS /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 0
+INFO 2026-03-01 01:28:51,135 basehttp 28024 29712 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:30:26,086 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:30:26,685 basehttp 28024 24292 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:30:42,033 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:30:42,191 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:30:42,342 basehttp 28024 29712 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:30:42,566 basehttp 28024 29712 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:30:42,621 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:30:42,814 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:31:11,212 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:31:48,158 basehttp 28024 24292 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:32:35,276 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:32:35,759 basehttp 28024 29712 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:32:37,124 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:32:37,391 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:32:37,627 basehttp 28024 24292 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:32:37,957 basehttp 28024 24292 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:32:38,038 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:32:38,303 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:32:39,037 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:32:40,091 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:33:02,766 basehttp 28024 29712 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:34:52,401 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:34:52,835 basehttp 28024 24292 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:34:57,123 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:34:57,384 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:34:57,543 basehttp 28024 29712 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:34:57,793 basehttp 28024 29712 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:34:57,872 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:34:58,105 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:35:03,190 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:35:06,998 basehttp 28024 24292 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:35:12,762 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:35:12,982 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:35:17,793 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:35:17,986 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:35:18,114 basehttp 28024 29712 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:35:18,393 basehttp 28024 29712 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:35:18,467 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:35:18,684 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:35:25,202 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:35:32,023 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:35:41,198 basehttp 28024 24292 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:36:47,209 basehttp 28024 24292 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:36:47,759 basehttp 28024 29712 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:36:53,004 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:36:53,169 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:36:53,291 basehttp 28024 24292 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:36:53,477 basehttp 28024 24292 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:36:53,534 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:36:53,761 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:36:55,975 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:37:00,004 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:37:05,204 basehttp 28024 29712 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:38:49,733 basehttp 28024 29712 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:39:04,872 basehttp 28024 17816 "OPTIONS /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 0
+INFO 2026-03-01 01:39:05,336 basehttp 28024 17816 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 415477
+INFO 2026-03-01 01:39:16,401 basehttp 28024 17816 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 415477
+INFO 2026-03-01 01:39:27,702 basehttp 28024 17816 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 415477
+INFO 2026-03-01 01:42:32,017 basehttp 28024 17816 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:42:32,320 basehttp 28024 26328 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 415477
+INFO 2026-03-01 01:42:59,105 basehttp 28024 26328 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:42:59,309 basehttp 28024 26328 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:42:59,443 basehttp 28024 17816 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:42:59,686 basehttp 28024 17816 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:42:59,743 basehttp 28024 26328 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:42:59,951 basehttp 28024 26328 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:43:10,108 basehttp 28024 26328 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:43:11,146 basehttp 28024 17816 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 415477
+INFO 2026-03-01 01:43:13,445 basehttp 28024 17816 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:43:13,756 basehttp 28024 26328 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 415477
+INFO 2026-03-01 01:43:14,696 basehttp 28024 26328 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:43:14,830 basehttp 28024 17816 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:43:14,895 basehttp 28024 26328 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:43:15,163 basehttp 28024 17816 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3360
+INFO 2026-03-01 01:43:15,222 basehttp 28024 26328 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:43:15,509 basehttp 28024 26328 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:43:17,170 basehttp 28024 26328 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:43:20,313 basehttp 28024 17816 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1504
+INFO 2026-03-01 01:43:20,614 basehttp 28024 26328 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:43:21,285 basehttp 28024 17816 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 587188
+INFO 2026-03-01 01:43:50,793 autoreload 28024 25784 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-03-01 01:43:53,199 autoreload 16688 18464 Watching for file changes with StatReloader
+INFO 2026-03-01 01:43:56,275 autoreload 16688 18464 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-03-01 01:43:58,117 autoreload 1520 20688 Watching for file changes with StatReloader
+INFO 2026-03-01 01:44:01,557 autoreload 1520 20688 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-03-01 01:44:03,137 autoreload 644 8432 Watching for file changes with StatReloader

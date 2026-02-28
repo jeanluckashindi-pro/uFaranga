@@ -269,6 +269,7 @@ class ProvinceSerializer(serializers.ModelSerializer):
     pays_nom = serializers.CharField(source='pays.nom', read_only=True)
     pays_code = serializers.CharField(source='pays.code_iso_2', read_only=True)
     pays = serializers.PrimaryKeyRelatedField(queryset=Pays.objects.all(), required=True)
+    geometry = serializers.SerializerMethodField()
 
     class Meta:
         model = Province
@@ -276,8 +277,14 @@ class ProvinceSerializer(serializers.ModelSerializer):
             'id', 'pays', 'pays_nom', 'pays_code', 'code', 'nom',
             'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
-            'date_creation', 'date_modification', 'metadonnees',
+            'date_creation', 'date_modification', 'metadonnees', 'geometry',
         ]
+
+    def get_geometry(self, obj):
+        geom = (obj.metadonnees or {}).get('geometry')
+        if geom and isinstance(geom, dict) and geom.get('type') in ('Polygon', 'MultiPolygon') and 'coordinates' in geom:
+            return geom
+        return None
         read_only_fields = ['id', 'date_creation', 'date_modification']
 
     def to_internal_value(self, data):
@@ -293,6 +300,7 @@ class DistrictSerializer(serializers.ModelSerializer):
     province_nom = serializers.CharField(source='province.nom', read_only=True)
     pays_nom = serializers.CharField(source='province.pays.nom', read_only=True)
     province = serializers.PrimaryKeyRelatedField(queryset=Province.objects.all(), required=True)
+    geometry = serializers.SerializerMethodField()
 
     class Meta:
         model = District
@@ -300,8 +308,14 @@ class DistrictSerializer(serializers.ModelSerializer):
             'id', 'province', 'province_nom', 'pays_nom', 'code', 'nom',
             'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
-            'date_creation', 'date_modification', 'metadonnees',
+            'date_creation', 'date_modification', 'metadonnees', 'geometry',
         ]
+
+    def get_geometry(self, obj):
+        geom = (obj.metadonnees or {}).get('geometry')
+        if geom and isinstance(geom, dict) and geom.get('type') in ('Polygon', 'MultiPolygon') and 'coordinates' in geom:
+            return geom
+        return None
         read_only_fields = ['id', 'date_creation', 'date_modification']
 
     def to_internal_value(self, data):
@@ -317,6 +331,7 @@ class QuartierSerializer(serializers.ModelSerializer):
     district_nom = serializers.CharField(source='district.nom', read_only=True)
     province_nom = serializers.CharField(source='district.province.nom', read_only=True)
     district = serializers.PrimaryKeyRelatedField(queryset=District.objects.all(), required=True)
+    geometry = serializers.SerializerMethodField()
 
     class Meta:
         model = Quartier
@@ -324,8 +339,14 @@ class QuartierSerializer(serializers.ModelSerializer):
             'id', 'district', 'district_nom', 'province_nom', 'code', 'nom',
             'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
-            'date_creation', 'date_modification', 'metadonnees',
+            'date_creation', 'date_modification', 'metadonnees', 'geometry',
         ]
+
+    def get_geometry(self, obj):
+        geom = (obj.metadonnees or {}).get('geometry')
+        if geom and isinstance(geom, dict) and geom.get('type') in ('Polygon', 'MultiPolygon') and 'coordinates' in geom:
+            return geom
+        return None
         read_only_fields = ['id', 'date_creation', 'date_modification']
 
     def to_internal_value(self, data):
@@ -365,16 +386,26 @@ class PointDeServiceSerializer(serializers.ModelSerializer):
 # --- Sérialiseur pour l'endpoint personnalisé de localisation complète ---
 
 class LocalisationCompleteSerializer(serializers.Serializer):
-    """Sérialiseur pour retourner toutes les données de localisation avec métadonnées."""
-    pays = serializers.SerializerMethodField()
+    """Sérialiseur pour retourner les pays actifs et le pays par défaut."""
+    pays_actifs = serializers.SerializerMethodField()
+    pays_defaut = serializers.SerializerMethodField()
+
+    def get_pays_actifs(self, obj):
+        return PaysSerializer(obj['pays_actifs'], many=True).data
+
+    def get_pays_defaut(self, obj):
+        if obj['pays_defaut']:
+            return PaysSerializer(obj['pays_defaut']).data
+        return None
+
+
+class HierarchieCompleteSerializer(serializers.Serializer):
+    """Sérialiseur pour retourner la hiérarchie complète avec filtres généalogiques."""
     provinces = serializers.SerializerMethodField()
     districts = serializers.SerializerMethodField()
     quartiers = serializers.SerializerMethodField()
     points_de_service = serializers.SerializerMethodField()
-    statistiques_globales = serializers.SerializerMethodField()
-
-    def get_pays(self, obj):
-        return PaysSerializer(obj['pays'], many=True).data
+    statistiques = serializers.SerializerMethodField()
 
     def get_provinces(self, obj):
         return ProvinceSerializer(obj['provinces'], many=True).data
@@ -388,9 +419,8 @@ class LocalisationCompleteSerializer(serializers.Serializer):
     def get_points_de_service(self, obj):
         return PointDeServiceSerializer(obj['points_de_service'], many=True).data
 
-    def get_statistiques_globales(self, obj):
+    def get_statistiques(self, obj):
         return {
-            'total_pays': obj['pays'].count(),
             'total_provinces': obj['provinces'].count(),
             'total_districts': obj['districts'].count(),
             'total_quartiers': obj['quartiers'].count(),

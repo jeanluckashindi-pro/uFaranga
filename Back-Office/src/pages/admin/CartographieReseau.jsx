@@ -24,6 +24,8 @@ const COULEUR_PROVINCE = COULEUR_PROVINCE_NON_OCCUPE;  // provinces non occupée
 const COULEUR_DISTRICT_NON_OCCUPE = '#4B5563'; // gray-600
 const COULEUR_DISTRICT = '#F58424';     // districts occupés = secondary
 const COULEUR_QUARTIER = '#10b981';     // emerald
+/** Contour des cercles (provinces/districts/quartiers) : couleur distincte du pays */
+const COULEUR_ENCERCLEMENT = '#E5E7EB';
 const ZONE_SOURCE_ID = 'zones-selected-country';
 
 /** Palette pro par sous-région (vision géographique cohérente, couleurs distinctes) */
@@ -66,51 +68,51 @@ function isActifAutorise(item) {
   return item && item.est_actif === true && item.autorise_systeme === true;
 }
 
-/** Construit la liste des pays avec provinces/districts/quartiers imbriqués à partir de la réponse API. */
-function buildLocalisationTree(response) {
+/**
+ * Construit la liste des pays à afficher sur la carte à partir de la réponse API
+ * /api/v1/localisation/complete/ : { pays_actifs: [...], pays_defaut: ... }.
+ * Seuls les pays_actifs sont chargés et affichés sur la carte.
+ */
+function buildCountriesFromPaysActifs(response) {
+  if (!response || !Array.isArray(response.pays_actifs)) return [];
+  return response.pays_actifs.map((p) => ({ ...p, provinces: p.provinces ?? [] }));
+}
+
+/**
+ * Construit l'arbre provinces → districts → quartiers à partir de la réponse
+ * GET /api/v1/localisation/hierarchie/?pays_id=xxx (provinces, districts, quartiers plats).
+ */
+function buildHierarchyTree(response) {
   if (!response) return [];
-  // Format déjà imbriqué (pays avec .provinces)
-  if (Array.isArray(response) && response.length > 0 && response[0].provinces) {
-    return response;
-  }
-  // Format plat : { pays: [], provinces: [], districts: [], quartiers: [] }
-  const paysList = response.pays ?? [];
   const provincesList = response.provinces ?? [];
   const districtsList = response.districts ?? [];
   const quartiersList = response.quartiers ?? [];
-  if (!Array.isArray(paysList) || paysList.length === 0) return [];
+  if (!Array.isArray(provincesList) || provincesList.length === 0) return [];
 
   const sid = (x) => (x != null ? String(x) : '');
-  const paysById = {};
-  paysList.forEach((p) => { paysById[sid(p.id)] = { ...p, provinces: [] }; });
-
   const provincesById = {};
-  provincesList.forEach((pr) => {
-    const paysRef = pr.pays ?? pr.pays_id;
-    const paysId = sid(typeof paysRef === 'object' && paysRef != null ? paysRef.id : paysRef);
-    if (paysId && paysById[paysId]) {
-      const prov = { ...pr, districts: [] };
-      provincesById[sid(pr.id)] = prov;
-      paysById[paysId].provinces.push(prov);
-    }
+  provincesList.forEach((p) => {
+    provincesById[sid(p.id)] = { ...p, districts: [] };
   });
 
+  const districtsById = {};
   districtsList.forEach((d) => {
-    const provRef = d.province ?? d.province_id;
-    const provId = sid(typeof provRef === 'object' && provRef != null ? provRef.id : provRef);
-    if (provId && provincesById[provId]) {
-      const dist = {
-        ...d,
-        quartiers: (quartiersList || []).filter((q) => {
-          const qDist = q.district ?? q.district_id;
-          return sid(typeof qDist === 'object' && qDist != null ? qDist.id : qDist) === sid(d.id);
-        }),
-      };
+    const provId = sid(d.province);
+    if (provincesById[provId]) {
+      const dist = { ...d, quartiers: [] };
+      districtsById[sid(d.id)] = dist;
       provincesById[provId].districts.push(dist);
     }
   });
 
-  return Object.values(paysById);
+  (quartiersList || []).forEach((q) => {
+    const distId = sid(q.district);
+    if (districtsById[distId]) {
+      districtsById[distId].quartiers.push(q);
+    }
+  });
+
+  return provincesList.map((p) => provincesById[sid(p.id)]).filter(Boolean);
 }
 
 function CartographieReseau() {
@@ -131,6 +133,8 @@ function CartographieReseau() {
   const [statsPosition, setStatsPosition] = useState(null);
   const [panelPosition, setPanelPosition] = useState(null);
   const [draggingCard, setDraggingCard] = useState(null);
+  const [hierarchyLoading, setHierarchyLoading] = useState(false);
+  const [hierarchyError, setHierarchyError] = useState(null);
   const dragStartRef = useRef({ x: 0, y: 0, left: 0, top: 0 });
   const mapWrapperRef = useRef(null);
   const statsCardRef = useRef(null);
@@ -144,10 +148,11 @@ function CartographieReseau() {
     setFetchError(null);
     try {
       const response = await apiService.getLocalisationComplete();
-      const list = buildLocalisationTree(response);
+      // Utiliser uniquement pays_actifs : seuls ces pays sont affichés sur la carte
+      const list = buildCountriesFromPaysActifs(response);
       setCountriesData(list);
     } catch (err) {
-      console.error('Erreur chargement localisation complète:', err);
+      console.error('Erreur chargement pays actifs (cartographie):', err);
       setCountriesData([]);
       setFetchError(err?.message || 'Impossible de charger les données.');
     } finally {
@@ -158,6 +163,39 @@ function CartographieReseau() {
   useEffect(() => {
     fetchLocalisationComplete();
   }, [fetchLocalisationComplete]);
+
+  // Au clic sur un pays : charger la hiérarchie (provinces, districts, quartiers) et l'afficher sur la carte
+  useEffect(() => {
+    const paysId = selectedCountry?.id;
+    if (!paysId) {
+      setHierarchyError(null);
+      return;
+    }
+    let cancelled = false;
+    setHierarchyError(null);
+    setHierarchyLoading(true);
+    apiService
+      .getHierarchie(paysId)
+      .then((res) => {
+        if (cancelled) return;
+        const tree = buildHierarchyTree(res || {});
+        setSelectedCountry((prev) => {
+          if (!prev || String(prev.id) !== String(paysId)) return prev;
+          return { ...prev, provinces: Array.isArray(tree) ? tree : [] };
+        });
+      })
+      .catch((err) => {
+        if (!cancelled) {
+          console.error('Erreur chargement hiérarchie:', err);
+          setHierarchyError(err?.message || 'Impossible de charger les provinces.');
+          setSelectedCountry((prev) => prev && String(prev.id) === String(paysId) ? { ...prev, provinces: [] } : prev);
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setHierarchyLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, [selectedCountry?.id]);
 
   const allCountryCodes = countriesData.map((p) => p.code_iso_2).filter(Boolean);
   const activeCountryCodes = countriesData
@@ -412,12 +450,14 @@ function CartographieReseau() {
     reapplyLayers(selectedCountry?.code_iso_2 || '');
   }, [mapLoaded, countriesData, selectedCountry, reapplyLayers]);
 
-  // Zones (provinces, districts, quartiers) en cercles colorés avec animations
+  // Découpage par niveau : pays → provinces (polygones ou cercles), puis province → districts, puis district → quartiers
   useEffect(() => {
     if (!map.current || !mapLoaded) return;
 
     const removeZones = () => {
-      ['zones-quartiers', 'zones-districts', 'zones-provinces', 'zones-quartiers-stroke', 'zones-districts-stroke', 'zones-provinces-stroke'].forEach((id) => {
+      if (!map.current) return;
+      ['zones-quartiers', 'zones-districts', 'zones-provinces', 'zones-fill', 'zones-line', 'zones-circles',
+        'zones-quartiers-stroke', 'zones-districts-stroke', 'zones-provinces-stroke'].forEach((id) => {
         if (map.current.getLayer(id)) map.current.removeLayer(id);
       });
       if (map.current.getSource(zonesSourceId)) map.current.removeSource(zonesSourceId);
@@ -448,39 +488,77 @@ function CartographieReseau() {
       return fallback ?? null;
     };
 
+    const sizeFromSuperficie = (km2, level) => {
+      const s = Number(km2);
+      if (!Number.isFinite(s) || s <= 0) return level === 'province' ? 40 : level === 'district' ? 15 : 6;
+      const sqrt = Math.sqrt(s);
+      return level === 'province' ? Math.max(20, Math.min(120, sqrt * 1.2)) : level === 'district' ? Math.max(8, Math.min(50, sqrt * 0.5)) : Math.max(5, Math.min(25, sqrt * 0.2));
+    };
+
+    // Un seul niveau affiché à la fois : provinces, ou districts de la province sélectionnée, ou quartiers du district sélectionné
+    const selType = selectedRegion?.type;
     const features = [];
-    (selectedCountry.provinces || []).forEach((prov) => {
-      const pos = lngLat(prov, countryCentre);
-      if (pos) {
-        features.push({
-          type: 'Feature',
-          geometry: { type: 'Point', coordinates: pos },
-          properties: { id: String(prov.id), nom: prov.nom || '', level: 'province', occupé: isActifAutorise(prov) ? 1 : 0 },
-        });
-      }
-      (prov.districts || []).forEach((dist) => {
-        const posD = lngLat(dist, pos || countryCentre);
-        if (posD) {
+
+    if (selType === 'district' && selectedRegion?.data) {
+      const dist = selectedRegion.data;
+      (dist.quartiers || []).forEach((q) => {
+        const geom = q?.metadonnees?.geometry ?? q?.geometry;
+        const pos = lngLat(q, countryCentre);
+        if (geom && (geom.type === 'Polygon' || geom.type === 'MultiPolygon') && Array.isArray(geom.coordinates)) {
           features.push({
             type: 'Feature',
-            geometry: { type: 'Point', coordinates: posD },
-            properties: { id: String(dist.id), nom: dist.nom || '', level: 'district', occupé: isActifAutorise(dist) ? 1 : 0, province_id: String(prov.id) },
+            geometry: geom,
+            properties: { id: String(q.id), nom: q.nom || '', level: 'quartier', occupé: isActifAutorise(q) ? 1 : 0, size: sizeFromSuperficie(q.metadonnees?.superficie_km2, 'quartier') },
+          });
+        } else if (pos) {
+          features.push({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: pos },
+            properties: { id: String(q.id), nom: q.nom || '', level: 'quartier', occupé: isActifAutorise(q) ? 1 : 0, size: sizeFromSuperficie(q.metadonnees?.superficie_km2, 'quartier') },
           });
         }
-        (dist.quartiers || []).forEach((q) => {
-          const posQ = lngLat(q, posD || pos || countryCentre);
-          if (posQ) {
-            features.push({
-              type: 'Feature',
-              geometry: { type: 'Point', coordinates: posQ },
-              properties: { id: String(q.id), nom: q.nom || '', level: 'quartier', occupé: isActifAutorise(q) ? 1 : 0 },
-            });
-          }
-        });
       });
-    });
+    } else if (selType === 'province' && selectedRegion?.data) {
+      const prov = selectedRegion.data;
+      (prov.districts || []).forEach((dist) => {
+        const geom = dist?.metadonnees?.geometry ?? dist?.geometry;
+        const pos = lngLat(dist, countryCentre);
+        if (geom && (geom.type === 'Polygon' || geom.type === 'MultiPolygon') && Array.isArray(geom.coordinates)) {
+          features.push({
+            type: 'Feature',
+            geometry: geom,
+            properties: { id: String(dist.id), nom: dist.nom || '', level: 'district', occupé: isActifAutorise(dist) ? 1 : 0, province_id: String(prov.id), size: sizeFromSuperficie(dist.metadonnees?.superficie_km2, 'district') },
+          });
+        } else if (pos) {
+          features.push({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: pos },
+            properties: { id: String(dist.id), nom: dist.nom || '', level: 'district', occupé: isActifAutorise(dist) ? 1 : 0, province_id: String(prov.id), size: sizeFromSuperficie(dist.metadonnees?.superficie_km2, 'district') },
+          });
+        }
+      });
+    } else {
+      (selectedCountry.provinces || []).forEach((prov) => {
+        const geom = prov?.metadonnees?.geometry ?? prov?.geometry;
+        const pos = lngLat(prov, countryCentre);
+        if (geom && (geom.type === 'Polygon' || geom.type === 'MultiPolygon') && Array.isArray(geom.coordinates)) {
+          features.push({
+            type: 'Feature',
+            geometry: geom,
+            properties: { id: String(prov.id), nom: prov.nom || '', level: 'province', occupé: isActifAutorise(prov) ? 1 : 0, size: sizeFromSuperficie(prov.metadonnees?.superficie_km2, 'province') },
+          });
+        } else if (pos) {
+          features.push({
+            type: 'Feature',
+            geometry: { type: 'Point', coordinates: pos },
+            properties: { id: String(prov.id), nom: prov.nom || '', level: 'province', occupé: isActifAutorise(prov) ? 1 : 0, size: sizeFromSuperficie(prov.metadonnees?.superficie_km2, 'province') },
+          });
+        }
+      });
+    }
 
     removeZones();
+    if (features.length === 0) return;
     const geo = { type: 'FeatureCollection', features };
 
     map.current.addSource(zonesSourceId, { type: 'geojson', data: geo });
@@ -510,75 +588,59 @@ function CartographieReseau() {
       }
     };
 
-    // Ordre: provinces (grands) en dessous, puis districts, puis quartiers (petits) au-dessus
+    // Polygones (découpage comme les pays) : fill + line
     map.current.addLayer({
-      id: 'zones-provinces',
+      id: 'zones-fill',
+      type: 'fill',
+      source: zonesSourceId,
+      filter: ['any', ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
+      paint: {
+        'fill-color': ['case', ['==', ['get', 'occupé'], 1], COULEUR_OCCUPE, COULEUR_PROVINCE],
+        'fill-opacity': 0.4,
+      },
+    });
+    map.current.addLayer({
+      id: 'zones-line',
+      type: 'line',
+      source: zonesSourceId,
+      filter: ['any', ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
+      paint: {
+        'line-color': COULEUR_ENCERCLEMENT,
+        'line-width': 2,
+      },
+    });
+
+    const circleRadiusExpr = ['interpolate', ['linear'], ['zoom'], 5, ['*', ['get', 'size'], 0.18], 8, ['*', ['get', 'size'], 0.45], 12, ['*', ['get', 'size'], 0.9]];
+    map.current.addLayer({
+      id: 'zones-circles',
       type: 'circle',
       source: zonesSourceId,
-      filter: ['==', ['get', 'level'], 'province'],
+      filter: ['==', ['geometry-type'], 'Point'],
       paint: {
-        'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 12, 8, 28, 12, 48],
+        'circle-radius': circleRadiusExpr,
         'circle-color': ['case', ['==', ['get', 'occupé'], 1], COULEUR_OCCUPE, COULEUR_PROVINCE],
-        'circle-opacity': 0,
-        'circle-stroke-width': 2,
-        'circle-stroke-color': ['case', ['==', ['get', 'occupé'], 1], COULEUR_OCCUPE, 'rgba(0,123,255,0.8)'],
-      },
-    });
-    map.current.addLayer({
-      id: 'zones-districts',
-      type: 'circle',
-      source: zonesSourceId,
-      filter: ['==', ['get', 'level'], 'district'],
-      paint: {
-        'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 6, 8, 14, 12, 24],
-        'circle-color': ['case', ['==', ['get', 'occupé'], 1], COULEUR_OCCUPE, COULEUR_DISTRICT_NON_OCCUPE],
-        'circle-opacity': 0,
-        'circle-stroke-width': 1.5,
-        'circle-stroke-color': ['case', ['==', ['get', 'occupé'], 1], COULEUR_OCCUPE, 'rgba(75,85,99,0.8)'],
-      },
-    });
-    map.current.addLayer({
-      id: 'zones-quartiers',
-      type: 'circle',
-      source: zonesSourceId,
-      filter: ['==', ['get', 'level'], 'quartier'],
-      paint: {
-        'circle-radius': ['interpolate', ['linear'], ['zoom'], 5, 3, 8, 8, 12, 14],
-        'circle-color': ['case', ['==', ['get', 'occupé'], 1], COULEUR_OCCUPE, COULEUR_QUARTIER],
-        'circle-opacity': 0,
-        'circle-stroke-width': 1,
-        'circle-stroke-color': ['case', ['==', ['get', 'occupé'], 1], COULEUR_OCCUPE, 'rgba(16,185,129,0.8)'],
+        'circle-opacity': 0.5,
+        'circle-stroke-width': 2.5,
+        'circle-stroke-color': COULEUR_ENCERCLEMENT,
       },
     });
 
-    const selectedProvinceId = selectedRegion?.type === 'province' ? String(selectedRegion?.data?.id ?? '') : '';
-
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (!map.current.getLayer('zones-provinces')) return;
-        map.current.setPaintProperty('zones-provinces', 'circle-opacity', 0.5);
-        map.current.setPaintProperty('zones-districts', 'circle-opacity', selectedProvinceId
-          ? ['case', ['==', ['get', 'province_id'], selectedProvinceId], 0.7, 0.22]
-          : 0.5);
-        map.current.setPaintProperty('zones-quartiers', 'circle-opacity', 0.55);
-      });
-    });
-
-    ['zones-provinces', 'zones-districts', 'zones-quartiers'].forEach((layerId) => {
+    const zoneLayerIds = ['zones-fill', 'zones-line', 'zones-circles'];
+    zoneLayerIds.forEach((layerId) => {
       map.current.on('click', layerId, handleZoneClick);
-      map.current.on('mouseenter', layerId, () => { map.current.getCanvas().style.cursor = 'pointer'; });
-      map.current.on('mouseleave', layerId, () => { map.current.getCanvas().style.cursor = ''; });
+      map.current.on('mouseenter', layerId, () => { if (map.current) map.current.getCanvas().style.cursor = 'pointer'; });
+      map.current.on('mouseleave', layerId, () => { if (map.current) map.current.getCanvas().style.cursor = ''; });
     });
 
     return () => {
-      removeZones();
-      ['zones-provinces', 'zones-districts', 'zones-quartiers'].forEach((layerId) => {
-        if (map.current) {
+      if (map.current) {
+        removeZones();
+        zoneLayerIds.forEach((layerId) => {
           map.current.off('click', layerId);
           map.current.off('mouseenter', layerId);
           map.current.off('mouseleave', layerId);
-        }
-      });
+        });
+      }
     };
   }, [mapLoaded, selectedCountry, selectedRegion]);
 
@@ -1012,71 +1074,52 @@ function CartographieReseau() {
                       Réessayer le chargement
                     </button>
                   )}
-                  <div className="space-y-4">
-                    {filteredCountriesBySousRegion.map(([sousRegionLabel, countries]) => {
-                      const color = getCouleurSousRegion(sousRegionLabel);
-                      return (
-                        <div key={sousRegionLabel || 'autre'} className="rounded-lg overflow-hidden border border-darkGray/50 bg-background/40">
-                          <div
-                            className="px-3 py-2 flex items-center gap-2 border-b border-darkGray/40"
-                            style={{ borderLeftWidth: 4, borderLeftColor: color }}
-                          >
-                            <span
-                              className="h-2 w-2 rounded-full flex-shrink-0"
-                              style={{ backgroundColor: color }}
-                            />
-                            <span className="text-xs font-semibold text-text uppercase tracking-wide">
-                              {sousRegionLabel || 'Autre'}
-                            </span>
-                            <span className="text-[10px] text-gray-500 ml-auto">
-                              {countries.length} pays
-                            </span>
-                          </div>
-                          <div className="p-1.5 space-y-1">
-                            {countries.map((country) => {
-                              const actif = isActifAutorise(country);
-                              return (
-                                <div
-                                  key={country.id}
-                                  onClick={() => flyToCountry(country)}
-                                  className={`p-2.5 rounded-md cursor-pointer transition-all border ${
-                                    actif
-                                      ? 'bg-secondary/20 border-secondary/50 text-text'
-                                      : 'bg-primary/10 border-primary/30 hover:bg-primary/20 text-gray-300'
-                                  }`}
-                                >
-                                  <div className="flex items-center justify-between gap-2">
-                                    <div className="flex items-center gap-2 flex-1 min-w-0">
-                                      <span
-                                        className="h-2 w-2 rounded-full flex-shrink-0"
-                                        style={{
-                                          backgroundColor: actif ? COULEUR_OCCUPE : COULEUR_NON_OCCUPE,
-                                          border: `1px solid ${actif ? COULEUR_OCCUPE : 'rgba(0,123,255,0.6)'}`,
-                                          opacity: actif ? 1 : 0.8,
-                                        }}
-                                      />
-                                      <div className="min-w-0">
-                                        <p className="font-medium text-sm truncate">{country.nom}</p>
-                                        <p className="text-[10px] text-gray-500">
-                                          {country.nombre_agents ?? 0} agents · {(country.nombre_utilisateurs ?? 0).toLocaleString()} users
-                                        </p>
-                                      </div>
-                                    </div>
-                                    <MapPin className="w-3.5 h-3.5 flex-shrink-0 opacity-50" />
-                                  </div>
-                                </div>
-                              );
-                            })}
-                          </div>
+                  {/* Liste type Google Maps — deux couleurs bg du projet : fond par défaut + fond au survol/sélection */}
+                  <div className="divide-y divide-darkGray/50">
+                    {filteredCountriesBySousRegion.map(([sousRegionLabel, countries]) => (
+                      <div key={sousRegionLabel || 'autre'}>
+                        <div className="px-2 py-1.5">
+                          <span className="text-[11px] font-medium text-gray-400 uppercase tracking-wide">
+                            {sousRegionLabel || 'Autre'}
+                          </span>
                         </div>
-                      );
-                    })}
+                        <div className="flex flex-col gap-1.5">
+                        {countries.map((country) => {
+                          const isSelected = selectedCountry?.id === country.id;
+                          return (
+                            <button
+                              key={country.id}
+                              type="button"
+                              onClick={() => flyToCountry(country)}
+                              className={`w-full flex items-center gap-3 px-3 py-2.5 text-left cursor-pointer transition-colors min-w-0 bg-background rounded-lg border ${
+                                isSelected ? 'bg-darkGray/50 border-darkGray' : 'border-darkGray/50 hover:bg-darkGray/30'
+                              }`}
+                            >
+                              <MapPin className="w-4 h-4 flex-shrink-0 text-gray-500" />
+                              <div className="flex-1 min-w-0">
+                                <p className="font-medium text-sm truncate text-text">{country.nom}</p>
+                                <p className="text-xs text-gray-500 truncate">
+                                  {country.nombre_agents ?? 0} agents · {(country.nombre_utilisateurs ?? 0).toLocaleString()} utilisateurs
+                                </p>
+                              </div>
+                              <ChevronRight className="w-4 h-4 flex-shrink-0 text-gray-500" />
+                            </button>
+                          );
+                        })}
+                        </div>
+                      </div>
+                    ))}
                   </div>
                 </>
               ) : (
                 <>
                   <div className="flex items-center justify-between mb-2 px-2">
-                    <span className="text-xs text-gray-400">Provinces / Districts</span>
+                    <span className="text-xs text-gray-400">
+                      Provinces / Districts
+                      {hierarchyLoading && (
+                        <span className="ml-2 text-primary animate-pulse">Chargement…</span>
+                      )}
+                    </span>
                     <button
                       onClick={() => {
                         setSelectedCountry(null);
@@ -1087,6 +1130,16 @@ function CartographieReseau() {
                       Retour aux pays
                     </button>
                   </div>
+                  {hierarchyError && (
+                    <div className="mb-2 p-2 rounded-lg bg-red-500/10 border border-red-500/30 text-xs text-red-400">
+                      {hierarchyError}
+                    </div>
+                  )}
+                  {hierarchyLoading && (selectedCountry.provinces || []).length === 0 ? (
+                    <div className="flex items-center justify-center py-6">
+                      <RadialSpinner className="w-8 h-8 text-primary" />
+                    </div>
+                  ) : null}
                   {(selectedCountry.provinces || []).map((prov) => {
                     const actif = isActifAutorise(prov);
                     const expanded = expandedProvinces.has(prov.id);

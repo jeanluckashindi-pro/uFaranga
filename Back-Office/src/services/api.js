@@ -324,6 +324,11 @@ class ApiService {
     const queryString = new URLSearchParams(params).toString();
     return this.request(`/api/v1/localisation/complete/${queryString ? `?${queryString}` : ''}`);
   }
+
+  async getHierarchie(paysId) {
+    if (!paysId) return null;
+    return this.request(`/api/v1/localisation/hierarchie/?pays_id=${encodeURIComponent(paysId)}`);
+  }
 }
 
 // Instance singleton
