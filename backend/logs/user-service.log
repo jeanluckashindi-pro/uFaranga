@@ -518,3 +518,244 @@ INFO 2026-03-01 09:24:58,123 autoreload 23272 17680 D:\Projets\Decima Techno\uFa
 INFO 2026-03-01 09:25:01,270 autoreload 27920 15820 Watching for file changes with StatReloader
 INFO 2026-03-01 09:25:03,792 autoreload 28148 7396 D:\Projets\Decima Techno\uFaranga\backend\venv\Lib\site-packages\django\db\models\__init__.py changed, reloading.
 INFO 2026-03-01 09:25:04,527 autoreload 26924 27720 Watching for file changes with StatReloader
+INFO 2026-03-01 11:15:42,496 autoreload 27920 15820 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-01 11:15:45,185 autoreload 26976 22464 Watching for file changes with StatReloader
+INFO 2026-03-01 11:22:22,614 autoreload 26976 22464 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\urls.py changed, reloading.
+INFO 2026-03-01 11:22:23,860 autoreload 4160 29492 Watching for file changes with StatReloader
+INFO 2026-03-01 11:25:42,904 autoreload 21724 23488 Watching for file changes with StatReloader
+INFO 2026-03-01 11:25:46,062 basehttp 21724 10572 "GET / HTTP/1.1" 200 4658
+INFO 2026-03-01 11:25:46,484 basehttp 21724 10572 "GET /api/schema/ HTTP/1.1" 200 299849
+WARNING 2026-03-01 11:25:59,745 log 21724 10572 Not Found: /api/v1/localisation/v2/pays/
+WARNING 2026-03-01 11:25:59,746 basehttp 21724 10572 "GET /api/v1/localisation/v2/pays/ HTTP/1.1" 404 14012
+WARNING 2026-03-01 11:25:59,799 log 21724 10572 Not Found: /favicon.ico
+WARNING 2026-03-01 11:25:59,800 basehttp 21724 10572 "GET /favicon.ico HTTP/1.1" 404 3761
+INFO 2026-03-01 11:26:11,423 autoreload 21724 23488 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views_optimisees.py changed, reloading.
+INFO 2026-03-01 11:26:12,449 autoreload 996 20088 Watching for file changes with StatReloader
+WARNING 2026-03-01 11:26:17,550 log 996 5760 Not Found: /api/v1/localisation/v2/pays/
+WARNING 2026-03-01 11:26:17,551 basehttp 996 5760 "GET /api/v1/localisation/v2/pays/ HTTP/1.1" 404 14570
+INFO 2026-03-01 11:26:26,106 autoreload 996 20088 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\urls.py changed, reloading.
+INFO 2026-03-01 11:26:27,125 autoreload 25392 20232 Watching for file changes with StatReloader
+WARNING 2026-03-01 11:28:34,642 log 25392 20024 Not Found: /api/v1/localisation/v2/pays/
+WARNING 2026-03-01 11:28:34,644 basehttp 25392 20024 "GET /api/v1/localisation/v2/pays/ HTTP/1.1" 404 15736
+WARNING 2026-03-01 11:28:36,681 log 25392 20024 Not Found: /api/v1/localisation/v2/pays/
+WARNING 2026-03-01 11:28:36,682 basehttp 25392 20024 "GET /api/v1/localisation/v2/pays/ HTTP/1.1" 404 15736
+INFO 2026-03-01 11:29:18,441 basehttp 25392 20024 "GET /api/v1/localisation/ HTTP/1.1" 200 665
+ERROR 2026-03-01 11:30:11,515 log 25392 20024 Internal Server Error: /api/v1/localisation/pays/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column pays.devise_code does not exist
+LINE 1: ..._km2", "localisation"."pays"."code_telephonique", "localisat...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\generics.py", line 175, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\pagination.py", line 223, in paginate_queryset
+    return list(self.page)
+           ^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\paginator.py", line 174, in __len__
+    return len(self.object_list)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: column pays.devise_code does not exist
+LINE 1: ..._km2", "localisation"."pays"."code_telephonique", "localisat...
+                                                             ^
+ERROR 2026-03-01 11:30:11,521 basehttp 25392 20024 "GET /api/v1/localisation/pays/ HTTP/1.1" 500 199035
+INFO 2026-03-01 11:31:58,730 autoreload 25392 20232 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-01 11:31:59,690 autoreload 4684 30516 Watching for file changes with StatReloader
+INFO 2026-03-01 11:32:34,175 autoreload 4684 30516 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-01 11:32:35,546 autoreload 11636 28912 Watching for file changes with StatReloader
+ERROR 2026-03-01 11:37:49,066 log 11636 2496 Internal Server Error: /api/v1/localisation/pays/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\generics.py", line 175, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\pagination.py", line 223, in paginate_queryset
+    return list(self.page)
+           ^^^^^^^^^^^^^^^
+  File "<frozen _collections_abc>", line 1026, in __iter__
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\paginator.py", line 185, in __getitem__
+    self.object_list = list(self.object_list)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 121, in __iter__
+    for row in compiler.results_iter(results):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1500, in apply_converters
+    value = converter(value, expression, connection)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\json.py", line 94, in from_db_value
+    return json.loads(value, cls=self.decoder)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 339, in loads
+    raise TypeError(f'the JSON object must be str, bytes or bytearray, '
+TypeError: the JSON object must be str, bytes or bytearray, not list
+ERROR 2026-03-01 11:37:49,071 basehttp 11636 2496 "GET /api/v1/localisation/pays/ HTTP/1.1" 500 166914
+INFO 2026-03-01 11:38:14,945 autoreload 11636 28912 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-01 11:38:16,246 autoreload 20104 25656 Watching for file changes with StatReloader
+INFO 2026-03-01 11:38:45,500 autoreload 20104 25656 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-01 11:38:47,092 autoreload 27692 14900 Watching for file changes with StatReloader
+INFO 2026-03-01 11:39:14,137 autoreload 27692 14900 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-01 11:39:15,244 autoreload 3596 19120 Watching for file changes with StatReloader
+ERROR 2026-03-01 11:39:36,255 log 3596 29784 Internal Server Error: /api/v1/localisation/pays/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\viewsets.py", line 124, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\mixins.py", line 40, in list
+    page = self.paginate_queryset(queryset)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\generics.py", line 175, in paginate_queryset
+    return self.paginator.paginate_queryset(queryset, self.request, view=self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\pagination.py", line 223, in paginate_queryset
+    return list(self.page)
+           ^^^^^^^^^^^^^^^
+  File "<frozen _collections_abc>", line 1026, in __iter__
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\paginator.py", line 185, in __getitem__
+    self.object_list = list(self.object_list)
+                       ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 398, in __iter__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 121, in __iter__
+    for row in compiler.results_iter(results):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1500, in apply_converters
+    value = converter(value, expression, connection)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\fields\json.py", line 94, in from_db_value
+    return json.loads(value, cls=self.decoder)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\json\__init__.py", line 339, in loads
+    raise TypeError(f'the JSON object must be str, bytes or bytearray, '
+TypeError: the JSON object must be str, bytes or bytearray, not list
+ERROR 2026-03-01 11:39:36,267 basehttp 3596 29784 "GET /api/v1/localisation/pays/ HTTP/1.1" 500 166914
+INFO 2026-03-01 11:39:49,645 autoreload 3596 19120 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-01 11:39:50,633 autoreload 15724 8340 Watching for file changes with StatReloader
+INFO 2026-03-01 11:39:58,781 autoreload 15724 8340 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-01 11:40:00,772 autoreload 1460 26628 Watching for file changes with StatReloader
+INFO 2026-03-01 11:42:38,389 basehttp 1460 876 "GET /api/v1/localisation/pays/ HTTP/1.1" 200 7666
+INFO 2026-03-01 11:43:13,666 basehttp 1460 876 "GET /api/v1/localisation/pays/?est_actif=true HTTP/1.1" 200 354
+INFO 2026-03-01 11:44:09,653 basehttp 1460 25868 "GET /api/v1/localisation/pays/?page_size=2 HTTP/1.1" 200 402
+INFO 2026-03-01 11:44:28,491 basehttp 1460 25868 "GET /api/v1/localisation/hierarchie/statistiques/ HTTP/1.1" 200 366
+INFO 2026-03-01 11:44:47,439 basehttp 1460 25868 "GET /api/v1/localisation/provinces/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f&page_size=3 HTTP/1.1" 200 519
+INFO 2026-03-01 11:44:58,916 basehttp 1460 25868 "GET /api/v1/localisation/hierarchie/?niveau=provinces&pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 2027
+INFO 2026-03-01 11:45:49,590 basehttp 1460 876 "GET /api/v1/localisation/hierarchie/?niveau=provinces&pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 2027
+INFO 2026-03-01 11:49:34,842 basehttp 1460 876 "GET /api/v1/localisation/pays/?est_actif=true HTTP/1.1" 200 354
+INFO 2026-03-01 11:50:15,147 autoreload 1460 26628 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\urls.py changed, reloading.
+INFO 2026-03-01 11:50:16,443 autoreload 23924 24600 Watching for file changes with StatReloader
+INFO 2026-03-01 11:50:40,864 basehttp 23924 28208 "GET /api/v1/localisation/geo/pays/ HTTP/1.1" 200 996
+INFO 2026-03-01 11:50:53,754 basehttp 23924 28208 "GET /api/v1/localisation/geo/provinces/geojson/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 5191
+INFO 2026-03-01 11:51:04,441 basehttp 23924 12040 "GET /api/v1/localisation/pays/?est_actif=true HTTP/1.1" 200 354
+INFO 2026-03-01 11:52:12,419 basehttp 23924 12040 "GET /api/v1/localisation/geo/pays/ HTTP/1.1" 200 996
