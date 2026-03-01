@@ -7,7 +7,6 @@ from django.db import models
 from django.utils import timezone
 import uuid
 
-
 class Pays(models.Model):
     """Pays - localisation.pays"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
@@ -31,9 +30,6 @@ class Pays(models.Model):
         db_index=True,
         help_text='Sous-région géographique (ex: Afrique de l\'Est, Afrique Centrale)'
     )
-    
-    latitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    longitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     
     # Statistiques
     nombre_agents = models.IntegerField(default=0, help_text='Nombre total d\'agents dans ce pays')
@@ -67,8 +63,6 @@ class Province(models.Model):
     pays = models.ForeignKey(Pays, on_delete=models.CASCADE, related_name='provinces')
     code = models.CharField(max_length=20)
     nom = models.CharField(max_length=100)
-    latitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    longitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     
     # Statistiques
     nombre_agents = models.IntegerField(default=0, help_text='Nombre total d\'agents dans cette province')
@@ -98,8 +92,6 @@ class District(models.Model):
     province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='districts')
     code = models.CharField(max_length=20)
     nom = models.CharField(max_length=100)
-    latitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    longitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     
     # Statistiques
     nombre_agents = models.IntegerField(default=0, help_text='Nombre total d\'agents dans ce district')
@@ -129,8 +121,6 @@ class Quartier(models.Model):
     district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='quartiers')
     code = models.CharField(max_length=20)
     nom = models.CharField(max_length=100)
-    latitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    longitude_centre = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     
     # Statistiques
     nombre_agents = models.IntegerField(default=0, help_text='Nombre total d\'agents dans ce quartier')
@@ -174,8 +164,6 @@ class PointDeService(models.Model):
         blank=True,
         related_name='points_de_service_agent',
     )
-    latitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    longitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     adresse_complementaire = models.TextField(blank=True)
     
     # Statistiques

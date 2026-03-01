@@ -485,3 +485,36 @@ INFO 2026-03-01 01:43:56,275 autoreload 16688 18464 D:\Projets\Decima Techno\uFa
 INFO 2026-03-01 01:43:58,117 autoreload 1520 20688 Watching for file changes with StatReloader
 INFO 2026-03-01 01:44:01,557 autoreload 1520 20688 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
 INFO 2026-03-01 01:44:03,137 autoreload 644 8432 Watching for file changes with StatReloader
+INFO 2026-03-01 01:53:31,270 basehttp 644 28664 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 451181
+INFO 2026-03-01 01:53:49,196 basehttp 644 28664 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 451181
+INFO 2026-03-01 01:53:50,896 basehttp 644 28664 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 451181
+INFO 2026-03-01 01:53:53,476 basehttp 644 28664 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 451181
+INFO 2026-03-01 01:58:56,718 basehttp 644 12868 "GET /api/v1/localisation/hierarchie/?pays_id=fe9b48c1-9641-412d-970d-dc1e490ee81f HTTP/1.1" 200 527720
+INFO 2026-03-01 02:01:11,470 autoreload 644 8432 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-03-01 02:01:14,007 autoreload 12352 21576 Watching for file changes with StatReloader
+INFO 2026-03-01 02:01:17,956 autoreload 12352 21576 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers.py changed, reloading.
+INFO 2026-03-01 02:01:19,712 autoreload 16540 21708 Watching for file changes with StatReloader
+INFO 2026-03-01 02:01:58,836 basehttp 16540 12128 "OPTIONS /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 200 0
+INFO 2026-03-01 02:01:58,836 basehttp 16540 2084 "OPTIONS /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 200 0
+INFO 2026-03-01 02:01:59,070 basehttp 16540 12128 "POST /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 200 867
+WARNING 2026-03-01 02:01:59,155 log 16540 2084 Unauthorized: /api/v1/authentification/jeton/actualiser/
+WARNING 2026-03-01 02:01:59,156 basehttp 16540 2084 "POST /api/v1/authentification/jeton/actualiser/ HTTP/1.1" 401 105
+INFO 2026-03-01 02:01:59,327 basehttp 16540 12128 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3747
+INFO 2026-03-01 02:01:59,664 basehttp 16540 12128 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1887
+INFO 2026-03-01 02:01:59,913 basehttp 16540 12128 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1887
+INFO 2026-03-01 02:02:36,892 basehttp 16540 12128 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1285
+INFO 2026-03-01 02:02:37,091 basehttp 16540 12128 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3808
+INFO 2026-03-01 02:02:37,365 basehttp 16540 12128 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1887
+INFO 2026-03-01 02:02:37,576 basehttp 16540 12128 "GET /api/v1/localisation/complete/ HTTP/1.1" 200 1887
+INFO 2026-03-01 02:02:49,655 basehttp 16540 12128 "GET /api/v1/localisation/hierarchie/?pays_id=dd3b9347-700f-48c2-823c-df957eddbf97 HTTP/1.1" 200 884196
+INFO 2026-03-01 09:06:15,693 autoreload 23268 5188 Watching for file changes with StatReloader
+INFO 2026-03-01 09:08:33,831 autoreload 23272 17680 Watching for file changes with StatReloader
+INFO 2026-03-01 09:12:57,363 autoreload 10876 4492 Watching for file changes with StatReloader
+INFO 2026-03-01 09:24:39,620 autoreload 10876 4492 D:\Projets\Decima Techno\uFaranga\backend\venv\Lib\site-packages\django\db\models\__init__.py changed, reloading.
+INFO 2026-03-01 09:24:40,920 autoreload 25352 5356 Watching for file changes with StatReloader
+INFO 2026-03-01 09:24:54,036 autoreload 25352 5356 D:\Projets\Decima Techno\uFaranga\backend\venv\Lib\site-packages\django\db\models\__init__.py changed, reloading.
+INFO 2026-03-01 09:24:54,845 autoreload 28148 7396 Watching for file changes with StatReloader
+INFO 2026-03-01 09:24:58,123 autoreload 23272 17680 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-01 09:25:01,270 autoreload 27920 15820 Watching for file changes with StatReloader
+INFO 2026-03-01 09:25:03,792 autoreload 28148 7396 D:\Projets\Decima Techno\uFaranga\backend\venv\Lib\site-packages\django\db\models\__init__.py changed, reloading.
+INFO 2026-03-01 09:25:04,527 autoreload 26924 27720 Watching for file changes with StatReloader

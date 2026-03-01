@@ -1,0 +1,72 @@
+================================================================================
+    INSTALLATION BASE DE DONNÉES LOCALISATION UFARANGA
+================================================================================
+
+📦 FICHIER: ufaranga_localisation_complete.sql (90 MB)
+
+================================================================================
+🚀 INSTALLATION EN 1 COMMANDE
+================================================================================
+
+psql -U ufaranga -d ufaranga -f ufaranga_localisation_complete.sql
+
+Durée: 5-10 minutes
+
+================================================================================
+✅ RÉSULTAT
+================================================================================
+
+Après installation, vous aurez:
+
+✓ 232,370 entités géographiques
+✓ 9 niveaux hiérarchiques complets
+✓ Coordonnées GPS réelles
+✓ 131 index optimisés
+✓ 8 fonctions SQL avancées
+✓ 3 vues matérialisées
+
+================================================================================
+📊 DÉTAILS DES DONNÉES
+================================================================================
+
+Niveau 1: 54 Pays
+Niveau 2: 1,095 Provinces
+Niveau 3: 3,374 Districts
+Niveau 4: 20,715 Communes
+Niveau 5: 114,370 Secteurs
+Niveau 6: 16,542 Quartiers
+Niveau 7: 60,164 Zones
+Niveau 8: 16,056 Collines
+Niveau 9: 0 Sous-localités
+
+TOTAL: 232,370 entités
+
+================================================================================
+⚠️ PRÉREQUIS
+================================================================================
+
+- PostgreSQL 10+
+- Base de données 'ufaranga' créée
+- Utilisateur 'ufaranga' avec droits
+- Espace disque: 500 MB minimum
+
+================================================================================
+🔍 VÉRIFICATION
+================================================================================
+
+Après installation, vérifier:
+
+psql -U ufaranga -d ufaranga -c "SELECT COUNT(*) FROM localisation.pays"
+
+Résultat attendu: 54
+
+================================================================================
+📝 NOTES
+================================================================================
+
+- Le fichier contient STRUCTURE + DONNÉES
+- Aucun script Python nécessaire
+- Tout est prêt à l'emploi
+- Compatible production
+
+================================================================================

@@ -25,7 +25,6 @@ class PaysSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'code_iso_2', 'code_iso_3', 'nom', 'nom_anglais',
             'continent', 'sous_region',
-            'latitude_centre', 'longitude_centre',
             'nombre_agents', 'nombre_utilisateurs',
             'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
             'autorise_systeme', 'est_actif',
@@ -45,7 +44,6 @@ class PointDeServiceCouvertureSerializer(serializers.ModelSerializer):
         model = PointDeService
         fields = [
             'id', 'code', 'nom', 'type_point',
-            'latitude', 'longitude',
             'adresse_complementaire',
             'nombre_agents', 'nombre_utilisateurs',
             'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
@@ -63,7 +61,6 @@ class QuartierCouvertureSerializer(serializers.ModelSerializer):
         model = Quartier
         fields = [
             'id', 'code', 'nom',
-            'latitude_centre', 'longitude_centre',
             'nombre_agents', 'nombre_utilisateurs',
             'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
             'autorise_systeme', 'est_actif',
@@ -91,7 +88,6 @@ class DistrictCouvertureSerializer(serializers.ModelSerializer):
         model = District
         fields = [
             'id', 'code', 'nom',
-            'latitude_centre', 'longitude_centre',
             'nombre_agents', 'nombre_utilisateurs',
             'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
             'autorise_systeme', 'est_actif',
@@ -121,7 +117,6 @@ class ProvinceCouvertureSerializer(serializers.ModelSerializer):
         model = Province
         fields = [
             'id', 'code', 'nom',
-            'latitude_centre', 'longitude_centre',
             'nombre_agents', 'nombre_utilisateurs',
             'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
             'autorise_systeme', 'est_actif',
@@ -181,7 +176,6 @@ class CouverturePaysSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'code_iso_2', 'code_iso_3', 'nom', 'nom_anglais',
             'continent', 'sous_region',
-            'latitude_centre', 'longitude_centre',
             'nombre_agents', 'nombre_utilisateurs',
             'nombre_agents_actifs', 'nombre_utilisateurs_actifs',
             'autorise_systeme', 'est_actif',
@@ -202,7 +196,6 @@ class PointDeServiceExpandSerializer(serializers.ModelSerializer):
         model = PointDeService
         fields = [
             'id', 'code', 'nom', 'type_point',
-            'latitude', 'longitude', 'autorise_systeme', 'est_actif',
         ]
 
 
@@ -214,7 +207,6 @@ class QuartierExpandSerializer(serializers.ModelSerializer):
         model = Quartier
         fields = [
             'id', 'code', 'nom',
-            'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
             'points_de_service',
         ]
@@ -228,7 +220,6 @@ class DistrictExpandSerializer(serializers.ModelSerializer):
         model = District
         fields = [
             'id', 'code', 'nom',
-            'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
             'quartiers',
         ]
@@ -242,7 +233,6 @@ class ProvinceExpandSerializer(serializers.ModelSerializer):
         model = Province
         fields = [
             'id', 'code', 'nom',
-            'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
             'districts',
         ]
@@ -257,7 +247,6 @@ class PaysDetailSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'code_iso_2', 'code_iso_3', 'nom', 'nom_anglais',
             'continent', 'sous_region',
-            'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
             'date_creation', 'date_modification', 'metadonnees',
             'provinces',
@@ -275,17 +264,15 @@ class ProvinceSerializer(serializers.ModelSerializer):
         model = Province
         fields = [
             'id', 'pays', 'pays_nom', 'pays_code', 'code', 'nom',
-            'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
             'date_creation', 'date_modification', 'metadonnees', 'geometry',
         ]
 
     def get_geometry(self, obj):
-        geom = (obj.metadonnees or {}).get('geometry')
+        geom = (obj.metadonnees or {}).get('polygone')
         if geom and isinstance(geom, dict) and geom.get('type') in ('Polygon', 'MultiPolygon') and 'coordinates' in geom:
             return geom
         return None
-        read_only_fields = ['id', 'date_creation', 'date_modification']
 
     def to_internal_value(self, data):
         if isinstance(data.get('pays'), str) and not is_valid_uuid(data['pays']):
@@ -306,17 +293,15 @@ class DistrictSerializer(serializers.ModelSerializer):
         model = District
         fields = [
             'id', 'province', 'province_nom', 'pays_nom', 'code', 'nom',
-            'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
             'date_creation', 'date_modification', 'metadonnees', 'geometry',
         ]
 
     def get_geometry(self, obj):
-        geom = (obj.metadonnees or {}).get('geometry')
+        geom = (obj.metadonnees or {}).get('polygone')
         if geom and isinstance(geom, dict) and geom.get('type') in ('Polygon', 'MultiPolygon') and 'coordinates' in geom:
             return geom
         return None
-        read_only_fields = ['id', 'date_creation', 'date_modification']
 
     def to_internal_value(self, data):
         if isinstance(data.get('province'), str) and not is_valid_uuid(data['province']):
@@ -337,17 +322,15 @@ class QuartierSerializer(serializers.ModelSerializer):
         model = Quartier
         fields = [
             'id', 'district', 'district_nom', 'province_nom', 'code', 'nom',
-            'latitude_centre', 'longitude_centre',
             'autorise_systeme', 'est_actif',
             'date_creation', 'date_modification', 'metadonnees', 'geometry',
         ]
 
     def get_geometry(self, obj):
-        geom = (obj.metadonnees or {}).get('geometry')
+        geom = (obj.metadonnees or {}).get('polygone')
         if geom and isinstance(geom, dict) and geom.get('type') in ('Polygon', 'MultiPolygon') and 'coordinates' in geom:
             return geom
         return None
-        read_only_fields = ['id', 'date_creation', 'date_modification']
 
     def to_internal_value(self, data):
         if isinstance(data.get('district'), str) and not is_valid_uuid(data['district']):
@@ -368,7 +351,6 @@ class PointDeServiceSerializer(serializers.ModelSerializer):
         fields = [
             'id', 'quartier', 'quartier_nom', 'district_nom', 'code', 'nom',
             'type_point', 'agent_utilisateur',
-            'latitude', 'longitude', 'adresse_complementaire',
             'autorise_systeme', 'est_actif',
             'date_creation', 'date_modification', 'metadonnees',
         ]
