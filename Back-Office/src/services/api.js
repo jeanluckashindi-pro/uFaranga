@@ -329,6 +329,108 @@ class ApiService {
     if (!paysId) return null;
     return this.request(`/api/v1/localisation/hierarchie/?pays_id=${encodeURIComponent(paysId)}`);
   }
+
+  // --- API Geo (découpage et affichage carte) ---
+  /** GET /api/v1/localisation/hierarchie/statistiques/ — statistiques globales de toutes les entités */
+  async getGeoStatistiques() {
+    return this.request('/api/v1/localisation/hierarchie/statistiques/');
+  }
+
+  async getGeoPays() {
+    return this.request('/api/v1/localisation/geo/pays/');
+  }
+
+  async getGeoPaysGeojson() {
+    return this.request('/api/v1/localisation/geo/pays/geojson/');
+  }
+
+  async getGeoProvinces(paysId) {
+    if (!paysId) return [];
+    const data = await this.request(`/api/v1/localisation/geo/provinces/?pays_id=${encodeURIComponent(paysId)}`);
+    return Array.isArray(data) ? data : [];
+  }
+
+  async getGeoProvincesGeojson(paysId) {
+    if (!paysId) return null;
+    return this.request(`/api/v1/localisation/geo/provinces/geojson/?pays_id=${encodeURIComponent(paysId)}`);
+  }
+
+  async getGeoDistricts(provinceId) {
+    if (!provinceId) return [];
+    const data = await this.request(`/api/v1/localisation/geo/districts/?province_id=${encodeURIComponent(provinceId)}`);
+    return Array.isArray(data) ? data : [];
+  }
+
+  async getGeoDistrictsGeojson(provinceId) {
+    if (!provinceId) return null;
+    return this.request(`/api/v1/localisation/geo/districts/geojson/?province_id=${encodeURIComponent(provinceId)}`);
+  }
+
+  async getGeoQuartiers(districtId) {
+    if (!districtId) return [];
+    const data = await this.request(`/api/v1/localisation/geo/quartiers/?district_id=${encodeURIComponent(districtId)}`);
+    return Array.isArray(data) ? data : [];
+  }
+
+  async getGeoQuartiersGeojson(districtId) {
+    if (!districtId) return null;
+    return this.request(`/api/v1/localisation/geo/quartiers/geojson/?district_id=${encodeURIComponent(districtId)}`);
+  }
+
+  async getGeoCommunes(districtId) {
+    if (!districtId) return [];
+    const data = await this.request(`/api/v1/localisation/geo/communes/?district_id=${encodeURIComponent(districtId)}`);
+    return Array.isArray(data) ? data : [];
+  }
+
+  async getGeoCommunesGeojson(districtId) {
+    if (!districtId) return null;
+    return this.request(`/api/v1/localisation/geo/communes/geojson/?district_id=${encodeURIComponent(districtId)}`);
+  }
+
+  async getGeoSecteurs(communeId) {
+    if (!communeId) return [];
+    const data = await this.request(`/api/v1/localisation/geo/secteurs/?commune_id=${encodeURIComponent(communeId)}`);
+    return Array.isArray(data) ? data : [];
+  }
+
+  async getGeoSecteursGeojson(communeId) {
+    if (!communeId) return null;
+    return this.request(`/api/v1/localisation/geo/secteurs/geojson/?commune_id=${encodeURIComponent(communeId)}`);
+  }
+
+  async getGeoZones(quartierId) {
+    if (!quartierId) return [];
+    const data = await this.request(`/api/v1/localisation/geo/zones/?quartier_id=${encodeURIComponent(quartierId)}`);
+    return Array.isArray(data) ? data : [];
+  }
+
+  async getGeoZonesGeojson(quartierId) {
+    if (!quartierId) return null;
+    return this.request(`/api/v1/localisation/geo/zones/geojson/?quartier_id=${encodeURIComponent(quartierId)}`);
+  }
+
+  async getGeoCollines(zoneId) {
+    if (!zoneId) return [];
+    const data = await this.request(`/api/v1/localisation/geo/collines/?zone_id=${encodeURIComponent(zoneId)}`);
+    return Array.isArray(data) ? data : [];
+  }
+
+  async getGeoCollinesGeojson(zoneId) {
+    if (!zoneId) return null;
+    return this.request(`/api/v1/localisation/geo/collines/geojson/?zone_id=${encodeURIComponent(zoneId)}`);
+  }
+
+  async getGeoPointsDeService(quartierId) {
+    if (!quartierId) return [];
+    const data = await this.request(`/api/v1/localisation/geo/points-de-service/?quartier_id=${encodeURIComponent(quartierId)}`);
+    return Array.isArray(data) ? data : [];
+  }
+
+  async getGeoPointsDeServiceGeojson(quartierId) {
+    if (!quartierId) return null;
+    return this.request(`/api/v1/localisation/geo/points-de-service/geojson/?quartier_id=${encodeURIComponent(quartierId)}`);
+  }
 }
 
 // Instance singleton

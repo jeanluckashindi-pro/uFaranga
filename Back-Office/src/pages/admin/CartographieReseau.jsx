@@ -11,6 +11,7 @@ import { RadialSpinner } from '../../components/common/Spinner';
 
 mapboxgl.accessToken = MAPBOX_TOKEN;
 
+const GEO_PAYS_SOURCE_ID = 'geo-pays';
 const COUNTRY_SOURCE_ID = 'country-boundaries';
 const SOUSREGION_LAYER_PREFIX = 'country-border-sousregion-';
 
@@ -65,54 +66,78 @@ function getCouleurSousRegion(sousRegion) {
 }
 
 function isActifAutorise(item) {
-  return item && item.est_actif === true && item.autorise_systeme === true;
+  return item && (item.est_actif === true && (item.autorise_systeme === true || item.autorise_systeme === undefined));
 }
 
-/**
- * Construit la liste des pays à afficher sur la carte à partir de la réponse API
- * /api/v1/localisation/complete/ : { pays_actifs: [...], pays_defaut: ... }.
- * Seuls les pays_actifs sont chargés et affichés sur la carte.
- */
-function buildCountriesFromPaysActifs(response) {
-  if (!response || !Array.isArray(response.pays_actifs)) return [];
-  return response.pays_actifs.map((p) => ({ ...p, provinces: p.provinces ?? [] }));
+function parseCoord(v) {
+  if (v == null) return NaN;
+  const s = String(v).trim().replace(',', '.');
+  const n = parseFloat(s);
+  return Number.isFinite(n) ? n : NaN;
 }
 
-/**
- * Construit l'arbre provinces → districts → quartiers à partir de la réponse
- * GET /api/v1/localisation/hierarchie/?pays_id=xxx (provinces, districts, quartiers plats).
- */
-function buildHierarchyTree(response) {
-  if (!response) return [];
-  const provincesList = response.provinces ?? [];
-  const districtsList = response.districts ?? [];
-  const quartiersList = response.quartiers ?? [];
-  if (!Array.isArray(provincesList) || provincesList.length === 0) return [];
+/** Extrait la géométrie pour Mapbox : API peut renvoyer une Feature → utiliser .geometry */
+function getGeometryForMap(item) {
+  const g = item?.geometry;
+  if (!g) return null;
+  if (g.type === 'Feature' && g.geometry) return g.geometry;
+  if (g.type === 'Polygon' || g.type === 'MultiPolygon' || g.type === 'Point') return g;
+  return null;
+}
 
-  const sid = (x) => (x != null ? String(x) : '');
-  const provincesById = {};
-  provincesList.forEach((p) => {
-    provincesById[sid(p.id)] = { ...p, districts: [] };
-  });
+/** Bounding box depuis l'item (bbox_ouest, bbox_sud, bbox_est, bbox_nord) → [[lngMin, latMin], [lngMax, latMax]] pour Mapbox fitBounds */
+function getBoundsFromItem(item) {
+  const west = parseCoord(item?.bbox_ouest);
+  const south = parseCoord(item?.bbox_sud);
+  const east = parseCoord(item?.bbox_est);
+  const north = parseCoord(item?.bbox_nord);
+  if (!Number.isFinite(west) || !Number.isFinite(south) || !Number.isFinite(east) || !Number.isFinite(north)) return null;
+  return [[west, south], [east, north]];
+}
 
-  const districtsById = {};
-  districtsList.forEach((d) => {
-    const provId = sid(d.province);
-    if (provincesById[provId]) {
-      const dist = { ...d, quartiers: [] };
-      districtsById[sid(d.id)] = dist;
-      provincesById[provId].districts.push(dist);
+/** Centre dérivé de la bbox en priorité (pas du point centre API), sinon fallback centre_latitude/centre_longitude */
+function getCentreLngLat(item) {
+  const b = getBoundsFromItem(item);
+  if (b) {
+    const lng = (b[0][0] + b[1][0]) / 2;
+    const lat = (b[0][1] + b[1][1]) / 2;
+    return [lng, lat];
+  }
+  const lat = parseCoord(item?.centre_latitude ?? item?.latitude_centre ?? item?.latitude);
+  const lng = parseCoord(item?.centre_longitude ?? item?.longitude_centre ?? item?.longitude);
+  return (Number.isFinite(lat) && Number.isFinite(lng)) ? [lng, lat] : null;
+}
+
+/** Construit un GeoJSON FeatureCollection des pays pour la carte (endpoint geo/pays/) */
+function buildPaysGeoJSON(countries) {
+  if (!Array.isArray(countries) || countries.length === 0) {
+    return { type: 'FeatureCollection', features: [] };
+  }
+  const features = [];
+  countries.forEach((c) => {
+    const geom = getGeometryForMap(c);
+    const centre = getCentreLngLat(c);
+    let geometry = null;
+    if (geom && (geom.type === 'Polygon' || geom.type === 'MultiPolygon')) {
+      geometry = geom;
+    } else if (geom && geom.type === 'Point' && Array.isArray(geom.coordinates)) {
+      geometry = geom;
+    } else if (centre) {
+      geometry = { type: 'Point', coordinates: centre };
     }
+    if (!geometry) return;
+    features.push({
+      type: 'Feature',
+      geometry,
+      properties: {
+        id: String(c.id),
+        iso_3166_1: c.code_iso_2 || '',
+        nom: c.nom || '',
+        est_actif: c.est_actif ? 1 : 0,
+      },
+    });
   });
-
-  (quartiersList || []).forEach((q) => {
-    const distId = sid(q.district);
-    if (districtsById[distId]) {
-      districtsById[distId].quartiers.push(q);
-    }
-  });
-
-  return provincesList.map((p) => provincesById[sid(p.id)]).filter(Boolean);
+  return { type: 'FeatureCollection', features };
 }
 
 function CartographieReseau() {
@@ -142,17 +167,18 @@ function CartographieReseau() {
   const zonesSourceId = ZONE_SOURCE_ID;
   const selectedCountryRef = useRef(null);
   selectedCountryRef.current = selectedCountry;
+  const countriesDataRef = useRef([]);
+  countriesDataRef.current = countriesData;
 
-  const fetchLocalisationComplete = useCallback(async () => {
+  const fetchGeoPays = useCallback(async () => {
     setLoading(true);
     setFetchError(null);
     try {
-      const response = await apiService.getLocalisationComplete();
-      // Utiliser uniquement pays_actifs : seuls ces pays sont affichés sur la carte
-      const list = buildCountriesFromPaysActifs(response);
+      const data = await apiService.getGeoPays();
+      const list = Array.isArray(data) ? data : (data?.results ?? []);
       setCountriesData(list);
     } catch (err) {
-      console.error('Erreur chargement pays actifs (cartographie):', err);
+      console.error('Erreur chargement pays (geo):', err);
       setCountriesData([]);
       setFetchError(err?.message || 'Impossible de charger les données.');
     } finally {
@@ -161,10 +187,10 @@ function CartographieReseau() {
   }, []);
 
   useEffect(() => {
-    fetchLocalisationComplete();
-  }, [fetchLocalisationComplete]);
+    fetchGeoPays();
+  }, [fetchGeoPays]);
 
-  // Au clic sur un pays : charger la hiérarchie (provinces, districts, quartiers) et l'afficher sur la carte
+  // Au clic sur un pays : charger les provinces via API geo
   useEffect(() => {
     const paysId = selectedCountry?.id;
     if (!paysId) {
@@ -175,18 +201,17 @@ function CartographieReseau() {
     setHierarchyError(null);
     setHierarchyLoading(true);
     apiService
-      .getHierarchie(paysId)
-      .then((res) => {
+      .getGeoProvinces(paysId)
+      .then((list) => {
         if (cancelled) return;
-        const tree = buildHierarchyTree(res || {});
         setSelectedCountry((prev) => {
           if (!prev || String(prev.id) !== String(paysId)) return prev;
-          return { ...prev, provinces: Array.isArray(tree) ? tree : [] };
+          return { ...prev, provinces: Array.isArray(list) ? list : [] };
         });
       })
       .catch((err) => {
         if (!cancelled) {
-          console.error('Erreur chargement hiérarchie:', err);
+          console.error('Erreur chargement provinces (geo):', err);
           setHierarchyError(err?.message || 'Impossible de charger les provinces.');
           setSelectedCountry((prev) => prev && String(prev.id) === String(paysId) ? { ...prev, provinces: [] } : prev);
         }
@@ -197,11 +222,66 @@ function CartographieReseau() {
     return () => { cancelled = true; };
   }, [selectedCountry?.id]);
 
+  // Charger les districts quand on sélectionne une province (si pas encore chargés)
+  useEffect(() => {
+    const prov = selectedRegion?.type === 'province' ? selectedRegion?.data : null;
+    if (!prov?.id || (prov.districts && Array.isArray(prov.districts))) return;
+    let cancelled = false;
+    apiService.getGeoDistricts(prov.id).then((list) => {
+      if (cancelled) return;
+      setSelectedCountry((prev) => {
+        if (!prev?.provinces) return prev;
+        return {
+          ...prev,
+          provinces: prev.provinces.map((p) =>
+            String(p.id) === String(prov.id) ? { ...p, districts: list } : p
+          ),
+        };
+      });
+      setSelectedRegion((prev) =>
+        prev?.type === 'province' && String(prev?.data?.id) === String(prov.id)
+          ? { ...prev, data: { ...prev.data, districts: list } }
+          : prev
+      );
+    });
+    return () => { cancelled = true; };
+  }, [selectedRegion?.type, selectedRegion?.data?.id]);
+
+  // Charger les quartiers quand on sélectionne un district (si pas encore chargés)
+  useEffect(() => {
+    const dist = selectedRegion?.type === 'district' ? selectedRegion?.data : null;
+    if (!dist?.id || (dist.quartiers && Array.isArray(dist.quartiers))) return;
+    let cancelled = false;
+    apiService.getGeoQuartiers(dist.id).then((list) => {
+      if (cancelled) return;
+      setSelectedCountry((prev) => {
+        if (!prev?.provinces) return prev;
+        return {
+          ...prev,
+          provinces: prev.provinces.map((p) => ({
+            ...p,
+            districts: (p.districts || []).map((d) =>
+              String(d.id) === String(dist.id) ? { ...d, quartiers: list } : d
+            ),
+          })),
+        };
+      });
+      setSelectedRegion((prev) =>
+        prev?.type === 'district' && String(prev?.data?.id) === String(dist.id)
+          ? { ...prev, data: { ...prev.data, quartiers: list } }
+          : prev
+      );
+    });
+    return () => { cancelled = true; };
+  }, [selectedRegion?.type, selectedRegion?.data?.id]);
+
   const allCountryCodes = countriesData.map((p) => p.code_iso_2).filter(Boolean);
   const activeCountryCodes = countriesData
     .filter((p) => isActifAutorise(p))
     .map((p) => p.code_iso_2)
     .filter(Boolean);
+
+  const paysGeoJSON = useMemo(() => buildPaysGeoJSON(countriesData), [countriesData]);
 
   const filteredCountries = countriesData.filter(
     (c) =>
@@ -252,55 +332,6 @@ function CartographieReseau() {
           0
         ),
       };
-
-  const reapplyLayers = useCallback(
-    (highlightCode = '') => {
-      if (!map.current || !map.current.getLayer('country-fills-click')) return;
-      const codes = allCountryCodes.length ? allCountryCodes : ['__none__'];
-      const activeCodes = activeCountryCodes.length ? activeCountryCodes : ['__none__'];
-
-      const style = map.current.getStyle();
-      const layersToRemove = (style?.layers || [])
-        .filter((l) => l.id.startsWith(SOUSREGION_LAYER_PREFIX) || l.id.startsWith('country-fill-sousregion-'))
-        .map((l) => l.id);
-      layersToRemove.forEach((id) => {
-        if (map.current.getLayer(id)) map.current.removeLayer(id);
-        if (map.current.getSource(id)) map.current.removeSource(id);
-      });
-      // Nettoyer les sources orphelines (ancien code ou hot-reload)
-      Object.keys(style?.sources || {}).forEach((sourceId) => {
-        if (sourceId.startsWith(SOUSREGION_LAYER_PREFIX) || sourceId.startsWith('country-fill-sousregion-')) {
-          try {
-            if (map.current.getSource(sourceId)) map.current.removeSource(sourceId);
-          } catch (_) { /* ignoré */ }
-        }
-      });
-
-      if (!map.current.getSource(COUNTRY_SOURCE_ID)) return;
-      const systemFilter = codes.length && codes[0] !== '__none__' ? ['in', 'iso_3166_1', ...codes] : ['==', 'iso_3166_1', '__none__'];
-      if (!map.current.getLayer('country-fills-inactive')) {
-        map.current.addLayer(
-          {
-            id: 'country-fills-inactive',
-            type: 'fill',
-            source: COUNTRY_SOURCE_ID,
-            'source-layer': 'country_boundaries',
-            filter: systemFilter,
-            paint: { 'fill-color': COULEUR_PAYS_SYSTEME, 'fill-opacity': 0.35 },
-          },
-          'country-fills-active'
-        );
-      } else {
-        map.current.setFilter('country-fills-inactive', systemFilter);
-      }
-
-      map.current.setFilter('country-fills-click', ['in', 'iso_3166_1', ...codes]);
-      map.current.setFilter('country-fills-active', ['in', 'iso_3166_1', ...activeCodes]);
-      map.current.setFilter('country-borders-active', ['in', 'iso_3166_1', ...activeCodes]);
-      map.current.setFilter('country-highlight', ['==', 'iso_3166_1', highlightCode || '']);
-    },
-    [allCountryCodes, activeCountryCodes]
-  );
 
   const handleDragStart = useCallback((card, e) => {
     if (e.button !== 0 || !mapWrapperRef.current) return;
@@ -353,83 +384,68 @@ function CartographieReseau() {
     });
 
     map.current.on('load', () => {
-      const codes = allCountryCodes.length ? allCountryCodes : ['__none__'];
-      const activeCodes = activeCountryCodes.length ? activeCountryCodes : ['__none__'];
-
-      if (!map.current.getSource(COUNTRY_SOURCE_ID)) {
-        map.current.addSource(COUNTRY_SOURCE_ID, {
-          type: 'vector',
-          url: 'mapbox://mapbox.country-boundaries-v1',
+      if (!map.current.getSource(GEO_PAYS_SOURCE_ID)) {
+        map.current.addSource(GEO_PAYS_SOURCE_ID, {
+          type: 'geojson',
+          data: { type: 'FeatureCollection', features: [] },
         });
       }
 
-      const systemFilterLoad = (codes[0] === '__none__' || !codes.length) ? ['==', 'iso_3166_1', '__none__'] : ['in', 'iso_3166_1', ...codes];
       map.current.addLayer({
-        id: 'country-fills-inactive',
+        id: 'geo-pays-fill',
         type: 'fill',
-        source: COUNTRY_SOURCE_ID,
-        'source-layer': 'country_boundaries',
-        filter: systemFilterLoad,
-        paint: { 'fill-color': COULEUR_PAYS_SYSTEME, 'fill-opacity': 0.35 },
-      });
-      map.current.addLayer({
-        id: 'country-fills-active',
-        type: 'fill',
-        source: COUNTRY_SOURCE_ID,
-        'source-layer': 'country_boundaries',
-        filter: ['in', 'iso_3166_1', ...activeCodes],
-        paint: { 'fill-color': COULEUR_OCCUPE, 'fill-opacity': 0.5 },
-      });
-
-      map.current.addLayer({
-        id: 'country-highlight',
-        type: 'fill',
-        source: COUNTRY_SOURCE_ID,
-        'source-layer': 'country_boundaries',
-        filter: ['==', 'iso_3166_1', ''],
-        paint: { 'fill-color': COULEUR_OCCUPE, 'fill-opacity': 0.35 },
-      });
-
-      map.current.addLayer({
-        id: 'country-borders-active',
-        type: 'line',
-        source: COUNTRY_SOURCE_ID,
-        'source-layer': 'country_boundaries',
-        filter: ['in', 'iso_3166_1', ...activeCodes],
+        source: GEO_PAYS_SOURCE_ID,
+        filter: ['any', ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
         paint: {
-          'line-color': COULEUR_OCCUPE,
-          'line-width': 2,
-          'line-opacity': 1,
+          'fill-color': ['case', ['==', ['get', 'est_actif'], 1], COULEUR_OCCUPE, COULEUR_PAYS_SYSTEME],
+          'fill-opacity': 0.45,
+        },
+      });
+      map.current.addLayer({
+        id: 'geo-pays-line',
+        type: 'line',
+        source: GEO_PAYS_SOURCE_ID,
+        filter: ['any', ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
+        paint: { 'line-color': COULEUR_ENCERCLEMENT, 'line-width': 1.5 },
+      });
+      map.current.addLayer({
+        id: 'geo-pays-circles',
+        type: 'circle',
+        source: GEO_PAYS_SOURCE_ID,
+        filter: ['==', ['geometry-type'], 'Point'],
+        paint: {
+          'circle-radius': 8,
+          'circle-color': ['case', ['==', ['get', 'est_actif'], 1], COULEUR_OCCUPE, COULEUR_PAYS_SYSTEME],
+          'circle-opacity': 0.6,
+          'circle-stroke-width': 2,
+          'circle-stroke-color': COULEUR_ENCERCLEMENT,
         },
       });
 
-      map.current.addLayer({
-        id: 'country-fills-click',
-        type: 'fill',
-        source: COUNTRY_SOURCE_ID,
-        'source-layer': 'country_boundaries',
-        filter: ['in', 'iso_3166_1', ...codes],
-        paint: { 'fill-color': '#000', 'fill-opacity': 0 },
-      });
-
-      map.current.on('click', 'country-fills-click', (e) => {
+      const handlePaysClick = (e) => {
         const feat = e.features?.[0];
-        const iso = feat?.properties?.iso_3166_1;
-        if (!iso) return;
-        const country = countriesData.find((c) => c.code_iso_2 === iso);
+        const id = feat?.properties?.id;
+        if (!id) return;
+        const country = (countriesDataRef.current || []).find((c) => String(c.id) === id);
         if (country) {
-          flyToCountry(country);
           setSelectedCountry(country);
           setSelectedRegion({ type: 'pays', data: country });
+          if (map.current) {
+            const bounds = getBoundsFromItem(country);
+            if (bounds) {
+              map.current.fitBounds(bounds, { padding: 60, duration: 1500, maxZoom: 12 });
+            } else {
+              const centre = getCentreLngLat(country);
+              if (centre) map.current.flyTo({ center: centre, zoom: 6, duration: 1500 });
+            }
+          }
         }
-      });
+      };
 
-      map.current.getCanvas().style.cursor = '';
-      map.current.on('mouseenter', 'country-fills-click', () => {
-        map.current.getCanvas().style.cursor = 'pointer';
-      });
-      map.current.on('mouseleave', 'country-fills-click', () => {
-        map.current.getCanvas().style.cursor = '';
+      ['geo-pays-fill', 'geo-pays-line', 'geo-pays-circles'].forEach((layerId) => {
+        map.current.on('click', layerId, handlePaysClick);
+        map.current.on('mouseenter', layerId, () => { if (map.current) map.current.getCanvas().style.cursor = 'pointer'; });
+        map.current.on('mouseleave', layerId, () => { if (map.current) map.current.getCanvas().style.cursor = ''; });
       });
 
       setMapLoaded(true);
@@ -443,12 +459,12 @@ function CartographieReseau() {
     };
   }, []);
 
-  // Mettre à jour les couches quand les données changent
+  // Mettre à jour la source geo-pays quand les données pays changent
   useEffect(() => {
     if (!map.current || !mapLoaded) return;
-    if (!map.current.getLayer('country-fills-click')) return;
-    reapplyLayers(selectedCountry?.code_iso_2 || '');
-  }, [mapLoaded, countriesData, selectedCountry, reapplyLayers]);
+    const src = map.current.getSource(GEO_PAYS_SOURCE_ID);
+    if (src) src.setData(paysGeoJSON);
+  }, [mapLoaded, paysGeoJSON]);
 
   // Découpage par niveau : pays → provinces (polygones ou cercles), puis province → districts, puis district → quartiers
   useEffect(() => {
@@ -468,25 +484,8 @@ function CartographieReseau() {
       return;
     }
 
-    const parseCoord = (v) => {
-      if (v == null) return NaN;
-      const s = String(v).trim().replace(',', '.');
-      const n = parseFloat(s);
-      return Number.isFinite(n) ? n : NaN;
-    };
-    const countryLng = parseCoord(selectedCountry.longitude_centre);
-    const countryLat = parseCoord(selectedCountry.latitude_centre);
     const defaultMapCentre = [25, -2];
-    const countryCentre = Number.isFinite(countryLng) && Number.isFinite(countryLat)
-      ? [countryLng, countryLat]
-      : defaultMapCentre;
-
-    const lngLat = (item, fallback) => {
-      const lat = parseCoord(item.latitude_centre ?? item.latitude);
-      const lng = parseCoord(item.longitude_centre ?? item.longitude);
-      if (Number.isFinite(lat) && Number.isFinite(lng)) return [lng, lat];
-      return fallback ?? null;
-    };
+    const countryCentre = getCentreLngLat(selectedCountry) || defaultMapCentre;
 
     const sizeFromSuperficie = (km2, level) => {
       const s = Number(km2);
@@ -502,56 +501,56 @@ function CartographieReseau() {
     if (selType === 'district' && selectedRegion?.data) {
       const dist = selectedRegion.data;
       (dist.quartiers || []).forEach((q) => {
-        const geom = q?.metadonnees?.geometry ?? q?.geometry;
-        const pos = lngLat(q, countryCentre);
+        const geom = getGeometryForMap(q);
+        const pos = getCentreLngLat(q) || countryCentre;
         if (geom && (geom.type === 'Polygon' || geom.type === 'MultiPolygon') && Array.isArray(geom.coordinates)) {
           features.push({
             type: 'Feature',
             geometry: geom,
-            properties: { id: String(q.id), nom: q.nom || '', level: 'quartier', occupé: isActifAutorise(q) ? 1 : 0, size: sizeFromSuperficie(q.metadonnees?.superficie_km2, 'quartier') },
+            properties: { id: String(q.id), nom: q.nom || '', level: 'quartier', occupé: isActifAutorise(q) ? 1 : 0, size: sizeFromSuperficie(q.superficie_km2 ?? q.metadonnees?.superficie_km2, 'quartier') },
           });
         } else if (pos) {
           features.push({
             type: 'Feature',
             geometry: { type: 'Point', coordinates: pos },
-            properties: { id: String(q.id), nom: q.nom || '', level: 'quartier', occupé: isActifAutorise(q) ? 1 : 0, size: sizeFromSuperficie(q.metadonnees?.superficie_km2, 'quartier') },
+            properties: { id: String(q.id), nom: q.nom || '', level: 'quartier', occupé: isActifAutorise(q) ? 1 : 0, size: sizeFromSuperficie(q.superficie_km2 ?? q.metadonnees?.superficie_km2, 'quartier') },
           });
         }
       });
     } else if (selType === 'province' && selectedRegion?.data) {
       const prov = selectedRegion.data;
       (prov.districts || []).forEach((dist) => {
-        const geom = dist?.metadonnees?.geometry ?? dist?.geometry;
-        const pos = lngLat(dist, countryCentre);
+        const geom = getGeometryForMap(dist);
+        const pos = getCentreLngLat(dist) || countryCentre;
         if (geom && (geom.type === 'Polygon' || geom.type === 'MultiPolygon') && Array.isArray(geom.coordinates)) {
           features.push({
             type: 'Feature',
             geometry: geom,
-            properties: { id: String(dist.id), nom: dist.nom || '', level: 'district', occupé: isActifAutorise(dist) ? 1 : 0, province_id: String(prov.id), size: sizeFromSuperficie(dist.metadonnees?.superficie_km2, 'district') },
+            properties: { id: String(dist.id), nom: dist.nom || '', level: 'district', occupé: isActifAutorise(dist) ? 1 : 0, province_id: String(prov.id), size: sizeFromSuperficie(dist.superficie_km2 ?? dist.metadonnees?.superficie_km2, 'district') },
           });
         } else if (pos) {
           features.push({
             type: 'Feature',
             geometry: { type: 'Point', coordinates: pos },
-            properties: { id: String(dist.id), nom: dist.nom || '', level: 'district', occupé: isActifAutorise(dist) ? 1 : 0, province_id: String(prov.id), size: sizeFromSuperficie(dist.metadonnees?.superficie_km2, 'district') },
+            properties: { id: String(dist.id), nom: dist.nom || '', level: 'district', occupé: isActifAutorise(dist) ? 1 : 0, province_id: String(prov.id), size: sizeFromSuperficie(dist.superficie_km2 ?? dist.metadonnees?.superficie_km2, 'district') },
           });
         }
       });
     } else {
       (selectedCountry.provinces || []).forEach((prov) => {
-        const geom = prov?.metadonnees?.geometry ?? prov?.geometry;
-        const pos = lngLat(prov, countryCentre);
+        const geom = getGeometryForMap(prov);
+        const pos = getCentreLngLat(prov) || countryCentre;
         if (geom && (geom.type === 'Polygon' || geom.type === 'MultiPolygon') && Array.isArray(geom.coordinates)) {
           features.push({
             type: 'Feature',
             geometry: geom,
-            properties: { id: String(prov.id), nom: prov.nom || '', level: 'province', occupé: isActifAutorise(prov) ? 1 : 0, size: sizeFromSuperficie(prov.metadonnees?.superficie_km2, 'province') },
+            properties: { id: String(prov.id), nom: prov.nom || '', level: 'province', occupé: isActifAutorise(prov) ? 1 : 0, size: sizeFromSuperficie(prov.superficie_km2 ?? prov.metadonnees?.superficie_km2, 'province') },
           });
         } else if (pos) {
           features.push({
             type: 'Feature',
             geometry: { type: 'Point', coordinates: pos },
-            properties: { id: String(prov.id), nom: prov.nom || '', level: 'province', occupé: isActifAutorise(prov) ? 1 : 0, size: sizeFromSuperficie(prov.metadonnees?.superficie_km2, 'province') },
+            properties: { id: String(prov.id), nom: prov.nom || '', level: 'province', occupé: isActifAutorise(prov) ? 1 : 0, size: sizeFromSuperficie(prov.superficie_km2 ?? prov.metadonnees?.superficie_km2, 'province') },
           });
         }
       });
@@ -585,6 +584,10 @@ function CartographieReseau() {
       if (data) {
         setSelectedRegion({ type, data });
         if (type === 'province') setExpandedProvinces((prev) => new Set(prev).add(id));
+        const bounds = getBoundsFromItem(data);
+        if (bounds && map.current) {
+          map.current.fitBounds(bounds, { padding: 80, duration: 800, maxZoom: 14 });
+        }
       }
     };
 
@@ -644,22 +647,15 @@ function CartographieReseau() {
     };
   }, [mapLoaded, selectedCountry, selectedRegion]);
 
-  useEffect(() => {
-    if (!map.current || !mapLoaded) return;
-    if (!map.current.getLayer('country-highlight')) return;
-    map.current.setFilter('country-highlight', [
-      '==',
-      'iso_3166_1',
-      selectedCountry?.code_iso_2 || '',
-    ]);
-  }, [selectedCountry, mapLoaded]);
 
   const flyToCountry = (country) => {
     if (!map.current || !country) return;
-    const lng = parseFloat(country.longitude_centre);
-    const lat = parseFloat(country.latitude_centre);
-    if (Number.isFinite(lng) && Number.isFinite(lat)) {
-      map.current.flyTo({ center: [lng, lat], zoom: 6, duration: 1500 });
+    const bounds = getBoundsFromItem(country);
+    if (bounds) {
+      map.current.fitBounds(bounds, { padding: 60, duration: 1500, maxZoom: 12 });
+    } else {
+      const centre = getCentreLngLat(country);
+      if (centre) map.current.flyTo({ center: centre, zoom: 6, duration: 1500 });
     }
     setSelectedCountry(country);
     setSelectedRegion({ type: 'pays', data: country });
@@ -677,78 +673,64 @@ function CartographieReseau() {
 
     map.current.once('style.load', () => {
       map.current.jumpTo({ center, zoom, pitch, bearing });
-      const codes = allCountryCodes.length ? allCountryCodes : ['__none__'];
-      const activeCodes = activeCountryCodes.length ? activeCountryCodes : ['__none__'];
-
-      if (!map.current.getSource(COUNTRY_SOURCE_ID)) {
-        map.current.addSource(COUNTRY_SOURCE_ID, {
-          type: 'vector',
-          url: 'mapbox://mapbox.country-boundaries-v1',
+      if (!map.current.getSource(GEO_PAYS_SOURCE_ID)) {
+        map.current.addSource(GEO_PAYS_SOURCE_ID, {
+          type: 'geojson',
+          data: paysGeoJSON,
         });
       }
-
-      const systemFilterStyle = codes.length ? ['in', 'iso_3166_1', ...codes] : ['==', 'iso_3166_1', '__none__'];
       map.current.addLayer({
-        id: 'country-fills-inactive',
+        id: 'geo-pays-fill',
         type: 'fill',
-        source: COUNTRY_SOURCE_ID,
-        'source-layer': 'country_boundaries',
-        filter: systemFilterStyle,
-        paint: { 'fill-color': COULEUR_PAYS_SYSTEME, 'fill-opacity': 0.35 },
-      });
-      map.current.addLayer({
-        id: 'country-fills-active',
-        type: 'fill',
-        source: COUNTRY_SOURCE_ID,
-        'source-layer': 'country_boundaries',
-        filter: ['in', 'iso_3166_1', ...activeCodes],
-        paint: { 'fill-color': COULEUR_OCCUPE, 'fill-opacity': 0.5 },
-      });
-      map.current.addLayer({
-        id: 'country-highlight',
-        type: 'fill',
-        source: COUNTRY_SOURCE_ID,
-        'source-layer': 'country_boundaries',
-        filter: ['==', 'iso_3166_1', selectedCountry?.code_iso_2 || ''],
-        paint: { 'fill-color': COULEUR_OCCUPE, 'fill-opacity': 0.35 },
-      });
-      map.current.addLayer({
-        id: 'country-borders-active',
-        type: 'line',
-        source: COUNTRY_SOURCE_ID,
-        'source-layer': 'country_boundaries',
-        filter: ['in', 'iso_3166_1', ...activeCodes],
+        source: GEO_PAYS_SOURCE_ID,
+        filter: ['any', ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
         paint: {
-          'line-color': COULEUR_OCCUPE,
-          'line-width': 2,
-          'line-opacity': 1,
+          'fill-color': ['case', ['==', ['get', 'est_actif'], 1], COULEUR_OCCUPE, COULEUR_PAYS_SYSTEME],
+          'fill-opacity': 0.45,
         },
       });
       map.current.addLayer({
-        id: 'country-fills-click',
-        type: 'fill',
-        source: COUNTRY_SOURCE_ID,
-        'source-layer': 'country_boundaries',
-        filter: ['in', 'iso_3166_1', ...codes],
-        paint: { 'fill-color': '#000', 'fill-opacity': 0 },
+        id: 'geo-pays-line',
+        type: 'line',
+        source: GEO_PAYS_SOURCE_ID,
+        filter: ['any', ['==', ['geometry-type'], 'Polygon'], ['==', ['geometry-type'], 'MultiPolygon']],
+        paint: { 'line-color': COULEUR_ENCERCLEMENT, 'line-width': 1.5 },
       });
-
-      map.current.on('click', 'country-fills-click', (e) => {
+      map.current.addLayer({
+        id: 'geo-pays-circles',
+        type: 'circle',
+        source: GEO_PAYS_SOURCE_ID,
+        filter: ['==', ['geometry-type'], 'Point'],
+        paint: {
+          'circle-radius': 8,
+          'circle-color': ['case', ['==', ['get', 'est_actif'], 1], COULEUR_OCCUPE, COULEUR_PAYS_SYSTEME],
+          'circle-opacity': 0.6,
+          'circle-stroke-width': 2,
+          'circle-stroke-color': COULEUR_ENCERCLEMENT,
+        },
+      });
+      const handlePaysClick = (e) => {
         const feat = e.features?.[0];
-        const iso = feat?.properties?.iso_3166_1;
-        if (!iso) return;
-        const country = countriesData.find((c) => c.code_iso_2 === iso);
+        const id = feat?.properties?.id;
+        if (!id) return;
+        const country = (countriesDataRef.current || []).find((c) => String(c.id) === id);
         if (country) {
-          flyToCountry(country);
           setSelectedCountry(country);
           setSelectedRegion({ type: 'pays', data: country });
+          if (map.current) {
+            const bounds = getBoundsFromItem(country);
+            if (bounds) map.current.fitBounds(bounds, { padding: 60, duration: 1500, maxZoom: 12 });
+            else {
+              const centre = getCentreLngLat(country);
+              if (centre) map.current.flyTo({ center: centre, zoom: 6, duration: 1500 });
+            }
+          }
         }
-      });
-      map.current.on('mouseenter', 'country-fills-click', () => {
-        map.current.getCanvas().style.cursor = 'pointer';
-      });
-      map.current.on('mouseleave', 'country-fills-click', () => {
-        map.current.getCanvas().style.cursor = '';
+      };
+      ['geo-pays-fill', 'geo-pays-line', 'geo-pays-circles'].forEach((layerId) => {
+        map.current.on('click', layerId, handlePaysClick);
+        map.current.on('mouseenter', layerId, () => { if (map.current) map.current.getCanvas().style.cursor = 'pointer'; });
+        map.current.on('mouseleave', layerId, () => { if (map.current) map.current.getCanvas().style.cursor = ''; });
       });
     });
   };
@@ -1038,7 +1020,7 @@ function CartographieReseau() {
                   <p className="text-xs opacity-90">Vérifiez que le backend est démarré et que <code className="bg-red-500/20 px-1 rounded">VITE_API_URL</code> pointe vers l’API (ex. http://127.0.0.1:8000).</p>
                   <button
                     type="button"
-                    onClick={() => fetchLocalisationComplete()}
+                    onClick={() => fetchGeoPays()}
                     className="text-xs font-medium text-primary hover:underline"
                   >
                     Réessayer
@@ -1068,7 +1050,7 @@ function CartographieReseau() {
                   {filteredCountries.length === 0 && !fetchError && (
                     <button
                       type="button"
-                      onClick={() => fetchLocalisationComplete()}
+                      onClick={() => fetchGeoPays()}
                       className="text-xs font-medium text-primary hover:underline mb-2"
                     >
                       Réessayer le chargement
