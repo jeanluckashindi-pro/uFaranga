@@ -1,0 +1,20 @@
+# Données GADM téléchargées
+gadm_data/
+gadm_data_africa/
+gadm_data_*/
+*.gpkg
+
+# Fichiers temporaires Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Logs
+*.log
+
+# Fichiers de sauvegarde
+*.bak
+*.backup
+*~
