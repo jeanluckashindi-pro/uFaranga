@@ -9,16 +9,16 @@ import uuid
 
 
 class Pays(models.Model):
-    """Niveau 1: Pays"""
+    """Niveau 0: Pays - Table de référence"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     code_iso_2 = models.CharField(max_length=2, unique=True, db_index=True)
-    code_iso_3 = models.CharField(max_length=3, db_index=True)
-    nom = models.CharField(max_length=100, db_index=True)
+    code_iso_3 = models.CharField(max_length=3, blank=True)
+    nom = models.CharField(max_length=100)
     nom_anglais = models.CharField(max_length=100, blank=True)
     
     # Géographie
-    continent = models.CharField(max_length=50, blank=True, db_index=True)
-    sous_region = models.CharField(max_length=100, blank=True, db_index=True)
+    continent = models.CharField(max_length=50, blank=True)
+    sous_region = models.CharField(max_length=100, blank=True)
     centre_latitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     centre_longitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
     bbox_nord = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
@@ -72,14 +72,11 @@ class Pays(models.Model):
     metadonnees = models.JSONField(default=dict, blank=True)
 
     class Meta:
-        db_table = 'localisation"."pays'
+        db_table = '"localisation"."pays_reference"'
         verbose_name = 'Pays'
         verbose_name_plural = 'Pays'
         ordering = ['nom']
-        indexes = [
-            models.Index(fields=['est_actif', 'autorise_systeme']),
-            models.Index(fields=['continent', 'sous_region']),
-        ]
+        managed = False  # Table gérée manuellement
 
     def __str__(self):
         return f"{self.nom} ({self.code_iso_2})"

@@ -1030,3 +1030,214 @@ django.db.utils.ProgrammingError: relation "localisation.pays" does not exist
 LINE 1: ...cation", "localisation"."pays"."metadonnees" FROM "localisat...
                                                              ^
 ERROR 2026-03-04 12:23:19,500 basehttp 2972 6056 "GET /api/v1/authentification/moi/ HTTP/1.1" 500 259376
+INFO 2026-03-04 15:02:52,893 autoreload 27704 25912 Watching for file changes with StatReloader
+INFO 2026-03-04 15:03:33,325 basehttp 27704 1772 "OPTIONS /api/v1/authentification/connexion/ HTTP/1.1" 200 0
+INFO 2026-03-04 15:03:34,668 basehttp 27704 1772 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-03-04 15:03:34,677 basehttp 27704 1772 "OPTIONS /api/v1/authentification/moi/ HTTP/1.1" 200 0
+ERROR 2026-03-04 15:03:34,969 log 27704 1772 Internal Server Error: /api/v1/authentification/moi/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedTable: relation "localisation.pays" does not exist
+LINE 1: ...cation", "localisation"."pays"."metadonnees" FROM "localisat...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py", line 341, in get
+    data = dict(serializer.data)
+                ^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 538, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\fields.py", line 1872, in to_representation
+    return method(value)
+           ^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py", line 699, in get_nationalite_details
+    pays = Pays.objects.get(code_iso_2=obj.nationalite)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: relation "localisation.pays" does not exist
+LINE 1: ...cation", "localisation"."pays"."metadonnees" FROM "localisat...
+                                                             ^
+ERROR 2026-03-04 15:03:34,980 basehttp 27704 1772 "GET /api/v1/authentification/moi/ HTTP/1.1" 500 259932
+INFO 2026-03-04 15:03:43,976 basehttp 27704 1772 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+ERROR 2026-03-04 15:03:44,177 log 27704 1772 Internal Server Error: /api/v1/authentification/moi/
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedTable: relation "localisation.pays" does not exist
+LINE 1: ...cation", "localisation"."pays"."metadonnees" FROM "localisat...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py", line 341, in get
+    data = dict(serializer.data)
+                ^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 571, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 538, in to_representation
+    ret[field.field_name] = field.to_representation(attribute)
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\fields.py", line 1872, in to_representation
+    return method(value)
+           ^^^^^^^^^^^^^
+  File "D:\Projets\Decima Techno\uFaranga\backend\apps\identite\serializers.py", line 699, in get_nationalite_details
+    pays = Pays.objects.get(code_iso_2=obj.nationalite)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 633, in get
+    num = len(clone)
+          ^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 380, in __len__
+    self._fetch_all()
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+              ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\sql\compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\jeanl\AppData\Local\Programs\Python\Python312\Lib\site-packages\psycopg\cursor.py", line 117, in execute
+    raise ex.with_traceback(None)
+django.db.utils.ProgrammingError: relation "localisation.pays" does not exist
+LINE 1: ...cation", "localisation"."pays"."metadonnees" FROM "localisat...
+                                                             ^
+ERROR 2026-03-04 15:03:44,182 basehttp 27704 1772 "GET /api/v1/authentification/moi/ HTTP/1.1" 500 259932
+INFO 2026-03-04 15:04:43,526 autoreload 27704 25912 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-04 15:04:46,484 autoreload 24768 14444 Watching for file changes with StatReloader
+INFO 2026-03-04 15:05:53,963 autoreload 24768 14444 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-04 15:05:57,378 autoreload 28568 18764 Watching for file changes with StatReloader
+INFO 2026-03-04 15:08:03,641 autoreload 28568 18764 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-04 15:08:07,377 autoreload 28060 25144 Watching for file changes with StatReloader
+INFO 2026-03-04 15:09:00,011 autoreload 28060 25144 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-04 15:09:02,684 autoreload 20760 21460 Watching for file changes with StatReloader
+INFO 2026-03-04 15:09:42,290 autoreload 20760 21460 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-04 15:09:43,799 autoreload 28740 26924 Watching for file changes with StatReloader
+INFO 2026-03-04 15:10:48,106 autoreload 28740 26924 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-03-04 15:10:50,175 autoreload 14048 2652 Watching for file changes with StatReloader
+INFO 2026-03-04 15:11:39,449 autoreload 14048 2652 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-04 15:11:41,102 autoreload 13496 11104 Watching for file changes with StatReloader
+INFO 2026-03-04 15:11:56,881 autoreload 13496 11104 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-04 15:11:58,435 autoreload 20284 9860 Watching for file changes with StatReloader
+INFO 2026-03-04 15:12:00,700 autoreload 20284 9860 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-03-04 15:12:02,378 autoreload 19408 16412 Watching for file changes with StatReloader
+INFO 2026-03-04 15:12:45,587 basehttp 19408 18940 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
+INFO 2026-03-04 15:12:46,015 basehttp 19408 18940 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3807

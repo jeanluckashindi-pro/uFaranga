@@ -59,10 +59,11 @@ class Pays(models.Model):
     fuseau_horaire_id = models.UUIDField(null=True, blank=True)
 
     class Meta:
-        db_table = 'localisation"."pays'
+        db_table = '"localisation"."divisions_administratives_niveau0"'
         verbose_name = 'Pays (ADM0)'
         verbose_name_plural = 'Pays (ADM0)'
         ordering = ['nom']
+        managed = False  # Table gérée manuellement
 
     def __str__(self):
         return f"{self.nom} ({self.code_iso_2})"
