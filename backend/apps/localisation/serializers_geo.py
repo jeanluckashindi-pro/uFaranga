@@ -3,7 +3,7 @@ Serializers GeoJSON pour affichage sur carte dynamique.
 Retourne les coordonnées et géométries pour chaque niveau hiérarchique.
 """
 from rest_framework import serializers
-from .models import Pays, Province, District, Commune, Secteur, Quartier, Zone, Colline, PointDeService
+from .models import Pays, Province, District, PointDeService, DivisionNiveau0, DivisionNiveau1, DivisionNiveau2
 
 
 # ============================================================================
@@ -37,156 +37,61 @@ class PaysGeoSerializer(serializers.ModelSerializer):
 
 
 class ProvinceGeoSerializer(serializers.ModelSerializer):
-    """Province avec coordonnées pour affichage carte"""
-    pays_nom = serializers.CharField(source='pays.nom', read_only=True)
-    pays_code = serializers.CharField(source='pays.code_iso_2', read_only=True)
-    geometry = serializers.SerializerMethodField()
+    """Province (Division Niveau 1) avec coordonnées pour affichage carte"""
     
     class Meta:
-        model = Province
+        model = DivisionNiveau1
         fields = [
-            'id', 'code', 'nom', 'pays_nom', 'pays_code',
-            'centre_latitude', 'centre_longitude',
-            'bbox_nord', 'bbox_sud', 'bbox_est', 'bbox_ouest',
-            'superficie_km2', 'population_estimee',
-            'geometry', 'est_actif'
+            'division_id', 'gid_0', 'pays', 'gid_1', 'nom_1', 
+            'type_1', 'code_1', 'code_iso', 'nom_pays', 'est_actif'
         ]
-    
-    def get_geometry(self, obj):
-        if obj.geometrie_geojson:
-            return obj.geometrie_geojson
-        if obj.centre_latitude and obj.centre_longitude:
-            return {
-                "type": "Point",
-                "coordinates": [float(obj.centre_longitude), float(obj.centre_latitude)]
-            }
-        return None
 
 
 class DistrictGeoSerializer(serializers.ModelSerializer):
-    """District avec coordonnées pour affichage carte"""
-    province_nom = serializers.CharField(source='province.nom', read_only=True)
-    pays_nom = serializers.CharField(source='province.pays.nom', read_only=True)
-    geometry = serializers.SerializerMethodField()
+    """District (Division Niveau 2) avec coordonnées pour affichage carte"""
     
     class Meta:
-        model = District
+        model = DivisionNiveau2
         fields = [
-            'id', 'code', 'nom', 'province_nom', 'pays_nom',
-            'centre_latitude', 'centre_longitude',
-            'bbox_nord', 'bbox_sud', 'bbox_est', 'bbox_ouest',
-            'superficie_km2', 'population_estimee', 'zone_urbaine',
-            'geometry', 'est_actif'
-        ]
-    
-    def get_geometry(self, obj):
-        if obj.geometrie_geojson:
-            return obj.geometrie_geojson
-        if obj.centre_latitude and obj.centre_longitude:
-            return {
-                "type": "Point",
-                "coordinates": [float(obj.centre_longitude), float(obj.centre_latitude)]
-            }
-        return None
-
-
-class CommuneGeoSerializer(serializers.ModelSerializer):
-    """Commune avec coordonnées pour affichage carte"""
-    district_nom = serializers.CharField(source='district.nom', read_only=True)
-    geometry = serializers.SerializerMethodField()
-    
-    class Meta:
-        model = Commune
-        fields = [
-            'id', 'code', 'nom', 'type_commune', 'district_nom',
-            'centre_latitude', 'centre_longitude',
-            'bbox_nord', 'bbox_sud', 'bbox_est', 'bbox_ouest',
-            'superficie_km2', 'population_totale', 'zone_urbaine',
-            'geometry', 'est_actif'
-        ]
-    
-    def get_geometry(self, obj):
-        if obj.centre_latitude and obj.centre_longitude:
-            return {
-                "type": "Point",
-                "coordinates": [float(obj.centre_longitude), float(obj.centre_latitude)]
-            }
-        return None
-
-
-class SecteurGeoSerializer(serializers.ModelSerializer):
-    """Secteur avec coordonnées pour affichage carte"""
-    commune_nom = serializers.CharField(source='commune.nom', read_only=True)
-    
-    class Meta:
-        model = Secteur
-        fields = [
-            'id', 'code', 'nom', 'type_secteur', 'commune_nom',
-            'centre_latitude', 'centre_longitude',
-            'population_estimee', 'zone_urbaine', 'est_actif'
+            'division_id', 'gid_0', 'pays', 'gid_1', 'nom_1',
+            'gid_2', 'nom_2', 'type_2', 'code_2', 
+            'code_iso', 'nom_pays', 'est_actif'
         ]
 
 
-class QuartierGeoSerializer(serializers.ModelSerializer):
-    """Quartier avec coordonnées pour affichage carte"""
-    district_nom = serializers.CharField(source='district.nom', read_only=True)
-    geometry = serializers.SerializerMethodField()
-    
-    class Meta:
-        model = Quartier
-        fields = [
-            'id', 'code', 'nom', 'type_zone', 'district_nom',
-            'centre_latitude', 'centre_longitude',
-            'bbox_nord', 'bbox_sud', 'bbox_est', 'bbox_ouest',
-            'nombre_habitants', 'geometry', 'est_actif'
-        ]
-    
-    def get_geometry(self, obj):
-        if obj.geometrie_geojson:
-            return obj.geometrie_geojson
-        if obj.centre_latitude and obj.centre_longitude:
-            return {
-                "type": "Point",
-                "coordinates": [float(obj.centre_longitude), float(obj.centre_latitude)]
-            }
-        return None
+# Serializers vides pour compatibilité (modèles non existants)
+class CommuneGeoSerializer(serializers.Serializer):
+    """Placeholder - Commune n'existe pas dans la structure actuelle"""
+    pass
 
 
-class ZoneGeoSerializer(serializers.ModelSerializer):
-    """Zone avec coordonnées pour affichage carte"""
-    quartier_nom = serializers.CharField(source='quartier.nom', read_only=True)
-    
-    class Meta:
-        model = Zone
-        fields = [
-            'id', 'code', 'nom', 'type_zone', 'quartier_nom',
-            'centre_latitude', 'centre_longitude',
-            'population_estimee', 'zone_commerciale', 'zone_residentielle',
-            'est_actif'
-        ]
+class SecteurGeoSerializer(serializers.Serializer):
+    """Placeholder - Secteur n'existe pas dans la structure actuelle"""
+    pass
 
 
-class CollineGeoSerializer(serializers.ModelSerializer):
-    """Colline avec coordonnées pour affichage carte"""
-    zone_nom = serializers.CharField(source='zone.nom', read_only=True)
-    
-    class Meta:
-        model = Colline
-        fields = [
-            'id', 'code', 'nom', 'type_colline', 'zone_nom',
-            'centre_latitude', 'centre_longitude', 'altitude_m',
-            'population_estimee', 'zone_rurale', 'est_actif'
-        ]
+class QuartierGeoSerializer(serializers.Serializer):
+    """Placeholder - Quartier n'existe pas dans la structure actuelle"""
+    pass
+
+
+class ZoneGeoSerializer(serializers.Serializer):
+    """Placeholder - Zone n'existe pas dans la structure actuelle"""
+    pass
+
+
+class CollineGeoSerializer(serializers.Serializer):
+    """Placeholder - Colline n'existe pas dans la structure actuelle"""
+    pass
 
 
 class PointDeServiceGeoSerializer(serializers.ModelSerializer):
     """Point de service avec coordonnées exactes pour affichage carte"""
-    quartier_nom = serializers.CharField(source='quartier.nom', read_only=True)
     
     class Meta:
         model = PointDeService
         fields = [
-            'id', 'code', 'nom', 'type_point', 'quartier_nom',
+            'id', 'code', 'nom', 'type_point', 'quartier_id',
             'latitude', 'longitude', 'altitude_m',
             'adresse_complementaire', 'est_actif'
         ]
@@ -227,10 +132,10 @@ class GeoJSONFeatureSerializer(serializers.Serializer):
                     "coordinates": coordinates
                 },
                 "properties": {
-                    "id": str(item.id),
-                    "code": item.code,
-                    "nom": item.nom,
-                    "est_actif": item.est_actif,
+                    "id": str(item.id) if hasattr(item, 'id') else str(item.division_id),
+                    "code": item.code if hasattr(item, 'code') else '',
+                    "nom": item.nom if hasattr(item, 'nom') else (item.nom_pays if hasattr(item, 'nom_pays') else ''),
+                    "est_actif": item.est_actif if hasattr(item, 'est_actif') else True,
                 }
             }
             

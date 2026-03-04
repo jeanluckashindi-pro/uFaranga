@@ -9,15 +9,19 @@ router = DefaultRouter()
 
 # Endpoints optimisés avec pagination
 router.register(r'pays', PaysOptimiseViewSet, basename='pays')
+router.register(r'niveau0', DivisionNiveau0ViewSet, basename='niveau0')
+router.register(r'niveau1', DivisionNiveau1ViewSet, basename='niveau1')
+router.register(r'niveau2', DivisionNiveau2ViewSet, basename='niveau2')
+
+# Alias pour compatibilité
 router.register(r'provinces', ProvinceOptimiseViewSet, basename='provinces')
 router.register(r'districts', DistrictOptimiseViewSet, basename='districts')
-router.register(r'communes', CommuneOptimiseViewSet, basename='communes')
-router.register(r'secteurs', SecteurOptimiseViewSet, basename='secteurs')
-router.register(r'quartiers', QuartierOptimiseViewSet, basename='quartiers')
-router.register(r'zones', ZoneOptimiseViewSet, basename='zones')
-router.register(r'collines', CollineOptimiseViewSet, basename='collines')
+
+# Points de service
 router.register(r'points-de-service', PointDeServiceOptimiseViewSet, basename='points-de-service')
-router.register(r'hierarchie', HierarchieOptimiseeViewSet, basename='hierarchie')
+
+# Statistiques
+router.register(r'statistiques', LocalisationStatistiquesViewSet, basename='statistiques')
 
 # Endpoints géospatiaux pour carte dynamique
 router.register(r'geo', GeoLocalisationViewSet, basename='geo')

@@ -1,6 +1,7 @@
 """
-Modèles COMPLETS pour le schéma localisation.
-Hiérarchie à 9 niveaux: Pays → Provinces → Districts → Communes → Secteurs → Quartiers → Zones → Collines → Sous-localités
+Modèles pour le schéma localisation.
+Hiérarchie GADM: Pays (niveau0) → Provinces (niveau1) → Districts (niveau2) → Communes (niveau3) → Secteurs (niveau4) → Villages (niveau5)
++ Points de service
 """
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
@@ -8,8 +9,12 @@ from django.utils import timezone
 import uuid
 
 
+# =============================================================================
+# TABLE DE RÉFÉRENCE PAYS (utilisée pour les ForeignKeys)
+# =============================================================================
+
 class Pays(models.Model):
-    """Niveau 0: Pays - Table de référence"""
+    """Table de référence des pays avec UUID - utilisée pour les relations ForeignKey"""
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     code_iso_2 = models.CharField(max_length=2, unique=True, db_index=True)
     code_iso_3 = models.CharField(max_length=3, blank=True)
@@ -76,347 +81,140 @@ class Pays(models.Model):
         verbose_name = 'Pays'
         verbose_name_plural = 'Pays'
         ordering = ['nom']
-        managed = False  # Table gérée manuellement
+        managed = False
 
     def __str__(self):
         return f"{self.nom} ({self.code_iso_2})"
 
 
-class Province(models.Model):
-    """Niveau 2: Provinces/Régions"""
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    pays = models.ForeignKey(Pays, on_delete=models.CASCADE, related_name='provinces', db_index=True)
-    code = models.CharField(max_length=20, db_index=True)
-    nom = models.CharField(max_length=100, db_index=True)
-    
-    # Géographie
-    centre_latitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    centre_longitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_nord = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_sud = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_est = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_ouest = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    superficie_km2 = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-    
-    # Statistiques
-    population_estimee = models.BigIntegerField(null=True, blank=True)
-    densite_population = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    zone_urbaine = models.BooleanField(default=False)
-    nombre_agents = models.IntegerField(default=0)
-    nombre_utilisateurs = models.IntegerField(default=0)
-    nombre_agents_actifs = models.IntegerField(default=0)
-    nombre_utilisateurs_actifs = models.IntegerField(default=0)
-    
-    # Infrastructure bancaire
-    code_bancaire = models.CharField(max_length=20, blank=True)
-    nombre_banques = models.IntegerField(default=0)
-    nombre_agences_bancaires = models.IntegerField(default=0)
-    nombre_distributeurs = models.IntegerField(default=0)
-    
-    # Couverture réseau
-    couverture_reseau_mobile = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    couverture_internet = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    
-    # Géométrie
-    geometrie_geojson = models.JSONField(null=True, blank=True)
-    
-    # Gestion
-    autorise_systeme = models.BooleanField(default=True, db_index=True)
-    est_actif = models.BooleanField(default=True, db_index=True)
-    date_creation = models.DateTimeField(default=timezone.now)
-    date_modification = models.DateTimeField(auto_now=True)
-    metadonnees = models.JSONField(default=dict, blank=True)
+# =============================================================================
+# DIVISIONS ADMINISTRATIVES GADM (lecture seule)
+# =============================================================================
+
+class DivisionNiveau0(models.Model):
+    """Niveau 0 GADM - Pays (lecture seule, données géographiques)"""
+    division_id = models.CharField(max_length=50, primary_key=True)
+    gid_0 = models.TextField(blank=True)
+    pays = models.TextField(blank=True)
+    code_iso = models.TextField(blank=True)
+    nom_pays = models.TextField(blank=True)
+    niveau_admin = models.BigIntegerField(null=True, blank=True)
+    est_autorise = models.BooleanField(default=False)
+    affiche_par_defaut = models.BooleanField(default=False)
+    continent_code = models.CharField(max_length=3, blank=True)
+    region_code = models.CharField(max_length=3, blank=True)
+    est_actif = models.BooleanField(default=False)
 
     class Meta:
-        db_table = 'localisation"."provinces'
-        verbose_name = 'Province'
-        verbose_name_plural = 'Provinces'
-        unique_together = [('pays', 'code')]
-        ordering = ['pays__nom', 'nom']
-        indexes = [
-            models.Index(fields=['pays', 'est_actif']),
-        ]
+        db_table = '"localisation"."divisions_administratives_niveau0"'
+        verbose_name = 'Division Niveau 0 (Pays GADM)'
+        verbose_name_plural = 'Divisions Niveau 0 (Pays GADM)'
+        ordering = ['nom_pays']
+        managed = False
 
     def __str__(self):
-        return f"{self.nom} ({self.pays.code_iso_2})"
+        return f"{self.nom_pays} ({self.code_iso})"
 
 
-class District(models.Model):
-    """Niveau 3: Districts"""
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    province = models.ForeignKey(Province, on_delete=models.CASCADE, related_name='districts', db_index=True)
-    code = models.CharField(max_length=20, db_index=True)
-    nom = models.CharField(max_length=100, db_index=True)
-    
-    # Géographie
-    centre_latitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    centre_longitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_nord = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_sud = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_est = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_ouest = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    superficie_km2 = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-    
-    # Statistiques
-    population_estimee = models.BigIntegerField(null=True, blank=True)
-    zone_urbaine = models.BooleanField(default=False)
-    niveau_activite_economique = models.CharField(max_length=20, blank=True)
-    nombre_agents = models.IntegerField(default=0)
-    nombre_utilisateurs = models.IntegerField(default=0)
-    nombre_agents_actifs = models.IntegerField(default=0)
-    nombre_utilisateurs_actifs = models.IntegerField(default=0)
-    
-    # Infrastructure
-    code_postal = models.CharField(max_length=20, blank=True)
-    code_bancaire = models.CharField(max_length=20, blank=True)
-    nombre_agences_bancaires = models.IntegerField(default=0)
-    nombre_distributeurs = models.IntegerField(default=0)
-    nombre_agents_mobile_money = models.IntegerField(default=0)
-    couverture_reseau_mobile = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    
-    # Géométrie
-    geometrie_geojson = models.JSONField(null=True, blank=True)
-    
-    # Gestion
-    autorise_systeme = models.BooleanField(default=True, db_index=True)
-    est_actif = models.BooleanField(default=True, db_index=True)
-    date_creation = models.DateTimeField(default=timezone.now)
-    date_modification = models.DateTimeField(auto_now=True)
-    metadonnees = models.JSONField(default=dict, blank=True)
+class DivisionNiveau1(models.Model):
+    """Niveau 1 GADM - Provinces/États"""
+    division_id = models.CharField(max_length=50, primary_key=True)
+    pays_division_id = models.CharField(max_length=50, db_index=True)
+    gid_0 = models.TextField(blank=True)
+    pays = models.TextField(blank=True)
+    gid_1 = models.TextField(blank=True)
+    nom_1 = models.TextField(blank=True)
+    nom_variante_1 = models.TextField(blank=True)
+    nom_local_1 = models.TextField(blank=True)
+    type_1 = models.TextField(blank=True)
+    type_anglais_1 = models.TextField(blank=True)
+    code_1 = models.TextField(blank=True)
+    hasc_1 = models.TextField(blank=True)
+    iso_1 = models.TextField(blank=True)
+    code_iso = models.TextField(blank=True)
+    nom_pays = models.TextField(blank=True)
+    niveau_admin = models.BigIntegerField(null=True, blank=True)
+    est_autorise = models.BooleanField(default=False)
+    affiche_par_defaut = models.BooleanField(default=False)
+    est_actif = models.BooleanField(default=False)
 
     class Meta:
-        db_table = 'localisation"."districts'
-        verbose_name = 'District'
-        verbose_name_plural = 'Districts'
-        unique_together = [('province', 'code')]
-        ordering = ['province__nom', 'nom']
-        indexes = [
-            models.Index(fields=['province', 'est_actif']),
-        ]
+        db_table = '"localisation"."divisions_administratives_niveau1"'
+        verbose_name = 'Division Niveau 1 (Province)'
+        verbose_name_plural = 'Divisions Niveau 1 (Provinces)'
+        ordering = ['nom_pays', 'nom_1']
+        managed = False
 
     def __str__(self):
-        return f"{self.nom} ({self.province.nom})"
+        return f"{self.nom_1} ({self.pays})"
 
 
-class Commune(models.Model):
-    """Niveau 4: Communes"""
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='communes', db_index=True)
-    code = models.CharField(max_length=50, db_index=True)
-    nom = models.CharField(max_length=200, db_index=True)
-    type_commune = models.CharField(max_length=50, default='COMMUNE')
-    
-    # Géographie
-    centre_latitude = models.DecimalField(max_digits=10, decimal_places=7)
-    centre_longitude = models.DecimalField(max_digits=10, decimal_places=7)
-    bbox_nord = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_sud = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_est = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_ouest = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    superficie_km2 = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-    
-    # Démographie
-    population_totale = models.BigIntegerField(null=True, blank=True)
-    zone_urbaine = models.BooleanField(default=False, db_index=True)
-    
-    # Gestion
-    autorise_systeme = models.BooleanField(default=True, db_index=True)
-    est_actif = models.BooleanField(default=True, db_index=True)
-    date_creation = models.DateTimeField(default=timezone.now)
-    date_modification = models.DateTimeField(auto_now=True)
-    metadonnees = models.JSONField(default=dict, blank=True)
+class DivisionNiveau2(models.Model):
+    """Niveau 2 GADM - Districts/Territoires"""
+    division_id = models.CharField(max_length=50, primary_key=True)
+    pays_division_id = models.CharField(max_length=50, db_index=True)
+    parent_division_id = models.CharField(max_length=50, db_index=True)
+    gid_0 = models.TextField(blank=True)
+    pays = models.TextField(blank=True)
+    gid_1 = models.TextField(blank=True)
+    nom_1 = models.TextField(blank=True)
+    nom_local_1 = models.TextField(blank=True)
+    gid_2 = models.TextField(blank=True)
+    nom_2 = models.TextField(blank=True)
+    nom_variante_2 = models.TextField(blank=True)
+    nom_local_2 = models.TextField(blank=True)
+    type_2 = models.TextField(blank=True)
+    type_anglais_2 = models.TextField(blank=True)
+    code_2 = models.TextField(blank=True)
+    hasc_2 = models.TextField(blank=True)
+    code_iso = models.TextField(blank=True)
+    nom_pays = models.TextField(blank=True)
+    niveau_admin = models.BigIntegerField(null=True, blank=True)
+    est_autorise = models.BooleanField(default=False)
+    affiche_par_defaut = models.BooleanField(default=False)
+    est_actif = models.BooleanField(default=False)
 
     class Meta:
-        db_table = 'localisation"."communes'
-        verbose_name = 'Commune'
-        verbose_name_plural = 'Communes'
-        unique_together = [('district', 'code')]
-        ordering = ['district__nom', 'nom']
-        indexes = [
-            models.Index(fields=['district', 'est_actif']),
-            models.Index(fields=['zone_urbaine', 'est_actif']),
-        ]
+        db_table = '"localisation"."divisions_administratives_niveau2"'
+        verbose_name = 'Division Niveau 2 (District)'
+        verbose_name_plural = 'Divisions Niveau 2 (Districts)'
+        ordering = ['nom_pays', 'nom_1', 'nom_2']
+        managed = False
 
     def __str__(self):
-        return f"{self.nom}"
+        return f"{self.nom_2} ({self.nom_1}, {self.pays})"
 
 
-class Secteur(models.Model):
-    """Niveau 5: Secteurs"""
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    commune = models.ForeignKey(Commune, on_delete=models.CASCADE, related_name='secteurs', db_index=True)
-    code = models.CharField(max_length=50, db_index=True)
-    nom = models.CharField(max_length=200, db_index=True)
-    type_secteur = models.CharField(max_length=50, default='SECTEUR')
-    
-    # Géographie
-    centre_latitude = models.DecimalField(max_digits=10, decimal_places=7)
-    centre_longitude = models.DecimalField(max_digits=10, decimal_places=7)
-    population_estimee = models.BigIntegerField(null=True, blank=True)
-    zone_urbaine = models.BooleanField(default=False, db_index=True)
-    
-    # Gestion
-    autorise_systeme = models.BooleanField(default=True, db_index=True)
-    est_actif = models.BooleanField(default=True, db_index=True)
-    date_creation = models.DateTimeField(default=timezone.now)
-    date_modification = models.DateTimeField(auto_now=True)
-    metadonnees = models.JSONField(default=dict, blank=True)
+# =============================================================================
+# ALIAS POUR COMPATIBILITÉ
+# =============================================================================
 
-    class Meta:
-        db_table = 'localisation"."secteurs'
-        verbose_name = 'Secteur'
-        verbose_name_plural = 'Secteurs'
-        unique_together = [('commune', 'code')]
-        ordering = ['commune__nom', 'nom']
-        indexes = [
-            models.Index(fields=['commune', 'est_actif']),
-        ]
-
-    def __str__(self):
-        return f"{self.nom}"
+# Alias pour faciliter l'utilisation
+Province = DivisionNiveau1
+District = DivisionNiveau2
+Commune = DivisionNiveau2  # Peut être niveau 2 ou 3 selon le pays
+Secteur = DivisionNiveau2
+Quartier = DivisionNiveau2
 
 
-class Quartier(models.Model):
-    """Niveau 6: Quartiers"""
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    district = models.ForeignKey(District, on_delete=models.CASCADE, related_name='quartiers', db_index=True)
-    secteur = models.ForeignKey(Secteur, on_delete=models.SET_NULL, null=True, blank=True, related_name='quartiers')
-    code = models.CharField(max_length=20, db_index=True)
-    nom = models.CharField(max_length=100, db_index=True)
-    
-    # Géographie
-    centre_latitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    centre_longitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_nord = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_sud = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_est = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    bbox_ouest = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
-    superficie_km2 = models.DecimalField(max_digits=12, decimal_places=2, null=True, blank=True)
-    
-    # Statistiques
-    type_zone = models.CharField(max_length=50, blank=True)
-    nombre_habitants = models.IntegerField(null=True, blank=True)
-    nombre_commerces = models.IntegerField(default=0)
-    nombre_agents = models.IntegerField(default=0)
-    nombre_utilisateurs = models.IntegerField(default=0)
-    nombre_agents_actifs = models.IntegerField(default=0)
-    nombre_utilisateurs_actifs = models.IntegerField(default=0)
-    
-    # Infrastructure
-    code_postal = models.CharField(max_length=20, blank=True)
-    
-    # Géométrie
-    geometrie_geojson = models.JSONField(null=True, blank=True)
-    
-    # Gestion
-    autorise_systeme = models.BooleanField(default=True, db_index=True)
-    est_actif = models.BooleanField(default=True, db_index=True)
-    date_creation = models.DateTimeField(default=timezone.now)
-    date_modification = models.DateTimeField(auto_now=True)
-    metadonnees = models.JSONField(default=dict, blank=True)
-
-    class Meta:
-        db_table = 'localisation"."quartiers'
-        verbose_name = 'Quartier'
-        verbose_name_plural = 'Quartiers'
-        unique_together = [('district', 'code')]
-        ordering = ['district__nom', 'nom']
-        indexes = [
-            models.Index(fields=['district', 'est_actif']),
-            models.Index(fields=['secteur']),
-        ]
-
-    def __str__(self):
-        return f"{self.nom} ({self.district.nom})"
-
-
-class Zone(models.Model):
-    """Niveau 7: Zones"""
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    quartier = models.ForeignKey(Quartier, on_delete=models.CASCADE, related_name='zones', db_index=True)
-    code = models.CharField(max_length=50, db_index=True)
-    nom = models.CharField(max_length=200, db_index=True)
-    type_zone = models.CharField(max_length=50, default='ZONE')
-    
-    # Géographie
-    centre_latitude = models.DecimalField(max_digits=10, decimal_places=7)
-    centre_longitude = models.DecimalField(max_digits=10, decimal_places=7)
-    population_estimee = models.IntegerField(null=True, blank=True)
-    
-    # Classification
-    zone_commerciale = models.BooleanField(default=False, db_index=True)
-    zone_residentielle = models.BooleanField(default=False, db_index=True)
-    
-    # Gestion
-    autorise_systeme = models.BooleanField(default=True, db_index=True)
-    est_actif = models.BooleanField(default=True, db_index=True)
-    date_creation = models.DateTimeField(default=timezone.now)
-    date_modification = models.DateTimeField(auto_now=True)
-    metadonnees = models.JSONField(default=dict, blank=True)
-
-    class Meta:
-        db_table = 'localisation"."zones'
-        verbose_name = 'Zone'
-        verbose_name_plural = 'Zones'
-        unique_together = [('quartier', 'code')]
-        ordering = ['quartier__nom', 'nom']
-        indexes = [
-            models.Index(fields=['quartier', 'est_actif']),
-        ]
-
-    def __str__(self):
-        return f"{self.nom}"
-
-
-class Colline(models.Model):
-    """Niveau 8: Collines"""
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    zone = models.ForeignKey(Zone, on_delete=models.CASCADE, related_name='collines', db_index=True)
-    code = models.CharField(max_length=50, db_index=True)
-    nom = models.CharField(max_length=200, db_index=True)
-    type_colline = models.CharField(max_length=50, default='COLLINE')
-    
-    # Géographie
-    centre_latitude = models.DecimalField(max_digits=10, decimal_places=7)
-    centre_longitude = models.DecimalField(max_digits=10, decimal_places=7)
-    altitude_m = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
-    population_estimee = models.IntegerField(null=True, blank=True)
-    zone_rurale = models.BooleanField(default=True, db_index=True)
-    
-    # Gestion
-    autorise_systeme = models.BooleanField(default=True, db_index=True)
-    est_actif = models.BooleanField(default=True, db_index=True)
-    date_creation = models.DateTimeField(default=timezone.now)
-    date_modification = models.DateTimeField(auto_now=True)
-    metadonnees = models.JSONField(default=dict, blank=True)
-
-    class Meta:
-        db_table = 'localisation"."collines'
-        verbose_name = 'Colline'
-        verbose_name_plural = 'Collines'
-        unique_together = [('zone', 'code')]
-        ordering = ['zone__nom', 'nom']
-        indexes = [
-            models.Index(fields=['zone', 'est_actif']),
-        ]
-
-    def __str__(self):
-        return f"{self.nom}"
-
+# =============================================================================
+# POINTS DE SERVICE
+# =============================================================================
 
 class PointDeService(models.Model):
-    """Points de service"""
+    """Points de service (agents, guichets, partenaires)"""
     TYPE_POINT_CHOICES = [
         ('AGENT', 'Agent'),
         ('GUICHET', 'Guichet'),
         ('PARTENAIRE', 'Partenaire'),
         ('AUTRE', 'Autre'),
     ]
+    
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    quartier = models.ForeignKey(Quartier, on_delete=models.CASCADE, related_name='points_de_service', db_index=True)
-    code = models.CharField(max_length=30, db_index=True)
-    nom = models.CharField(max_length=100, db_index=True)
-    type_point = models.CharField(max_length=20, choices=TYPE_POINT_CHOICES, default='AGENT')
+    quartier_id = models.UUIDField(null=True, blank=True, db_index=True)
+    code = models.CharField(max_length=30, blank=True)
+    nom = models.CharField(max_length=100, blank=True)
+    type_point = models.CharField(max_length=20, blank=True)
     
     # Localisation
     latitude = models.DecimalField(max_digits=10, decimal_places=7, null=True, blank=True)
@@ -434,6 +232,10 @@ class PointDeService(models.Model):
     nombre_agents_actifs = models.IntegerField(default=0)
     nombre_utilisateurs_actifs = models.IntegerField(default=0)
     
+    # Géométrie
+    zone_couverture_geojson = models.JSONField(null=True, blank=True)
+    rayon_couverture_km = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    
     # Gestion
     autorise_systeme = models.BooleanField(default=True, db_index=True)
     est_actif = models.BooleanField(default=True, db_index=True)
@@ -442,15 +244,176 @@ class PointDeService(models.Model):
     metadonnees = models.JSONField(default=dict, blank=True)
 
     class Meta:
-        db_table = 'localisation"."points_de_service'
+        db_table = '"localisation"."points_service"'
         verbose_name = 'Point de service'
         verbose_name_plural = 'Points de service'
-        unique_together = [('quartier', 'code')]
-        ordering = ['quartier__nom', 'nom']
-        indexes = [
-            models.Index(fields=['quartier', 'est_actif']),
-            models.Index(fields=['type_point']),
-        ]
+        ordering = ['nom']
+        managed = False
 
     def __str__(self):
-        return f"{self.nom} ({self.quartier.nom})"
+        return f"{self.nom} ({self.type_point})"
+
+
+
+# =============================================================================
+# TABLES DE GESTION GÉOGRAPHIQUE
+# =============================================================================
+
+class FuseauHoraire(models.Model):
+    """Fuseaux horaires"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    code = models.CharField(max_length=50, unique=True)
+    nom = models.CharField(max_length=100)
+    offset_utc = models.CharField(max_length=10)
+    offset_minutes = models.IntegerField()
+    description = models.TextField(blank=True)
+    est_actif = models.BooleanField(default=True)
+    date_creation = models.DateTimeField(default=timezone.now)
+    date_modification = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = '"localisation"."fuseaux_horaires"'
+        verbose_name = 'Fuseau horaire'
+        verbose_name_plural = 'Fuseaux horaires'
+        ordering = ['offset_minutes']
+        managed = False
+
+    def __str__(self):
+        return f"{self.nom} ({self.offset_utc})"
+
+
+class ZoneRisque(models.Model):
+    """Zones à risque pour la conformité et la sécurité"""
+    NIVEAU_RISQUE_CHOICES = [
+        ('FAIBLE', 'Faible'),
+        ('MOYEN', 'Moyen'),
+        ('ELEVE', 'Élevé'),
+        ('TRES_ELEVE', 'Très élevé'),
+        ('CRITIQUE', 'Critique'),
+    ]
+    
+    TYPE_RISQUE_CHOICES = [
+        ('FRAUDE', 'Fraude'),
+        ('BLANCHIMENT', 'Blanchiment'),
+        ('TERRORISME', 'Terrorisme'),
+        ('CRIMINALITE', 'Criminalité'),
+        ('INSTABILITE', 'Instabilité'),
+        ('AUTRE', 'Autre'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    pays = models.ForeignKey(Pays, on_delete=models.CASCADE, related_name='zones_risque')
+    province_id = models.UUIDField(null=True, blank=True)
+    district_id = models.UUIDField(null=True, blank=True)
+    quartier_id = models.UUIDField(null=True, blank=True)
+    
+    niveau_risque = models.CharField(max_length=20, choices=NIVEAU_RISQUE_CHOICES)
+    type_risque = models.CharField(max_length=50, choices=TYPE_RISQUE_CHOICES)
+    score_risque = models.IntegerField(help_text='Score de 0 à 100')
+    description = models.TextField(blank=True)
+    mesures_mitigation = models.TextField(blank=True)
+    
+    verification_renforcee = models.BooleanField(default=False)
+    limite_transaction = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
+    
+    date_evaluation = models.DateField()
+    date_prochaine_evaluation = models.DateField(null=True, blank=True)
+    
+    est_actif = models.BooleanField(default=True, db_index=True)
+    metadonnees = models.JSONField(default=dict, blank=True)
+    date_creation = models.DateTimeField(default=timezone.now)
+    date_modification = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = '"localisation"."zones_risque"'
+        verbose_name = 'Zone à risque'
+        verbose_name_plural = 'Zones à risque'
+        ordering = ['-score_risque', 'niveau_risque']
+        managed = False
+
+    def __str__(self):
+        return f"{self.pays.nom} - {self.niveau_risque} ({self.type_risque})"
+
+
+class RestrictionGeographique(models.Model):
+    """Restrictions géographiques pour les transactions"""
+    NIVEAU_RESTRICTION_CHOICES = [
+        ('FAIBLE', 'Faible'),
+        ('MOYEN', 'Moyen'),
+        ('ELEVE', 'Élevé'),
+        ('TOTAL', 'Total'),
+    ]
+    
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    pays = models.ForeignKey(Pays, on_delete=models.CASCADE, related_name='restrictions')
+    
+    type_restriction = models.CharField(max_length=50)
+    niveau_restriction = models.CharField(max_length=20, choices=NIVEAU_RESTRICTION_CHOICES)
+    description = models.TextField(blank=True)
+    
+    autorise_transactions = models.BooleanField(default=True)
+    autorise_transferts_entrants = models.BooleanField(default=True)
+    autorise_transferts_sortants = models.BooleanField(default=True)
+    montant_max_journalier = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
+    montant_max_mensuel = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
+    
+    date_debut = models.DateField()
+    date_fin = models.DateField(null=True, blank=True)
+    
+    est_actif = models.BooleanField(default=True, db_index=True)
+    metadonnees = models.JSONField(default=dict, blank=True)
+    date_creation = models.DateTimeField(default=timezone.now)
+    date_modification = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = '"localisation"."restrictions_geographiques"'
+        verbose_name = 'Restriction géographique'
+        verbose_name_plural = 'Restrictions géographiques'
+        ordering = ['-date_debut']
+        managed = False
+
+    def __str__(self):
+        return f"{self.pays.nom} - {self.type_restriction} ({self.niveau_restriction})"
+    
+    def est_en_vigueur(self):
+        """Vérifie si la restriction est actuellement en vigueur"""
+        from datetime import date
+        aujourd_hui = date.today()
+        if not self.est_actif:
+            return False
+        if self.date_debut > aujourd_hui:
+            return False
+        if self.date_fin and self.date_fin < aujourd_hui:
+            return False
+        return True
+
+
+class CorridorPaiement(models.Model):
+    """Corridors de paiement entre pays"""
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    code = models.CharField(max_length=50, unique=True)
+    nom = models.CharField(max_length=200)
+    
+    pays_origine = models.ForeignKey(Pays, on_delete=models.CASCADE, related_name='corridors_sortants', db_column='pays_origine_id')
+    pays_destination = models.ForeignKey(Pays, on_delete=models.CASCADE, related_name='corridors_entrants', db_column='pays_destination_id')
+    
+    volume_transactions_mensuel = models.BigIntegerField(default=0)
+    montant_moyen = models.DecimalField(max_digits=20, decimal_places=2, null=True, blank=True)
+    delai_moyen_heures = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    taux_commission = models.DecimalField(max_digits=8, decimal_places=4, null=True, blank=True)
+    
+    est_prioritaire = models.BooleanField(default=False)
+    est_actif = models.BooleanField(default=True, db_index=True)
+    metadonnees = models.JSONField(default=dict, blank=True)
+    date_creation = models.DateTimeField(default=timezone.now)
+    date_modification = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = '"localisation"."corridors_paiement"'
+        verbose_name = 'Corridor de paiement'
+        verbose_name_plural = 'Corridors de paiement'
+        ordering = ['-volume_transactions_mensuel']
+        managed = False
+
+    def __str__(self):
+        return f"{self.pays_origine.code_iso_2} → {self.pays_destination.code_iso_2}"

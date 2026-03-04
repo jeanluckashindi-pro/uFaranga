@@ -1241,3 +1241,37 @@ INFO 2026-03-04 15:12:00,700 autoreload 20284 9860 D:\Projets\Decima Techno\uFar
 INFO 2026-03-04 15:12:02,378 autoreload 19408 16412 Watching for file changes with StatReloader
 INFO 2026-03-04 15:12:45,587 basehttp 19408 18940 "POST /api/v1/authentification/connexion/ HTTP/1.1" 200 1284
 INFO 2026-03-04 15:12:46,015 basehttp 19408 18940 "GET /api/v1/authentification/moi/ HTTP/1.1" 200 3807
+INFO 2026-03-04 15:16:34,374 autoreload 19408 16412 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-04 15:16:37,367 autoreload 25468 17084 Watching for file changes with StatReloader
+INFO 2026-03-04 15:19:36,060 autoreload 25468 17084 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-03-04 15:19:37,698 autoreload 25872 27548 Watching for file changes with StatReloader
+INFO 2026-03-04 15:20:59,127 autoreload 25872 27548 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers_optimises.py changed, reloading.
+INFO 2026-03-04 15:21:00,915 autoreload 4008 14072 Watching for file changes with StatReloader
+INFO 2026-03-04 15:21:40,264 autoreload 4008 14072 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views_optimisees.py changed, reloading.
+INFO 2026-03-04 15:21:42,343 autoreload 30584 13092 Watching for file changes with StatReloader
+INFO 2026-03-04 15:21:46,548 autoreload 30584 13092 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views_optimisees.py changed, reloading.
+INFO 2026-03-04 15:21:47,717 autoreload 25564 1188 Watching for file changes with StatReloader
+INFO 2026-03-04 15:22:14,533 autoreload 25564 1188 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\views_geo.py changed, reloading.
+INFO 2026-03-04 15:22:15,950 autoreload 8140 15792 Watching for file changes with StatReloader
+INFO 2026-03-04 15:22:43,946 autoreload 8140 15792 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers_geo.py changed, reloading.
+INFO 2026-03-04 15:22:45,495 autoreload 12812 29944 Watching for file changes with StatReloader
+INFO 2026-03-04 15:23:27,825 autoreload 12812 29944 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\serializers_geo.py changed, reloading.
+INFO 2026-03-04 15:23:29,463 autoreload 19656 15464 Watching for file changes with StatReloader
+INFO 2026-03-04 15:24:04,402 autoreload 19656 15464 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\urls.py changed, reloading.
+INFO 2026-03-04 15:24:06,088 autoreload 24684 30192 Watching for file changes with StatReloader
+INFO 2026-03-04 15:26:51,107 autoreload 24684 30192 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\models.py changed, reloading.
+INFO 2026-03-04 15:26:52,911 autoreload 25236 19040 Watching for file changes with StatReloader
+INFO 2026-03-04 15:29:11,682 autoreload 25236 19040 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\models.py changed, reloading.
+INFO 2026-03-04 15:29:13,134 autoreload 21232 28872 Watching for file changes with StatReloader
+INFO 2026-03-04 15:30:43,959 autoreload 21232 28872 D:\Projets\Decima Techno\uFaranga\backend\apps\identite\apps.py changed, reloading.
+INFO 2026-03-04 15:30:45,465 autoreload 5548 18212 Watching for file changes with StatReloader
+INFO 2026-03-04 15:31:08,600 autoreload 5548 18212 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\views.py changed, reloading.
+INFO 2026-03-04 15:31:10,447 autoreload 23824 18044 Watching for file changes with StatReloader
+INFO 2026-03-04 15:31:31,764 autoreload 23824 18044 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\urls.py changed, reloading.
+INFO 2026-03-04 15:31:33,452 autoreload 2820 23332 Watching for file changes with StatReloader
+INFO 2026-03-04 15:31:43,840 autoreload 2820 23332 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\services.py changed, reloading.
+INFO 2026-03-04 15:31:45,879 autoreload 26592 840 Watching for file changes with StatReloader
+INFO 2026-03-04 15:32:07,253 autoreload 26592 840 D:\Projets\Decima Techno\uFaranga\backend\apps\authentication\urls.py changed, reloading.
+INFO 2026-03-04 15:32:09,061 autoreload 18096 1700 Watching for file changes with StatReloader
+INFO 2026-03-04 15:35:49,991 autoreload 18096 1700 D:\Projets\Decima Techno\uFaranga\backend\apps\localisation\services.py changed, reloading.
+INFO 2026-03-04 15:35:51,782 autoreload 22788 30044 Watching for file changes with StatReloader

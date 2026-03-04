@@ -169,25 +169,61 @@ class Utilisateur(AbstractBaseUser, PermissionsMixin):
     nom_famille = models.CharField(max_length=100, default='')
     date_naissance = models.DateField()
     lieu_naissance = models.CharField(max_length=100, blank=True, default='')
-    nationalite = models.CharField(max_length=2, default='BI')
+    nationalite = models.CharField(max_length=2, default='BI', help_text='Code ISO 2 du pays de nationalité')
     
-    # Adresse
-    pays_residence = models.CharField(max_length=2, default='BI')
-    province = models.CharField(max_length=100, blank=True, default='')
+    # Adresse (champs texte pour compatibilité)
+    pays_residence = models.CharField(max_length=2, default='BI', help_text='Code ISO 2 du pays de résidence')
+    province = models.CharField(max_length=100, blank=True, default='', help_text='Nom de la province (texte libre)')
     ville = models.CharField(max_length=100, blank=True, default='')
     commune = models.CharField(max_length=100, blank=True, default='')
-    quartier = models.CharField(max_length=100, blank=True, default='')
+    quartier = models.CharField(max_length=100, blank=True, default='', help_text='Nom du quartier (texte libre)')
     avenue = models.CharField(max_length=100, blank=True, default='')
     numero_maison = models.CharField(max_length=50, blank=True, default='')
     adresse_complete = models.TextField(blank=True, default='')
     code_postal = models.CharField(max_length=20, blank=True, default='')
     
-    # Localisation (hiérarchie géo : Pays → Province → District → Quartier → Point de service)
-    pays = models.ForeignKey('localisation.Pays', on_delete=models.SET_NULL, null=True, blank=True, related_name='utilisateurs_identite')
-    province_geo = models.ForeignKey('localisation.Province', on_delete=models.SET_NULL, null=True, blank=True, related_name='utilisateurs_identite', db_column='province_id')
-    district = models.ForeignKey('localisation.District', on_delete=models.SET_NULL, null=True, blank=True, related_name='utilisateurs_identite')
-    quartier_geo = models.ForeignKey('localisation.Quartier', on_delete=models.SET_NULL, null=True, blank=True, related_name='utilisateurs_identite', db_column='quartier_id')
-    point_de_service = models.ForeignKey('localisation.PointDeService', on_delete=models.SET_NULL, null=True, blank=True, related_name='utilisateurs_identite')
+    # Localisation structurée (hiérarchie géo avec ForeignKeys)
+    # Pays : FK vers pays_reference (UUID)
+    pays = models.ForeignKey(
+        'localisation.Pays', 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True, 
+        related_name='utilisateurs_identite',
+        db_column='pays_id',
+        help_text='Référence vers localisation.pays_reference'
+    )
+    
+    # Province, District, Quartier : UUID sans FK car tables GADM utilisent VARCHAR comme PK
+    # Ces champs peuvent être NULL si l'utilisateur n'a pas de localisation précise
+    province_geo = models.UUIDField(
+        null=True, 
+        blank=True, 
+        db_column='province_id',
+        help_text='UUID de la province (pas de FK car GADM utilise VARCHAR)'
+    )
+    district = models.UUIDField(
+        null=True, 
+        blank=True, 
+        db_column='district_id',
+        help_text='UUID du district (pas de FK car GADM utilise VARCHAR)'
+    )
+    quartier_geo = models.UUIDField(
+        null=True, 
+        blank=True, 
+        db_column='quartier_id',
+        help_text='UUID du quartier (pas de FK car GADM utilise VARCHAR)'
+    )
+    
+    # Point de service : FK vers points_service (UUID)
+    point_de_service = models.ForeignKey(
+        'localisation.PointDeService', 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True, 
+        related_name='utilisateurs_identite',
+        help_text='Référence vers localisation.points_service'
+    )
     
     # Vérifications
     telephone_verifie = models.BooleanField(default=False)

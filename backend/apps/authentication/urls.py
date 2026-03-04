@@ -42,4 +42,7 @@ urlpatterns = [
 
     # Historique des changements de mot de passe — GET /api/v1/authentification/historique-mot-de-passe/
     path('historique-mot-de-passe/', views.HistoriqueMotDePasseView.as_view(), name='historique-mot-de-passe'),
+    
+    # Vérification localisation et restrictions — GET /api/v1/authentification/verification-localisation/
+    path('verification-localisation/', views.VerificationLocalisationView.as_view(), name='verification-localisation'),
 ]

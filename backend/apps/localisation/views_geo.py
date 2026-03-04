@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .models import Pays, Province, District, Commune, Secteur, Quartier, Zone, Colline, PointDeService
+from .models import Pays, Province, District, PointDeService, DivisionNiveau0, DivisionNiveau1, DivisionNiveau2
 from .serializers_geo import (
     PaysGeoSerializer, ProvinceGeoSerializer, DistrictGeoSerializer,
     CommuneGeoSerializer, SecteurGeoSerializer, QuartierGeoSerializer,

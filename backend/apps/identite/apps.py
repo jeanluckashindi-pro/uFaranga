@@ -8,3 +8,4 @@ class IdentiteConfig(AppConfig):
     
     def ready(self):
         import apps.identite.signals
+        import apps.identite.signals_localisation  # Signals pour la localisation automatique

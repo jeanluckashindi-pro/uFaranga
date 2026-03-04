@@ -777,3 +777,72 @@ class HistoriqueMotDePasseView(APIView):
             'nombre_total': nombre_total,
             'historique': historique_data,
         }, status=status.HTTP_200_OK)
+
+
+
+# =============================================================================
+# VÉRIFICATION LOCALISATION — Vérifier les restrictions géographiques
+# =============================================================================
+@extend_schema(
+    tags=['Authentication'],
+    summary='Vérifier les restrictions géographiques',
+    description=(
+        'Vérifie si l\'utilisateur connecté est dans une zone restreinte ou à risque. '
+        'Retourne les informations de localisation, restrictions actives, et zones à risque.'
+    ),
+    responses={
+        200: {
+            'description': 'Informations de localisation et restrictions',
+            'content': {
+                'application/json': {
+                    'example': {
+                        'autorise_transactions': True,
+                        'verification_renforcee': False,
+                        'pays': {'code_iso_2': 'BI', 'nom': 'Burundi'},
+                        'zones_risque': [],
+                        'restrictions_actives': [],
+                        'corridors_disponibles': []
+                    }
+                }
+            }
+        },
+    },
+)
+class VerificationLocalisationView(APIView):
+    """
+    Vérifie les restrictions géographiques et zones à risque pour l'utilisateur connecté.
+    """
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        from apps.localisation.services import LocalisationService
+        from apps.identite.models import Utilisateur as UtilisateurIdentite
+        
+        # Récupérer l'utilisateur identite
+        utilisateur = UtilisateurIdentite.objects.filter(
+            courriel=request.user.email
+        ).first()
+        
+        if not utilisateur:
+            return Response({
+                'error': 'Profil identite introuvable',
+                'autorise_transactions': False
+            }, status=status.HTTP_404_NOT_FOUND)
+        
+        # Obtenir toutes les informations de localisation
+        info = LocalisationService.obtenir_info_complete_localisation(utilisateur)
+        
+        # Vérifier l'autorisation de transaction
+        verif = LocalisationService.verifier_autorisation_transaction(utilisateur)
+        
+        return Response({
+            'autorise_transactions': verif['autorise'],
+            'raison': verif['raison'],
+            'verification_renforcee': verif['verification_renforcee'],
+            'limite_montant': verif['limite_montant'],
+            'pays': info['pays'],
+            'fuseau_horaire': info['fuseau_horaire'],
+            'zones_risque': info['zones_risque'],
+            'restrictions_actives': info['restrictions_actives'],
+            'corridors_disponibles': info['corridors_disponibles']
+        })

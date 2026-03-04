@@ -1,7 +1,7 @@
 """
-Views optimisées avec pagination, filtres et cache pour gérer 232K+ entités.
+Vues optimisées pour la structure GADM avec pagination et filtres.
 """
-from rest_framework import viewsets, filters
+from rest_framework import viewsets, filters, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny
@@ -9,40 +9,40 @@ from rest_framework.pagination import PageNumberPagination
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Count, Q
 
-from .models import Pays, Province, District, Commune, Secteur, Quartier, Zone, Colline, PointDeService
+from .models import Pays, Province, District, PointDeService, DivisionNiveau0, DivisionNiveau1, DivisionNiveau2
 from .serializers_optimises import *
 from .permissions import IsSystemeOrSuperAdmin
 
 
 # ============================================================================
-# PAGINATION OPTIMISÉE
+# PAGINATION
 # ============================================================================
 
 class StandardPagination(PageNumberPagination):
-    page_size = 100
+    page_size = 50
     page_size_query_param = 'page_size'
-    max_page_size = 1000
+    max_page_size = 200
 
 
 class LargePagination(PageNumberPagination):
-    page_size = 50
+    page_size = 100
     page_size_query_param = 'page_size'
     max_page_size = 500
 
 
 # ============================================================================
-# VIEWSETS OPTIMISÉS
+# VIEWSETS POUR PAYS (Table de référence)
 # ============================================================================
 
 class PaysOptimiseViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet optimisé pour Pays"""
+    """ViewSet optimisé pour Pays (table de référence)"""
     queryset = Pays.objects.all()
     permission_classes = [AllowAny]
     pagination_class = StandardPagination
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['continent', 'sous_region', 'est_actif', 'autorise_systeme']
-    search_fields = ['nom', 'code_iso_2', 'code_iso_3']
-    ordering_fields = ['nom', 'code_iso_2', 'date_creation']
+    filterset_fields = ['code_iso_2', 'continent', 'sous_region', 'est_actif', 'autorise_systeme']
+    search_fields = ['nom', 'nom_anglais', 'code_iso_2', 'code_iso_3']
+    ordering_fields = ['nom', 'code_iso_2', 'continent', 'date_creation']
     ordering = ['nom']
     
     def get_serializer_class(self):
@@ -51,215 +51,100 @@ class PaysOptimiseViewSet(viewsets.ReadOnlyModelViewSet):
         return PaysListSerializer
 
 
-class ProvinceOptimiseViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet optimisé pour Provinces"""
-    queryset = Province.objects.select_related('pays').all()
+# ============================================================================
+# VIEWSETS POUR DIVISIONS GADM (lecture seule)
+# ============================================================================
+
+class DivisionNiveau0ViewSet(viewsets.ReadOnlyModelViewSet):
+    """ViewSet pour Niveau 0 - Pays GADM"""
+    queryset = DivisionNiveau0.objects.all()
     permission_classes = [AllowAny]
     pagination_class = StandardPagination
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['pays', 'est_actif', 'autorise_systeme']
-    search_fields = ['nom', 'code']
-    ordering_fields = ['nom', 'code', 'date_creation']
-    ordering = ['nom']
+    filterset_fields = ['code_iso', 'continent_code', 'region_code', 'est_actif']
+    search_fields = ['nom_pays', 'code_iso', 'gid_0']
+    ordering_fields = ['nom_pays', 'code_iso']
+    ordering = ['nom_pays']
     
     def get_serializer_class(self):
         if self.action == 'retrieve':
-            return ProvinceDetailSerializer
-        return ProvinceListSerializer
-    
-    def get_queryset(self):
-        qs = super().get_queryset()
-        pays_id = self.request.query_params.get('pays_id')
-        if pays_id:
-            qs = qs.filter(pays_id=pays_id)
-        return qs
+            return DivisionNiveau0DetailSerializer
+        return DivisionNiveau0ListSerializer
 
 
-class DistrictOptimiseViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet optimisé pour Districts"""
-    queryset = District.objects.select_related('province', 'province__pays').all()
-    permission_classes = [AllowAny]
-    pagination_class = StandardPagination
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['province', 'est_actif', 'autorise_systeme']
-    search_fields = ['nom', 'code']
-    ordering_fields = ['nom', 'code', 'date_creation']
-    ordering = ['nom']
-    
-    def get_serializer_class(self):
-        if self.action == 'retrieve':
-            return DistrictDetailSerializer
-        return DistrictListSerializer
-    
-    def get_queryset(self):
-        qs = super().get_queryset()
-        province_id = self.request.query_params.get('province_id')
-        pays_id = self.request.query_params.get('pays_id')
-        
-        if province_id:
-            qs = qs.filter(province_id=province_id)
-        elif pays_id:
-            qs = qs.filter(province__pays_id=pays_id)
-        
-        return qs
-
-
-class CommuneOptimiseViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet optimisé pour Communes (20K+ entités)"""
-    queryset = Commune.objects.select_related('district', 'district__province').all()
+class DivisionNiveau1ViewSet(viewsets.ReadOnlyModelViewSet):
+    """ViewSet pour Niveau 1 - Provinces GADM"""
+    queryset = DivisionNiveau1.objects.all()
     permission_classes = [AllowAny]
     pagination_class = LargePagination
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['district', 'type_commune', 'zone_urbaine', 'est_actif', 'autorise_systeme']
-    search_fields = ['nom', 'code']
-    ordering_fields = ['nom', 'code', 'population_totale', 'date_creation']
-    ordering = ['nom']
+    filterset_fields = ['pays_division_id', 'code_iso', 'type_1', 'est_actif']
+    search_fields = ['nom_1', 'nom_variante_1', 'nom_local_1', 'code_1']
+    ordering_fields = ['nom_1', 'code_1', 'nom_pays']
+    ordering = ['nom_pays', 'nom_1']
     
     def get_serializer_class(self):
         if self.action == 'retrieve':
-            return CommuneDetailSerializer
-        return CommuneListSerializer
+            return DivisionNiveau1DetailSerializer
+        return DivisionNiveau1ListSerializer
     
     def get_queryset(self):
         qs = super().get_queryset()
-        district_id = self.request.query_params.get('district_id')
-        province_id = self.request.query_params.get('province_id')
-        pays_id = self.request.query_params.get('pays_id')
+        pays_division_id = self.request.query_params.get('pays_division_id')
+        code_iso = self.request.query_params.get('code_iso')
         
-        if district_id:
-            qs = qs.filter(district_id=district_id)
-        elif province_id:
-            qs = qs.filter(district__province_id=province_id)
-        elif pays_id:
-            qs = qs.filter(district__province__pays_id=pays_id)
+        if pays_division_id:
+            qs = qs.filter(pays_division_id=pays_division_id)
+        elif code_iso:
+            qs = qs.filter(code_iso=code_iso)
         
         return qs
 
 
-class SecteurOptimiseViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet optimisé pour Secteurs (114K+ entités)"""
-    queryset = Secteur.objects.select_related('commune', 'commune__district').all()
+class DivisionNiveau2ViewSet(viewsets.ReadOnlyModelViewSet):
+    """ViewSet pour Niveau 2 - Districts GADM"""
+    queryset = DivisionNiveau2.objects.all()
     permission_classes = [AllowAny]
     pagination_class = LargePagination
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['commune', 'type_secteur', 'zone_urbaine', 'est_actif', 'autorise_systeme']
-    search_fields = ['nom', 'code']
-    ordering_fields = ['nom', 'code', 'date_creation']
-    ordering = ['nom']
+    filterset_fields = ['pays_division_id', 'parent_division_id', 'code_iso', 'type_2', 'est_actif']
+    search_fields = ['nom_2', 'nom_variante_2', 'nom_local_2', 'code_2', 'nom_1']
+    ordering_fields = ['nom_2', 'code_2', 'nom_pays', 'nom_1']
+    ordering = ['nom_pays', 'nom_1', 'nom_2']
     
     def get_serializer_class(self):
         if self.action == 'retrieve':
-            return SecteurDetailSerializer
-        return SecteurListSerializer
+            return DivisionNiveau2DetailSerializer
+        return DivisionNiveau2ListSerializer
     
     def get_queryset(self):
         qs = super().get_queryset()
-        commune_id = self.request.query_params.get('commune_id')
-        district_id = self.request.query_params.get('district_id')
+        pays_division_id = self.request.query_params.get('pays_division_id')
+        parent_division_id = self.request.query_params.get('parent_division_id')
+        code_iso = self.request.query_params.get('code_iso')
         
-        if commune_id:
-            qs = qs.filter(commune_id=commune_id)
-        elif district_id:
-            qs = qs.filter(commune__district_id=district_id)
+        if parent_division_id:
+            qs = qs.filter(parent_division_id=parent_division_id)
+        elif pays_division_id:
+            qs = qs.filter(pays_division_id=pays_division_id)
+        elif code_iso:
+            qs = qs.filter(code_iso=code_iso)
         
         return qs
 
 
-class QuartierOptimiseViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet optimisé pour Quartiers"""
-    queryset = Quartier.objects.select_related('district', 'secteur').all()
-    permission_classes = [AllowAny]
-    pagination_class = StandardPagination
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['district', 'secteur', 'est_actif', 'autorise_systeme']
-    search_fields = ['nom', 'code']
-    ordering_fields = ['nom', 'code', 'date_creation']
-    ordering = ['nom']
-    
-    def get_serializer_class(self):
-        if self.action == 'retrieve':
-            return QuartierDetailSerializer
-        return QuartierListSerializer
-    
-    def get_queryset(self):
-        qs = super().get_queryset()
-        district_id = self.request.query_params.get('district_id')
-        secteur_id = self.request.query_params.get('secteur_id')
-        
-        if district_id:
-            qs = qs.filter(district_id=district_id)
-        if secteur_id:
-            qs = qs.filter(secteur_id=secteur_id)
-        
-        return qs
-
-
-class ZoneOptimiseViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet optimisé pour Zones (60K+ entités)"""
-    queryset = Zone.objects.select_related('quartier', 'quartier__district').all()
-    permission_classes = [AllowAny]
-    pagination_class = LargePagination
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['quartier', 'type_zone', 'zone_commerciale', 'zone_residentielle', 'est_actif', 'autorise_systeme']
-    search_fields = ['nom', 'code']
-    ordering_fields = ['nom', 'code', 'date_creation']
-    ordering = ['nom']
-    
-    def get_serializer_class(self):
-        if self.action == 'retrieve':
-            return ZoneDetailSerializer
-        return ZoneListSerializer
-    
-    def get_queryset(self):
-        qs = super().get_queryset()
-        quartier_id = self.request.query_params.get('quartier_id')
-        district_id = self.request.query_params.get('district_id')
-        
-        if quartier_id:
-            qs = qs.filter(quartier_id=quartier_id)
-        elif district_id:
-            qs = qs.filter(quartier__district_id=district_id)
-        
-        return qs
-
-
-class CollineOptimiseViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet optimisé pour Collines (16K+ entités)"""
-    queryset = Colline.objects.select_related('zone', 'zone__quartier').all()
-    permission_classes = [AllowAny]
-    pagination_class = StandardPagination
-    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['zone', 'type_colline', 'zone_rurale', 'est_actif', 'autorise_systeme']
-    search_fields = ['nom', 'code']
-    ordering_fields = ['nom', 'code', 'altitude_m', 'date_creation']
-    ordering = ['nom']
-    
-    def get_serializer_class(self):
-        if self.action == 'retrieve':
-            return CollineDetailSerializer
-        return CollineListSerializer
-    
-    def get_queryset(self):
-        qs = super().get_queryset()
-        zone_id = self.request.query_params.get('zone_id')
-        quartier_id = self.request.query_params.get('quartier_id')
-        
-        if zone_id:
-            qs = qs.filter(zone_id=zone_id)
-        elif quartier_id:
-            qs = qs.filter(zone__quartier_id=quartier_id)
-        
-        return qs
-
+# ============================================================================
+# VIEWSETS POUR POINTS DE SERVICE
+# ============================================================================
 
 class PointDeServiceOptimiseViewSet(viewsets.ReadOnlyModelViewSet):
     """ViewSet optimisé pour Points de Service"""
-    queryset = PointDeService.objects.select_related('quartier', 'quartier__district').all()
+    queryset = PointDeService.objects.all()
     permission_classes = [AllowAny]
     pagination_class = StandardPagination
     filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
-    filterset_fields = ['quartier', 'type_point', 'est_actif', 'autorise_systeme']
-    search_fields = ['nom', 'code']
+    filterset_fields = ['quartier_id', 'type_point', 'est_actif', 'autorise_systeme']
+    search_fields = ['nom', 'code', 'adresse_complementaire']
     ordering_fields = ['nom', 'code', 'type_point', 'date_creation']
     ordering = ['nom']
     
@@ -271,238 +156,130 @@ class PointDeServiceOptimiseViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         qs = super().get_queryset()
         quartier_id = self.request.query_params.get('quartier_id')
-        district_id = self.request.query_params.get('district_id')
         
         if quartier_id:
             qs = qs.filter(quartier_id=quartier_id)
-        elif district_id:
-            qs = qs.filter(quartier__district_id=district_id)
         
         return qs
 
 
 # ============================================================================
-# ENDPOINT HIÉRARCHIE OPTIMISÉE
+# ALIAS POUR COMPATIBILITÉ
 # ============================================================================
 
-class HierarchieOptimiseeViewSet(viewsets.ViewSet):
-    """Endpoint optimisé pour récupérer la hiérarchie avec filtres"""
+# Alias pour faciliter l'utilisation
+ProvinceOptimiseViewSet = DivisionNiveau1ViewSet
+DistrictOptimiseViewSet = DivisionNiveau2ViewSet
+
+
+# ============================================================================
+# VUES STATISTIQUES
+# ============================================================================
+
+class LocalisationStatistiquesViewSet(viewsets.ViewSet):
+    """Statistiques globales sur la localisation"""
     permission_classes = [AllowAny]
     
     @action(detail=False, methods=['get'])
-    def statistiques(self, request):
-        """Statistiques globales de la hiérarchie"""
-        stats = {
-            'pays': {
+    def resume(self, request):
+        """Résumé des statistiques de localisation"""
+        return Response({
+            'pays_reference': {
                 'total': Pays.objects.count(),
                 'actifs': Pays.objects.filter(est_actif=True).count(),
             },
-            'provinces': {
-                'total': Province.objects.count(),
-                'actifs': Province.objects.filter(est_actif=True).count(),
+            'divisions_niveau0': {
+                'total': DivisionNiveau0.objects.count(),
+                'actifs': DivisionNiveau0.objects.filter(est_actif=True).count(),
             },
-            'districts': {
-                'total': District.objects.count(),
-                'actifs': District.objects.filter(est_actif=True).count(),
+            'divisions_niveau1': {
+                'total': DivisionNiveau1.objects.count(),
+                'actifs': DivisionNiveau1.objects.filter(est_actif=True).count(),
             },
-            'communes': {
-                'total': Commune.objects.count(),
-                'actifs': Commune.objects.filter(est_actif=True).count(),
-            },
-            'secteurs': {
-                'total': Secteur.objects.count(),
-                'actifs': Secteur.objects.filter(est_actif=True).count(),
-            },
-            'quartiers': {
-                'total': Quartier.objects.count(),
-                'actifs': Quartier.objects.filter(est_actif=True).count(),
-            },
-            'zones': {
-                'total': Zone.objects.count(),
-                'actifs': Zone.objects.filter(est_actif=True).count(),
-            },
-            'collines': {
-                'total': Colline.objects.count(),
-                'actifs': Colline.objects.filter(est_actif=True).count(),
+            'divisions_niveau2': {
+                'total': DivisionNiveau2.objects.count(),
+                'actifs': DivisionNiveau2.objects.filter(est_actif=True).count(),
             },
             'points_de_service': {
                 'total': PointDeService.objects.count(),
                 'actifs': PointDeService.objects.filter(est_actif=True).count(),
             },
-        }
-        return Response(stats)
+        })
     
-    def list(self, request):
-        """Récupère la hiérarchie filtrée par niveau"""
-        niveau = request.query_params.get('niveau', 'pays')
-        pays_id = request.query_params.get('pays_id')
-        province_id = request.query_params.get('province_id')
-        district_id = request.query_params.get('district_id')
-        commune_id = request.query_params.get('commune_id')
-        secteur_id = request.query_params.get('secteur_id')
-        quartier_id = request.query_params.get('quartier_id')
-        zone_id = request.query_params.get('zone_id')
+    @action(detail=False, methods=['get'])
+    def hierarchie(self, request):
+        """Récupère la hiérarchie selon le niveau demandé"""
+        niveau = request.query_params.get('niveau')
+        pays_division_id = request.query_params.get('pays_division_id')
+        parent_division_id = request.query_params.get('parent_division_id')
+        code_iso = request.query_params.get('code_iso')
         
         # Construire la requête selon le niveau
-        if niveau == 'provinces' and pays_id:
-            qs = Province.objects.filter(pays_id=pays_id, est_actif=True)
-            serializer = ProvinceListSerializer(qs, many=True)
-        elif niveau == 'districts' and province_id:
-            qs = District.objects.filter(province_id=province_id, est_actif=True)
-            serializer = DistrictListSerializer(qs, many=True)
-        elif niveau == 'communes' and district_id:
-            qs = Commune.objects.filter(district_id=district_id, est_actif=True)
-            serializer = CommuneListSerializer(qs, many=True)
-        elif niveau == 'secteurs' and commune_id:
-            qs = Secteur.objects.filter(commune_id=commune_id, est_actif=True)
-            serializer = SecteurListSerializer(qs, many=True)
-        elif niveau == 'quartiers' and district_id:
-            qs = Quartier.objects.filter(district_id=district_id, est_actif=True)
-            serializer = QuartierListSerializer(qs, many=True)
-        elif niveau == 'zones' and quartier_id:
-            qs = Zone.objects.filter(quartier_id=quartier_id, est_actif=True)
-            serializer = ZoneListSerializer(qs, many=True)
-        elif niveau == 'collines' and zone_id:
-            qs = Colline.objects.filter(zone_id=zone_id, est_actif=True)
-            serializer = CollineListSerializer(qs, many=True)
-        elif niveau == 'points_de_service' and quartier_id:
-            qs = PointDeService.objects.filter(quartier_id=quartier_id, est_actif=True)
-            serializer = PointDeServiceListSerializer(qs, many=True)
-        else:
+        if niveau == 'pays':
             qs = Pays.objects.filter(est_actif=True)
             serializer = PaysListSerializer(qs, many=True)
+        elif niveau == 'niveau0':
+            qs = DivisionNiveau0.objects.filter(est_actif=True)
+            if code_iso:
+                qs = qs.filter(code_iso=code_iso)
+            serializer = DivisionNiveau0ListSerializer(qs, many=True)
+        elif niveau == 'niveau1' or niveau == 'provinces':
+            qs = DivisionNiveau1.objects.filter(est_actif=True)
+            if pays_division_id:
+                qs = qs.filter(pays_division_id=pays_division_id)
+            elif code_iso:
+                qs = qs.filter(code_iso=code_iso)
+            serializer = DivisionNiveau1ListSerializer(qs, many=True)
+        elif niveau == 'niveau2' or niveau == 'districts':
+            qs = DivisionNiveau2.objects.filter(est_actif=True)
+            if parent_division_id:
+                qs = qs.filter(parent_division_id=parent_division_id)
+            elif pays_division_id:
+                qs = qs.filter(pays_division_id=pays_division_id)
+            elif code_iso:
+                qs = qs.filter(code_iso=code_iso)
+            serializer = DivisionNiveau2ListSerializer(qs, many=True)
+        else:
+            return Response(
+                {'error': 'Niveau invalide. Utilisez: pays, niveau0, niveau1, niveau2, provinces, districts'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         
-        return Response(serializer.data)
+        return Response({
+            'niveau': niveau,
+            'total': qs.count(),
+            'donnees': serializer.data
+        })
     
-    @action(detail=False, methods=['get'], url_path='complete')
-    def complete(self, request):
-        """
-        Hiérarchie complète avec filtres généalogiques.
-        Retourne tous les niveaux filtrés selon les paramètres.
-        """
-        params = request.query_params
+    @action(detail=False, methods=['get'])
+    def recherche_globale(self, request):
+        """Recherche globale dans toutes les divisions"""
+        query = request.query_params.get('q', '')
         
-        # Initialiser les querysets
-        provinces_qs = Province.objects.select_related('pays').all()
-        districts_qs = District.objects.select_related('province', 'province__pays').all()
-        communes_qs = Commune.objects.select_related('district', 'district__province').all()
-        secteurs_qs = Secteur.objects.select_related('commune', 'commune__district').all()
-        quartiers_qs = Quartier.objects.select_related('district', 'secteur').all()
-        zones_qs = Zone.objects.select_related('quartier', 'quartier__district').all()
-        collines_qs = Colline.objects.select_related('zone', 'zone__quartier').all()
-        points_qs = PointDeService.objects.select_related('quartier', 'quartier__district').all()
+        if len(query) < 2:
+            return Response(
+                {'error': 'La recherche doit contenir au moins 2 caractères'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
         
-        # Filtres par pays
-        if params.get('pays_id'):
-            pays_id = params['pays_id']
-            provinces_qs = provinces_qs.filter(pays_id=pays_id)
-            districts_qs = districts_qs.filter(province__pays_id=pays_id)
-            communes_qs = communes_qs.filter(district__province__pays_id=pays_id)
-            secteurs_qs = secteurs_qs.filter(commune__district__province__pays_id=pays_id)
-            quartiers_qs = quartiers_qs.filter(district__province__pays_id=pays_id)
-            zones_qs = zones_qs.filter(quartier__district__province__pays_id=pays_id)
-            collines_qs = collines_qs.filter(zone__quartier__district__province__pays_id=pays_id)
-            points_qs = points_qs.filter(quartier__district__province__pays_id=pays_id)
+        # Recherche dans toutes les tables
+        pays_qs = Pays.objects.filter(
+            Q(nom__icontains=query) | Q(code_iso_2__icontains=query)
+        ).filter(est_actif=True)[:10]
         
-        # Filtres par province
-        if params.get('province_id'):
-            province_id = params['province_id']
-            provinces_qs = provinces_qs.filter(id=province_id)
-            districts_qs = districts_qs.filter(province_id=province_id)
-            communes_qs = communes_qs.filter(district__province_id=province_id)
-            secteurs_qs = secteurs_qs.filter(commune__district__province_id=province_id)
-            quartiers_qs = quartiers_qs.filter(district__province_id=province_id)
-            zones_qs = zones_qs.filter(quartier__district__province_id=province_id)
-            collines_qs = collines_qs.filter(zone__quartier__district__province_id=province_id)
-            points_qs = points_qs.filter(quartier__district__province_id=province_id)
+        niveau1_qs = DivisionNiveau1.objects.filter(
+            Q(nom_1__icontains=query) | Q(code_1__icontains=query)
+        ).filter(est_actif=True)[:20]
         
-        # Filtres par district
-        if params.get('district_id'):
-            district_id = params['district_id']
-            districts_qs = districts_qs.filter(id=district_id)
-            communes_qs = communes_qs.filter(district_id=district_id)
-            secteurs_qs = secteurs_qs.filter(commune__district_id=district_id)
-            quartiers_qs = quartiers_qs.filter(district_id=district_id)
-            zones_qs = zones_qs.filter(quartier__district_id=district_id)
-            collines_qs = collines_qs.filter(zone__quartier__district_id=district_id)
-            points_qs = points_qs.filter(quartier__district_id=district_id)
+        niveau2_qs = DivisionNiveau2.objects.filter(
+            Q(nom_2__icontains=query) | Q(code_2__icontains=query)
+        ).filter(est_actif=True)[:20]
         
-        # Filtres par commune
-        if params.get('commune_id'):
-            commune_id = params['commune_id']
-            communes_qs = communes_qs.filter(id=commune_id)
-            secteurs_qs = secteurs_qs.filter(commune_id=commune_id)
-        
-        # Filtres par quartier
-        if params.get('quartier_id'):
-            quartier_id = params['quartier_id']
-            quartiers_qs = quartiers_qs.filter(id=quartier_id)
-            zones_qs = zones_qs.filter(quartier_id=quartier_id)
-            collines_qs = collines_qs.filter(zone__quartier_id=quartier_id)
-            points_qs = points_qs.filter(quartier_id=quartier_id)
-        
-        # Filtres par zone
-        if params.get('zone_id'):
-            zone_id = params['zone_id']
-            zones_qs = zones_qs.filter(id=zone_id)
-            collines_qs = collines_qs.filter(zone_id=zone_id)
-        
-        # Filtres par statut actif
-        if 'est_actif' in params:
-            val = params.get('est_actif', '').lower()
-            est_actif = val in ('true', '1', 'yes')
-            provinces_qs = provinces_qs.filter(est_actif=est_actif)
-            districts_qs = districts_qs.filter(est_actif=est_actif)
-            communes_qs = communes_qs.filter(est_actif=est_actif)
-            secteurs_qs = secteurs_qs.filter(est_actif=est_actif)
-            quartiers_qs = quartiers_qs.filter(est_actif=est_actif)
-            zones_qs = zones_qs.filter(est_actif=est_actif)
-            collines_qs = collines_qs.filter(est_actif=est_actif)
-            points_qs = points_qs.filter(est_actif=est_actif)
-        
-        # Filtres par autorisation système
-        if 'autorise_systeme' in params:
-            val = params.get('autorise_systeme', '').lower()
-            autorise = val in ('true', '1', 'yes')
-            provinces_qs = provinces_qs.filter(autorise_systeme=autorise)
-            districts_qs = districts_qs.filter(autorise_systeme=autorise)
-            communes_qs = communes_qs.filter(autorise_systeme=autorise)
-            secteurs_qs = secteurs_qs.filter(autorise_systeme=autorise)
-            quartiers_qs = quartiers_qs.filter(autorise_systeme=autorise)
-            zones_qs = zones_qs.filter(autorise_systeme=autorise)
-            collines_qs = collines_qs.filter(autorise_systeme=autorise)
-            points_qs = points_qs.filter(autorise_systeme=autorise)
-        
-        # Ordonner les résultats
-        provinces_qs = provinces_qs.order_by('pays__nom', 'nom')
-        districts_qs = districts_qs.order_by('province__nom', 'nom')
-        communes_qs = communes_qs.order_by('district__nom', 'nom')
-        secteurs_qs = secteurs_qs.order_by('commune__nom', 'nom')
-        quartiers_qs = quartiers_qs.order_by('district__nom', 'nom')
-        zones_qs = zones_qs.order_by('quartier__nom', 'nom')
-        collines_qs = collines_qs.order_by('zone__nom', 'nom')
-        points_qs = points_qs.order_by('quartier__nom', 'nom')
-        
-        # Préparer les données
-        data = {
-            'provinces': ProvinceListSerializer(provinces_qs, many=True).data,
-            'districts': DistrictListSerializer(districts_qs, many=True).data,
-            'communes': CommuneListSerializer(communes_qs, many=True).data,
-            'secteurs': SecteurListSerializer(secteurs_qs, many=True).data,
-            'quartiers': QuartierListSerializer(quartiers_qs, many=True).data,
-            'zones': ZoneListSerializer(zones_qs, many=True).data,
-            'collines': CollineListSerializer(collines_qs, many=True).data,
-            'points_de_service': PointDeServiceListSerializer(points_qs, many=True).data,
-            'statistiques': {
-                'total_provinces': provinces_qs.count(),
-                'total_districts': districts_qs.count(),
-                'total_communes': communes_qs.count(),
-                'total_secteurs': secteurs_qs.count(),
-                'total_quartiers': quartiers_qs.count(),
-                'total_zones': zones_qs.count(),
-                'total_collines': collines_qs.count(),
-                'total_points_de_service': points_qs.count(),
+        return Response({
+            'query': query,
+            'resultats': {
+                'pays': PaysListSerializer(pays_qs, many=True).data,
+                'provinces': DivisionNiveau1ListSerializer(niveau1_qs, many=True).data,
+                'districts': DivisionNiveau2ListSerializer(niveau2_qs, many=True).data,
             }
-        }
-        
-        return Response(data)
+        })
